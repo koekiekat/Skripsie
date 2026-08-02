@@ -1,0 +1,23 @@
+\acswitchoff 
+\babel@toc {afrikaans}{}\relax 
+\contentsline {chapter}{Abstract}{iii}{chapter*.3}%
+\babel@toc {afrikaans}{}\relax 
+\contentsline {chapter}{Uittreksel}{iv}{chapter*.4}%
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{Table of contents}{v}{chapter*.4}%
+\contentsline {chapter}{List of figures}{vi}{chapter*.5}%
+\contentsline {chapter}{List of tables}{vi}{chapter*.6}%
+\contentsline {chapter}{Nomenclature}{viii}{chapter*.8}%
+\contentsline {section}{Acronyms and abbreviations}{ix}{section*.9}%
+\contentsline {section}{Definitions}{x}{section*.10}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problem Statement}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Objectives}{1}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Thesis overview}{2}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Literature}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Related Work}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Summary and conclusions}{4}{chapter.3}%
+\contentsline {chapter}{References}{5}{chapter*.13}%
+\contentsline {chapter}{\numberline {A}Appendix title goes here}{6}{appendix.A}%
+\contentsfinish 

@@ -1,6 +1,37 @@
 \mychapter{Introduction}{Introduction}{}
 \label{chap:introduction}
 
+\mysection{Background}{Background}
+\label{sec:background}
+
+Given data from many hours of recordings which contains whale noises at 
+undetermined times is difficult to analyse where these whale sounds occur 
+at a glance. This is of interest as researchers can use this information 
+to determine the migration patterns of whales and other behaviours.
+
+\mysection{Problem Statement}{Problem Statement}
+\label{sec:problemstatement}
+
+Determine whether the method of Dynamic Time Warping (DTW) can be 
+successfully used to find whale sounds within large amounts of data. 
+When the data used is in the form of feature vectors instead of scalars.
+
+\mysection{Objectives}{Objectives}
+\label{sec:objectives}
+
+Three different feature extraction methods will be used to extract the 
+features needed from the data. These features methods will be 
+Short Time Fourier Transform (STFT), Mel-frequency Cepstral Coeffficients 
+(MFCC) and Linear Predictive Coding (LPC).
+
+Dynamic Time Warping (DTW) will be used for detection and classification 
+of the feature vectors extracted using the different methods. This will be 
+tested against a dataset which is labeled to determine whether the DTW 
+method actually works correctly. 
+
+The reason for the different feature extraction methods is to show that the 
+DTW method is not dependent on the feature extraction method used.
+
 \mysection{Thesis overview}{Thesis Overview}
 \label{sec:overview}
 
