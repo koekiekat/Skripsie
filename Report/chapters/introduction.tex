@@ -12,25 +12,24 @@ to determine the migration patterns of whales and other behaviours.
 \mysection{Problem Statement}{Problem Statement}
 \label{sec:problemstatement}
 
-Determine whether the method of Dynamic Time Warping (DTW) can be 
-successfully used to find whale sounds within large amounts of data. 
-When the data used is in the form of feature vectors instead of scalars.
+Determine whether using Dynamic Time Warping (DTW) in the frequency domain, thus 
+using vector features, improves the ability of DTW to detect and classify whale 
+calls compared to the time-domain approach of Dynamic Time Warping, thus using scalar features.
 
 \mysection{Objectives}{Objectives}
 \label{sec:objectives}
 
-Three different feature extraction methods will be used to extract the 
-features needed from the data. These features methods will be 
-Short Time Fourier Transform (STFT), Mel-frequency Cepstral Coeffficients 
-(MFCC) and Linear Predictive Coding (LPC).
+The DTW method in the time domain will first be implemented. The scalar features will be used
+from the data as it is given in the file.
 
-Dynamic Time Warping (DTW) will be used for detection and classification 
-of the feature vectors extracted using the different methods. This will be 
-tested against a dataset which is labeled to determine whether the DTW 
-method actually works correctly. 
+The DTW method in the frequency domain will then be implemented using three different extraction methods 
+to ensure that the comparison between sacalr and vector features does not depend on how the vector
+features are chosen. The methods used will be Short Time Fourier Transform (STFT), 
+Mel-frequency Cepstral Coeffficients (MFCC) and Linear Predictive Coding (LPC).
 
-The reason for the different feature extraction methods is to show that the 
-DTW method is not dependent on the feature extraction method used.
+The four models will then be compared to determine which method is best for whale detection 
+and to determine whether the frequency domain approach is better and if so, how significant 
+the improvements are.
 
 \mysection{Thesis overview}{Thesis Overview}
 \label{sec:overview}
