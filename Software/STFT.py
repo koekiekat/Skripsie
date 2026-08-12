@@ -25,3 +25,4 @@ def plot_spectrogram(f, t, Zxx, fs_new):
     plt.ylabel("Frequency (Hz)")
     plt.title("Spectrogram of Audio Signal")
     plt.ylim(0, fs_new/2)
+    plt.show()
