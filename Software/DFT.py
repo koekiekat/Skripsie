@@ -1,4 +1,26 @@
 import numpy as np
+from scipy.spatial import distance as dist
+
+def z_normalize_frames(seq):
+    # seq shape: (n_time_frames, n_freq_bins)
+    mean = seq.mean(axis=1, keepdims=True)
+    std = seq.std(axis=1, keepdims=True) + 1e-8
+    return (seq - mean) / std
+
+def dtw_calc(template_Zxx, comparison_Zxx):
+    x_seq = np.abs(template_Zxx).T      # shape: (n_time_frames, n_freq_bins)
+    y_seq = np.abs(comparison_Zxx).T    # shape: (n_time_frames, n_freq_bins)
+
+    dist_mat = dist.cdist(x_seq, y_seq, "cosine")
+    path, cost_mat = dp(dist_mat)
+    ali_cost = cost_mat[-1, -1]
+    #print("Alignment cost: {:.4f}".format(ali_cost))
+
+    M = x_seq.shape[0]
+    N = y_seq.shape[0]
+    norm_ali_cost = ali_cost / (M + N)
+    #print("Normalized alignment cost: {:.4f}".format(norm_ali_cost))
+    return norm_ali_cost
 
 def dp(dist_mat):
     """

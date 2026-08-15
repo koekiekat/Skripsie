@@ -8,6 +8,7 @@ plt.rcParams['figure.figsize'] = [10, 5]
 
 def start_end_times(text):
     df = pd.read_csv(text, sep="\t") #tabs are used to seperate columns"
+    df = df.drop_duplicates(subset = ["Begin Time (s)", "End Time (s)"]).reset_index(drop=True)
     pad = 0.1
     start_t = df["Begin Time (s)"].values - pad
     end_t = df["End Time (s)"].values + pad

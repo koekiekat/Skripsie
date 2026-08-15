@@ -5,6 +5,13 @@ from scipy import signal
 
 plt.rcParams['figure.figsize'] = [10, 5]
 
+def short_time_calc(sig, fs):
+    fs_new = 2000
+    resampled_sig = resample_audio(sig, fs, fs_new)
+    f_seg, t_seg, Zxx_seg = stft_calculation(resampled_sig, fs, fs_new)
+    #plot_spectrogram(f_seg, t_seg, Zxx_seg, fs_new)
+    return f_seg, t_seg, Zxx_seg, fs_new
+
 def resample_audio(audio_segments, f_s, fs_new):
     up = 1
     down = int(f_s / fs_new)
@@ -24,5 +31,5 @@ def plot_spectrogram(f, t, Zxx, fs_new):
     plt.xlabel("Time (s)")
     plt.ylabel("Frequency (Hz)")
     plt.title("Spectrogram of Audio Signal")
-    plt.ylim(0, fs_new/2)
+    plt.ylim(0, fs_new/4)
     plt.show()
