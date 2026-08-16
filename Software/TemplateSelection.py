@@ -8,13 +8,67 @@ from Background_functions import read_audio_file, split_audio_segments, start_en
 from STFT import short_time_calc, plot_spectrogram
 from DFT import dtw_calc
 
+def check_test_leftover(file_label, call_type, segments, f_s,
+                          audio_template, template_idx_for_template,
+                          expected_count, results_dir):
+    """
+    For a given call type, recomputes DTW cost against its template for all
+    segments, then reports how many of the top `expected_count` candidates
+    are left over for testing (i.e. not claimed as template or calibration),
+    along with the cost distribution of what's left.
+    """
+    saved = load_results(file_label, call_type, results_dir)
+    if saved is None:
+        print(f"No saved selection found for {file_label} / {call_type} yet.")
+        return None
+
+    claimed_idx = set(saved["template_idx"]) | set(saved["calibration_idx"])
+
+    f_temp, t_temp, Zxx_temp, fs_new = short_time_calc(audio_template, f_s)
+    num_calls = len(segments)
+    stft_cost = np.zeros(num_calls)
+    for i in range(num_calls):
+        _, _, Zxx_seg, _ = short_time_calc(segments[i], f_s)
+        stft_cost[i] = dtw_calc(Zxx_temp, Zxx_seg)
+
+    sorted_idx = np.argsort(stft_cost)
+    sorted_idx = np.array([i for i in sorted_idx if i != template_idx_for_template])
+    candidate_idx = sorted_idx[:expected_count]
+
+    leftover_idx = [i for i in candidate_idx if i not in claimed_idx]
+    leftover_costs = stft_cost[leftover_idx]
+
+    print(f"--- {file_label} / {call_type} ---")
+    print(f"Total candidates considered: {len(candidate_idx)}")
+    print(f"Claimed (template + calibration): {len(claimed_idx)}")
+    print(f"Left over for testing: {len(leftover_idx)}")
+    if len(leftover_idx) > 0:
+        print(f"Leftover cost range: {leftover_costs.min():.4f} - {leftover_costs.max():.4f}")
+        print(f"Leftover cost mean/median: {leftover_costs.mean():.4f} / {np.median(leftover_costs):.4f}")
+
+        # quick spread check: how many leftover calls fall in low/mid/high cost thirds
+        full_range = candidate_idx  # for reference thirds based on full candidate pool
+        full_costs = stft_cost[full_range]
+        low_cut, high_cut = np.percentile(full_costs, [33, 66])
+        n_low = np.sum(leftover_costs <= low_cut)
+        n_mid = np.sum((leftover_costs > low_cut) & (leftover_costs <= high_cut))
+        n_high = np.sum(leftover_costs > high_cut)
+        print(f"Leftover spread — low third: {n_low}, mid third: {n_mid}, high third: {n_high}")
+    else:
+        print("WARNING: no candidates left for testing.")
+
+    return {
+        "leftover_idx": leftover_idx,
+        "leftover_costs": leftover_costs,
+        "stft_cost": stft_cost,
+        "candidate_idx": candidate_idx,
+    }
 
 def load_file_calls(wav_path, text_path):
     f_s, x = read_audio_file(wav_path)
     _, start_t, end_t = start_end_times(text_path)
     segments = split_audio_segments(x, f_s, start_t, end_t)
     return f_s, x, start_t, end_t, segments
-
 
 def select_calls_interactive(segments, f_s, start_t, audio_template,
                               expected_count, n_templates, n_calibration,
@@ -134,21 +188,39 @@ def load_results(file_label, call_type, results_dir):
     data["calibration_end_t"] = np.array(data["calibration_end_t"])
     return data
 
+def get_used_indices(file_label, results_dir, exclude_call_type=None):
+    """
+    Scan all saved selection files for this file_label and return the set
+    of call indices already claimed by template or calibration allocations,
+    across all call types (optionally excluding one call type, e.g. itself).
+    """
+    used = set()
+    for path in results_dir.glob(f"{file_label}_*.json"):
+        with open(path) as f:
+            data = json.load(f)
+        if exclude_call_type is not None and data["call_type"] == exclude_call_type:
+            continue
+        used.update(data["template_idx"])
+        used.update(data["calibration_idx"])
+    return used
 
 def run_call_selection(file_label, call_type, segments, f_s, start_t,
                         template_idx, expected_count, n_templates, n_calibration,
-                        results_dir):
+                        results_dir, used_idx=None):
     existing = load_results(file_label, call_type, results_dir)
     if existing is not None:
         print(f"Loaded existing {call_type} selections for {file_label}, skipping interactive step.")
         return {"mode": "loaded", "packaged": existing}
+
+    used_idx = set(used_idx or set())
+    used_idx.add(template_idx)   # always exclude the template's own index too
 
     audio_template = segments[template_idx]
     results = select_calls_interactive(
         segments, f_s, start_t, audio_template,
         expected_count=expected_count, n_templates=n_templates, n_calibration=n_calibration,
         call_type=call_type, file_label=file_label,
-        exclude_idx=[template_idx]
+        exclude_idx=used_idx
     )
     return {"mode": "interactive", "results": results}
 
