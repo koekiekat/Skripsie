@@ -1,13 +1,10 @@
 import numpy as np
 import pandas as pd
 from scipy.io import wavfile
+from scipy import signal
 import matplotlib.pyplot as plt
 
 plt.rcParams['figure.figsize'] = [10, 5]
-
-def read_audio_file(fn):
-    f_s, x = wavfile.read(fn)
-    return f_s, x
 
 def start_end_times(text):
     df = pd.read_csv(text, sep="\t") #tabs are used to seperate columns"
@@ -16,6 +13,10 @@ def start_end_times(text):
     start_t = df["Begin Time (s)"].values - pad
     end_t = df["End Time (s)"].values + pad
     return df, start_t, end_t
+
+def read_audio_file(fn):
+    f_s, x = wavfile.read(fn)
+    return f_s, x
 
 def split_audio_segments(x, f_s, start_t, end_t):
     audio_segments = []

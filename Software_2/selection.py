@@ -6,7 +6,7 @@ from IPython.display import display
 from background_functions import read_audio_file, start_end_times, split_audio_segments
 from stft import short_time_calc, plot_spectrogram
 
-CALL_TYPES = ["single_tone", "multi_tone", "burst_tonal"]
+CALL_TYPES = ["single_tone", "multi_tone", "burst_tonal", "tonal_downsweep"]
 
 
 def load_file_calls(wav_path, text_path):
@@ -249,3 +249,76 @@ def classify_calls_interactive(segments, f_s, start_t, file_label, recording_lab
 
     show_next()
     return existing
+
+# Map the codes used in your "Call" column to your internal call types.
+# Extend this if you have other codes (e.g. burst-tonal).
+CALL_CODE_MAP = {
+    "ST": "single_tone",
+    "MT": "multi_tone",
+    "BT": "burst_tonal",
+    "TD": "tonal-downsweep",
+}
+
+
+def labels_from_dataframe(df, label_map=None):
+    """
+    Build an {index: call_type} dict from a selections dataframe that
+    already has a 'Call' column with ground-truth codes, using the same
+    row indices that split_audio_segments/segments will use (i.e. after
+    the same de-duplication start_end_times performs).
+    """
+    label_map = label_map or CALL_CODE_MAP
+    labels = {}
+    unmapped_counts = {}
+    for idx, code in enumerate(df["Call"]):
+        code_clean = str(code).strip().upper()
+        if code_clean in label_map:
+            labels[idx] = label_map[code_clean]
+        else:
+            unmapped_counts[code_clean] = unmapped_counts.get(code_clean, 0) + 1
+
+    if unmapped_counts:
+        print(f"Warning: unrecognised codes left unlabeled: {unmapped_counts}")
+    return labels
+
+
+def load_file_calls_with_labels(wav_path, text_path, label_map=None):
+    """
+    Same as load_file_calls, but also pulls the ground-truth call type
+    for each call straight out of the 'Call' column instead of requiring
+    manual classification.
+    """
+    f_s, x = read_audio_file(wav_path)
+    df, start_t, end_t = start_end_times(text_path)
+    segments = split_audio_segments(x, f_s, start_t, end_t)
+    labels = labels_from_dataframe(df, label_map)
+    return f_s, x, start_t, end_t, segments, labels
+
+
+def classify_calls_from_labels(labels, file_label, recording_label, results_dir,
+                                overwrite=False):
+    """
+    Non-interactive replacement for classify_calls_interactive: writes out
+    the classification JSON straight from an already-known {index: call_type}
+    dict (e.g. from labels_from_dataframe), so all the downstream helpers
+    (summarize_classifications, get_indices_by_type, clear/restore, etc.)
+    keep working unchanged.
+    """
+    path = _classification_path(file_label, recording_label, results_dir)
+    if path.exists() and not overwrite:
+        print(f"{file_label}/{recording_label} already has a saved "
+              f"classification. Pass overwrite=True to replace it.")
+        return load_classification(file_label, recording_label, results_dir)
+
+    data = {
+        "file_label": file_label,
+        "recording_label": recording_label,
+        "labels": dict(labels),
+        "done": True,
+    }
+    save_classification(data, file_label, recording_label, results_dir)
+
+    counts = {ct: sum(1 for v in labels.values() if v == ct) for ct in CALL_TYPES}
+    print(f"{file_label}/{recording_label}: saved {len(labels)} label(s) "
+          f"from file. Totals: {counts}")
+    return data
