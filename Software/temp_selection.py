@@ -1,9 +1,10 @@
 import json
+import random
 
 import ipywidgets as widgets
 from IPython.display import display
 
-from background_functions import read_audio_file, start_end_times, split_audio_segments
+from background_functions import read_audio_file, start_end_times, split_audio_segments, call_length_stats
 from stft import short_time_calc, plot_spectrogram
 
 CALL_TYPES = ["single_tone", "multi_tone", "burst_tonal", "tonal_downsweep"]
@@ -171,3 +172,93 @@ def select_templates_interactive(wav_path, segments, f_s, start_t, end_t, labels
 
     show_next()
     return existing
+
+def _background_path(file_label, recording_label, results_dir):
+    return results_dir / f"{file_label}_{recording_label}_background.json"
+
+
+def load_background_segments(file_label, recording_label, results_dir):
+    """Load previously saved background segments (empty list if none)."""
+    path = _background_path(file_label, recording_label, results_dir)
+    if not path.exists():
+        return []
+    with open(path) as f:
+        return json.load(f)
+
+
+def save_background_segments(background, file_label, recording_label, results_dir):
+    path = _background_path(file_label, recording_label, results_dir)
+    with open(path, "w") as f:
+        json.dump(background, f, indent=2)
+
+
+def extract_background_segments(wav_path, text_path, n_segments,
+                                  file_label, recording_label, results_dir,
+                                  buffer=0.5, seed=None):
+    """
+    Randomly extract `n_segments` background (non-call) audio segments from
+    a full recording, avoiding any region within `buffer` seconds of a
+    labeled call. Each segment's duration is randomized between the
+    shortest and longest labeled call length in this recording, so
+    background segments span the same length range as real calls.
+
+    wav_path: path to the full recording
+    text_path: path to the corresponding selections/labels file (used to
+        know where calls are, and to derive the call-length range)
+    n_segments: how many background segments to extract
+    buffer: extra seconds of padding around each labeled call to avoid
+    seed: optional random seed for reproducibility
+
+    Saves the result to results_dir and also returns it. Each entry has
+    call_type, start_time, end_time, and wav_path -- same shape as saved
+    templates, so it can be loaded/used the same way downstream.
+    """
+    if seed is not None:
+        random.seed(seed)
+
+    f_s, x = read_audio_file(wav_path)
+    df, start_t, end_t = start_end_times(text_path)
+    _, longest, shortest = call_length_stats(df)
+
+    recording_duration = len(x) / f_s
+    forbidden = [(max(0, s - buffer), min(recording_duration, e + buffer))
+                 for s, e in zip(start_t, end_t)]
+    forbidden.sort()
+
+    def overlaps_forbidden(cand_start, cand_end):
+        for f_start, f_end in forbidden:
+            if cand_start < f_end and cand_end > f_start:
+                return True
+        return False
+
+    background = []
+    max_attempts = n_segments * 200
+    attempts = 0
+
+    while len(background) < n_segments and attempts < max_attempts:
+        attempts += 1
+        duration = random.uniform(shortest, longest)
+        cand_start = random.uniform(0, recording_duration - duration)
+        cand_end = cand_start + duration
+
+        if overlaps_forbidden(cand_start, cand_end):
+            continue
+        if any(cand_start < b["end_time"] and cand_end > b["start_time"]
+               for b in background):
+            continue
+
+        background.append({
+            "call_type": "background",
+            "start_time": cand_start,
+            "end_time": cand_end,
+            "wav_path": str(wav_path),
+        })
+
+    if len(background) < n_segments:
+        print(f"Warning: only found {len(background)}/{n_segments} valid "
+              f"background segments after {attempts} attempts.")
+
+    save_background_segments(background, file_label, recording_label, results_dir)
+    print(f"Saved {len(background)} background segment(s) to "
+          f"{_background_path(file_label, recording_label, results_dir).name}")
+    return background
