@@ -216,3 +216,38 @@ def plot_dtw_scatter(call_costs, background_costs, threshold=None, seed=0):
     plt.legend(loc="upper right")
     plt.grid(axis="x", alpha=0.3)
     plt.show()
+
+def _threshold_path(file_label, call_type, results_dir):
+    return results_dir / f"{file_label}_{call_type}_threshold.json"
+
+def save_threshold(threshold, j_stat, auc, call_type, file_label, results_dir,
+                    n_templates=None, n_background=None):
+    """
+    Save a computed DTW threshold for a given call type, along with the
+    metrics used to select it, so it can be reloaded later for detection
+    without needing to recompute the DTW distributions.
+    """
+    data = {
+        "call_type": call_type,
+        "file_label": file_label,
+        "threshold": float(threshold),
+        "youden_j": float(j_stat),
+        "auc": float(auc),
+        "n_templates": n_templates,
+        "n_background": n_background,
+    }
+    path = _threshold_path(file_label, call_type, results_dir)
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"Saved threshold for '{call_type}' ({file_label}) to {path.name}: "
+          f"threshold={threshold:.4f}, J={j_stat:.4f}, AUC={auc:.4f}")
+    return data
+
+def load_threshold(file_label, call_type, results_dir):
+    """Load a previously saved threshold for this call type, or None if missing."""
+    path = _threshold_path(file_label, call_type, results_dir)
+    if not path.exists():
+        print(f"No saved threshold found for '{call_type}' ({file_label}).")
+        return None
+    with open(path) as f:
+        return json.load(f)
