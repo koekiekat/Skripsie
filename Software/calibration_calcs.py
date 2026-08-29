@@ -18,6 +18,7 @@ def _load_template_segment(template, fs_new=1000):
     window before transforming, so every spectrogram has the same number
     of frequency bins regardless of the original segment's duration.
     """
+    #Extract template
     f_s, x = read_audio_file(template["wav_path"])
     start_sample = int(template["start_time"] * f_s)
     end_sample = int(template["end_time"] * f_s)
@@ -25,10 +26,12 @@ def _load_template_segment(template, fs_new=1000):
 
     resampled = resample_audio(segment, f_s, fs_new)
 
+    #Ensures window meets minimum length reqs
     min_len = int(fs_new * MIN_STFT_DURATION)
     if len(resampled) < min_len:
         resampled = np.pad(resampled, (0, min_len - len(resampled)), mode="constant")
 
+    #Calculate STFT
     _, _, Zxx = stft_calculation(resampled, f_s, fs_new)
     return Zxx
 
@@ -44,18 +47,25 @@ def compute_template_dtw_costs(templates_path, n_templates, fs_new=1000):
         pairs: list of (i, j) index pairs (positions within the first
                n_templates entries) matching each entry in `costs`
     """
+    #load template data from .json file
     with open(templates_path) as f:
         templates = json.load(f)
 
+    #error warning if too little templates
     if len(templates) < n_templates:
         print(f"Warning: file only has {len(templates)} template(s), "
               f"using all of them instead of {n_templates}.")
+
+    #Only wokring with first n templates
     templates = templates[:n_templates]
 
+    #Get STFTs of all templates
     spectrograms = [_load_template_segment(t, fs_new) for t in templates]
 
-    costs = []
-    pairs = []
+    costs = [] #will store all DTW costs
+    pairs = [] #will store which pairs were compared
+
+    #calculate and save all DTW costs
     for i, j in combinations(range(len(templates)), 2):
         cost = dtw_calc(spectrograms[i], spectrograms[j])
         costs.append(cost)
@@ -78,11 +88,13 @@ def compute_template_background_dtw_costs(templates_path, background_path,
                n_templates entries, j = position in the first n_background
                entries) matching each entry in `costs`
     """
+    #opens and stores template & background info
     with open(templates_path) as f:
         templates = json.load(f)
     with open(background_path) as f:
         background = json.load(f)
 
+    #ensures min length is met for all templates and background samples
     if len(templates) < n_templates:
         print(f"Warning: templates file only has {len(templates)} entr(ies), "
               f"using all of them instead of {n_templates}.")
@@ -90,14 +102,17 @@ def compute_template_background_dtw_costs(templates_path, background_path,
         print(f"Warning: background file only has {len(background)} entr(ies), "
               f"using all of them instead of {n_background}.")
 
+    #ensures only first n templates / background samples are used
     templates = templates[:n_templates]
     background = background[:n_background]
 
     template_specs = [_load_template_segment(t, fs_new) for t in templates]
     background_specs = [_load_template_segment(b, fs_new) for b in background]
 
-    costs = []
-    pairs = []
+    costs = [] #will store DTW costs
+    pairs = [] #will store pairs compared
+
+    #calculate all DTW costs
     for i, j in product(range(len(templates)), range(len(background))):
         cost = dtw_calc(template_specs[i], background_specs[j])
         costs.append(cost)
@@ -105,7 +120,7 @@ def compute_template_background_dtw_costs(templates_path, background_path,
 
     return costs, pairs
 
-def compute_roc_curve(call_costs, background_costs, n_thresholds=200):
+def compute_roc_curve(call_costs, background_costs, n_thresholds=200):#automatically evaluates 200 thresholds
     """
     Compute ROC curve points by sweeping thresholds over the full range of
     both cost distributions.
@@ -120,31 +135,40 @@ def compute_roc_curve(call_costs, background_costs, n_thresholds=200):
         tpr: array of true positive rates, one per threshold
         thresholds: the threshold values used, same order as fpr/tpr
     """
+    #saves all costs in arrays
     call_costs = np.array(call_costs)
     background_costs = np.array(background_costs)
 
+    #finds min and max DTW cost in each array to determine the range of evaluation of thresholds
     lo = min(call_costs.min(), background_costs.min())
     hi = max(call_costs.max(), background_costs.max())
+
+    #Generates n_thresholds evenly spaced decision threshold values between lo and hi.
     thresholds = np.linspace(lo, hi, n_thresholds)
 
-    tpr = []
-    fpr = []
-    for t in thresholds:
-        tp = np.sum(call_costs <= t)
-        fn = np.sum(call_costs > t)
-        fp = np.sum(background_costs <= t)
-        tn = np.sum(background_costs > t)
+    tpr = [] #true positive rate
+    fpr = [] #false positive rate
 
-        tpr.append(tp / (tp + fn) if (tp + fn) > 0 else 0)
-        fpr.append(fp / (fp + tn) if (fp + tn) > 0 else 0)
+    #works through each threshold value generated
+    for t in thresholds:
+        tp = np.sum(call_costs <= t) #counts how many calls are correctly classified
+        fn = np.sum(call_costs > t) #counts incorrect call classifications
+        fp = np.sum(background_costs <= t) #counts incorrect background classifications
+        tn = np.sum(background_costs > t) #counts correct background classifications
+
+        #Calculates rates for the current threshold t
+        tpr.append(tp / (tp + fn) if (tp + fn) > 0 else 0) #sensitivity / recall [TP/(TP + FN)]
+        fpr.append(fp / (fp + tn) if (fp + tn) > 0 else 0) #[FP/(FP + TN)]
 
     return np.array(fpr), np.array(tpr), thresholds
 
 def compute_auc(fpr, tpr):
     """Area under the ROC curve via the trapezoidal rule."""
-    # Sort by fpr ascending so np.trapz integrates correctly
+    # Sort by fpr ascending so np.trapz integrates correctly(left to right integration)
     order = np.argsort(fpr)
-    return np.trapz(tpr[order], fpr[order])
+
+    #calculate area under ROC curve
+    return np.trapezoid(tpr[order], fpr[order])
 
 def plot_roc_curve(call_costs, background_costs, n_thresholds=200,
                     best_threshold=None):
@@ -153,17 +177,28 @@ def plot_roc_curve(call_costs, background_costs, n_thresholds=200,
     optionally marking the point corresponding to a chosen threshold
     (e.g. from find_threshold_youden).
     """
+    #returns false positive and true positive rates as well as all calculated thresholds
     fpr, tpr, thresholds = compute_roc_curve(call_costs, background_costs, n_thresholds)
+
+    #returns area under ROC curve
     auc = compute_auc(fpr, tpr)
 
+    #creates plot figure
     plt.figure(figsize=(6, 6))
+
+    #plots fpr and tpr
     plt.plot(fpr, tpr, color="tab:blue", linewidth=2, label=f"ROC curve (AUC = {auc:.3f})")
+
+    #plots diagonal reference line for AUC = 0.5
     plt.plot([0, 1], [0, 1], color="gray", linestyle="--", linewidth=1, label="Chance level")
 
+
     if best_threshold is not None:
+        #finds threshold value
         idx = np.argmin(np.abs(thresholds - best_threshold))
-        plt.scatter(fpr[idx], tpr[idx], color="red", zorder=5,
-                    label=f"Chosen threshold = {best_threshold:.3f}")
+
+        #plots red dot on threshold value
+        plt.scatter(fpr[idx], tpr[idx], color="red", zorder=5, label=f"Chosen threshold = {best_threshold:.3f}")
 
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
@@ -180,8 +215,12 @@ def find_threshold_youden_from_roc(fpr, tpr, thresholds):
     that maximizes Youden's J statistic (J = TPR - FPR) -- i.e. the point
     on the curve furthest above the diagonal chance line.
     """
+    #calculate Youden's J statistic(used to find best threshold)
     j_scores = tpr - fpr
+
+    #saves maximum j_score
     best_idx = np.argmax(j_scores)
+    
     return thresholds[best_idx], j_scores[best_idx]
 
 def plot_dtw_scatter(call_costs, background_costs, threshold=None, seed=0):
@@ -202,12 +241,10 @@ def plot_dtw_scatter(call_costs, background_costs, threshold=None, seed=0):
 
     plt.figure(figsize=(10, 4))
     plt.scatter(call_costs, call_y, color="tab:blue", label="Call vs Call", alpha=0.8)
-    plt.scatter(background_costs, background_y, color="tab:orange",
-                label="Call vs Background", alpha=0.8)
+    plt.scatter(background_costs, background_y, color="tab:orange", label="Call vs Background", alpha=0.8)
 
     if threshold is not None:
-        plt.axvline(threshold, color="black", linestyle="--", linewidth=2,
-                    label=f"Threshold = {threshold:.3f}")
+        plt.axvline(threshold, color="black", linestyle="--", linewidth=2, label=f"Threshold = {threshold:.3f}")
 
     plt.yticks([0, 1], ["Background", "Call"])
     plt.ylim(-0.5, 1.5)

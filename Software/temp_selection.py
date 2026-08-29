@@ -188,78 +188,71 @@ def save_background_segments(background, file_label, recording_label, results_di
         json.dump(background, f, indent=2)
 
 def extract_background_segments_interactive(wav_path, text_path, n_segments,
-                                              file_label, recording_label, results_dir,
-                                              buffer=0.5, seed=None,
-                                              candidate_pool_size=None,
-                                              fs_new=1000):
-    """
-    Randomly generate candidate background (non-call) segments spread
-    across the full duration of a (potentially very long, e.g. 72-hour)
-    recording, avoiding any labeled call region, then let you visually
-    accept or reject each one via button click before saving.
-
-    n_segments: how many *accepted* background segments you want in total
-    candidate_pool_size: how many candidates to generate up front to
-        review (defaults to 3x n_segments -- increase this if you expect
-        to reject a lot, e.g. from other unlabeled noise/signals)
-    """
+                                             file_label, recording_label, results_dir,
+                                             buffer=10.0, seed=None,
+                                             candidate_pool_size=None,
+                                             fs_new=1000):
     if seed is not None:
         random.seed(seed)
+
+    existing = load_background_segments(file_label, recording_label, results_dir)
+    if len(existing) >= n_segments:
+        print(f"Already have {len(existing)} background segment(s) for "
+              f"{file_label}/{recording_label} (target {n_segments}). Nothing to do.")
+        return existing
+
+    remaining_target = n_segments - len(existing)
     if candidate_pool_size is None:
-        candidate_pool_size = n_segments * 3
+        candidate_pool_size = remaining_target * 5
 
     f_s, x = read_audio_file(wav_path)
     df, start_t, end_t = start_end_times(text_path)
     _, longest, shortest = call_length_stats(df)
 
     recording_duration = len(x) / f_s
-    forbidden = sorted((max(0, s - buffer), min(recording_duration, e + buffer))
-                        for s, e in zip(start_t, end_t))
-
-    def overlaps(cand_start, cand_end, intervals):
-        for f_start, f_end in intervals:
-            if cand_start < f_end and cand_end > f_start:
-                return True
-        return False
+    
+    forbidden = [
+        (max(0.0, float(s) - buffer), min(recording_duration, float(e) + buffer))
+        for s, e in zip(start_t, end_t)
+    ]
+    already_taken = [(float(e["start_time"]), float(e["end_time"])) for e in existing]
 
     candidates = []
-    max_attempts = candidate_pool_size * 200
+    max_attempts = candidate_pool_size * 500
     attempts = 0
+
     while len(candidates) < candidate_pool_size and attempts < max_attempts:
         attempts += 1
         duration = random.uniform(max(shortest, MIN_STFT_DURATION), longest)
         cand_start = random.uniform(0, recording_duration - duration)
         cand_end = cand_start + duration
-        if overlaps(cand_start, cand_end, forbidden):
+
+        if interval_overlaps(cand_start, cand_end, forbidden):
             continue
-        if overlaps(cand_start, cand_end, candidates):
+        if interval_overlaps(cand_start, cand_end, already_taken):
             continue
+        if interval_overlaps(cand_start, cand_end, candidates):
+            continue
+
         candidates.append((cand_start, cand_end))
 
-    if len(candidates) < n_segments:
-        print(f"Warning: only generated {len(candidates)} candidate(s) "
-              f"after {attempts} attempts -- may not reach {n_segments} "
-              f"accepted segments.")
-
-    accepted = []
+    accepted = list(existing)
     state = {"pos": 0}
+
     out = widgets.Output()
     status = widgets.Label()
     btn_accept = widgets.Button(description="Accept", button_style="success")
     btn_reject = widgets.Button(description="Reject (has signal)", button_style="danger")
     btn_stop = widgets.Button(description="Stop", button_style="warning")
 
-    display(
-        widgets.HTML(f"<b>{recording_label} — reviewing background candidates "
-                      f"(target {n_segments})</b>"),
-        status,
-        widgets.HBox([btn_accept, btn_reject, btn_stop]),
-        out,
-    )
+    # Wipe existing click handlers to prevent double execution on re-runs
+    btn_accept._click_handlers.callbacks.clear()
+    btn_reject._click_handlers.callbacks.clear()
+    btn_stop._click_handlers.callbacks.clear()
 
     def update_status():
         status.value = (f"Accepted: {len(accepted)}/{n_segments} | "
-                         f"Candidates remaining: {len(candidates) - state['pos']}")
+                        f"Candidates remaining: {len(candidates) - state['pos']}")
 
     def show_next():
         out.clear_output(wait=True)
@@ -275,12 +268,17 @@ def extract_background_segments_interactive(wav_path, text_path, n_segments,
         end_sample = int(cand_end * f_s)
         segment = x[start_sample:end_sample]
 
+        plt.ioff()  # Turn interactive plot mode OFF temporarily
+        f_sig, t_sig, Zxx_sig, fsn = short_time_calc(segment, f_s, fs_new)
+        fig = plot_spectrogram(f_sig, t_sig, Zxx_sig, fsn)
+        plt.ion()   # Turn interactive plot mode back ON
+
         with out:
-            f_sig, t_sig, Zxx_sig, fsn = short_time_calc(segment, f_s, fs_new)
-            plot_spectrogram(f_sig, t_sig, Zxx_sig, fsn)
-            print(f"candidate {state['pos'] + 1}/{len(candidates)} | "
-                  f"start_t {cand_start:.2f} | end_t {cand_end:.2f} "
-                  f"({cand_start / 3600:.2f} hr into recording)")
+            display(fig)
+            print(f"Candidate {state['pos'] + 1}/{len(candidates)} | "
+                  f"start_t {cand_start:.2f}s | end_t {cand_end:.2f}s "
+                  f"({cand_start / 3600:.2f} hr)")
+            
         update_status()
 
     def on_accept(b):
@@ -291,6 +289,7 @@ def extract_background_segments_interactive(wav_path, text_path, n_segments,
             "end_time": cand_end,
             "wav_path": str(wav_path),
         })
+        save_background_segments(accepted, file_label, recording_label, results_dir)
         state["pos"] += 1
         show_next()
 
@@ -301,21 +300,33 @@ def extract_background_segments_interactive(wav_path, text_path, n_segments,
     def finalize(reason):
         out.clear_output(wait=True)
         with out:
-            print(f"Stopped: {reason} Accepted {len(accepted)}/{n_segments} "
-                  f"background segment(s).")
+            print(f"Stopped: {reason} Total accepted: {len(accepted)}/{n_segments} segment(s).")
         for b in (btn_accept, btn_reject, btn_stop):
             b.disabled = True
-        save_background_segments(accepted, file_label, recording_label, results_dir)
-        print(f"Saved {len(accepted)} background segment(s) to "
-              f"{_background_path(file_label, recording_label, results_dir).name}")
-        plot_background_coverage(accepted, recording_duration)
 
     btn_accept.on_click(on_accept)
     btn_reject.on_click(on_reject)
     btn_stop.on_click(lambda b: finalize("Stopped by user."))
 
+    display(
+        widgets.HTML(f"<b>{recording_label} — reviewing background candidates "
+                     f"(target {n_segments}, {len(existing)} saved)</b>"),
+        status,
+        widgets.HBox([btn_accept, btn_reject, btn_stop]),
+        out,
+    )
+
     show_next()
     return accepted
+
+def interval_overlaps(cand_start, cand_end, intervals):
+    """
+    Robust overlap check against a list of (start, end) tuples.
+    """
+    for start, end in intervals:
+        if max(cand_start, start) < min(cand_end, end):
+            return True
+    return False
 
 def plot_background_coverage(accepted, recording_duration):
     """

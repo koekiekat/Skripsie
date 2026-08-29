@@ -17,8 +17,8 @@ def resample_audio(audio_segments, f_s, fs_new):
     return audio_resampled
 
 def stft_calculation(audio_resampled, f_s, fs_new):
-    framelength = fs_new * 0.128
-    noverlap = int(framelength * 0.8)
+    framelength = int(fs_new * 0.128)
+    noverlap = int(framelength * 0.75)
     window = "hamming"
 
     f, t, Zxx = signal.stft(audio_resampled, fs=fs_new, nperseg=framelength, noverlap=noverlap, window=window)
@@ -30,4 +30,3 @@ def plot_spectrogram(f, t, Zxx, fs_new):
     plt.ylabel("Frequency (Hz)")
     plt.title("Spectrogram of Audio Signal")
     plt.ylim(0, fs_new/2)
-    plt.show()
