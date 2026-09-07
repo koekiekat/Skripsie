@@ -19,7 +19,7 @@ def read_audio_chunk(audio_file, start_hour, duration_hour = 1.0, fs_new = 1000)
 
     return fs_new, resampled
 
-def compute_template_dtw_costs(st_temps, mt_temps, bt_temps, n_templates, audio_segment, fs_new=1000):
+def compute_template_dtw_costs(st_stfts, mt_stfts, bt_stfts, n_templates, audio_segment, fs_new=1000):
     """
     Load a saved templates JSON file, take the first `n_templates` entries,
     and compute the DTW cost of every template against every other template
@@ -31,38 +31,28 @@ def compute_template_dtw_costs(st_temps, mt_temps, bt_temps, n_templates, audio_
         pairs: list of (i, j) index pairs (positions within the first
                n_templates entries) matching each entry in `costs`
     """
-    #load template data from .json file
-    with open(st_temps) as f:
-        st_templates = json.load(f)
-
-    with open(mt_temps) as f:
-        mt_templates = json.load(f)
-
-    with open(bt_temps) as f:
-        bt_templates = json.load(f)
-
     #error warning if too little templates
-    if len(st_templates) < n_templates:
-        print(f"Warning: file only has {len(st_templates)} template(s), "
+    '''if len(st_temps) < n_templates:
+        print(f"Warning: file only has {len(st_temps)} template(s), "
               f"using all of them instead of {n_templates}.")
 
-    if len(mt_templates) < n_templates:
-        print(f"Warning: file only has {len(mt_templates)} template(s), "
+    if len(mt_temps) < n_templates:
+        print(f"Warning: file only has {len(mt_temps)} template(s), "
               f"using all of them instead of {n_templates}.")
 
-    if len(bt_templates) < n_templates:
-        print(f"Warning: file only has {len(bt_templates)} template(s), "
-              f"using all of them instead of {n_templates}.")
+    if len(bt_temps) < n_templates:
+        print(f"Warning: file only has {len(bt_temps)} template(s), "
+              f"using all of them instead of {n_templates}.")'''
 
     #Only wokring with first n templates
-    st_templates = st_templates[:n_templates]
-    mt_templates = mt_templates[:n_templates]
-    bt_templates = bt_templates[:n_templates]
+    '''st_templates = st_temps[:n_templates]
+    mt_templates = mt_temps[:n_templates]
+    bt_templates = bt_temps[:n_templates]'''
 
     #Get STFTs of all templates
-    st_stfts = [_load_template_segment(t, fs_new) for t in st_templates]
-    mt_stfts = [_load_template_segment(t, fs_new) for t in mt_templates]
-    bt_stfts = [_load_template_segment(t, fs_new) for t in bt_templates]
+    '''st_stfts = [_load_template_segment(t, fs_new) for t in st_temps]
+    mt_stfts = [_load_template_segment(t, fs_new) for t in mt_temps]
+    bt_stfts = [_load_template_segment(t, fs_new) for t in bt_temps]'''
 
     #will store all DTW costs
     costs_st = []
@@ -79,7 +69,7 @@ def compute_template_dtw_costs(st_temps, mt_temps, bt_temps, n_templates, audio_
 
     return costs_st, costs_mt, costs_bt
 
-def _load_template_segment(template, fs_new=1000):
+def load_template_segment(template, fs_new=1000):
     """
     Given one saved template/background entry ({start_time, end_time,
     wav_path, ...}), reload its audio from disk and compute its STFT.
