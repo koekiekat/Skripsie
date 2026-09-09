@@ -30,7 +30,7 @@ def batched_dtw_costs_for_template(template_Zxx, Zxx_batch):
     y_all = np.abs(Zxx_batch).transpose(0, 2, 1).reshape(-1, n_freq)  # (n_windows*n_frames, n_freq)
     dist_all = dist.cdist(x_seq, y_all, "cosine")  # (n_temp_frames, n_windows*n_frames)
     dist_all = dist_all.reshape(x_seq.shape[0], n_windows, n_frames)
-    print("start dist calcs")
+    #print("start dist calcs")
 
     costs = np.empty(n_windows)
     for w in range(n_windows):

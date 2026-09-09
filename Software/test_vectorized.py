@@ -52,11 +52,11 @@ def dtw_costs_vectorized(st_stfts, mt_stfts, bt_stfts, n_templates, audio_segmen
     # audio_segment here is Zxx_window: (n_windows, n_freq, n_frames_per_window)
 
     # For each call type, compute costs of every template against every window
-    print("ST")
+    #print("ST")
     st_costs = [batched_dtw_costs_for_template(t, audio_segment) for t in st_stfts]
-    print("MT")
+    #print("MT")
     mt_costs = [batched_dtw_costs_for_template(t, audio_segment) for t in mt_stfts]
-    print("BT")
+    #print("BT")
     bt_costs = [batched_dtw_costs_for_template(t, audio_segment) for t in bt_stfts]
 
     return st_costs, mt_costs, bt_costs
