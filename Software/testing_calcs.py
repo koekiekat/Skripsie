@@ -4,6 +4,7 @@ from stft import resample_audio, stft_calculation
 from dtw import dtw_calc
 from background_functions import read_audio_file
 import json
+import pandas as pd
 
 MIN_STFT_DURATION = 0.128  # seconds -- matches framelength in stft.py's short_time_calc
 
