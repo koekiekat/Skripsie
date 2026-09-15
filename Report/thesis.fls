@@ -671,7 +671,6 @@ INPUT .\chapters\introduction.tex
 INPUT .\chapters\introduction.tex
 INPUT .\chapters\introduction.tex
 INPUT chapters\introduction.tex
-INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr8.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmr7.tfm
@@ -691,6 +690,15 @@ INPUT .\chapters\literature.tex
 INPUT .\chapters\literature.tex
 INPUT .\chapters\literature.tex
 INPUT chapters\literature.tex
+INPUT .\chapters\system_design.tex
+INPUT .\chapters\system_design.tex
+INPUT chapters\system_design.tex
+INPUT .\chapters\detailed_design.tex
+INPUT .\chapters\detailed_design.tex
+INPUT chapters\detailed_design.tex
+INPUT .\chapters\reuslts.tex
+INPUT .\chapters\reuslts.tex
+INPUT chapters\reuslts.tex
 INPUT .\chapters\conclusion.tex
 INPUT .\chapters\conclusion.tex
 INPUT .\chapters\conclusion.tex
@@ -726,8 +734,6 @@ INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr17.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr17.pfb
-INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr8.pfb
-INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr8.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri12.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri12.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmro12.pfb

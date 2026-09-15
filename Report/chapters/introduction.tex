@@ -4,39 +4,56 @@
 \mysection{Background}{Background}
 \label{sec:background}
 
-Given data from many hours of recordings which contains whale noises at 
-undetermined times is difficult to analyse where these whale sounds occur 
-at a glance. This is of interest as researchers can use this information 
-to determine the migration patterns of whales and other behaviours.
+Since the late 1990s there have been indications that whales have been struck by shipping vessels.\cite{vessel_collision_since_1990s} 
+Today this has become a larger concern, as vessel speeds and traffic has substantially increased.  
+In False Bay, South Africa, a colony of Bryde's whales have been detected. Bryde's whales are found to migrate in smaller regions 
+instead of the usual large-scale migrations of other whale species. Due to the increase in shipping traffic as well as the fishing 
+activities in the area, the Bryde's whales in this are are also in danger.\cite{bryde_whales_SA}
+Detection and classification systems for whale calls can be used to monitor the migration patterns of the specific whale colony throughout 
+the year. The information gained from such analysis can help determine when vessel traffic should be diverted for the safety of the whale population.
+These types of systems have been implemented on different whale colonies, but the migration patterns of the False Bay colony has not yet been 
+thoroughly documented.\cite{reducing_vessel_collisions} 
+Due to the variations in call types between different colonies of some whale species (killer whales\cite{killer_whale_dialects}, blue 
+whales\cite{blue_whale_song_variation}), models trained for other Bryde's whale colonies would not be completely trustworthy for the detection of 
+calls within the False Bay Bryde's Whale colony as universiality of calls cannot be assumed. Therefore, a model trained specifically for the False 
+Bay colony would be beneficial. Dynamic Time Warping (DTW) is a lesser studied method for whale classification, but has been shown to be effective 
+on different whale colonies.\cite{DTW_has_worked}
+
 
 \mysection{Problem Statement}{Problem Statement}
 \label{sec:problemstatement}
 
-Determine whether using Dynamic Time Warping (DTW) in the frequency domain, thus 
-using vector features, improves the ability of DTW to detect and classify whale 
-calls compared to the time-domain approach of Dynamic Time Warping, thus using scalar features.
-The methods used will be Short Time Fourier Transform (STFT), 
+This project will determine whether using Dynamic Time Warping (DTW) in the frequency domain, thus 
+using vector features, is able to effectively detect Bryde's Whale calls within the False Bay region.
+Three feature extraction methods will be compared. These will be Short Time Fourier Transform (STFT), 
 Mel-frequency Cepstral Coeffficients (MFCC) and Linear Predictive Coding (LPC).
 
 \mysection{Objectives}{Objectives}
 \label{sec:objectives}
 
-The DTW method in the time domain will first be implemented. The scalar features will be used
-from the data as it is given in the file.
+\begin{enumerate}
+    \item Implement a DTW detection system using three different feature extraction methods(STFT, MFCC and LPC). This shows whether the effectiveness 
+    of the DTW system is independent from the feature extraction method.
+    \item Calculate the precision, recall and F1-score for each model.
+    \item Compare results and determine whether DTW is overall a good detection method and which 
+    feature extraction method is best suited.
+\end{enumerate}
 
-The DTW method in the frequency domain will then be implemented using three different extraction methods 
-to ensure that the comparison between sacalr and vector features does not depend on how the vector
-features are chosen. The methods used will be Short Time Fourier Transform (STFT), 
-Mel-frequency Cepstral Coeffficients (MFCC) and Linear Predictive Coding (LPC).
+\mysection{Scope}{Scope}
+\label{sec:scope}
+    What you didn't consider.
 
-The four models will then be compared to determine which method is best for whale detection 
-and to determine whether the frequency domain approach is better and if so, how significant 
-the improvements are.
+\mysection{Layout of report}{Layout of report}
+\label{sec:layout}
 
-\mysection{Thesis overview}{Thesis Overview}
-\label{sec:overview}
-
-Write a good thesis and follow the instructions at \cite{sun_thesis_guide}. The pukka \LaTeX ~ template for Stellenbosch Theses is available at \cite{sun_latex_template}, this one is just for dummies.
+\begin{itemize}
+    \item Chapter 2 provides anu background information needed to understand how to solve the given problem as well as any helpful literature of previous 
+    solutions to the problem.
+    \item Chapter 3 provides an explanation of the overall setup and method used to solve the problem including what metrics were used to meet the stated objectives.
+    \item Chapter 4 gives a detailed design explanation for all the functional blocks defined in the previous chapter.
+    \item Chapter 5 provides evidence of results obtained after the system has been designed as well as descriptions of what the results show.
+    \item Chapter 6 contains all concluding thoughts on the results and what that means for the solutions as well as improvements and recommendations for the project.
+\end{itemize}
 
 
 \Ac{MFT} is as good as \ac{MFT} can be, as Table \ref{tab:my_label} and Figure \ref{fig:enter-label} shows.
@@ -59,7 +76,7 @@ Have a look at my explanation in Section \ref{sec:relatedwork} on page \pageref{
     \label{tab:my_label}
 \end{table}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png}
     \caption{Your figure caption.}

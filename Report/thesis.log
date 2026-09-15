@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  6 AUG 2026 13:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  15 SEP 2026 22:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1553,7 +1553,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 3.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 3.
-<stb-thesis-frntp.pdf, id=77, 597.50786pt x 845.04686pt>
+<stb-thesis-frntp.pdf, id=93, 597.50786pt x 845.04686pt>
 File: stb-thesis-frntp.pdf Graphic file (type pdf)
 <use stb-thesis-frntp.pdf>
 Package pdftex.def Info: stb-thesis-frntp.pdf  used on input line 3.
@@ -1655,16 +1655,25 @@ Chapter 1.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.36 \mysection{Thesis overview}{Thesis Overview}
-                                                  [1
+l.31 \mysection{Objectives}{Objectives}
+                                        [1
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 51.
-<figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png, id=200, 195.73125pt x 51.19125pt>
+(Font)              <7> on input line 68.
+
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[2]
+<figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png, id=241, 195.73125pt x 51.19125pt>
 File: figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png Graphic file (type png)
 <use figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png>
-Package pdftex.def Info: figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png  used on input line 64.
+Package pdftex.def Info: figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png  used on input line 81.
 (pdftex.def)             Requested size: 364.19667pt x 95.2569pt.
 ) (chapters/literature.tex
 
@@ -1674,20 +1683,27 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[2 <./figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png>]
+[3 <./figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png>]
 Chapter 2.
-) (chapters/conclusion.tex [3
+) (chapters/system_design.tex [4
 
 ]
 Chapter 3.
-) [4
+) (chapters/detailed_design.tex [5
 
-] (thesis.bbl
-Underfull \hbox (badness 1975) in paragraph at lines 30--32
-[]\T1/lmr/m/n/12 (+20) D. Els, ``Stel-len-bosch uni-ver-sity the-sis bun-dle,'' 2024, [][]$https : / / ctan . org / pkg /
- []
+]
+Chapter 4.
+) (chapters/reuslts.tex [6
 
-) (appendices/appendices.tex (appendices/an_appendix.tex [5
+]
+Chapter 5.
+) (chapters/conclusion.tex [7
+
+]
+Chapter 6.
+) [8
+
+] (thesis.bbl) (appendices/appendices.tex (appendices/an_appendix.tex [9
 
 ]
 Appendix A.
@@ -1696,7 +1712,7 @@ Appendix A.
 Package caption Warning: Unused \captionsetup[algorithm] on input line 376.
 See the caption package documentation for explanation.
 
-[6
+[10
 
 ] (thesis.aux)
  ***********
@@ -1704,20 +1720,20 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 16E798242AA39277CB83F8653DF59D41;2198.
+(rerunfilecheck)             Checksum: C9A68284806F84B07FF7F515BEA70BDA;2528.
  ) 
 Here is how much of TeX's memory you used:
- 51144 strings out of 467871
- 1036852 string characters out of 5419828
- 1638704 words of memory out of 5000000
- 78993 multiletter control sequences out of 15000+600000
- 723906 words of font info for 167 fonts, out of 8000000 for 9000
+ 51226 strings out of 467871
+ 1038593 string characters out of 5419828
+ 1641047 words of memory out of 5000000
+ 79034 multiletter control sequences out of 15000+600000
+ 721789 words of font info for 175 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,11n,112p,2591b,671s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (18 pages, 297527 bytes).
+ <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (22 pages, 298487 bytes).
 PDF statistics:
- 298 PDF objects out of 1000 (max. 8388607)
- 41 named destinations out of 1000 (max. 500000)
- 51879 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 356 PDF objects out of 1000 (max. 8388607)
+ 56 named destinations out of 1000 (max. 500000)
+ 49863 words of extra memory for PDF output out of 51595 (max. 10000000)
 
