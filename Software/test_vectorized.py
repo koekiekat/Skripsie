@@ -7,6 +7,7 @@ import json
 from scipy import signal
 import pandas as pd
 import matplotlib.pyplot as plt
+import random
 
 MIN_STFT_DURATION = 0.128  # seconds -- matches framelength in stft.py's short_time_calc
 
@@ -132,6 +133,10 @@ def _overlaps(a_start, a_end, b_start, b_end):
     return a_start < b_end and b_start < a_end
 
 def match_detections(detections, ground_truth, require_label_match=True):
+    """
+    Same matching logic as match_detections, but also returns the actual
+    false positive detections (not just the count) so they can be inspected.
+    """
     detections = sorted(detections, key=lambda d: d[0])
     gt_start = np.array([g["start"] for g in ground_truth])
     gt_end = np.array([g["end"] for g in ground_truth])
@@ -139,7 +144,6 @@ def match_detections(detections, ground_truth, require_label_match=True):
     det_matched = [False] * len(detections)
 
     for i, (d_start, d_end, d_label) in enumerate(detections):
-        # only consider ground-truth calls that could plausibly overlap d
         lo = np.searchsorted(gt_end, d_start, side="right")
         hi = np.searchsorted(gt_start, d_end, side="left")
 
@@ -159,7 +163,11 @@ def match_detections(detections, ground_truth, require_label_match=True):
     tp = sum(det_matched)
     fp = len(detections) - tp
     fn = sum(not m for m in gt_matched)
-    return tp, fp, fn
+
+    false_positive_detections = [d for d, matched in zip(detections, det_matched) if not matched]
+    false_negative_gts = [g for g, matched in zip(ground_truth, gt_matched) if not matched]
+
+    return tp, fp, fn, false_positive_detections, false_negative_gts
 
 def windows_to_calls(times, scores, labels, threshold, step, window_len, tol=1e-6):
     mask = scores <= threshold
@@ -187,9 +195,8 @@ def compute_pr_curve(times, scores, labels, ground_truth, step, window_len,
     precision, recall = [], []
 
     for t in thresholds:
-        print(t)
         calls = windows_to_calls(times, scores, labels, t, step, window_len)
-        tp, fp, fn = match_detections(calls, ground_truth, require_label_match)
+        tp, fp, fn, _, _ = match_detections(calls, ground_truth, require_label_match)
         precision.append(tp / (tp + fp) if (tp + fp) > 0 else 1.0)
         recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
 
@@ -230,4 +237,95 @@ def plot_pr_curve(precision, recall, ap=None, marked_point=None):
     plt.ylim(0, 1.05)
     plt.legend()
     plt.grid(alpha=0.3)
+    plt.show()
+
+def plot_detection_spectrograms(detections, wav_path,
+                                 fs_new=1000,
+                                 framelength=None,
+                                 noverlap=None,
+                                 context=0.5,
+                                 n_examples=12,
+                                 hour_duration=3600.0,
+                                 random_sample=True,
+                                 seed=0,
+                                 title_prefix="FP"):
+    """
+    Plot spectrograms of a sample of detections (e.g. false positives or
+    false negatives), with time context on either side.
+
+    detections: list of (start_time, end_time, label) in GLOBAL seconds
+                (for false negatives, use (g['start'], g['end'], g['label']))
+    wav_path: path to the full audio .wav file
+    framelength / noverlap: STFT params in samples; defaults to the same
+                             0.128s / 75% overlap used in your detection pipeline
+    context: seconds of padding before/after the call to include
+    n_examples: max number to plot
+    random_sample: if True, randomly sample n_examples; if False, take the first n
+    title_prefix: label prefix for subplot titles, e.g. "FP" or "FN"
+    """
+    if framelength is None:
+        framelength = int(fs_new * 0.128)
+    if noverlap is None:
+        noverlap = int(framelength * 0.75)
+
+    if len(detections) == 0:
+        print(f"No {title_prefix} entries to plot.")
+        return
+
+    if random_sample:
+        rng = random.Random(seed)
+        sample = rng.sample(detections, min(n_examples, len(detections)))
+    else:
+        sample = detections[:n_examples]
+
+    # group by hour so we only load each hour's audio once
+    from collections import defaultdict
+    by_hour = defaultdict(list)
+    for start, end, label in sample:
+        hour_idx = int(start // hour_duration)
+        by_hour[hour_idx].append((start, end, label))
+
+    n_plot = len(sample)
+    n_cols = 3
+    n_rows = int(np.ceil(n_plot / n_cols))
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
+    axes = np.atleast_1d(axes).flatten()
+
+    ax_idx = 0
+    for hour_idx, entries in by_hour.items():
+        f_s, audio_array = read_audio_chunk(wav_path, hour_idx, duration_hour=1.0, fs_new=fs_new)
+
+        for start, end, label in entries:
+            local_start = start - hour_idx * hour_duration
+            local_end = end - hour_idx * hour_duration
+
+            seg_start_t = max(0, local_start - context)
+            seg_end_t = min(len(audio_array) / f_s, local_end + context)
+            seg_start_idx = int(seg_start_t * f_s)
+            seg_end_idx = int(seg_end_t * f_s)
+            segment = audio_array[seg_start_idx:seg_end_idx]
+
+            ax = axes[ax_idx]
+            if len(segment) < framelength:
+                ax.set_title(f"{title_prefix}: {label} @ {start:.2f}s\n(segment too short)")
+                ax.axis("off")
+                ax_idx += 1
+                continue
+
+            f, t, Zxx = signal.stft(segment, fs=f_s, nperseg=framelength, noverlap=noverlap,
+                                     window="hamming")
+            Zxx_db = 20 * np.log10(np.abs(Zxx) + 1e-10)
+
+            ax.pcolormesh(t + seg_start_t, f, Zxx_db, shading="gouraud", cmap="viridis")
+            ax.axvline(local_start, color="red", linestyle="--", linewidth=1)
+            ax.axvline(local_end, color="red", linestyle="--", linewidth=1)
+            ax.set_title(f"{title_prefix}: {label} @ {start:.2f}s (dur={end-start:.2f}s)", fontsize=10)
+            ax.set_xlabel("Time (s, local)")
+            ax.set_ylabel("Freq (Hz)")
+            ax_idx += 1
+
+    for j in range(ax_idx, len(axes)):
+        axes[j].axis("off")
+
+    plt.tight_layout()
     plt.show()
