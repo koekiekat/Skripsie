@@ -329,3 +329,21 @@ def plot_detection_spectrograms(detections, wav_path,
 
     plt.tight_layout()
     plt.show()
+
+def get_exclusion_intervals(ground_truth, exclude_labels=("td",), pad=0.0):
+    """Returns a list of (start, end) tuples for calls you want excluded, with optional padding (s)."""
+    return [(g["start"] - pad, g["end"] + pad)
+            for g in ground_truth if g["label"] in exclude_labels]
+
+def get_exclusion_mask(window_times_global, window_len, exclude_intervals):
+    """
+    window_times_global: 1D array of each window's start time (global seconds)
+    Returns a boolean array, True = keep, False = drop (window overlaps an excluded interval)
+    """
+    starts = window_times_global
+    ends = window_times_global + window_len
+    keep = np.ones(len(window_times_global), dtype=bool)
+    for ex_start, ex_end in exclude_intervals:
+        overlap = (starts < ex_end) & (ends > ex_start)
+        keep &= ~overlap
+    return keep
