@@ -11,6 +11,148 @@ import random
 
 MIN_STFT_DURATION = 0.128  # seconds -- matches framelength in stft.py's short_time_calc
 
+def merge_consecutive_detections(all_detected_t, all_detected_labels, step=0.075, window_len=0.15, tol=1e-6):
+    """
+    Merge consecutive per-window detections into contiguous calls.
+
+    A run continues as long as consecutive detections are exactly one `step`
+    apart (within `tol`) and share the same label; otherwise a new run starts.
+
+    Returns:
+        combined_calls: list of (start_time, end_time, label) tuples
+    """
+    combined_calls = []
+
+    if len(all_detected_t) > 0:
+        run_start = all_detected_t[0]
+        run_end = all_detected_t[0]
+        run_label = all_detected_labels[0]
+
+        for t, label in zip(all_detected_t[1:], all_detected_labels[1:]):
+            gap = t - run_end
+            is_consecutive = np.isclose(gap, step, atol=tol)
+
+            if is_consecutive and label == run_label:
+                # extend the current run
+                run_end = t
+            else:
+                # close out the current run, start a new one
+                combined_calls.append((run_start, run_end + window_len, run_label))
+                run_start = t
+                run_end = t
+                run_label = label
+
+        # don't forget to flush the last run after the loop ends
+        combined_calls.append((run_start, run_end + window_len, run_label))
+    return combined_calls
+
+def run_detection_pipeline(audio_file, n_hours, st_stfts, mt_stfts, bt_stfts,
+                            st_threshold, mt_threshold, bt_threshold,
+                            exclude_intervals, fs_new=1000,
+                            window_len=0.15, step_len=0.075, vote_frac=0.6):
+    """
+    Run the DTW-based call detector over an audio file in 1-hour chunks,
+    excluding windows that overlap `exclude_intervals` (e.g. tonal downsweeps).
+
+    Returns:
+        all_detected_t, all_detected_labels: times/labels of triggered detections
+        all_scores, all_labels_all, all_times_all: per-window best cost/label/time
+            for every evaluated window (used for PR curves)
+    """
+    all_detected_t = []
+    all_detected_labels = []
+    all_scores = []
+    all_labels_all = []
+    all_times_all = []
+
+    n_templates = len(st_stfts)  # assumes st/mt/bt all use the same n_templates
+
+    for i in range(n_hours):
+        f_s, audio_array = read_audio_chunk(audio_file, i, duration_hour=1.0, fs_new=fs_new)
+
+        f_win, t_win, Zxx_window = batch_stft_windows(
+            audio_array,
+            window_len=int(window_len * fs_new),
+            step_len=int(window_len * fs_new / 2),
+            fs_new=f_s,
+            framelength=int(f_s * 0.128),
+            noverlap=int(int(f_s * 0.128) * 0.75),
+        )
+
+        n_windows = Zxx_window.shape[0]
+        window_times_global = np.arange(n_windows) * step_len + i * 3600
+
+        keep = get_exclusion_mask(window_times_global, window_len=window_len, exclude_intervals=exclude_intervals)
+        Zxx_window = Zxx_window[keep]
+        window_times_global = window_times_global[keep]
+
+        costs_st, costs_mt, costs_bt = dtw_costs_vectorized(
+            st_stfts, mt_stfts, bt_stfts, n_templates=n_templates, audio_segment=Zxx_window
+        )
+
+        results = {}
+        for costs_list, threshold, label in [(costs_st, st_threshold, "st"),
+                                              (costs_mt, mt_threshold, "mt"),
+                                              (costs_bt, bt_threshold, "bt")]:
+            costs_arr = np.vstack(costs_list)
+            n_t = costs_arr.shape[0]
+            votes = (costs_arr < threshold).sum(axis=0)
+            mean_cost = costs_arr.mean(axis=0)
+            triggered = votes >= np.ceil(vote_frac * n_t)
+            results[label] = (triggered, mean_cost)
+
+        n_windows = Zxx_window.shape[0]
+        call_detected = np.zeros(n_windows, dtype=bool)
+        call_labels = np.full(n_windows, "", dtype=object)
+        best_cost = np.full(n_windows, np.inf)
+        best_cost_all = np.full(n_windows, np.inf)
+        best_label_all = np.full(n_windows, "", dtype=object)
+
+        for label, (triggered, mean_cost) in results.items():
+            all_time_better = mean_cost < best_cost_all
+            best_label_all[all_time_better] = label
+            best_cost_all[all_time_better] = mean_cost[all_time_better]
+
+            triggered_better = triggered & (mean_cost < best_cost)
+            call_labels[triggered_better] = label
+            best_cost[triggered_better] = mean_cost[triggered_better]
+            call_detected |= triggered
+
+        print(f"Processing hour {i+1} of {n_hours}: {call_detected.sum()} / {n_windows} windows flagged as calls")
+
+        all_scores.extend(best_cost_all.tolist())
+        all_labels_all.extend(best_label_all.tolist())
+        all_times_all.extend(window_times_global.tolist())  # <-- fixed: reuse filtered times, don't recompute
+
+        detected = np.where(call_detected)[0]
+        detected_t_global = window_times_global[detected]
+        all_detected_t.extend(detected_t_global.tolist())
+        all_detected_labels.extend(call_labels[detected].tolist())
+
+    all_detected_t = np.array(all_detected_t)
+    all_detected_labels = np.array(all_detected_labels, dtype=object)
+    all_scores = np.array(all_scores)
+    all_labels_all = np.array(all_labels_all, dtype=object)
+    all_times_all = np.array(all_times_all)
+
+    return all_detected_t, all_detected_labels, all_scores, all_labels_all, all_times_all
+
+def load_all_thresholds(results_dir, file_label):
+    """
+    Load previously saved thresholds for single_tone, multi_tone, and burst_tonal
+    call types.
+
+    Returns:
+        st_threshold, mt_threshold, bt_threshold: float threshold values
+    """
+    call_types = ["single_tone", "multi_tone", "burst_tonal"]
+    thresholds_by_type = {}
+
+    for call_type in call_types:
+        result = load_threshold(file_label=file_label, call_type=call_type, results_dir=results_dir)
+        thresholds_by_type[call_type] = result["threshold"]
+
+    return thresholds_by_type["single_tone"], thresholds_by_type["multi_tone"], thresholds_by_type["burst_tonal"]
 
 def read_audio_chunk(audio_file, start_hour, duration_hour = 1.0, fs_new = 1000):
     start_sec = start_hour * 3600
@@ -89,6 +231,45 @@ def load_template_segment(template, fs_new=1000):
     #Calculate STFT
     _, _, Zxx = stft_calculation(resampled, f_s, fs_new)
     return Zxx
+
+def load_template_segment_fast(template, fs_new=1000):
+    with sf.SoundFile(template["wav_path"]) as f:
+        f_s = f.samplerate
+        start_sample = int(template["start_time"] * f_s)
+        end_sample = int(template["end_time"] * f_s)
+        f.seek(start_sample)
+        segment = f.read(end_sample - start_sample, dtype="int16")
+
+    resampled = resample_audio(segment, f_s, fs_new)
+
+    min_len = int(fs_new * MIN_STFT_DURATION)
+    if len(resampled) < min_len:
+        resampled = np.pad(resampled, (0, min_len - len(resampled)), mode="constant")
+
+    _, _, Zxx = stft_calculation(resampled, f_s, fs_new)
+    return Zxx
+
+def load_all_template_stfts(results_dir, file_label, recording_label, n_templates=10, fs_new=1000):
+    """
+    Load single_tone, multi_tone, and burst_tonal template JSON files for a given
+    file_label/recording_label, take the first n_templates from each, and compute
+    their STFTs.
+
+    Returns:
+        st_stfts, mt_stfts, bt_stfts: lists of STFT arrays (Zxx), one per template
+    """
+    call_types = ["single_tone", "multi_tone", "burst_tonal"]
+    stfts_by_type = {}
+
+    for call_type in call_types:
+        path = results_dir / f"{file_label}_{recording_label}_{call_type}_templates.json"
+        with open(path) as f:
+            templates = json.load(f)
+
+        templates = templates[:n_templates]
+        stfts_by_type[call_type] = [load_template_segment_fast(t, fs_new) for t in templates]
+
+    return stfts_by_type["single_tone"], stfts_by_type["multi_tone"], stfts_by_type["burst_tonal"]
 
 def batch_stft_windows(audio_array, window_len, step_len, fs_new, framelength, noverlap):
     # (n_windows, window_len) view, no copying
