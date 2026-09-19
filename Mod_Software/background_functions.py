@@ -3,6 +3,7 @@ import pandas as pd
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 
+
 plt.rcParams['figure.figsize'] = [10, 5]
 
 def read_audio_file(fn):

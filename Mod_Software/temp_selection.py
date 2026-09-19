@@ -342,7 +342,7 @@ def interval_overlaps(cand_start, cand_end, intervals):
             return True
     return False
 
-def plot_background_coverage(accepted, recording_duration):
+'''def plot_background_coverage(accepted, recording_duration):
     """
     Quick sanity-check plot: shows where each accepted background segment
     falls across the recording's full duration, so you can confirm they're
@@ -357,7 +357,7 @@ def plot_background_coverage(accepted, recording_duration):
     plt.yticks([])
     plt.xlabel("Time into recording (hours)")
     plt.title("Coverage of accepted background segments")
-    plt.show()
+    plt.show()'''
 
 def review_saved_calls(json_path, fs_new=1000, start_idx=0):
     """

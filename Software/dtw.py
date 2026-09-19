@@ -38,6 +38,27 @@ def batched_dtw_costs_for_template(template_Zxx, Zxx_batch):
         costs[w] = cost_mat[-1, -1] / (x_seq.shape[0] + n_frames)
     return costs
 
+def dtw_calc_new(template_feat, comparison_feat, metric="cosine"):
+    x_seq = np.asarray(template_feat).T      # (n_frames, n_features)
+    y_seq = np.asarray(comparison_feat).T
+
+    dist_mat = dist.cdist(x_seq, y_seq, metric)
+    cost_mat = dp(dist_mat)
+    return cost_mat[-1, -1] / (x_seq.shape[0] + y_seq.shape[0])
+
+
+def batched_dtw_costs_for_template_new(template_feat, feat_batch, metric="cosine"):
+    x_seq = np.asarray(template_feat).T
+    n_windows, n_feat, n_frames = feat_batch.shape
+
+    y_all = feat_batch.transpose(0, 2, 1).reshape(-1, n_feat)
+    dist_all = dist.cdist(x_seq, y_all, metric).reshape(x_seq.shape[0], n_windows, n_frames)
+
+    costs = np.empty(n_windows)
+    for w in range(n_windows):
+        costs[w] = dp(dist_all[:, w, :])[-1, -1] / (x_seq.shape[0] + n_frames)
+    return costs
+
 @njit(cache=True)
 def dp(dist_mat):
     """

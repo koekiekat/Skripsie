@@ -5,7 +5,7 @@ import numpy as np
 
 from background_functions import read_audio_file
 from stft import resample_audio, stft_calculation
-from dtw import dtw_calc  # adjust this import to match wherever dtw_calc actually lives
+from dtw import dtw_calc, dtw_calc_new  # adjust this import to match wherever dtw_calc actually lives
 
 MIN_STFT_DURATION = 0.128  # seconds -- must match the framelength used in short_time_calc
 
@@ -118,6 +118,12 @@ def compute_template_background_dtw_costs(templates_path, background_path,
         costs.append(cost)
         pairs.append((i, j))
 
+    return costs, pairs
+
+def dtw_cross_costs(specs_a, specs_b, metric="cosine"):
+    """Every item in specs_a vs every item in specs_b."""
+    pairs = list(product(range(len(specs_a)), range(len(specs_b))))
+    costs = [dtw_calc_new(specs_a[i], specs_b[j], metric) for i, j in pairs]
     return costs, pairs
 
 def compute_roc_curve(call_costs, background_costs, n_thresholds=200):#automatically evaluates 200 thresholds
@@ -257,6 +263,9 @@ def plot_dtw_scatter(call_costs, background_costs, threshold=None, seed=0):
 def _threshold_path(file_label, call_type, results_dir):
     return results_dir / f"{file_label}_{call_type}_threshold.json"
 
+def threshold_path_new(file_label, call_type, results_dir, feature_name="stft"):
+    return results_dir / f"{file_label}_{feature_name}_{call_type}_threshold.json"
+
 def save_threshold(threshold, j_stat, auc, call_type, file_label, results_dir,
                     n_templates=None, n_background=None):
     """
@@ -280,11 +289,35 @@ def save_threshold(threshold, j_stat, auc, call_type, file_label, results_dir,
           f"threshold={threshold:.4f}, J={j_stat:.4f}, AUC={auc:.4f}")
     return data
 
+def save_threshold_new(threshold, j_stat, auc, call_type, file_label, results_dir,
+                   n_templates=None, n_background=None,
+                   feature_name="stft", feature_params=None):
+    data = {
+        "call_type": call_type, "file_label": file_label,
+        "feature": feature_name, "feature_params": feature_params,
+        "threshold": float(threshold), "youden_j": float(j_stat), "auc": float(auc),
+        "n_templates": n_templates, "n_background": n_background,
+    }
+    path = threshold_path_new(file_label, call_type, results_dir, feature_name)
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"Saved threshold for '{call_type}' [{feature_name}] to {path.name}: "
+          f"threshold={threshold:.4f}, J={j_stat:.4f}, AUC={auc:.4f}")
+    return data
+
 def load_threshold(file_label, call_type, results_dir):
     """Load a previously saved threshold for this call type, or None if missing."""
     path = _threshold_path(file_label, call_type, results_dir)
     if not path.exists():
         print(f"No saved threshold found for '{call_type}' ({file_label}).")
+        return None
+    with open(path) as f:
+        return json.load(f)
+
+def load_threshold_new(file_label, call_type, results_dir, feature_name="stft"):
+    path = threshold_path_new(file_label, call_type, results_dir, feature_name)
+    if not path.exists():
+        print(f"No saved threshold found for '{call_type}' [{feature_name}] ({file_label}).")
         return None
     with open(path) as f:
         return json.load(f)
@@ -312,7 +345,6 @@ def compute_pr_curve(call_costs, background_costs, n_thresholds=200):
 
     return np.array(precision), np.array(recall), thresholds
 
-
 def find_threshold_for_precision(precision, recall, thresholds, min_precision=0.5):
     """
     Among thresholds meeting a minimum precision requirement,
@@ -323,7 +355,6 @@ def find_threshold_for_precision(precision, recall, thresholds, min_precision=0.
         raise ValueError(f"No threshold reaches precision >= {min_precision}")
     best_idx = np.argmax(np.where(valid, recall, -1))
     return thresholds[best_idx], precision[best_idx], recall[best_idx]
-
 
 def find_threshold_fbeta(precision, recall, thresholds, beta=1.0):
     """
@@ -350,7 +381,6 @@ def compute_ap(precision, recall):
     precision_interp = np.maximum.accumulate(precision_sorted[::-1])[::-1]
     ap = np.sum(np.diff(recall_sorted, prepend=0) * precision_interp)
     return ap
-
 
 def plot_pr_curve(call_costs, background_costs, n_thresholds=200,
                    best_threshold=None):

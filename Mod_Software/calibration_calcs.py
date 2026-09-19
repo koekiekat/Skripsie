@@ -5,119 +5,14 @@ import numpy as np
 
 from background_functions import read_audio_file
 from stft import resample_audio, stft_calculation
-from dtw import dtw_calc  # adjust this import to match wherever dtw_calc actually lives
+from dtw import dtw_calc_new  # adjust this import to match wherever dtw_calc actually lives
 
 MIN_STFT_DURATION = 0.128  # seconds -- must match the framelength used in short_time_calc
 
-def _load_template_segment(template, fs_new=1000):
-    """
-    Given one saved template/background entry ({start_time, end_time,
-    wav_path, ...}), reload its audio from disk and compute its STFT.
-
-    Pads short segments up to the minimum length required by the STFT
-    window before transforming, so every spectrogram has the same number
-    of frequency bins regardless of the original segment's duration.
-    """
-    #Extract template
-    f_s, x = read_audio_file(template["wav_path"])
-    start_sample = int(template["start_time"] * f_s)
-    end_sample = int(template["end_time"] * f_s)
-    segment = x[start_sample:end_sample]
-
-    resampled = resample_audio(segment, f_s, fs_new)
-
-    #Ensures window meets minimum length reqs
-    min_len = int(fs_new * MIN_STFT_DURATION)
-    if len(resampled) < min_len:
-        resampled = np.pad(resampled, (0, min_len - len(resampled)), mode="constant")
-
-    #Calculate STFT
-    _, _, Zxx = stft_calculation(resampled, f_s, fs_new)
-    return Zxx
-
-def compute_template_dtw_costs(templates_path, n_templates, fs_new=1000):
-    """
-    Load a saved templates JSON file, take the first `n_templates` entries,
-    and compute the DTW cost of every template against every other template
-    (all unique pairs, no self-comparisons, no duplicate reverse pairs since
-    dtw_calc is symmetric).
-
-    Returns:
-        costs: 1D list of DTW costs, one per pair
-        pairs: list of (i, j) index pairs (positions within the first
-               n_templates entries) matching each entry in `costs`
-    """
-    #load template data from .json file
-    with open(templates_path) as f:
-        templates = json.load(f)
-
-    #error warning if too little templates
-    if len(templates) < n_templates:
-        print(f"Warning: file only has {len(templates)} template(s), "
-              f"using all of them instead of {n_templates}.")
-
-    #Only wokring with first n templates
-    templates = templates[:n_templates]
-
-    #Get STFTs of all templates
-    spectrograms = [_load_template_segment(t, fs_new) for t in templates]
-
-    costs = [] #will store all DTW costs
-    pairs = [] #will store which pairs were compared
-
-    #calculate and save all DTW costs
-    for i, j in combinations(range(len(templates)), 2):
-        cost = dtw_calc(spectrograms[i], spectrograms[j])
-        costs.append(cost)
-        pairs.append((i, j))
-
-    return costs, pairs
-
-def compute_template_background_dtw_costs(templates_path, background_path,
-                                            n_templates, n_background, fs_new=1000):
-    """
-    Load a saved templates JSON file and a saved background JSON file, take
-    the first `n_templates` and first `n_background` entries respectively,
-    and compute the DTW cost of every template against every background
-    segment (the full cross product -- there's no symmetry to exploit here
-    since templates and background are two different sets).
-
-    Returns:
-        costs: 1D list of DTW costs, one per (template, background) pair
-        pairs: list of (i, j) index pairs (i = position in the first
-               n_templates entries, j = position in the first n_background
-               entries) matching each entry in `costs`
-    """
-    #opens and stores template & background info
-    with open(templates_path) as f:
-        templates = json.load(f)
-    with open(background_path) as f:
-        background = json.load(f)
-
-    #ensures min length is met for all templates and background samples
-    if len(templates) < n_templates:
-        print(f"Warning: templates file only has {len(templates)} entr(ies), "
-              f"using all of them instead of {n_templates}.")
-    if len(background) < n_background:
-        print(f"Warning: background file only has {len(background)} entr(ies), "
-              f"using all of them instead of {n_background}.")
-
-    #ensures only first n templates / background samples are used
-    templates = templates[:n_templates]
-    background = background[:n_background]
-
-    template_specs = [_load_template_segment(t, fs_new) for t in templates]
-    background_specs = [_load_template_segment(b, fs_new) for b in background]
-
-    costs = [] #will store DTW costs
-    pairs = [] #will store pairs compared
-
-    #calculate all DTW costs
-    for i, j in product(range(len(templates)), range(len(background))):
-        cost = dtw_calc(template_specs[i], background_specs[j])
-        costs.append(cost)
-        pairs.append((i, j))
-
+def dtw_cross_costs(specs_a, specs_b, metric="cosine"):
+    """Every item in specs_a vs every item in specs_b."""
+    pairs = list(product(range(len(specs_a)), range(len(specs_b))))
+    costs = [dtw_calc_new(specs_a[i], specs_b[j], metric) for i, j in pairs]
     return costs, pairs
 
 def compute_roc_curve(call_costs, background_costs, n_thresholds=200):#automatically evaluates 200 thresholds
@@ -254,37 +149,29 @@ def plot_dtw_scatter(call_costs, background_costs, threshold=None, seed=0):
     plt.grid(axis="x", alpha=0.3)
     plt.show()
 
-def _threshold_path(file_label, call_type, results_dir):
-    return results_dir / f"{file_label}_{call_type}_threshold.json"
+def threshold_path_new(file_label, call_type, results_dir, feature_name="stft"):
+    return results_dir / f"{file_label}_{feature_name}_{call_type}_threshold.json"
 
-def save_threshold(threshold, j_stat, auc, call_type, file_label, results_dir,
-                    n_templates=None, n_background=None):
-    """
-    Save a computed DTW threshold for a given call type, along with the
-    metrics used to select it, so it can be reloaded later for detection
-    without needing to recompute the DTW distributions.
-    """
+def save_threshold_new(threshold, j_stat, auc, call_type, file_label, results_dir,
+                   n_templates=None, n_background=None,
+                   feature_name="stft", feature_params=None):
     data = {
-        "call_type": call_type,
-        "file_label": file_label,
-        "threshold": float(threshold),
-        "youden_j": float(j_stat),
-        "auc": float(auc),
-        "n_templates": n_templates,
-        "n_background": n_background,
+        "call_type": call_type, "file_label": file_label,
+        "feature": feature_name, "feature_params": feature_params,
+        "threshold": float(threshold), "youden_j": float(j_stat), "auc": float(auc),
+        "n_templates": n_templates, "n_background": n_background,
     }
-    path = _threshold_path(file_label, call_type, results_dir)
+    path = threshold_path_new(file_label, call_type, results_dir, feature_name)
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
-    print(f"Saved threshold for '{call_type}' ({file_label}) to {path.name}: "
+    print(f"Saved threshold for '{call_type}' [{feature_name}] to {path.name}: "
           f"threshold={threshold:.4f}, J={j_stat:.4f}, AUC={auc:.4f}")
     return data
 
-def load_threshold(file_label, call_type, results_dir):
-    """Load a previously saved threshold for this call type, or None if missing."""
-    path = _threshold_path(file_label, call_type, results_dir)
+'''def load_threshold_new(file_label, call_type, results_dir, feature_name="stft"):
+    path = threshold_path_new(file_label, call_type, results_dir, feature_name)
     if not path.exists():
-        print(f"No saved threshold found for '{call_type}' ({file_label}).")
+        print(f"No saved threshold found for '{call_type}' [{feature_name}] ({file_label}).")
         return None
     with open(path) as f:
-        return json.load(f)
+        return json.load(f)'''
