@@ -288,3 +288,94 @@ def load_threshold(file_label, call_type, results_dir):
         return None
     with open(path) as f:
         return json.load(f)
+
+def compute_pr_curve(call_costs, background_costs, n_thresholds=200):
+    """
+    Sweep DTW cost thresholds and compute precision/recall.
+    A sample is classified as 'call' when its DTW cost <= threshold.
+    """
+    call_costs = np.array(call_costs)
+    background_costs = np.array(background_costs)
+
+    lo = min(call_costs.min(), background_costs.min())
+    hi = max(call_costs.max(), background_costs.max())
+    thresholds = np.linspace(lo, hi, n_thresholds)
+
+    precision, recall = [], []
+    for t in thresholds:
+        tp = np.sum(call_costs <= t)
+        fn = np.sum(call_costs > t)
+        fp = np.sum(background_costs <= t)
+
+        precision.append(tp / (tp + fp) if (tp + fp) > 0 else 1.0)
+        recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
+
+    return np.array(precision), np.array(recall), thresholds
+
+
+def find_threshold_for_precision(precision, recall, thresholds, min_precision=0.5):
+    """
+    Among thresholds meeting a minimum precision requirement,
+    pick the one with highest recall.
+    """
+    valid = precision >= min_precision
+    if not valid.any():
+        raise ValueError(f"No threshold reaches precision >= {min_precision}")
+    best_idx = np.argmax(np.where(valid, recall, -1))
+    return thresholds[best_idx], precision[best_idx], recall[best_idx]
+
+
+def find_threshold_fbeta(precision, recall, thresholds, beta=1.0):
+    """
+    Pick threshold maximizing F-beta score. beta<1 weights precision more;
+    beta>1 weights recall more.
+    """
+    beta2 = beta ** 2
+    f_beta = (1 + beta2) * precision * recall / (beta2 * precision + recall + 1e-12)
+    best_idx = np.argmax(f_beta)
+    return thresholds[best_idx], f_beta[best_idx]
+
+def compute_ap(precision, recall):
+    """
+    Average Precision via the area under the PR curve (all-point interpolation).
+    Assumes recall is monotonically related to threshold (check ordering).
+    """
+    # Sort by recall ascending for correct integration
+    order = np.argsort(recall)
+    recall_sorted = recall[order]
+    precision_sorted = precision[order]
+
+    # Standard all-point AP: sum of (recall_n - recall_n-1) * precision_n
+    # using interpolated (running max from the right) precision
+    precision_interp = np.maximum.accumulate(precision_sorted[::-1])[::-1]
+    ap = np.sum(np.diff(recall_sorted, prepend=0) * precision_interp)
+    return ap
+
+
+def plot_pr_curve(call_costs, background_costs, n_thresholds=200,
+                   best_threshold=None):
+    """
+    Plot the PR curve for your DTW-based call/background classifier,
+    optionally marking the point corresponding to a chosen threshold.
+    """
+    precision, recall, thresholds = compute_pr_curve(call_costs, background_costs, n_thresholds)
+    ap = compute_ap(precision, recall)
+
+    plt.figure(figsize=(6, 6))
+    plt.plot(recall, precision, color="tab:blue", linewidth=2, label=f"PR curve (AP = {ap:.3f})")
+
+    if best_threshold is not None:
+        idx = np.argmin(np.abs(thresholds - best_threshold))
+        plt.scatter(recall[idx], precision[idx], color="red", zorder=5,
+                    label=f"Chosen threshold = {best_threshold:.3f}\n(P={precision[idx]:.3f}, R={recall[idx]:.3f})")
+
+    plt.xlabel("Recall")
+    plt.ylabel("Precision")
+    plt.title("Precision-Recall Curve: DTW-based Call Detection")
+    plt.xlim(0, 1.05)
+    plt.ylim(0, 1.05)
+    plt.legend()
+    plt.grid(alpha=0.3)
+    plt.show()
+
+    return precision, recall, thresholds, ap

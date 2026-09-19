@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  15 SEP 2026 22:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  18 SEP 2026 09:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1670,7 +1670,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [2]
-<figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png, id=241, 195.73125pt x 51.19125pt>
+<figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png, id=244, 195.73125pt x 51.19125pt>
 File: figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png Graphic file (type png)
 <use figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png>
 Package pdftex.def Info: figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png  used on input line 81.
@@ -1689,9 +1689,14 @@ Chapter 2.
 
 ]
 Chapter 3.
+<figures/Skrip_CH3.drawio.png, id=257, 764.8575pt x 283.0575pt>
+File: figures/Skrip_CH3.drawio.png Graphic file (type png)
+<use figures/Skrip_CH3.drawio.png>
+Package pdftex.def Info: figures/Skrip_CH3.drawio.png  used on input line 6.
+(pdftex.def)             Requested size: 364.19667pt x 134.78195pt.
 ) (chapters/detailed_design.tex [5
 
-]
+ <./figures/Skrip_CH3.drawio.png>]
 Chapter 4.
 ) (chapters/reuslts.tex [6
 
@@ -1720,20 +1725,20 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: C9A68284806F84B07FF7F515BEA70BDA;2528.
+(rerunfilecheck)             Checksum: 02078028A378ED17D65DE2B6553F50F9;2528.
  ) 
 Here is how much of TeX's memory you used:
- 51226 strings out of 467871
- 1038593 string characters out of 5419828
+ 51236 strings out of 467871
+ 1038897 string characters out of 5419828
  1641047 words of memory out of 5000000
- 79034 multiletter control sequences out of 15000+600000
+ 79043 multiletter control sequences out of 15000+600000
  721789 words of font info for 175 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,11n,112p,2591b,671s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (22 pages, 298487 bytes).
+Output written on thesis.pdf (22 pages, 324428 bytes).
 PDF statistics:
- 356 PDF objects out of 1000 (max. 8388607)
- 56 named destinations out of 1000 (max. 500000)
- 49863 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 361 PDF objects out of 1000 (max. 8388607)
+ 57 named destinations out of 1000 (max. 500000)
+ 49868 words of extra memory for PDF output out of 51595 (max. 10000000)
 

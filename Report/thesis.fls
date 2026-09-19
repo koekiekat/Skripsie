@@ -693,6 +693,13 @@ INPUT chapters\literature.tex
 INPUT .\chapters\system_design.tex
 INPUT .\chapters\system_design.tex
 INPUT chapters\system_design.tex
+INPUT .\figures\Skrip_CH3.drawio.png
+INPUT .\figures\Skrip_CH3.drawio.png
+INPUT .\figures\Skrip_CH3.drawio.png
+INPUT .\figures\Skrip_CH3.drawio.png
+INPUT .\figures\Skrip_CH3.drawio.png
+INPUT .\figures\Skrip_CH3.drawio.png
+INPUT .\figures\Skrip_CH3.drawio.png
 INPUT .\chapters\detailed_design.tex
 INPUT .\chapters\detailed_design.tex
 INPUT chapters\detailed_design.tex

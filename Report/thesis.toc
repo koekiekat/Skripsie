@@ -22,6 +22,6 @@
 \contentsline {chapter}{\numberline {4}Detailed Design}{6}{chapter.4}%
 \contentsline {chapter}{\numberline {5}Results}{7}{chapter.5}%
 \contentsline {chapter}{\numberline {6}Conclusion}{8}{chapter.6}%
-\contentsline {chapter}{References}{9}{chapter*.13}%
+\contentsline {chapter}{References}{9}{chapter*.14}%
 \contentsline {chapter}{\numberline {A}Appendix title goes here}{10}{appendix.A}%
 \contentsfinish 
