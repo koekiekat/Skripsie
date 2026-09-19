@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass, field
-from typing import Callable
+from typing import Callable, Optional
 
 import numpy as np
 import soundfile as sf
@@ -8,27 +8,40 @@ from scipy import signal
 
 from stft import resample_audio
 
-
 @dataclass(frozen=True)
 class FeatureExtractor:
-    name: str                                          # used in filenames / saved JSON
-    fn: Callable[[np.ndarray, int], np.ndarray]        # (audio, fs) -> (n_features, n_frames)
-    min_duration: float                                # seconds; shorter audio gets zero-padded
-    metric: str = "cosine"                             # distance metric DTW should use
-    params: dict = field(default_factory=dict)         # recorded alongside saved thresholds
+    name: str
+    fn: Callable[[np.ndarray, int], np.ndarray]
+    min_duration: float
+    metric: str = "cosine"
+    params: dict = field(default_factory=dict)
+    batch_fn: Optional[Callable] = None          # (n_windows, window_len), fs -> (n_windows, n_feat, n_frames)
 
     def __call__(self, audio, fs):
         return self.fn(audio, fs)
+
+    def batch(self, windows, fs):
+        """(n_windows, window_len) -> (n_windows, n_features, n_frames)"""
+        if self.batch_fn is not None:
+            return self.batch_fn(windows, fs)
+        return np.stack([self.fn(w, fs) for w in windows])   # slow fallback
 
 def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming"):
     def fn(audio, fs):
         nperseg = int(fs * frame_dur)
         _, _, Zxx = signal.stft(audio, fs=fs, nperseg=nperseg,
                                 noverlap=int(nperseg * overlap), window=window)
-        return np.abs(Zxx)          # magnitude here, NOT inside DTW
+        return np.abs(Zxx)
+
+    def batch_fn(windows, fs):
+        nperseg = int(fs * frame_dur)
+        _, _, Zxx = signal.stft(windows, fs=fs, nperseg=nperseg,
+                                noverlap=int(nperseg * overlap), window=window, axis=-1)
+        return np.abs(Zxx)
 
     return FeatureExtractor("stft", fn, min_duration=frame_dur, metric="cosine",
-                            params=dict(frame_dur=frame_dur, overlap=overlap, window=window))
+                            params=dict(frame_dur=frame_dur, overlap=overlap, window=window),
+                            batch_fn=batch_fn)
 
 def make_mfcc_extractor(n_mfcc=13, n_mels=20, frame_dur=0.128, overlap=0.75,
                         fmin=0.0, fmax=None, drop_c0=True):

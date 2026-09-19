@@ -1,10 +1,8 @@
-from itertools import combinations, product
+from itertools import product
 import json
 import matplotlib.pyplot as plt
 import numpy as np
 
-from background_functions import read_audio_file
-from stft import resample_audio, stft_calculation
 from dtw import dtw_calc_new  # adjust this import to match wherever dtw_calc actually lives
 
 MIN_STFT_DURATION = 0.128  # seconds -- must match the framelength used in short_time_calc
@@ -168,10 +166,10 @@ def save_threshold_new(threshold, j_stat, auc, call_type, file_label, results_di
           f"threshold={threshold:.4f}, J={j_stat:.4f}, AUC={auc:.4f}")
     return data
 
-'''def load_threshold_new(file_label, call_type, results_dir, feature_name="stft"):
+def load_threshold_new(file_label, call_type, results_dir, feature_name="stft"):
     path = threshold_path_new(file_label, call_type, results_dir, feature_name)
     if not path.exists():
         print(f"No saved threshold found for '{call_type}' [{feature_name}] ({file_label}).")
         return None
     with open(path) as f:
-        return json.load(f)'''
+        return json.load(f)
