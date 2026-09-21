@@ -47,38 +47,50 @@ def run_detection_pipeline_new(audio_file, n_hours, st_feats, mt_feats, bt_feats
                                st_threshold, mt_threshold, bt_threshold,
                                exclude_intervals, extractor, fs_new=1000,
                                window_len=0.15, step_len=0.075, vote_frac=0.6):
-    all_detected_t, all_detected_labels = [], []
-    all_scores, all_labels_all, all_times_all = [], [], []
+    all_detected_t, all_detected_labels = [], [] #precision adn recall passed for my thresholds
+    all_scores, all_labels_all, all_times_all = [], [], [] #PR version
+    all_kth = []
 
+#converts seconds to samples
     win_samples = int(round(window_len * fs_new))
     step_samples = int(round(step_len * fs_new))
 
     for i in range(n_hours):
+        #loads 1 hour of audio
         f_s, audio_array = read_audio_chunk(audio_file, i, duration_hour=1.0, fs_new=fs_new)
 
+        #computes features
         feats_window = batch_feature_windows(audio_array, win_samples, step_samples, f_s, extractor)
 
+        #stores window start times for each winodw
         n_windows = feats_window.shape[0]
         window_times_global = np.arange(n_windows) * step_len + i * 3600
 
+        #Filter out tonal-downsweeps
         keep = get_exclusion_mask(window_times_global, window_len=window_len,
                                   exclude_intervals=exclude_intervals)
         feats_window = feats_window[keep]
         window_times_global = window_times_global[keep]
 
+        #Costst calculated for windows against each template and stored
         costs_st, costs_mt, costs_bt = dtw_costs_vectorized_new(
             st_feats, mt_feats, bt_feats, feats_window, extractor.metric)
 
+        #is it a call or not?
         results = {}
-        for costs_list, threshold, label in [(costs_st, st_threshold, "st"),
-                                             (costs_mt, mt_threshold, "mt"),
-                                             (costs_bt, bt_threshold, "bt")]:
-            costs_arr = np.vstack(costs_list)
+        kth_cols = []
+        for costs_list, threshold, label in [(costs_st, st_threshold, "st"), 
+                                             (costs_mt, mt_threshold, "mt"), 
+                                             (costs_bt, bt_threshold, "bt")]: #loops through each call type one at a time
+            costs_arr = np.vstack(costs_list) #stacks costs one under the other
             n_t = costs_arr.shape[0]
-            votes = (costs_arr < threshold).sum(axis=0)
-            mean_cost = costs_arr.mean(axis=0)
-            triggered = votes >= np.ceil(vote_frac * n_t)
-            results[label] = (triggered, mean_cost)
+            votes = (costs_arr < threshold).sum(axis=0) #counts how many templates is below threshold
+            mean_cost = costs_arr.mean(axis=0) #avg cost
+            triggered = votes >= np.ceil(vote_frac * n_t) #true if 60% of templates are below thrshold
+            results[label] = (triggered, mean_cost) # store results
+
+            k = int(np.ceil(vote_frac * n_t))
+            kth_cols.append(np.partition(costs_arr, k - 1, axis = 0)[k - 1])#store kth smallest cost per window
 
         n_windows = feats_window.shape[0]
         call_detected = np.zeros(n_windows, dtype=bool)
@@ -88,11 +100,11 @@ def run_detection_pipeline_new(audio_file, n_hours, st_feats, mt_feats, bt_feats
         best_label_all = np.full(n_windows, "", dtype=object)
 
         for label, (triggered, mean_cost) in results.items():
-            all_time_better = mean_cost < best_cost_all
+            all_time_better = mean_cost < best_cost_all #Tracks lowest mean cost across types(ignore thresholds and votes) used for PR curve
             best_label_all[all_time_better] = label
             best_cost_all[all_time_better] = mean_cost[all_time_better]
 
-            triggered_better = triggered & (mean_cost < best_cost)
+            triggered_better = triggered & (mean_cost < best_cost) #If two types triggger call lowest mean cost wins label
             call_labels[triggered_better] = label
             best_cost[triggered_better] = mean_cost[triggered_better]
             call_detected |= triggered
@@ -100,51 +112,44 @@ def run_detection_pipeline_new(audio_file, n_hours, st_feats, mt_feats, bt_feats
         print(f"Processing hour {i+1} of {n_hours}: {call_detected.sum()} / {n_windows} windows flagged as calls")
 
         all_scores.extend(best_cost_all.tolist())
+        all_kth.append(np.stack(kth_cols, axis = 1).astype(np.float32))# (n_windows, 3) s_t, m_t, b_t
         all_labels_all.extend(best_label_all.tolist())
         all_times_all.extend(window_times_global.tolist())
 
+        #stores only detected calls
         detected = np.where(call_detected)[0]
         all_detected_t.extend(window_times_global[detected].tolist())
         all_detected_labels.extend(call_labels[detected].tolist())
 
     return (np.array(all_detected_t), np.array(all_detected_labels, dtype=object),
             np.array(all_scores), np.array(all_labels_all, dtype=object),
-            np.array(all_times_all))
+            np.array(all_times_all), np.concatenate(all_kth, axis = 0))
 
-def merge_consecutive_detections(all_detected_t, all_detected_labels, step=0.075, window_len=0.15, tol=1e-6):
-    """
-    Merge consecutive per-window detections into contiguous calls.
+def merge_consecutive_detections(all_detected_t, all_detected_labels, step=0.075,
+                                 window_len=0.15, tol=1e-6, max_gap_windows=1,
+                                 split_on_label=False, min_windows=1):
+    t = np.asarray(all_detected_t, dtype=float)
+    if len(t) == 0:
+        return []
+    labels = np.asarray(all_detected_labels, dtype=object)
 
-    A run continues as long as consecutive detections are exactly one `step`
-    apart (within `tol`) and share the same label; otherwise a new run starts.
+    # a run breaks where the gap between flagged windows is too large
+    breaks = np.diff(t) / step > 1 + max_gap_windows + tol
+    if split_on_label:
+        breaks |= labels[1:] != labels[:-1]
 
-    Returns:
-        combined_calls: list of (start_time, end_time, label) tuples
-    """
-    combined_calls = []
+    starts = np.concatenate(([0], np.flatnonzero(breaks) + 1))
+    ends = np.concatenate((starts[1:], [len(t)])) - 1          # inclusive
+    keep = (ends - starts + 1) >= min_windows
 
-    if len(all_detected_t) > 0:
-        run_start = all_detected_t[0]
-        run_end = all_detected_t[0]
-        run_label = all_detected_labels[0]
+    # dominant label per run
+    uniq, codes = np.unique(labels, return_inverse=True)
+    onehot = np.zeros((len(t), len(uniq)), dtype=np.int32)
+    onehot[np.arange(len(t)), codes] = 1
+    dominant = uniq[np.add.reduceat(onehot, starts, axis=0).argmax(axis=1)]
 
-        for t, label in zip(all_detected_t[1:], all_detected_labels[1:]):
-            gap = t - run_end
-            is_consecutive = np.isclose(gap, step, atol=tol)
-
-            if is_consecutive and label == run_label:
-                # extend the current run
-                run_end = t
-            else:
-                # close out the current run, start a new one
-                combined_calls.append((run_start, run_end + window_len, run_label))
-                run_start = t
-                run_end = t
-                run_label = label
-
-        # don't forget to flush the last run after the loop ends
-        combined_calls.append((run_start, run_end + window_len, run_label))
-    return combined_calls
+    return [(float(t[s]), float(t[e]) + window_len, lab)
+            for s, e, lab in zip(starts[keep], ends[keep], dominant[keep])]
 
 def read_audio_chunk(audio_file, start_hour, duration_hour = 1.0, fs_new = 1000):
     start_sec = start_hour * 3600
@@ -217,42 +222,74 @@ def match_detections(detections, ground_truth, require_label_match=True):
 
     return tp, fp, fn, false_positive_detections, false_negative_gts
 
-def windows_to_calls(times, scores, labels, threshold, step, window_len, tol=1e-6):
+def windows_to_calls(times, scores, labels, threshold, step, window_len, **merge_kw):
     mask = scores <= threshold
     if not mask.any():
         return []
+    return merge_consecutive_detections(times[mask], labels[mask],
+                                        step=step, window_len=window_len, **merge_kw)
 
-    idx = np.where(mask)[0]
-    t = times[idx]
-    lbl = labels[idx]
+def compute_pr_curve_alpha(times, kth_costs, thresholds, ground_truth, step, window_len,
+                           alphas, require_label_match=False, **merge_kw):
+    """
+    kth_costs: (n_windows, 3) k-th smallest template cost for st, mt, bt
+    thresholds: (st_threshold, mt_threshold, bt_threshold), the calibrated ones
+    alphas: scale factors applied to all three thresholds together (1.0 = deployed rule)
+    """
+    ratios = kth_costs / np.asarray(thresholds, dtype=float)      # < 1 means that type triggers
+    best_ratio = ratios.min(axis=1)                               # window is flagged if any type triggers
+    best_label = np.array(["st", "mt", "bt"], dtype=object)[ratios.argmin(axis=1)]
 
-    # a "break" happens where the gap isn't one step, or the label changes
-    gaps = np.diff(t)
-    label_changed = lbl[1:] != lbl[:-1]
-    breaks = ~np.isclose(gaps, step, atol=tol) | label_changed
-
-    break_positions = np.where(breaks)[0]
-    run_starts = np.concatenate(([0], break_positions + 1))
-    run_ends = np.concatenate((break_positions, [len(idx) - 1]))
-
-    return [(t[s], t[e] + window_len, lbl[s]) for s, e in zip(run_starts, run_ends)]
+    precision, recall, used = [], [], []
+    for a in alphas:
+        calls = windows_to_calls(times, best_ratio, best_label, a, step, window_len, **merge_kw)
+        if not calls:
+            continue
+        tp, fp, fn, _, _ = match_detections(calls, ground_truth, require_label_match)
+        precision.append(tp / (tp + fp))
+        recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
+        used.append(a)
+    return np.array(precision), np.array(recall), np.array(used), best_label
 
 def compute_pr_curve(times, scores, labels, ground_truth, step, window_len,
-                      n_thresholds=100, require_label_match=True):
-    thresholds = np.linspace(scores.min(), scores.max(), n_thresholds)
-    precision, recall = [], []
+                     n_thresholds=60, require_label_match=False,
+                     q_lo=1e-4, q_hi=0.05, **merge_kw):
+                     #scores = lowest mean cost across three call types
+                     #ground_truth = annptated calls with td removed
+                     #n_thresholds, q_lo, q_hi = control thresholds tried
+                     #**merg_kw collects extra keyword arguments(window size) for merging
+    #Marks which scores are real numbers(score can be inf if all costs are NAN)
+    finite = np.isfinite(scores)
 
+    #makes n_thresholds numbers btwn q_lo and q_hi spaced by a constant ratio rather than constabt difference
+    #quantile turns each fractioninto a score val
+    #unique sorts values from lowest cost to highest and removes duplicates
+    thresholds = np.unique(np.quantile(scores[finite], np.geomspace(q_lo, q_hi, n_thresholds)))
+    #the reason for quantile is due to all useful thresholds being lower
+
+    precision, recall, used = [], [], []
+
+    #runs through all n_thresholds thresholds
     for t in thresholds:
-        calls = windows_to_calls(times, scores, labels, t, step, window_len)
+        #turns thresholds into a list of calls(i.e. which calls are flagged for this threshold)
+        calls = windows_to_calls(times, scores, labels, t, step, window_len, **merge_kw)
+        if not calls:
+            continue
+        #calculates tp,fp,fn
         tp, fp, fn, _, _ = match_detections(calls, ground_truth, require_label_match)
-        precision.append(tp / (tp + fp) if (tp + fp) > 0 else 1.0)
+        #calculate precision and recall
+        precision.append(tp / (tp + fp))
         recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
+        #records which thresholds' precision and recall have been stored
+        used.append(t)
 
-    return np.array(precision), np.array(recall), thresholds
+    return np.array(precision), np.array(recall), np.array(used)
 
 def compute_average_precision(precision, recall):
     order = np.argsort(recall)
-    return np.trapezoid(precision[order], recall[order])
+    r, p = recall[order], precision[order]
+    p_interp = np.maximum.accumulate(p[::-1])[::-1]
+    return np.sum(np.diff(r, prepend=0.0) * p_interp)
 
 def plot_pr_curve(precision, recall, ap=None, marked_point=None):
     """

@@ -43,8 +43,7 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming"):
                             params=dict(frame_dur=frame_dur, overlap=overlap, window=window),
                             batch_fn=batch_fn)
 
-def make_mfcc_extractor(n_mfcc=13, n_mels=20, frame_dur=0.128, overlap=0.75,
-                        fmin=0.0, fmax=None, drop_c0=True):
+def make_mfcc_extractor(n_mfcc=13, n_mels=20, frame_dur=0.128, overlap=0.75):
     import librosa
 
     def fn(audio, fs):
@@ -52,15 +51,14 @@ def make_mfcc_extractor(n_mfcc=13, n_mels=20, frame_dur=0.128, overlap=0.75,
         hop = int(n_fft * (1 - overlap))
         m = librosa.feature.mfcc(
             y=audio.astype(np.float32), sr=fs,
-            n_mfcc=n_mfcc + int(drop_c0),
             n_fft=n_fft, hop_length=hop, window="hamming",
-            n_mels=n_mels, fmin=fmin, fmax=fmax,
+            n_mels=n_mels,
         )
-        return m[1:] if drop_c0 else m
+        return m
 
     return FeatureExtractor("mfcc", fn, min_duration=frame_dur, metric="euclidean",
                             params=dict(n_mfcc=n_mfcc, n_mels=n_mels, frame_dur=frame_dur,
-                                        overlap=overlap, fmin=fmin, fmax=fmax, drop_c0=drop_c0))
+                                        overlap=overlap))
 
 # ---- single shared loader (replaces all three copies) ----
 def load_segment_features(entry, extractor, fs_new=1000):
