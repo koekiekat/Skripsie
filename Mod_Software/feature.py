@@ -5,7 +5,7 @@ from typing import Callable, Optional
 import numpy as np
 import soundfile as sf
 from scipy import signal
-
+import librosa
 from stft import resample_audio
 
 @dataclass(frozen=True)
@@ -40,25 +40,32 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming"):
         return np.abs(Zxx)
 
     return FeatureExtractor("stft", fn, min_duration=frame_dur, metric="cosine",
-                            params=dict(frame_dur=frame_dur, overlap=overlap, window=window),
-                            batch_fn=batch_fn)
+                            params=dict(frame_dur=frame_dur, overlap=overlap, window=window),batch_fn=batch_fn)
 
-def make_mfcc_extractor(n_mfcc=13, n_mels=20, frame_dur=0.128, overlap=0.75):
-    import librosa
+def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean"):                       # one scalar scale
 
     def fn(audio, fs):
         n_fft = int(fs * frame_dur)
         hop = int(n_fft * (1 - overlap))
-        m = librosa.feature.mfcc(
-            y=audio.astype(np.float32), sr=fs,
-            n_fft=n_fft, hop_length=hop, window="hamming",
-            n_mels=n_mels,
-        )
-        return m
+        S = librosa.feature.melspectrogram(
+            y=audio.astype(np.float32), sr=fs, n_fft=n_fft, hop_length=hop,
+            window="hamming", n_mels=n_mels)
+        m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), n_mfcc=n_mfcc + int(drop_c0))
+        return m[1:] if drop_c0 else m  
 
-    return FeatureExtractor("mfcc", fn, min_duration=frame_dur, metric="euclidean",
-                            params=dict(n_mfcc=n_mfcc, n_mels=n_mels, frame_dur=frame_dur,
-                                        overlap=overlap))
+    def batch_windows(audio, fs):
+            n_fft = int(fs * frame_dur)
+            hop = int(n_fft * (1 - overlap))
+            S = librosa.feature.melspectrogram(
+                        y=audio.astype(np.float32), sr=fs, n_fft=n_fft, hop_length=hop,
+                        window="hamming", n_mels=n_mels)
+            m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), n_mfcc=n_mfcc + int(drop_c0))
+                   
+            return m[..., 1:, :] if drop_c0 else m      
+
+    return FeatureExtractor("mfcc", fn, min_duration=frame_dur, metric=metric,
+                        batch_fn=batch_windows,
+                        params=dict(n_mfcc=n_mfcc, n_mels=n_mels, frame_dur=frame_dur,overlap=overlap, drop_c0=drop_c0))
 
 # ---- single shared loader (replaces all three copies) ----
 def load_segment_features(entry, extractor, fs_new=1000):

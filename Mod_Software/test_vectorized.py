@@ -127,22 +127,32 @@ def run_detection_pipeline_new(audio_file, n_hours, st_feats, mt_feats, bt_feats
 
 def merge_consecutive_detections(all_detected_t, all_detected_labels, step=0.075,
                                  window_len=0.15, tol=1e-6, max_gap_windows=1,
-                                 split_on_label=False, min_windows=1):
+                                 split_on_label=False, min_windows=1, max_windows=None):
     t = np.asarray(all_detected_t, dtype=float)
     if len(t) == 0:
         return []
     labels = np.asarray(all_detected_labels, dtype=object)
 
-    # a run breaks where the gap between flagged windows is too large
     breaks = np.diff(t) / step > 1 + max_gap_windows + tol
     if split_on_label:
         breaks |= labels[1:] != labels[:-1]
 
     starts = np.concatenate(([0], np.flatnonzero(breaks) + 1))
     ends = np.concatenate((starts[1:], [len(t)])) - 1          # inclusive
+
+    if max_windows is not None:
+        new_starts, new_ends = [], []
+        for s, e in zip(starts, ends):
+            length = e - s + 1
+            for chunk_start in range(s, e + 1, max_windows):
+                chunk_end = min(chunk_start + max_windows - 1, e)
+                new_starts.append(chunk_start)
+                new_ends.append(chunk_end)
+        starts = np.array(new_starts)
+        ends = np.array(new_ends)
+
     keep = (ends - starts + 1) >= min_windows
 
-    # dominant label per run
     uniq, codes = np.unique(labels, return_inverse=True)
     onehot = np.zeros((len(t), len(uniq)), dtype=np.int32)
     onehot[np.arange(len(t)), codes] = 1
