@@ -342,23 +342,6 @@ def interval_overlaps(cand_start, cand_end, intervals):
             return True
     return False
 
-'''def plot_background_coverage(accepted, recording_duration):
-    """
-    Quick sanity-check plot: shows where each accepted background segment
-    falls across the recording's full duration, so you can confirm they're
-    actually spread out rather than clustered.
-    """
-    if not accepted:
-        return
-    starts_hr = [a["start_time"] / 3600 for a in accepted]
-    plt.figure(figsize=(10, 1.5))
-    plt.scatter(starts_hr, [0] * len(starts_hr), alpha=0.7)
-    plt.xlim(0, recording_duration / 3600)
-    plt.yticks([])
-    plt.xlabel("Time into recording (hours)")
-    plt.title("Coverage of accepted background segments")
-    plt.show()'''
-
 def review_saved_calls(json_path, fs_new=1000, start_idx=0):
     """
     Step through every entry in a saved templates/background JSON file

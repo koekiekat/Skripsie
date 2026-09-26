@@ -25,7 +25,12 @@ def stft_calculation(audio_resampled, f_s, fs_new):
     return f, t, Zxx
 
 def plot_spectrogram(f, t, Zxx, fs_new):
-    plt.pcolormesh(t, f, np.log(np.abs(Zxx + 1e-16)), vmin = 0, vmax = np.max(np.log(np.abs(Zxx + 1e-16))));
+    plt.pcolormesh(t, 
+                   f, 
+                   np.log(np.abs(Zxx + 1e-16)), 
+                   vmin = 0, 
+                   vmax = np.max(np.log(np.abs(Zxx + 1e-16)))
+                   )
     plt.xlabel("Time (s)")
     plt.ylabel("Frequency (Hz)")
     plt.title("Spectrogram of Audio Signal")

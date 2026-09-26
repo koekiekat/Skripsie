@@ -44,11 +44,6 @@ def dp(dist_mat):
     # Initialize the cost matrix
     cost_mat = np.full((N + 1, M + 1), np.inf)
     cost_mat[0, 0] = 0.0
-    '''cost_mat = np.zeros((N + 1, M + 1))
-    for i in range(1, N + 1):
-        cost_mat[i, 0] = np.inf
-    for i in range(1, M + 1):
-        cost_mat[0, i] = np.inf'''
 
     # Fill the cost matrix while keeping traceback information
     #traceback_mat = np.zeros((N, M))
