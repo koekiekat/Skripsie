@@ -71,7 +71,7 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming"):
                             batch_fn=batch_fn
                             )
 
-def make_mfcc_extractor(n_mfcc=14, n_mels=14, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean"):                       # one scalar scale
+def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean"):                       # one scalar scale
 
     def normalize_rows(feat, eps=1e-9):
         mean = feat.mean(axis=-1, keepdims=True)
@@ -100,8 +100,8 @@ def make_mfcc_extractor(n_mfcc=14, n_mels=14, frame_dur=0.128, overlap=0.75, dro
         m = m[1:] if drop_c0 else m 
 
         #delta = librosa.feature.delta(m, order=1)
-        delta = safe_delta(m, order=1)
-        m_d_1 = np.concatenate([m, delta], axis=0)
+        #delta = safe_delta(m, order=1)
+        #m_d_1 = np.concatenate([m, delta], axis=0)
         return m
 
     def batch_windows(audio, fs):
@@ -121,8 +121,8 @@ def make_mfcc_extractor(n_mfcc=14, n_mels=14, frame_dur=0.128, overlap=0.75, dro
             m = m[..., 1:, :] if drop_c0 else m      
 
             #delta = librosa.feature.delta(m, order=1)
-            delta = safe_delta(m, order=1)
-            m_d_1 = np.concatenate([m, delta], axis=-2)
+            #delta = safe_delta(m, order=1)
+            #m_d_1 = np.concatenate([m, delta], axis=-2)
             return m
 
     return FeatureExtractor("mfcc", 
