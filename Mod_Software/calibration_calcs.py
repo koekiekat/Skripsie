@@ -162,6 +162,26 @@ def save_threshold_new(threshold, j_stat, auc, call_type, file_label, results_di
           f"threshold={threshold:.4f}, J={j_stat:.4f}, AUC={auc:.4f}")
     return data
 
+def save_threshold_new_pr(threshold, score, call_type, file_label, results_dir,
+                   score_name="youden_j", auc=None,
+                   n_templates=None, n_background=None,
+                   feature_name="stft", feature_params=None):
+    data = {
+        "call_type": call_type, "file_label": file_label,
+        "feature": feature_name, "feature_params": feature_params,
+        "threshold": float(threshold),
+        score_name: float(score) if score is not None else None,
+        "auc": float(auc) if auc is not None else None,
+        "n_templates": n_templates, "n_background": n_background,
+    }
+    path = threshold_path_new(file_label, call_type, results_dir, feature_name)
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"Saved threshold for '{call_type}' [{feature_name}] to {path.name}: "
+          f"threshold={threshold:.4f}, {score_name}={score:.4f}" +
+          (f", AUC={auc:.4f}" if auc is not None else ""))
+    return data
+
 def load_threshold_new(file_label, call_type, results_dir, feature_name="stft"):
     path = threshold_path_new(file_label, call_type, results_dir, feature_name)
     if not path.exists():

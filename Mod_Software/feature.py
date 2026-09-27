@@ -71,7 +71,7 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming"):
                             batch_fn=batch_fn
                             )
 
-def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean"):                       # one scalar scale
+def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
 
     def normalize_rows(feat, eps=1e-9):
         mean = feat.mean(axis=-1, keepdims=True)
@@ -99,10 +99,12 @@ def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, dro
                                  )
         m = m[1:] if drop_c0 else m 
 
-        #delta = librosa.feature.delta(m, order=1)
-        #delta = safe_delta(m, order=1)
-        #m_d_1 = np.concatenate([m, delta], axis=0)
-        return m
+        delta = safe_delta(m, order=1)
+        m_d_1 = np.concatenate([m, delta], axis=0)
+        if derv_1:
+            return m_d_1
+        else:
+            return m
 
     def batch_windows(audio, fs):
             n_fft = int(fs * frame_dur)
@@ -120,12 +122,19 @@ def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, dro
                    
             m = m[..., 1:, :] if drop_c0 else m      
 
-            #delta = librosa.feature.delta(m, order=1)
-            #delta = safe_delta(m, order=1)
-            #m_d_1 = np.concatenate([m, delta], axis=-2)
-            return m
+            delta = safe_delta(m, order=1)
+            m_d_1 = np.concatenate([m, delta], axis=-2)
+            if derv_1:
+               return m_d_1
+            else:
+                return m
 
-    return FeatureExtractor("mfcc", 
+    if derv_1:
+        call = "mfcc_d_1"
+    else:
+        call = "mfcc"
+
+    return FeatureExtractor(call, 
                             fn, 
                             min_duration=frame_dur, 
                             metric=metric,
