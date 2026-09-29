@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.spatial import distance as dist
 from numba import njit
+import librosa
 
 def dtw_calc_new(template_feat, comparison_feat, metric="cosine"):
     x_seq = np.asarray(template_feat).T      # (n_frames, n_features)
@@ -8,7 +9,7 @@ def dtw_calc_new(template_feat, comparison_feat, metric="cosine"):
 
     dist_mat = dist.cdist(x_seq, y_seq, metric)
     cost_mat = dp(dist_mat)
-    return cost_mat[-1, -1] / (x_seq.shape[0] + y_seq.shape[0])
+    return cost_mat[-1, -1] / (x_seq.shape[0] + y_seq.shape[0]) #cost_mat[-1, :]
 
 
 def batched_dtw_costs_for_template_new(template_feat, feat_batch, metric="cosine"):
@@ -81,3 +82,9 @@ def dp(dist_mat):
     cost_mat = cost_mat[1:, 1:]
     #return (path[::-1], cost_mat)
     return cost_mat
+
+def dp_new(dist_mat):
+    """Global DTW cost matrix (same output as before), computed by librosa."""
+    C = np.ascontiguousarray(dist_mat, dtype=np.float64)
+    D = librosa.sequence.dtw(C=C, subseq=False, backtrack=False) #subseq = True
+    return D
