@@ -3,24 +3,26 @@ import soundfile as sf
 import numpy as np
 from itertools import product
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 from feature import resample_audio
 from dtw import(
-    dtw_calc_new
+    dtw_calc_new,
+    dtw_calc
 )
 
 def load_entries(path, n=None):
     with open(path) as f:
         return json.load(f)[:n]
 
-def load_template_features_fixed_length(entry, extractor, window_len, fs_new=1000):
+def load_template_features_fixed_length(template, extractor, window_len, fs_new=1000):
     """
     Like load_segment_features, but centers/pads the segment to exactly
     window_len seconds instead of using the call's own start/end duration.
     """
-    with sf.SoundFile(entry["wav_path"]) as f:
+    with sf.SoundFile(template["wav_path"]) as f:
         f_s = f.samplerate
-        call_start, call_end = entry["start_time"], entry["end_time"]
+        call_start, call_end = template["start_time"], template["end_time"]
         call_center = (call_start + call_end) / 2
 
         half_len = window_len / 2
@@ -43,6 +45,22 @@ def load_template_features_fixed_length(entry, extractor, window_len, fs_new=100
     return extractor(audio, fs_new)
 
 def dtw_cross_costs(feat_temps, feat_bg_calib, metric="cosine"):
+    """
+    Calculate costs of every item in feat_temps vs every item in feat_bg_calib.
+
+    Returns:
+        costs
+    """
+
+    #Build all feature pairs (feat_temps, feat_bg_calib)
+    pairs = list(product(range(len(feat_temps)), range(len(feat_bg_calib)))) 
+
+    #Calculate costs for each pair
+    costs = [dtw_calc(feat_temps[i], feat_bg_calib[j], metric) for i, j in pairs]
+
+    return costs
+
+def dtw_cross_costs_new(feat_temps, feat_bg_calib, metric="cosine"):
     """
     Calculate costs of every item in feat_temps vs every item in feat_bg_calib.
 
@@ -90,8 +108,7 @@ def find_threshold_best_f1_from_pr(precision, recall, thresholds, beta=1.0):
     best_idx = np.argmax(f_scores)
     return thresholds[best_idx], f_scores[best_idx]
 
-def plot_pr_curve_from_costs(call_costs, background_costs, n_thresholds=200,
-                              best_threshold=None, ax=None):
+def plot_pr_curve_from_costs(call_costs, background_costs, n_thresholds=200, best_threshold=None, ax=None):
     precision, recall, thresholds = compute_pr_curve_from_costs(call_costs, background_costs, n_thresholds)
 
     standalone = ax is None
@@ -117,4 +134,37 @@ def plot_pr_curve_from_costs(call_costs, background_costs, n_thresholds=200,
         plt.show()
 
     return precision, recall, thresholds
+
+def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len,
+                      best_window_len, thresholds, best_vote_frac, n_temps,
+                      n_calib, best_f1=None, vote_f1_scores=None, template_files=None):
+    config = {
+        "feature": {
+            "method": feat_method,
+            "frame_len": float(best_frame_len),
+            "params": extractor.params,          # frame_dur, overlap, window
+            "metric": extractor.metric,
+            "fs_new": int(fs_new),
+        },
+        "window_len": float(best_window_len),
+        "thresholds": {k: float(v) for k, v in thresholds.items()},   # {"st":..,"mt":..,"bt":..}
+        "best_vote_frac": float(best_vote_frac),
+        "n_temps": int(n_temps),
+        "n_calib": int(n_calib),
+        "best_f1_calibration": None if best_f1 is None else float(best_f1),
+        # tuple keys aren't valid JSON, so flatten them to strings
+        "vote_f1_scores": None if vote_f1_scores is None else
+            {"|".join(map(str, k)): float(v) for k, v in vote_f1_scores.items()},
+        "template_files": template_files,
+    }
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w") as f:
+        json.dump(config, f, indent=2)
+    print(f"Saved model config to {path}")
+    return config
+
+def load_model_config(path):
+    with open(path) as f:
+        return json.load(f)
 

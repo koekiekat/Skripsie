@@ -5,6 +5,7 @@ from typing import Optional
 import numpy as np
 import soundfile as sf
 from scipy import signal
+import matplotlib.pyplot as plt
 
 
 @dataclass(frozen=True)
@@ -93,3 +94,26 @@ def resample_audio(audio_segments, f_s, fs_new):
     down = int(f_s / fs_new)
     audio_resampled = signal.resample_poly(audio_segments, up, down)
     return audio_resampled
+
+def feature_axes(feat, extractor, fs_new=1000):
+    p = extractor.params
+    nperseg = int(fs_new * p["frame_dur"])
+    noverlap = int(nperseg * p["overlap"])
+    hop = nperseg - noverlap
+
+    n_freq, n_frames = feat.shape
+    f = np.fft.rfftfreq(nperseg, d=1 / fs_new)   # length nperseg//2 + 1 == n_freq
+    t = np.arange(n_frames) * hop / fs_new       # scipy's default boundary padding puts frame 0 at t = 0
+    return f, t
+
+def plot_spectrogram(f, t, Zxx, fs_new):
+    plt.pcolormesh(t, 
+                   f, 
+                   np.log(np.abs(Zxx + 1e-16)), 
+                   vmin = 0, 
+                   vmax = np.max(np.log(np.abs(Zxx + 1e-16)))
+                   )
+    plt.xlabel("Time (s)")
+    plt.ylabel("Frequency (Hz)")
+    plt.title("Spectrogram of Audio Signal")
+    plt.ylim(0, fs_new/2)
