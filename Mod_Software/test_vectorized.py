@@ -73,8 +73,7 @@ def run_detection_pipeline_new(audio_file, n_hours, st_feats, mt_feats, bt_feats
         window_times_global = window_times_global[keep]
 
         #Costst calculated for windows against each template and stored
-        costs_st, costs_mt, costs_bt = dtw_costs_vectorized_new(
-            st_feats, mt_feats, bt_feats, feats_window, extractor.metric)
+        costs_st, costs_mt, costs_bt = dtw_costs_vectorized_new(st_feats, mt_feats, bt_feats, feats_window, extractor.metric)
 
         #is it a call or not?
         results = {}
@@ -133,7 +132,7 @@ def merge_consecutive_detections(all_detected_t, all_detected_labels, step=0.075
         return []
     labels = np.asarray(all_detected_labels, dtype=object)
 
-    breaks = np.diff(t) / step > 1 + max_gap_windows + tol
+    breaks = np.diff(t) / step > 1 + max_gap_windows + tol 
     if split_on_label:
         breaks |= labels[1:] != labels[:-1]
 
@@ -157,8 +156,7 @@ def merge_consecutive_detections(all_detected_t, all_detected_labels, step=0.075
     onehot[np.arange(len(t)), codes] = 1
     dominant = uniq[np.add.reduceat(onehot, starts, axis=0).argmax(axis=1)]
 
-    return [(float(t[s]), float(t[e]) + window_len, lab)
-            for s, e, lab in zip(starts[keep], ends[keep], dominant[keep])]
+    return [(float(t[s]), float(t[e]) + window_len, lab) for s, e, lab in zip(starts[keep], ends[keep], dominant[keep])]
 
 def read_audio_chunk(audio_file, start_hour, duration_hour = 1.0, fs_new = 1000):
     start_sec = start_hour * 3600

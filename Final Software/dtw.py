@@ -11,7 +11,6 @@ def dtw_calc(template_feat, comparison_feat, metric="cosine"):
     cost_mat = dp(dist_mat)
     return cost_mat[-1, -1] / (x_seq.shape[0] + y_seq.shape[0])
 
-
 def batched_dtw_costs_for_template(template_feat, feat_batch, metric="cosine"):
     x_seq = np.asarray(template_feat).T
     n_windows, n_feat, n_frames = feat_batch.shape
@@ -23,6 +22,12 @@ def batched_dtw_costs_for_template(template_feat, feat_batch, metric="cosine"):
     for w in range(n_windows):
         costs[w] = dp(dist_all[:, w, :])[-1, -1] / (x_seq.shape[0] + n_frames)
     return costs
+
+def dtw_costs_vectorized(st_feats, mt_feats, bt_feats, window_feats, metric):
+    st = [batched_dtw_costs_for_template(t, window_feats, metric) for t in st_feats]
+    mt = [batched_dtw_costs_for_template(t, window_feats, metric) for t in mt_feats]
+    bt = [batched_dtw_costs_for_template(t, window_feats, metric) for t in bt_feats]
+    return st, mt, bt
 
 @njit(cache=True)
 def dp(dist_mat):
@@ -109,3 +114,9 @@ def batched_dtw_costs_for_template_new(template_feat, feat_batch, metric="cosine
     for w in range(n_windows):
         costs[w] = dp_new(dist_all[:, w, :])[-1, -1] / (x_seq.shape[0] + n_frames)
     return costs
+
+def dtw_costs_vectorized_new(st_feats, mt_feats, bt_feats, window_feats, metric):
+    st = [batched_dtw_costs_for_template_new(t, window_feats, metric) for t in st_feats]
+    mt = [batched_dtw_costs_for_template_new(t, window_feats, metric) for t in mt_feats]
+    bt = [batched_dtw_costs_for_template_new(t, window_feats, metric) for t in bt_feats]
+    return st, mt, bt

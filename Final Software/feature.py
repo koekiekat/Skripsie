@@ -117,3 +117,8 @@ def plot_spectrogram(f, t, Zxx, fs_new):
     plt.ylabel("Frequency (Hz)")
     plt.title("Spectrogram of Audio Signal")
     plt.ylim(0, fs_new/2)
+
+def batch_feature_windows(audio_array, window_len, step_len, fs, extractor):
+    """window_len / step_len in SAMPLES. Returns (n_windows, n_features, n_frames)."""
+    windows = np.lib.stride_tricks.sliding_window_view(audio_array, window_len)[::step_len]
+    return extractor.batch(windows, fs)

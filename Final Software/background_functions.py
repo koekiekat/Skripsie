@@ -3,6 +3,7 @@ import pandas as pd
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 from scipy import signal
+import soundfile as sf
 
 plt.rcParams['figure.figsize'] = [10, 5]
 
@@ -66,3 +67,14 @@ def plot_spectrogram(f, t, Zxx, fs_new):
     plt.ylabel("Frequency (Hz)")
     plt.title("Spectrogram of Audio Signal")
     plt.ylim(0, fs_new/2)
+
+def read_audio_chunk(audio_file, start_hour, duration_hour, fs_new):
+    start_sec = start_hour * 3600
+    duration_sec = duration_hour * 3600
+    with sf.SoundFile(audio_file) as f:
+        f_s = f.samplerate
+        f.seek(int(start_sec * f_s))
+        audio_array = f.read(int(duration_sec * f_s), dtype="int16")
+    resampled = resample_audio(audio_array, f_s, fs_new)
+
+    return fs_new, resampled

@@ -135,6 +135,35 @@ def plot_pr_curve_from_costs(call_costs, background_costs, n_thresholds=200, bes
 
     return precision, recall, thresholds
 
+def plot_dtw_scatter(call_costs, background_costs, threshold=None, seed=0, ax=None):
+    rng = np.random.default_rng(seed)
+    call_costs = np.array(call_costs)
+    background_costs = np.array(background_costs)
+
+    call_y = 1 + rng.uniform(-0.15, 0.15, size=len(call_costs))
+    background_y = 0 + rng.uniform(-0.15, 0.15, size=len(background_costs))
+
+    standalone = ax is None
+    if standalone:
+        fig, ax = plt.subplots(figsize=(10, 4))
+
+    ax.scatter(call_costs, call_y, color="tab:blue", label="Call vs Call", alpha=0.8)
+    ax.scatter(background_costs, background_y, color="tab:orange", label="Call vs Background", alpha=0.8)
+
+    if threshold is not None:
+        ax.axvline(threshold, color="black", linestyle="--", linewidth=2, label=f"Threshold = {threshold:.3f}")
+
+    ax.set_yticks([0, 1])
+    ax.set_yticklabels(["Background", "Call"])
+    ax.set_ylim(-0.5, 1.5)
+    ax.set_xlabel("DTW Cost")
+    ax.set_title("Individual DTW Costs: Call vs Call vs Background")
+    ax.legend(loc="upper right")
+    ax.grid(axis="x", alpha=0.3)
+
+    if standalone:
+        plt.show()
+
 def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len,
                       best_window_len, thresholds, best_vote_frac, n_temps,
                       n_calib, best_f1=None, vote_f1_scores=None, template_files=None):
@@ -163,8 +192,4 @@ def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len,
         json.dump(config, f, indent=2)
     print(f"Saved model config to {path}")
     return config
-
-def load_model_config(path):
-    with open(path) as f:
-        return json.load(f)
 
