@@ -7,6 +7,7 @@ import soundfile as sf
 from scipy import signal
 import matplotlib.pyplot as plt
 from scipy.signal import butter, sosfiltfilt
+import librosa
 
 
 @dataclass(frozen=True)
@@ -58,6 +59,82 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming", f_min=0
                             params=dict(frame_dur=frame_dur, overlap=overlap,
                                         window=window, f_min=f_min),
                             batch_fn=batch_fn)
+
+def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
+
+    def normalize_rows(feat, eps=1e-9):
+        mean = feat.mean(axis=-1, keepdims=True)
+        std = feat.std(axis=-1, keepdims=True)
+        return (feat - mean) / (std + eps)
+
+    def safe_delta(m, order=1, max_width=9):
+        n_frames = m.shape[-1]
+        width = min(max_width, n_frames if n_frames % 2 == 1 else n_frames - 1)
+        width = max(width, 3)
+        return librosa.feature.delta(m, order=order, width=width)
+
+    def fn(audio, fs):
+        n_fft = int(fs * frame_dur)
+        hop = int(n_fft * (1 - overlap))
+        S = librosa.feature.melspectrogram(y=audio.astype(np.float32), 
+                                           sr=fs, 
+                                           n_fft=n_fft, 
+                                           hop_length=hop,
+                                           window="hamming", 
+                                           n_mels=n_mels, fmin = 30, fmax = 500
+                                           )
+        m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), 
+                                 n_mfcc=n_mfcc + int(drop_c0)
+                                 )
+        m = m[1:] if drop_c0 else m 
+
+        delta = safe_delta(m, order=1)
+        m_d_1 = np.concatenate([m, delta], axis=0)
+        if derv_1:
+            return m_d_1
+        else:
+            return m
+
+    def batch_windows(audio, fs):
+            n_fft = int(fs * frame_dur)
+            hop = int(n_fft * (1 - overlap))
+            S = librosa.feature.melspectrogram(y=audio.astype(np.float32), 
+                                               sr=fs, 
+                                               n_fft=n_fft, 
+                                               hop_length=hop,
+                                               window="hamming", 
+                                               n_mels=n_mels
+                                               )
+            m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), 
+                                     n_mfcc=n_mfcc + int(drop_c0)
+                                    )
+                   
+            m = m[..., 1:, :] if drop_c0 else m      
+
+            delta = safe_delta(m, order=1)
+            m_d_1 = np.concatenate([m, delta], axis=-2)
+            if derv_1:
+               return m_d_1
+            else:
+                return m
+
+    if derv_1:
+        call = "mfcc_d_1"
+    else:
+        call = "mfcc"
+
+    return FeatureExtractor(call, 
+                            fn, 
+                            min_duration=frame_dur, 
+                            metric=metric,
+                            batch_fn=batch_windows,
+                            params=dict(n_mfcc=n_mfcc, 
+                                        n_mels=n_mels, 
+                                        frame_dur=frame_dur,
+                                        overlap=overlap, 
+                                        drop_c0=drop_c0)
+                            )
+
 
 def feature_axes(feat, extractor, fs_new=1000):
     p = extractor.params

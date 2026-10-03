@@ -10,8 +10,7 @@ from scipy.spatial import distance as dist
 
 
 from feature import(
-    load_features_from_json,
-    batch_feature_windows
+    load_features_from_json
 )
 
 from background_functions import(
@@ -19,8 +18,6 @@ from background_functions import(
 )
 
 from dtw import(
-    dtw_costs_vectorized,
-    dtw_costs_vectorized_new,
     dtw_curve
 )
 
@@ -301,6 +298,30 @@ def compute_average_precision(precision, recall):
     p_interp = np.maximum.accumulate(p[::-1])[::-1]
     return np.sum(np.diff(r, prepend=0.0) * p_interp)
 
+def plot_mfcc(m, fs_new, hop_samples, ax=None, normalise=False):
+    """Plot an (n_coeffs, n_frames) MFCC matrix against real time."""
+    img_data = m
+    if normalise:  # display only: stops one large-magnitude row from washing out the rest
+        img_data = (m - m.mean(axis=1, keepdims=True)) / (m.std(axis=1, keepdims=True) + 1e-9)
+
+    n_coeffs, n_frames = m.shape
+    t = np.arange(n_frames) * (hop_samples / fs_new)
+    coeff_idx = np.arange(n_coeffs)
+
+    standalone = ax is None
+    if standalone:
+        fig, ax = plt.subplots(figsize=(10, 5))
+
+    img = ax.pcolormesh(t, coeff_idx, img_data, shading="auto")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("MFCC coefficient")
+
+    if standalone:
+        ax.set_title("MFCC")
+        plt.colorbar(img, ax=ax, label="Coefficient value")
+
+    return img
+
 def plot_detection_spectrograms(detections, wav_path,
                                  fs_new=1000,
                                  framelength=None,
@@ -344,8 +365,8 @@ def plot_detection_spectrograms(detections, wav_path,
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
     axes = np.atleast_2d(axes) if extractor is not None else np.atleast_1d(axes).flatten()
 
-    # hop_samples = int(fs_new * extractor.params["frame_dur"] * (1 - extractor.params["overlap"])) \
-    #     if extractor is not None else None
+    hop_samples = int(fs_new * extractor.params["frame_dur"] * (1 - extractor.params["overlap"])) \
+        if extractor is not None else None
 
     ax_idx = 0
     for hour_idx, entries in by_hour.items():
@@ -385,17 +406,17 @@ def plot_detection_spectrograms(detections, wav_path,
             ax_stft.set_xlabel("Time (s, local)")
             ax_stft.set_ylabel("Freq (Hz)")
 
-            # if extractor is not None:
-            #     feat = extractor(segment.astype(np.float32), f_s)
-            #     plot_mfcc(feat, f_s, hop_samples, ax=ax_feat)
-            #     ax_feat.set_title(f"{extractor.name.upper()}", fontsize=10)
-            #     # shift the feature's local time axis to match the STFT panel's global offset
-            #     for coll in ax_feat.collections:
-            #         coll.set_clim()  # no-op placeholder if you want shared color scaling later
+            if extractor is not None:
+                feat = extractor(segment.astype(np.float32), f_s)
+                plot_mfcc(feat, f_s, hop_samples, ax=ax_feat)
+                ax_feat.set_title(f"{extractor.name.upper()}", fontsize=10)
+                # shift the feature's local time axis to match the STFT panel's global offset
+                for coll in ax_feat.collections:
+                    coll.set_clim()  # no-op placeholder if you want shared color scaling later
 
             ax_idx += 1
 
-        # turn off any completely unused rows/slots
+    # turn off any completely unused rows/slots
     flat_axes = axes.flatten()
     used = ax_idx * n_cols
     for j in range(used, len(flat_axes)):

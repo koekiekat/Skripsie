@@ -71,7 +71,7 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming"):
                             batch_fn=batch_fn
                             )
 
-def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
+def make_mfcc_extractor(n_mfcc=13, n_mels=26, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
 
     def normalize_rows(feat, eps=1e-9):
         mean = feat.mean(axis=-1, keepdims=True)
