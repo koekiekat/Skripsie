@@ -136,3 +136,10 @@ def dtw_calc_times(temp_feat, comp_feat, hop_sec, frame_sec, metric):
     start_s = start_path * hop_sec - frame_sec / 2
     end_s = end_path * hop_sec + frame_sec / 2
     return cost, start_s, end_s
+
+def dtw_curve(temp_feat, comp_feat, metric):
+    T = np.asarray(temp_feat).T
+    S = np.asarray(comp_feat).T
+    C = np.ascontiguousarray(dist.cdist(T, S, metric))
+    D = librosa.sequence.dtw(C=C, subseq=True, backtrack=False)
+    return D[-1, :] / T.shape[0]

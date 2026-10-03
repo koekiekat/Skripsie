@@ -4,6 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 from scipy import signal
+import librosa
+from scipy.signal import find_peaks
+from scipy.spatial import distance as dist
+
 
 from feature import(
     load_features_from_json,
@@ -16,7 +20,8 @@ from background_functions import(
 
 from dtw import(
     dtw_costs_vectorized,
-    dtw_costs_vectorized_new
+    dtw_costs_vectorized_new,
+    dtw_curve
 )
 
 def load_model_config(path):
@@ -57,85 +62,75 @@ def get_exclusion_intervals(ground_truth, exclude_labels=("td",), pad=0.0):
             for g in ground_truth if g["label"] in exclude_labels]
 
 def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
-                               st_threshold, mt_threshold, bt_threshold,
-                               exclude_intervals, extractor, fs_new,
-                               window_len, step_len, vote_frac, dtw_method):
-    all_detected_t, all_detected_labels = [], [] #precision adn recall passed for my thresholds
-    # all_scores, all_labels_all, all_times_all = [], [], [] #PR version
-    all_times_all = []
-    all_kth = []
+                       st_threshold, mt_threshold, bt_threshold,
+                       exclude_intervals, extractor, fs_new, vote_frac,
+                       hop_s, frame_s, min_sep_s=0.5, alpha_max=3.0):
 
-    #converts seconds to samples
-    win_samples = int(round(window_len * fs_new))
-    step_samples = int(round(step_len * fs_new))
+    templates = [st_feats, mt_feats, bt_feats]
+    thresholds = [st_threshold, mt_threshold, bt_threshold]
+    call_types = ["st", "mt", "bt"]
 
+    # one entry per detected call
+    all_starts, all_ends, all_scaled_costs, all_labels = [], [], [], []
 
+    # detections closer together than this (in frames) count as one call
+    min_sep_frames = max(1, round(min_sep_s / hop_s))
 
     for i in range(n_hours):
-        #loads 1 hour of audio
+        # load 1 hour of audio and compute features for the whole hour
         f_s, audio_array = read_audio_chunk(audio_file, start_hour=i, duration_hour=1.0, fs_new=fs_new)
-        
-        #computes features
-        feats_window = batch_feature_windows(audio_array, win_samples, step_samples, f_s, extractor)
-        
-        #stores window start times for each winodw
-        n_windows = feats_window.shape[0]
-        window_times_global = np.arange(n_windows) * step_len + i * 3600
+        feat_stream = extractor(audio_array, fs_new)                  # (n_freq, n_frames)
 
-        #filter out downsweeps
-        keep = get_exclusion_mask(window_times_global, window_len=window_len, exclude_intervals=exclude_intervals)
-        feats_window = feats_window[keep]
-        window_times_global = window_times_global[keep]
+        template_costs = []     # per call type: (n_temps, n_frames), cost of each template at each frame
+        scaled_cost_rows = []   # per call type: kth cost / threshold, <= 1 means "call"
 
-        #Costs calculated for windows against each template and stored
-        if dtw_method == "old":
-            costs_st, costs_mt, costs_bt = dtw_costs_vectorized(st_feats, mt_feats, bt_feats, feats_window, extractor.metric)
-        elif dtw_method == "new":
-            costs_st, costs_mt, costs_bt = dtw_costs_vectorized_new(st_feats, mt_feats, bt_feats, feats_window, extractor.metric)
+        for temps, threshold in zip(templates, thresholds):
+            costs_arr = np.stack([dtw_curve(t, feat_stream, extractor.metric) for t in temps])
+            k = max(1, round(vote_frac * len(temps)))                 # same k as calibration
+            kth_cost = np.sort(costs_arr, axis=0)[k - 1]              # kth lowest cost across templates, per frame
+            template_costs.append(costs_arr)
+            scaled_cost_rows.append(kth_cost / threshold)
 
-        results = {}
-        kth_cols = []
+        scaled_costs = np.nan_to_num(np.stack(scaled_cost_rows), nan=10.0, posinf=10.0)   # (3, n_frames)
+        best_type = scaled_costs.argmin(axis=0)       # which call type fits best at each frame
+        best_scaled_cost = scaled_costs.min(axis=0)   # its scaled cost
 
-        window_info = {
-            "st": (costs_st, st_threshold),
-            "mt": (costs_mt, mt_threshold),
-            "bt": (costs_bt, bt_threshold)
-        }
+        # one frame per call: the lowest point of each dip in best_scaled_cost,
+        # no higher than alpha_max, at least min_sep_frames apart
+        call_end_frames, _ = find_peaks(-best_scaled_cost, height=-alpha_max, distance=min_sep_frames)
 
-        for label, (costs_list, threshold) in window_info.items():
-            costs_arr = np.vstack(costs_list) #stacks costs one under the other
-            n_t = costs_arr.shape[0]
-            votes = (costs_arr < threshold).sum(axis=0) #counts how many templates is below threshold
-            mean_cost = costs_arr.mean(axis=0) #avg cost used for label detection
-            triggered = votes >= np.ceil(vote_frac * n_t) #true if 60% of templates are below thrshold
-            results[label] = (triggered, mean_cost) # store results
+        for end_frame in call_end_frames:
+            type_idx = best_type[end_frame]
 
-            k = int(np.ceil(vote_frac * n_t))
-            kth_cols.append(np.partition(costs_arr, k - 1, axis = 0)[k - 1])#store kth smallest cost per window
+            # the single template that matched best at this frame
+            best_temp_idx = template_costs[type_idx][:, end_frame].argmin()
+            best_template = templates[type_idx][best_temp_idx]
 
-        n_windows = feats_window.shape[0]
-        call_detected = np.zeros(n_windows, dtype=bool)
-        call_labels = np.full(n_windows, "", dtype=object)
-        best_cost = np.full(n_windows, np.inf)
+            # redo the DTW on a short stretch of the stream ending at end_frame, to find where the match began
+            seg_lo = max(0, end_frame - 2 * best_template.shape[1])
+            seg_feat = feat_stream[:, seg_lo:end_frame + 1]
+            dist_mat = dist.cdist(best_template.T, seg_feat.T, extractor.metric)
+            D, steps = librosa.sequence.dtw(C=dist_mat, subseq=True, backtrack=False, return_steps=True)
+            warp_path = librosa.sequence.dtw_backtracking(steps, subseq=True, start=dist_mat.shape[1] - 1)
+            start_frame = seg_lo + warp_path[-1, 1]                   # warp_path runs end -> start
 
-        for label, (triggered, mean_cost) in results.items():
+            all_starts.append(i * 3600 + start_frame * hop_s - frame_s / 2)
+            all_ends.append(i * 3600 + end_frame * hop_s + frame_s / 2)
+            all_scaled_costs.append(best_scaled_cost[end_frame])
+            all_labels.append(call_types[type_idx])
 
-            triggered_better = triggered & (mean_cost < best_cost) #If two types triggger call lowest mean cost wins label
-            call_labels[triggered_better] = label
-            #best_cost[triggered_better] = mean_cost[triggered_better]
-            call_detected |= triggered
+        n_detected = int((best_scaled_cost[call_end_frames] <= 1).sum())
+        print(f"Processing hour {i+1} of {n_hours}: {n_detected} calls detected at the calibrated thresholds")
 
-        print(f"Processing hour {i+1} of {n_hours}: {call_detected.sum()} / {n_windows} windows flagged as calls")
-        
-        all_kth.append(np.stack(kth_cols, axis = 1).astype(np.float32))# (n_windows, 3) s_t, m_t, b_t
-        all_times_all.extend(window_times_global.tolist())
+    all_starts, all_ends = np.array(all_starts), np.array(all_ends)
+    all_scaled_costs, all_labels = np.array(all_scaled_costs), np.array(all_labels, dtype=object)
 
-        detected = np.where(call_detected)[0]
-        all_detected_t.extend(window_times_global[detected].tolist())
-        all_detected_labels.extend(call_labels[detected].tolist())
+    # drop detections that overlap an excluded interval (downsweeps)
+    keep = np.ones(len(all_starts), dtype=bool)
+    for ex_start, ex_end in exclude_intervals:
+        keep &= ~((all_starts < ex_end) & (all_ends > ex_start))
 
-    return(np.array(all_detected_t), np.array(all_detected_labels), np.array(all_times_all), np.concatenate(all_kth, axis = 0))
-       
+    return all_starts[keep], all_ends[keep], all_scaled_costs[keep], all_labels[keep]       
 def get_exclusion_mask(window_times_global, window_len, exclude_intervals):
     """
     window_times_global: 1D array of each window's start time (global seconds)
@@ -227,8 +222,6 @@ def match_detections(detections, raven_table, ignore_duplicates=False):
     false_negative_gts = [g for g, m in zip(raven_table, rt_calls_matched) if not m]
     return tp, fp, fn, false_positive_detections, false_negative_gts
 
-
-
 def compute_pr_curve_alpha(times, kth_costs, thresholds, ground_truth, step, window_len, alphas, max_gap_windows, min_windows, max_windows):
     """
     kth_costs: (n_windows, 3) k-th smallest template cost for st, mt, bt
@@ -249,6 +242,19 @@ def compute_pr_curve_alpha(times, kth_costs, thresholds, ground_truth, step, win
         recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
         used.append(a)
     return np.array(precision), np.array(recall), np.array(used), best_label
+
+def compute_pr_curve_alpha_new(starts, ends, scaled_costs, labels, ground_truth, alphas):
+    precision, recall, used = [], [], []
+    for a in alphas:
+        is_call = scaled_costs <= a
+        calls = [(float(s), float(e), lab) for s, e, lab in zip(starts[is_call], ends[is_call], labels[is_call])]
+        if not calls:
+            continue
+        tp, fp, fn, _, _ = match_detections(calls, ground_truth)
+        precision.append(tp / (tp + fp))
+        recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
+        used.append(a)
+    return np.array(precision), np.array(recall), np.array(used)
 
 def windows_to_calls(times, scores, labels, threshold, step, window_len, max_gap, min_win, max_win):
     mask = scores <= threshold
