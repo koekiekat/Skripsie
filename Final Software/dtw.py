@@ -120,3 +120,19 @@ def dtw_costs_vectorized_new(st_feats, mt_feats, bt_feats, window_feats, metric)
     mt = [batched_dtw_costs_for_template_new(t, window_feats, metric) for t in mt_feats]
     bt = [batched_dtw_costs_for_template_new(t, window_feats, metric) for t in bt_feats]
     return st, mt, bt
+
+def dtw_calc_times(temp_feat, comp_feat, hop_sec, frame_sec, metric):
+    temp_seq = np.asarray(temp_feat).T
+    comp_seq = np.asarray(comp_feat).T
+
+    dist_mat = dist.cdist(temp_seq, comp_seq, metric)
+    dtw_costs, warp_path = librosa.sequence.dtw(C = dist_mat, subseq = True, backtrack = True)
+
+    #warp_path runs from END to START
+    end_path = warp_path[0, 1]
+    start_path = warp_path[-1, 1]
+
+    cost = float(dtw_costs[-1, end_path] / temp_seq.shape[0])
+    start_s = start_path * hop_sec - frame_sec / 2
+    end_s = end_path * hop_sec + frame_sec / 2
+    return cost, start_s, end_s

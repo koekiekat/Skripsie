@@ -4,18 +4,20 @@ import numpy as np
 from itertools import product
 import matplotlib.pyplot as plt
 from pathlib import Path
+from numba import njit
 
 from feature import resample_audio
 from dtw import(
     dtw_calc_new,
-    dtw_calc
+    dtw_calc,
+    dtw_calc_times
 )
 
 def load_entries(path, n=None):
     with open(path) as f:
         return json.load(f)[:n]
 
-def load_template_features_fixed_length(template, extractor, window_len, fs_new=1000):
+def load_template_features_fixed_length(template, extractor, window_len, fs_new):
     """
     Like load_segment_features, but centers/pads the segment to exactly
     window_len seconds instead of using the call's own start/end duration.
@@ -164,7 +166,7 @@ def plot_dtw_scatter(call_costs, background_costs, threshold=None, seed=0, ax=No
     if standalone:
         plt.show()
 
-def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len,
+def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len, dtw_method,
                       best_window_len, thresholds, best_vote_frac, n_temps,
                       n_calib, best_f1=None, vote_f1_scores=None, template_files=None):
     config = {
@@ -175,6 +177,7 @@ def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len,
             "metric": extractor.metric,
             "fs_new": int(fs_new),
         },
+        "dtw_method": dtw_method,
         "window_len": float(best_window_len),
         "thresholds": {k: float(v) for k, v in thresholds.items()},   # {"st":..,"mt":..,"bt":..}
         "best_vote_frac": float(best_vote_frac),
@@ -193,3 +196,16 @@ def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len,
     print(f"Saved model config to {path}")
     return config
 
+def frame_hop_len(extractor, fs_new):
+    #frame_dur, overlap, window
+    feature_parameters = extractor.params
+    samples_per_frame =int(fs_new *feature_parameters["frame_dur"])
+    hop_in_samples= samples_per_frame - int(samples_per_frame * feature_parameters["overlap"])
+    hop_in_seconds = hop_in_samples / fs_new
+    return hop_in_seconds
+
+def dtw_cross_costs_time(feat_temps, feat_comps, hop_sec, frame_sec, metric):
+    pair_res = list(product(range(len(feat_temps)), range(len(feat_comps))))
+    results = [dtw_calc_times(feat_temps[i], feat_comps[j], hop_sec, frame_sec, metric) for i, j in pair_res]
+    costs, start_s, end_s = zip(*results)
+    return list(costs), list(start_s), list(end_s)

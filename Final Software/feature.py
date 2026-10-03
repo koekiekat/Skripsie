@@ -6,6 +6,7 @@ import numpy as np
 import soundfile as sf
 from scipy import signal
 import matplotlib.pyplot as plt
+from scipy.signal import butter, sosfiltfilt
 
 
 @dataclass(frozen=True)
@@ -29,43 +30,44 @@ class FeatureExtractor:
         """(n_windows, window_len) -> (n_windows, n_features, n_frames)"""
         if self.batch_fn is not None:
             return self.batch_fn(windows, fs)
-        return np.stack([self.fn(w, fs) for w in windows])   # slow fallback
+        return np.stack([self.fn(w, fs) for w in windows])   # slow fallback  
 
-def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming"):
+def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming", f_min=0.0):
+    def _prep(audio, fs):
+        if f_min > 0:   # zero-phase high-pass so low-frequency energy is removed, not just hidden
+            sos = butter(4, f_min, btype="highpass", fs=fs, output="sos")
+            audio = sosfiltfilt(sos, audio, axis=-1)
+        return audio
+
+    def _keep(nperseg, fs):   # which STFT bins are at or above f_min
+        return np.fft.rfftfreq(nperseg, d=1 / fs) >= f_min
+
     def fn(audio, fs):
-        #number of samples per STFT segment
-        nperseg = int(fs * frame_dur) 
-        #Compute STFT
-        _, _, Zxx = signal.stft(audio, 
-                                fs=fs, 
-                                nperseg=nperseg,
-                                noverlap=int(nperseg * overlap), 
-                                window=window
-                                )
-        #return real STFT magnitudes instead of complex magnitudes
-        return np.abs(Zxx) #(n_freq_bins, n_frames)
+        nperseg = int(fs * frame_dur)
+        _, _, Zxx = signal.stft(_prep(audio, fs), fs=fs, nperseg=nperseg,
+                                noverlap=int(nperseg * overlap), window=window)
+        return np.abs(Zxx)[_keep(nperseg, fs)]                  # (n_freq_kept, n_frames)
 
     def batch_fn(windows, fs):
         nperseg = int(fs * frame_dur)
-        #axis = -1: compute STFT along last axis independently for each row
-        _, _, Zxx = signal.stft(windows,
-                                fs=fs, 
-                                nperseg=nperseg,
-                                noverlap=int(nperseg * overlap), 
-                                window=window, 
-                                axis=-1
-                                )
-        return np.abs(Zxx) #(n_windows, n_freq_bins, n_frames)
+        _, _, Zxx = signal.stft(_prep(windows, fs), fs=fs, nperseg=nperseg,
+                                noverlap=int(nperseg * overlap), window=window, axis=-1)
+        return np.abs(Zxx)[:, _keep(nperseg, fs), :]            # (n_windows, n_freq_kept, n_frames)
 
-    return FeatureExtractor("stft", 
-                            fn, 
-                            min_duration=frame_dur, 
-                            metric="cosine",
-                            params=dict(frame_dur=frame_dur, 
-                                        overlap=overlap, 
-                                        window=window),
-                            batch_fn=batch_fn
-                            )
+    return FeatureExtractor("stft", fn, min_duration=frame_dur, metric="cosine",
+                            params=dict(frame_dur=frame_dur, overlap=overlap,
+                                        window=window, f_min=f_min),
+                            batch_fn=batch_fn)
+
+def feature_axes(feat, extractor, fs_new=1000):
+    p = extractor.params
+    nperseg = int(fs_new * p["frame_dur"])
+    hop = nperseg - int(nperseg * p["overlap"])
+    n_freq, n_frames = feat.shape
+    f = np.fft.rfftfreq(nperseg, d=1 / fs_new)
+    f = f[f >= p.get("f_min", 0.0)]              # keep axis in step with the sliced features
+    t = np.arange(n_frames) * hop / fs_new
+    return f, t
 
 def load_segment_features(entry, extractor, fs_new=1000):
 
@@ -94,17 +96,6 @@ def resample_audio(audio_segments, f_s, fs_new):
     down = int(f_s / fs_new)
     audio_resampled = signal.resample_poly(audio_segments, up, down)
     return audio_resampled
-
-def feature_axes(feat, extractor, fs_new=1000):
-    p = extractor.params
-    nperseg = int(fs_new * p["frame_dur"])
-    noverlap = int(nperseg * p["overlap"])
-    hop = nperseg - noverlap
-
-    n_freq, n_frames = feat.shape
-    f = np.fft.rfftfreq(nperseg, d=1 / fs_new)   # length nperseg//2 + 1 == n_freq
-    t = np.arange(n_frames) * hop / fs_new       # scipy's default boundary padding puts frame 0 at t = 0
-    return f, t
 
 def plot_spectrogram(f, t, Zxx, fs_new):
     plt.pcolormesh(t, 
