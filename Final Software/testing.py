@@ -86,7 +86,7 @@ def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
             k = max(1, round(vote_frac * len(temps)))                 # same k as calibration
             kth_cost = np.sort(costs_arr, axis=0)[k - 1]              # kth lowest cost across templates, per frame
             template_costs.append(costs_arr)
-            scaled_cost_rows.append(kth_cost / threshold)
+            scaled_cost_rows.append(kth_cost / threshold) #divided by threshold so that when alpha = 1 we are at our specific threshold
 
         scaled_costs = np.nan_to_num(np.stack(scaled_cost_rows), nan=10.0, posinf=10.0)   # (3, n_frames)
         best_type = scaled_costs.argmin(axis=0)       # which call type fits best at each frame

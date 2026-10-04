@@ -22,11 +22,6 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem[Faustmann(2024)]{data_set}
-A.~Faustmann, ``Potential vocalizations of bryde's whales in false bay, south
-  africa,'' 2024,
-  \url{https://scholardata.sun.ac.za/articles/dataset/An_Analysis_of_Potential_Low_Frequency_Vocalizations_of_Southern_African_Bryde_s_Whales_/25108016?file=44351747}.
-
 \bibitem[van Waerebeek et~al.(2006)van Waerebeek, Baker, Félix, Gedamke,
   Iñiguez, Sanino, Secchi, Sutaria, van Helden, and
   Wang]{vessel_collision_since_1990s}
@@ -65,5 +60,10 @@ M.~A. McDonald, S.~L. Mesnick, and J.~A. Hildebrand, ``The geographic variation
 J.~C. Brown, A.~Hodgins-Davis, and P.~J.~O. Miller, ``Classification of
   vocalizations of killer whales using dynamic time warping,'' 2006,
   \url{https://pubs.aip.org/asa/jasa/article/119/3/EL34/850621}.
+
+\bibitem[Faustmann(2024)]{data_set}
+A.~Faustmann, ``Potential vocalizations of bryde's whales in false bay, south
+  africa,'' 2024,
+  \url{https://scholardata.sun.ac.za/articles/dataset/An_Analysis_of_Potential_Low_Frequency_Vocalizations_of_Southern_African_Bryde_s_Whales_/25108016?file=44351747}.
 
 \end{thebibliography}

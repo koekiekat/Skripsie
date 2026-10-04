@@ -9,10 +9,31 @@
 
 \mysection{Overview}{Overview}\label{sec:overview}
 
-\mysection{Hyperparameter Tuning}{Hyperparameter Tuning}\label{sec:hyperparameter-tuning}
+\mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods}
 
+\mysubsection{STFT}{STFT}\label{sec:stft}
+Used signal.stft from scipy.
+
+\mysubsection{MFCC}{MFCC}\label{sec:mfcc}
+used librosa
+
+\mysubsection{LPC}{LPC}\label{sec:lpc}
+
+\mysection{DTW methodology}{DTW methodology}\label{sec:dtw_method}
+used librosa. Calculated the cost matrix of a large stream of audio against a template. Only used the bottom rows costs since these show dips when a call is detected as the cost bottoms out.
+A call was detected by determining where the dips were and then finding whether the end cost of that dip was below the threshold.
+\mysection{Hyperparameter Tuning}{Hyperparameter Tuning}\label{sec:hyperparameter-tuning}
+The frame length of any feature extraction method affects the frequency resolution. Therefore, different widths of frame length (0.048, 0.064, 0.096, 0.128, 0.192, 0.256, 0.384, 0.512) were tested to see 
+which produced the best F1 score. In the process of determining the best frame length the F1 score is calculated by also finding the best possible thresholds for which each call can be seperated as either 
+a call or background noise. While the project only focused on general detection of calls and not on classification, three different thresholds, one for each call type, were calculated and used. The reason for this 
+is that choosing one overarching threshold would make the model far too lenient for some calls as call types such as single-tones and burst-tonals tend to have a significant difference in threshold choice. 
+Even though three different thresholds were chosen based on the templates from each call type in the final detection only general call detection was considered and not whether the model classified the calls 
+correctly. This was due to the fact that single0tones and multi-tones sometimes look very similar and thus tend to be incorrectly classified.
+
+When deciding whether an audio segment is a call or not that segment is compared against all 30 templates (10 for each call type). For each call type some of the 10 templates will say that it is a call and others will say that it 
+is not since the templates were chosen for varying noise conditions. The vote fraction is used to decide whether the audio segment is from that call type or not. If that vote fraction amount of the 10 calls say it is a call then 
+it will be classified as such if less than that vote fraction agree that it is a call then it will not be classified as a call. The F1 score is calculated using different voting fractions (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0) 
+as well as the chosen frame length and thresholds. This F1 is used to choose the best possible voting fraction for all three call types. 
 \mysection{Training Procedure}{Training Procedure}\label{sec:training-procedure}
 
 \mysection{Evaluation Metrics}{Evaluation Metrics}\label{sec:evaluation-metrics}
-
-\mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods}
