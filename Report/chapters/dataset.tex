@@ -1,0 +1,59 @@
+\mychapter{Dataset}{Dataset}{}\label{chap:dataset}
+
+\mysection{Background}{Background}\label{sec:background}
+
+The dataset used contains three 72 hour recordings, recorded in False Bay, near Gordons Bay, between 22 April 2023 and 22 June 2023. 
+The recordings were taken at a depth of 20 to 30 meters at the coordinates, S 34.16813deg, E18.758718deg. 
+
+The device used for the recordings was a single omnidirectional hydrophone, designed and built by a Stellenbosch University research 
+group from the Electrical and Electronic Engineering Department.
+
+The recorded data has a sampling rate of 8kHz and a 16-bit resolution. The data was extracted as a 72 hour wav file from an SD card 
+used by the recording device.\cite{data_set}
+
+\mysection{Labeling}{Labeling}\label{sec:labeling}
+
+Detection tables, containg start and end times of calls within the each file, were provided from a previous research project which used a 
+band-limited energy detector to flag calls. This method unfortunately did not detect all the calls within the audio files and none of the 
+calls were labelled as a specific type of call. 
+
+Another detection table was procured. This table contained more detections for the first 72 hour file and contained call labels for all three files. 
+This meant that there were sufficient labels for the first 72 hour recording of the dataset and there were partial labels for the second and third 72 
+hour recordings within the dataset.\cite{data_set}
+
+\mysection{Data Splitting}{Data Splitting}\label{sec:data-splitting}
+
+For this project the data was plit in three sections. Each of the 72 hour audio files was chosen for a different section. Given that only 
+the first of the three 72 hour audio files was well labeled, it was decided that this would be used for training and testing. The second 
+audio file was used for hyperparameter tuning and the third was used to select templates.
+
+\mysubsection{Template Selection}{Template Selection}\label{sec:temp_sel}
+
+The audio file which was recorded starting on the 29th was used to select templates. These chosen templates were used for the comparison which 
+determined whether an audio clip contained calls or not.
+
+For the three different call type, single-tones, multi-tones and burst-tonals, the maximum number of templates per call type which could be 
+extracted such that each call type had the same amount of templates was 10. The limiting call type was burst-tonals.
+
+To ensure that the 10 templates chosen were representative of varying amounts of background noise templates were chosen by looking at spectrograms 
+of detected calls throughout the audio file. The visual inspection was also necessary since some of the calls labeled as single-tones looked more like 
+multi-tones and some of the multi-tones could actually be classified as burst-tonals.
+
+\mysubsection{Hyperparameter Tuning Template Selection}{Hyperparameter Tuning Template Selection}\label{sec:tune_temp_sel}
+
+The audio file which was recorded starting on the 26th was used to select calibration templates. These templates were used to determine below which threshold a 
+segment of audio could be considered a call. For the calibration templates 10 templates were chosen for each call type. This was again limited by the burst-tonals 
+maximum number of templates. In this file there were however only 9 labeled burst-tonals, but when selecting multi-tones it was found that a call originally labeled 
+as a multi-tone could in fact be seen as a burst-tonal. 
+
+Besides these 30 templates, 10 for each call type, 100 background templates were also selected. Within each audio file most of the time is made up of background 
+noise and only some parts actually contain calls. This was simulated by selecting many more background templates that call-type templates. Since there is no table 
+labeling background noise background segments of varying sizes were extracted from the file and 100 templates were manually selected. The reason for the manual process 
+links with the unreliability of the labelled data. The audio file used was only labeled by the band-limited energy detector and thus did not label all the calls 
+within the file. This means that some of the samples extracted as background audio actually contained calls that had never been labeled. Manually selecting each template 
+ensured that all the templates chosen were in fact background noise only.
+
+\mysubsection{Evaluation Data Selection}{Evaluation Data Selection}\label{sec:eval_dat_sel}
+
+The entire first audio file which was recorded starting on the 22nd was used for the final evaluation of the whale call detection model. No templates were extracted, 
+instead the entire file was sweeped to search for calls.

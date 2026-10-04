@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  18 SEP 2026 09:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  4 OCT 2026 12:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1553,7 +1553,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 3.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 3.
-<stb-thesis-frntp.pdf, id=93, 597.50786pt x 845.04686pt>
+<stb-thesis-frntp.pdf, id=221, 597.50786pt x 845.04686pt>
 File: stb-thesis-frntp.pdf Graphic file (type pdf)
 <use stb-thesis-frntp.pdf>
 Package pdftex.def Info: stb-thesis-frntp.pdf  used on input line 3.
@@ -1592,34 +1592,42 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 ]) [4
 
-] (thesis.toc)
+] (thesis.toc [5
+
+
+])
 \tf@toc=\write6
 \openout6 = `thesis.toc'.
 
- [5
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/lmr/m/sc/12'.
+(microtype)             Ignoring protrusion settings for this character.
 
 
-] (thesis.lof)
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[6] (thesis.lof)
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
- [6
+ [7
 
 ] (thesis.lot)
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [7
+ [8
 
 ] (frontmatter/nomenclature.tex
 No file thesis.nls.
-(frontmatter/variables_and_functions.tex) [8
+(frontmatter/variables_and_functions.tex) [9
 
 
 ]
-Package microtype Info: Character `029' is missing
-(microtype)             in font `T1/lmr/m/sc/12'.
-(microtype)             Ignoring protrusion settings for this character.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/17.28'.
 (microtype)             Ignoring protrusion settings for this character.
@@ -1635,7 +1643,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[9]
+[10]
 
 Package glossaries Info: Preparing to sort glossary `main' (total number of
 (glossaries)             referenced entries: 1)
@@ -1649,32 +1657,21 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61652pt}.
 
-[10]) (chapters/introduction.tex
+[11]) (chapters/introduction.tex
 Chapter 1.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.31 \mysection{Objectives}{Objectives}
-                                        [1
+l.33     \item C
+                hapter 3 provides an explanation of the overall setup and me... [1
 
 ]
+
+LaTeX Warning: Reference `fig:enter-label' on page 2 undefined on input line 40.
+
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 68.
-
-
-Package fancyhdr Warning: \headheight is too small (14.5pt): 
-(fancyhdr)                Make it at least 27.11653pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11653pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
-
-[2]
-<figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png, id=244, 195.73125pt x 51.19125pt>
-File: figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png Graphic file (type png)
-<use figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png>
-Package pdftex.def Info: figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png  used on input line 81.
-(pdftex.def)             Requested size: 364.19667pt x 95.2569pt.
+(Font)              <7> on input line 49.
 ) (chapters/literature.tex
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
@@ -1683,32 +1680,74 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[3 <./figures/Faculty-of-Engineering-Stellenbosch-University-Logo.png>]
+[2]
 Chapter 2.
-) (chapters/system_design.tex [4
+) (chapters/dataset.tex [3
 
 ]
 Chapter 3.
-<figures/Skrip_CH3.drawio.png, id=257, 764.8575pt x 283.0575pt>
+[4
+
+]
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/lmr/m/sc/14.4'.
+(microtype)             Ignoring protrusion settings for this character.
+) (chapters/background.tex
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[5]
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[6]
+Chapter 4.
+) (chapters/system_design.tex [7
+
+]
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[8]
+Chapter 5.
+<figures/Skrip_CH3.drawio.png, id=466, 764.8575pt x 283.0575pt>
 File: figures/Skrip_CH3.drawio.png Graphic file (type png)
 <use figures/Skrip_CH3.drawio.png>
-Package pdftex.def Info: figures/Skrip_CH3.drawio.png  used on input line 6.
+Package pdftex.def Info: figures/Skrip_CH3.drawio.png  used on input line 5.
 (pdftex.def)             Requested size: 364.19667pt x 134.78195pt.
-) (chapters/detailed_design.tex [5
+) (chapters/results.tex [9
 
  <./figures/Skrip_CH3.drawio.png>]
-Chapter 4.
-) (chapters/reuslts.tex [6
-
-]
-Chapter 5.
-) (chapters/conclusion.tex [7
-
-]
 Chapter 6.
-) [8
+) (chapters/conclusion.tex [10
 
-] (thesis.bbl) (appendices/appendices.tex (appendices/an_appendix.tex [9
+]
+Chapter 7.
+) [11
+
+] (thesis.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 26--29
+\T1/lmr/m/n/12 (+20) africa,'' 2024, [][]$https : / / scholardata . sun . ac . za / articles / dataset / An _ Analysis _ of _
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--29
+\T1/lmr/m/n/12 (+20) Potential _ Low _ Frequency _ Vocalizations _ of _ Southern _ African _ Bryde _ s _
+ []
+
+) (appendices/appendices.tex (appendices/an_appendix.tex [12
 
 ]
 Appendix A.
@@ -1717,28 +1756,32 @@ Appendix A.
 Package caption Warning: Unused \captionsetup[algorithm] on input line 376.
 See the caption package documentation for explanation.
 
-[10
+[13
 
 ] (thesis.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 02078028A378ED17D65DE2B6553F50F9;2528.
+(rerunfilecheck)             Checksum: D4F6051FE0E76A7AC6B2D4A075B56729;7634.
  ) 
 Here is how much of TeX's memory you used:
- 51236 strings out of 467871
- 1038897 string characters out of 5419828
- 1641047 words of memory out of 5000000
- 79043 multiletter control sequences out of 15000+600000
- 721789 words of font info for 175 fonts, out of 8000000 for 9000
+ 51396 strings out of 467871
+ 1041289 string characters out of 5419828
+ 1646310 words of memory out of 5000000
+ 79142 multiletter control sequences out of 15000+600000
+ 725609 words of font info for 187 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,11n,112p,2591b,671s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 117i,12n,112p,2591b,747s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (22 pages, 324428 bytes).
+Output written on thesis.pdf (26 pages, 354533 bytes).
 PDF statistics:
- 361 PDF objects out of 1000 (max. 8388607)
- 57 named destinations out of 1000 (max. 500000)
- 49868 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 577 PDF objects out of 1000 (max. 8388607)
+ 93 named destinations out of 1000 (max. 500000)
+ 52167 words of extra memory for PDF output out of 61914 (max. 10000000)
 
