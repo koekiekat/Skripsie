@@ -4,7 +4,6 @@ import numpy as np
 from itertools import product
 import matplotlib.pyplot as plt
 from pathlib import Path
-from numba import njit
 
 from feature import resample_audio
 from dtw import(
@@ -107,7 +106,10 @@ def find_threshold_best_f1_from_pr(precision, recall, thresholds, beta=1.0):
         f_scores = (1 + beta**2) * precision * recall / (beta**2 * precision + recall)
     f_scores = np.nan_to_num(f_scores, nan=0.0)
 
-    best_idx = np.argmax(f_scores)
+
+    ties = np.flatnonzero(f_scores >= f_scores.max() - 1e-9)
+    best_idx = ties[np.argmin(np.abs(thresholds[ties] - np.median(thresholds[ties])))]
+    #best_idx = np.argmax(f_scores)
     return thresholds[best_idx], f_scores[best_idx]
 
 def plot_pr_curve_from_costs(call_costs, background_costs, n_thresholds=200, best_threshold=None, ax=None):

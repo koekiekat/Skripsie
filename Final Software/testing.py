@@ -76,7 +76,7 @@ def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
     for i in range(n_hours):
         # load 1 hour of audio and compute features for the whole hour
         f_s, audio_array = read_audio_chunk(audio_file, start_hour=i, duration_hour=1.0, fs_new=fs_new)
-        feat_stream = extractor(audio_array, fs_new)                  # (n_freq, n_frames)
+        feat_stream = extractor(audio_array, fs_new) # (n_freq, n_frames)
 
         template_costs = []     # per call type: (n_temps, n_frames), cost of each template at each frame
         scaled_cost_rows = []   # per call type: kth cost / threshold, <= 1 means "call"
@@ -109,7 +109,7 @@ def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
             dist_mat = dist.cdist(best_template.T, seg_feat.T, extractor.metric)
             D, steps = librosa.sequence.dtw(C=dist_mat, subseq=True, backtrack=False, return_steps=True)
             warp_path = librosa.sequence.dtw_backtracking(steps, subseq=True, start=dist_mat.shape[1] - 1)
-            start_frame = seg_lo + warp_path[-1, 1]                   # warp_path runs end -> start
+            start_frame = seg_lo + warp_path[-1, 1] # warp_path runs end -> start
 
             all_starts.append(i * 3600 + start_frame * hop_s - frame_s / 2)
             all_ends.append(i * 3600 + end_frame * hop_s + frame_s / 2)
@@ -128,6 +128,7 @@ def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
         keep &= ~((all_starts < ex_end) & (all_ends > ex_start))
 
     return all_starts[keep], all_ends[keep], all_scaled_costs[keep], all_labels[keep]       
+
 def get_exclusion_mask(window_times_global, window_len, exclude_intervals):
     """
     window_times_global: 1D array of each window's start time (global seconds)
@@ -178,7 +179,7 @@ def merge_consecutive_detections(all_detected_t, all_detected_labels,
 
     return [(float(s), float(e), lab) for s, e, lab in zip(start_t, end_t, kept_labels)] 
 
-def match_detections(detections, raven_table, ignore_duplicates=False):
+def match_detections(detections, raven_table, ignore_duplicates):
     detections = sorted(detections, key=lambda x: x[0])  # sort by start time   
     
     rt_start_times = np.array([g["start"] for g in raven_table])
@@ -247,7 +248,7 @@ def compute_pr_curve_alpha_new(starts, ends, scaled_costs, labels, ground_truth,
         calls = [(float(s), float(e), lab) for s, e, lab in zip(starts[is_call], ends[is_call], labels[is_call])]
         if not calls:
             continue
-        tp, fp, fn, _, _ = match_detections(calls, ground_truth)
+        tp, fp, fn, _, _ = match_detections(calls, ground_truth, ignore_duplicates=True)
         precision.append(tp / (tp + fp))
         recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
         used.append(a)
