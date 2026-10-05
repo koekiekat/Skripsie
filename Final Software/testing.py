@@ -178,67 +178,74 @@ def merge_consecutive_detections(all_detected_t, all_detected_labels,
 
     return [(float(s), float(e), lab) for s, e, lab in zip(start_t, end_t, kept_labels)] 
 
-def match_detections(detections, raven_table, ignore_duplicates):
+def match_detections(detections, raven_table, ):#ignore_duplicates):
     detections = sorted(detections, key=lambda x: x[0])  # sort by start time   
     
     rt_start_times = np.array([g["start"] for g in raven_table])
     rt_end_times = np.array([g["end"] for g in raven_table])
 
     #set up empty lists
-    rt_calls_matched = [False] * len(raven_table)
-    detections_matched = [False] * len(detections)
+    det_touches = np.zeros(len(detections), dtype=bool) #detection overlaps >= 1 labelled call
+    calls_touched = np.zeros(len(raven_table), dtype=bool)
 
-    duplicate = [False] * len(detections)
+    #rt_calls_matched = [False] * len(raven_table)
+    #detections_matched = [False] * len(detections)
+
+    #duplicate = [False] * len(detections)
 
     for i, (det_start, det_end, _) in enumerate(detections):
-        rt_lo = np.searchsorted(rt_end_times, det_start, side="right")
-        rt_hi = np.searchsorted(rt_start_times, det_end, side="left")
+        rt_lo = np.searchsorted(rt_end_times, det_start, side="right") #if a label ends before the detected starts it is out ...lo
+        rt_hi = np.searchsorted(rt_start_times, det_end, side="left")#if a label starts after det ends it is out ...hi
 
-        best_index, best_overlap, touched = None, 0.0, False
-        for j in range(rt_lo, rt_hi):
-            overlap = min(det_end, rt_end_times[j]) - max(det_start, rt_start_times[j])
-            if overlap > 0:
-                touched = True                      # overlaps *some* real call
-            if rt_calls_matched[j]:
-                continue
-            if overlap > best_overlap:
-                best_overlap = overlap
-                best_index = j
-        if best_index is not None:
-            rt_calls_matched[best_index] = True
-            detections_matched[i] = True
-        elif touched and ignore_duplicates:
-            duplicate[i] = True                      # real call already matched by another detection
+        if rt_hi > rt_lo:#if raven ends after det starts and starts before det ends
+            det_touches[i] = True
+            calls_touched[rt_lo:rt_hi] = True
 
-    tp = sum(detections_matched)
-    fp = len(detections) - tp - sum(duplicate)
-    fn = len(raven_table) - sum(rt_calls_matched)
+        #best_index, best_overlap, touched = None, 0.0, False
+        # for j in range(rt_lo, rt_hi):
+        #     overlap = min(det_end, rt_end_times[j]) - max(det_start, rt_start_times[j])
+        #     if overlap > 0:
+        #         touched = True                      # overlaps *some* real call
+        #     if rt_calls_matched[j]:
+        #         continue
+        #     if overlap > best_overlap:
+        #         best_overlap = overlap
+        #         best_index = j
+        # if best_index is not None:
+        #     rt_calls_matched[best_index] = True
+        #     detections_matched[i] = True
+        # elif touched and ignore_duplicates:
+        #     duplicate[i] = True                      # real call already matched by another detection
 
-    false_positive_detections = [d for d, m, dup in zip(detections, detections_matched, duplicate)
-                                 if not m and not dup]
-    false_negative_gts = [g for g, m in zip(raven_table, rt_calls_matched) if not m]
-    return tp, fp, fn, false_positive_detections, false_negative_gts
+    tp_det = int(sum(det_touches))
+    fp = len(detections) - tp_det
+    tp_calls = int(sum(calls_touched))
+    fn = len(raven_table) - tp_calls
 
-def compute_pr_curve_alpha(times, kth_costs, thresholds, ground_truth, step, window_len, alphas, max_gap_windows, min_windows, max_windows):
-    """
-    kth_costs: (n_windows, 3) k-th smallest template cost for st, mt, bt
-    thresholds: (st_threshold, mt_threshold, bt_threshold), the calibrated ones
-    alphas: scale factors applied to all three thresholds together (1.0 = deployed rule)
-    """
-    ratios = kth_costs / np.asarray(thresholds, dtype=float)      # < 1 means that type triggers
-    best_ratio = ratios.min(axis=1)                               # window is flagged if any type triggers
-    best_label = np.array(["st", "mt", "bt"], dtype=object)[ratios.argmin(axis=1)]
+    false_positive_detections = [dets for dets, touches in zip(detections, det_touches)if not touches]
+    false_negative_calls = [calls for calls, touched in zip(raven_table, calls_touched) if not touched]
+    return tp_det, fp, tp_calls, fn, false_positive_detections, false_negative_calls
 
-    precision, recall, used = [], [], []
-    for a in alphas:
-        calls = windows_to_calls(times, best_ratio, best_label, a, step, window_len, max_gap_windows, min_windows, max_windows)
-        if not calls:
-            continue
-        tp, fp, fn, _, _ = match_detections(calls, ground_truth)
-        precision.append(tp / (tp + fp))
-        recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
-        used.append(a)
-    return np.array(precision), np.array(recall), np.array(used), best_label
+# def compute_pr_curve_alpha(times, kth_costs, thresholds, ground_truth, step, window_len, alphas, max_gap_windows, min_windows, max_windows):
+#     """
+#     kth_costs: (n_windows, 3) k-th smallest template cost for st, mt, bt
+#     thresholds: (st_threshold, mt_threshold, bt_threshold), the calibrated ones
+#     alphas: scale factors applied to all three thresholds together (1.0 = deployed rule)
+#     """
+#     ratios = kth_costs / np.asarray(thresholds, dtype=float)      # < 1 means that type triggers
+#     best_ratio = ratios.min(axis=1)                               # window is flagged if any type triggers
+#     best_label = np.array(["st", "mt", "bt"], dtype=object)[ratios.argmin(axis=1)]
+
+#     precision, recall, used = [], [], []
+#     for a in alphas:
+#         calls = windows_to_calls(times, best_ratio, best_label, a, step, window_len, max_gap_windows, min_windows, max_windows)
+#         if not calls:
+#             continue
+#         tp_det, fp, tp_calls, fn, _, _ = match_detections(calls, ground_truth)
+#         precision.append(tp_det / (tp_det + fp))
+#         recall.append(tp_calls / (tp_calls + fn) if (tp_calls + fn) > 0 else 0.0)
+#         used.append(a)
+#     return np.array(precision), np.array(recall), np.array(used), best_label
 
 def compute_pr_curve_alpha_new(starts, ends, scaled_costs, labels, ground_truth, alphas):
     precision, recall, used = [], [], []
@@ -247,17 +254,17 @@ def compute_pr_curve_alpha_new(starts, ends, scaled_costs, labels, ground_truth,
         calls = [(float(s), float(e), lab) for s, e, lab in zip(starts[is_call], ends[is_call], labels[is_call])]
         if not calls:
             continue
-        tp, fp, fn, _, _ = match_detections(calls, ground_truth, ignore_duplicates=True)
-        precision.append(tp / (tp + fp))
-        recall.append(tp / (tp + fn) if (tp + fn) > 0 else 0.0)
+        tp_det, fp, tp_calls, fn, _, _ = match_detections(calls, ground_truth)
+        precision.append(tp_det / (tp_det + fp))
+        recall.append(tp_calls / (tp_calls + fn) if (tp_calls + fn) > 0 else 0.0)
         used.append(a)
     return np.array(precision), np.array(recall), np.array(used)
 
-def windows_to_calls(times, scores, labels, threshold, step, window_len, max_gap, min_win, max_win):
-    mask = scores <= threshold
-    if not mask.any():
-        return []
-    return merge_consecutive_detections(times[mask], labels[mask], step=step, window_len=window_len, max_gap_windows=max_gap, min_windows=min_win, max_windows=max_win)
+# def windows_to_calls(times, scores, labels, threshold, step, window_len, max_gap, min_win, max_win):
+#     mask = scores <= threshold
+#     if not mask.any():
+#         return []
+#     return merge_consecutive_detections(times[mask], labels[mask], step=step, window_len=window_len, max_gap_windows=max_gap, min_windows=min_win, max_windows=max_win)
 
 def plot_pr_curve(precision, recall, ap=None, marked_point=None):
     """
