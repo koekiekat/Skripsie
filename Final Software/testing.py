@@ -8,7 +8,6 @@ import librosa
 from scipy.signal import find_peaks
 from scipy.spatial import distance as dist
 
-
 from feature import(
     load_features_from_json
 )
@@ -324,16 +323,18 @@ def plot_mfcc(m, fs_new, hop_samples, ax=None, normalise=False):
     return img
 
 def plot_detection_spectrograms(detections, wav_path,
-                                 fs_new=1000,
-                                 framelength=None,
-                                 noverlap=None,
-                                 context=0.5,
-                                 n_examples=12,
-                                 hour_duration=3600.0,
-                                 random_sample=True,
-                                 seed=0,
-                                 title_prefix="FP",
-                                 extractor=None):
+                                fs_new,
+                                framelength,
+                                noverlap,
+                                n_examples,                          
+                                extractor,
+                                feat_method,
+                                context=0.5,
+                                hour_duration=3600.0,
+                                random_sample=True,
+                                seed=0,
+                                title_prefix="FP",
+):
     """
     Plot spectrograms of a sample of detections. If `extractor` is given,
     also plots that extractor's feature (e.g. MFCC) alongside the STFT
@@ -361,13 +362,13 @@ def plot_detection_spectrograms(detections, wav_path,
         by_hour[hour_idx].append((start, end, label))
 
     n_plot = len(sample)
-    n_cols = 2 if extractor is not None else 3   # STFT+MFCC pair, or STFT alone
-    n_rows = n_plot if extractor is not None else int(np.ceil(n_plot / n_cols))
+    n_cols = 2 if feat_method == "mfcc" else 3   # STFT+MFCC pair, or STFT alone
+    n_rows = n_plot if feat_method == "mfcc" else int(np.ceil(n_plot / n_cols))
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
-    axes = np.atleast_2d(axes) if extractor is not None else np.atleast_1d(axes).flatten()
+    axes = np.atleast_2d(axes) if feat_method == "mfcc" else np.atleast_1d(axes).flatten()
 
     hop_samples = int(fs_new * extractor.params["frame_dur"] * (1 - extractor.params["overlap"])) \
-        if extractor is not None else None
+        if feat_method == "mfcc" else None
 
     ax_idx = 0
     for hour_idx, entries in by_hour.items():
@@ -383,7 +384,7 @@ def plot_detection_spectrograms(detections, wav_path,
             seg_end_idx = int(seg_end_t * f_s)
             segment = audio_array[seg_start_idx:seg_end_idx]
 
-            if extractor is not None:
+            if feat_method == "mfcc":
                 ax_stft, ax_feat = axes[ax_idx, 0], axes[ax_idx, 1]
             else:
                 ax_stft = axes[ax_idx]
@@ -391,7 +392,7 @@ def plot_detection_spectrograms(detections, wav_path,
             if len(segment) < framelength:
                 ax_stft.set_title(f"{title_prefix}: {label} @ {start:.2f}s\n(segment too short)")
                 ax_stft.axis("off")
-                if extractor is not None:
+                if feat_method == "mfcc":
                     ax_feat.axis("off")
                 ax_idx += 1
                 continue
@@ -407,7 +408,7 @@ def plot_detection_spectrograms(detections, wav_path,
             ax_stft.set_xlabel("Time (s, local)")
             ax_stft.set_ylabel("Freq (Hz)")
 
-            if extractor is not None:
+            if feat_method == "mfcc":
                 feat = extractor(segment.astype(np.float32), f_s)
                 plot_mfcc(feat, f_s, hop_samples, ax=ax_feat)
                 ax_feat.set_title(f"{extractor.name.upper()}", fontsize=10)

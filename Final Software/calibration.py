@@ -168,7 +168,7 @@ def plot_dtw_scatter(call_costs, background_costs, threshold=None, seed=0, ax=No
     if standalone:
         plt.show()
 
-def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len, dtw_method, thresholds, best_vote_frac, n_temps,
+def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len, thresholds, best_vote_frac, n_temps,
                       n_calib, best_f1=None, vote_f1_scores=None, template_files=None, search_len_s):
     config = {
         "feature": {
@@ -178,7 +178,6 @@ def save_model_config(path, *, feat_method, extractor, fs_new, best_frame_len, d
             "metric": extractor.metric,
             "fs_new": int(fs_new),
         },
-        "dtw_method": dtw_method,
         "search_len_s": float(search_len_s),
         "thresholds": {k: float(v) for k, v in thresholds.items()},   # {"st":..,"mt":..,"bt":..}
         "best_vote_frac": float(best_vote_frac),
