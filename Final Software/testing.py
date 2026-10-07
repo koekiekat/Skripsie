@@ -71,6 +71,7 @@ def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
 
     # detections closer together than this (in frames) count as one call
     min_sep_frames = max(1, round(min_sep_s / hop_s))
+    print(f"calls closer than {min_sep_frames} frames are one call")
 
     for i in range(n_hours):
         # load 1 hour of audio and compute features for the whole hour
@@ -141,42 +142,42 @@ def get_exclusion_mask(window_times_global, window_len, exclude_intervals):
         keep &= ~overlap
     return keep
 
-def merge_consecutive_detections(all_detected_t, all_detected_labels,
-                                step, window_len, max_gap_windows,
-                                min_windows, max_windows
-):
-    call_start_t = np.asarray(all_detected_t, dtype=float) #place all start times in a list
-    labels = np.asarray(all_detected_labels, dtype=object)
-    breaks_btwn_calls = np.diff(call_start_t)
-    breaks =  breaks_btwn_calls / step > 1 + max_gap_windows + 1e-6 #True if one or more gaps of 75% of window
+# def merge_consecutive_detections(all_detected_t, all_detected_labels,
+#                                 step, window_len, max_gap_windows,
+#                                 min_windows, max_windows
+# ):
+#     call_start_t = np.asarray(all_detected_t, dtype=float) #place all start times in a list
+#     labels = np.asarray(all_detected_labels, dtype=object)
+#     breaks_btwn_calls = np.diff(call_start_t)
+#     breaks =  breaks_btwn_calls / step > 1 + max_gap_windows + 1e-6 #True if one or more gaps of 75% of window
     
-    is_first = np.r_[True, breaks] # True if there was a break just before that time
-    first_window = np.arange(len(call_start_t))[is_first] #stores index of start time of merged calls
+#     is_first = np.r_[True, breaks] # True if there was a break just before that time
+#     first_window = np.arange(len(call_start_t))[is_first] #stores index of start time of merged calls
 
-    is_last = np.r_[breaks, True] # True where a group finishes
-    last_window = np.arange(len(call_start_t))[is_last]  #stores index of the start time of the final window of a set of merged calls
+#     is_last = np.r_[breaks, True] # True where a group finishes
+#     last_window = np.arange(len(call_start_t))[is_last]  #stores index of the start time of the final window of a set of merged calls
     
-    if max_windows is not None:
-        new_first_window, new_last_window = [], []
-        for first, last in zip(first_window, last_window):
-            for chunk_start in range(first, last + 1, max_windows): #(start, stop, step)
-                chunk_end = min(chunk_start + max_windows - 1, last)
-                new_first_window.append(chunk_start)
-                new_last_window.append(chunk_end)
-        first = np.array(new_first_window)
-        last = np.array(new_last_window)
+#     if max_windows is not None:
+#         new_first_window, new_last_window = [], []
+#         for first, last in zip(first_window, last_window):
+#             for chunk_start in range(first, last + 1, max_windows): #(start, stop, step)
+#                 chunk_end = min(chunk_start + max_windows - 1, last)
+#                 new_first_window.append(chunk_start)
+#                 new_last_window.append(chunk_end)
+#         first = np.array(new_first_window)
+#         last = np.array(new_last_window)
 
-    keep = (last - first + 1) >= min_windows
-    uniq, codes = np.unique(labels, return_inverse=True)
-    onehot = np.zeros((len(call_start_t), len(uniq)), dtype=np.int32)
-    onehot[np.arange(len(call_start_t)), codes] = 1
-    dominant = uniq[np.add.reduceat(onehot, first, axis=0).argmax(axis=1)]
+#     keep = (last - first + 1) >= min_windows
+#     uniq, codes = np.unique(labels, return_inverse=True)
+#     onehot = np.zeros((len(call_start_t), len(uniq)), dtype=np.int32)
+#     onehot[np.arange(len(call_start_t)), codes] = 1
+#     dominant = uniq[np.add.reduceat(onehot, first, axis=0).argmax(axis=1)]
 
-    start_t = call_start_t[first[keep]]
-    end_t = call_start_t[last[keep]]+ window_len
-    kept_labels = dominant[keep]
+#     start_t = call_start_t[first[keep]]
+#     end_t = call_start_t[last[keep]]+ window_len
+#     kept_labels = dominant[keep]
 
-    return [(float(s), float(e), lab) for s, e, lab in zip(start_t, end_t, kept_labels)] 
+#     return [(float(s), float(e), lab) for s, e, lab in zip(start_t, end_t, kept_labels)] 
 
 def match_detections(detections, raven_table, ):#ignore_duplicates):
     detections = sorted(detections, key=lambda x: x[0])  # sort by start time   
@@ -226,27 +227,6 @@ def match_detections(detections, raven_table, ):#ignore_duplicates):
     false_negative_calls = [calls for calls, touched in zip(raven_table, calls_touched) if not touched]
     return tp_det, fp, tp_calls, fn, false_positive_detections, false_negative_calls
 
-# def compute_pr_curve_alpha(times, kth_costs, thresholds, ground_truth, step, window_len, alphas, max_gap_windows, min_windows, max_windows):
-#     """
-#     kth_costs: (n_windows, 3) k-th smallest template cost for st, mt, bt
-#     thresholds: (st_threshold, mt_threshold, bt_threshold), the calibrated ones
-#     alphas: scale factors applied to all three thresholds together (1.0 = deployed rule)
-#     """
-#     ratios = kth_costs / np.asarray(thresholds, dtype=float)      # < 1 means that type triggers
-#     best_ratio = ratios.min(axis=1)                               # window is flagged if any type triggers
-#     best_label = np.array(["st", "mt", "bt"], dtype=object)[ratios.argmin(axis=1)]
-
-#     precision, recall, used = [], [], []
-#     for a in alphas:
-#         calls = windows_to_calls(times, best_ratio, best_label, a, step, window_len, max_gap_windows, min_windows, max_windows)
-#         if not calls:
-#             continue
-#         tp_det, fp, tp_calls, fn, _, _ = match_detections(calls, ground_truth)
-#         precision.append(tp_det / (tp_det + fp))
-#         recall.append(tp_calls / (tp_calls + fn) if (tp_calls + fn) > 0 else 0.0)
-#         used.append(a)
-#     return np.array(precision), np.array(recall), np.array(used), best_label
-
 def compute_pr_curve_alpha_new(starts, ends, scaled_costs, labels, ground_truth, alphas):
     precision, recall, used = [], [], []
     for a in alphas:
@@ -259,12 +239,6 @@ def compute_pr_curve_alpha_new(starts, ends, scaled_costs, labels, ground_truth,
         recall.append(tp_calls / (tp_calls + fn) if (tp_calls + fn) > 0 else 0.0)
         used.append(a)
     return np.array(precision), np.array(recall), np.array(used)
-
-# def windows_to_calls(times, scores, labels, threshold, step, window_len, max_gap, min_win, max_win):
-#     mask = scores <= threshold
-#     if not mask.any():
-#         return []
-#     return merge_consecutive_detections(times[mask], labels[mask], step=step, window_len=window_len, max_gap_windows=max_gap, min_windows=min_win, max_windows=max_win)
 
 def plot_pr_curve(precision, recall, ap=None, marked_point=None):
     """
@@ -404,8 +378,7 @@ def plot_detection_spectrograms(detections, wav_path,
                 ax_idx += 1
                 continue
 
-            f, t, Zxx = signal.stft(segment, fs=f_s, nperseg=framelength, noverlap=noverlap,
-                                     window="hamming")
+            f, t, Zxx = signal.stft(segment, fs=f_s, nperseg=framelength, noverlap=noverlap, window="hamming")
             Zxx_db = 20 * np.log10(np.abs(Zxx) + 1e-10)
 
             ax_stft.pcolormesh(t + seg_start_t, f, Zxx_db, shading="gouraud", cmap="viridis")

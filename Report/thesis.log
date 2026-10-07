@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  5 OCT 2026 22:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  7 OCT 2026 15:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1553,7 +1553,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 3.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 3.
-<stb-thesis-frntp.pdf, id=237, 597.50786pt x 845.04686pt>
+<stb-thesis-frntp.pdf, id=229, 597.50786pt x 845.04686pt>
 File: stb-thesis-frntp.pdf Graphic file (type pdf)
 <use stb-thesis-frntp.pdf>
 Package pdftex.def Info: stb-thesis-frntp.pdf  used on input line 3.
@@ -1616,15 +1616,23 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 
  [7
 
-] (thesis.lot)
+]
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[8] (thesis.lot)
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [8
+ [9
 
 ] (frontmatter/nomenclature.tex
 No file thesis.nls.
-(frontmatter/variables_and_functions.tex) [9
+(frontmatter/variables_and_functions.tex) [10
 
 
 ]
@@ -1643,7 +1651,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[10]
+[11]
 
 Package glossaries Info: Preparing to sort glossary `main' (total number of
 (glossaries)             referenced entries: 1)
@@ -1657,21 +1665,27 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61652pt}.
 
-[11]) (chapters/introduction.tex
+[12]) (chapters/introduction.tex
 Chapter 1.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.33     \item C
-                hapter 3 provides an explanation of the overall setup and me... [1
+l.27 \mysection{Objectives}{Objectives}
+                                        [1
 
 ]
 
-LaTeX Warning: Reference `fig:enter-label' on page 2 undefined on input line 40.
+LaTeX Warning: Reference `fig:enter-label' on page 2 undefined on input line 55.
+
+
+LaTeX Warning: Reference `sec:relatedwork' on page 2 undefined on input line 56.
+
+
+LaTeX Warning: Reference `sec:relatedwork' on page 2 undefined on input line 56.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 49.
+(Font)              <7> on input line 64.
 ) (chapters/literature.tex
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
@@ -1681,15 +1695,51 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [2]
-Chapter 2.
-) (chapters/background.tex [3
 
-]
-Chapter 3.
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[3]
+Chapter 2.
+<figures/background/vector_dtw.png, id=521, 492.84125pt x 122.4575pt>
+File: figures/background/vector_dtw.png Graphic file (type png)
+<use figures/background/vector_dtw.png>
+Package pdftex.def Info: figures/background/vector_dtw.png  used on input line 12.
+(pdftex.def)             Requested size: 364.19667pt x 90.49753pt.
+[4
+
+{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc} <./figures/background/vector_dtw.png>]
+<figures/background/cost_matrix.png, id=533, 683.55376pt x 241.90375pt>
+File: figures/background/cost_matrix.png Graphic file (type png)
+<use figures/background/cost_matrix.png>
+Package pdftex.def Info: figures/background/cost_matrix.png  used on input line 43.
+(pdftex.def)             Requested size: 364.19667pt x 128.88754pt.
+
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[5{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc} <./figures/background/cost_matrix.png>]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/14.4'.
 (microtype)             Ignoring protrusion settings for this character.
-) (chapters/dataset.tex [4
+) (chapters/dataset.tex
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[6]
+Chapter 3.
+[7
 
 ]
 
@@ -1699,34 +1749,22 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[5]
+[8]) (chapters/system_design.tex
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[9]
 Chapter 4.
-[6
-
-]
-
-Package fancyhdr Warning: \headheight is too small (14.5pt): 
-(fancyhdr)                Make it at least 27.11653pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11653pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
-
-[7]) (chapters/system_design.tex
-
-Package fancyhdr Warning: \headheight is too small (14.5pt): 
-(fancyhdr)                Make it at least 27.11653pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11653pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
-
-[8]
-Chapter 5.
-<figures/Skrip_CH3.drawio.png, id=546, 764.8575pt x 283.0575pt>
+<figures/Skrip_CH3.drawio.png, id=562, 764.8575pt x 283.0575pt>
 File: figures/Skrip_CH3.drawio.png Graphic file (type png)
 <use figures/Skrip_CH3.drawio.png>
 Package pdftex.def Info: figures/Skrip_CH3.drawio.png  used on input line 5.
 (pdftex.def)             Requested size: 364.19667pt x 134.78195pt.
-[9
+[10
 
  <./figures/Skrip_CH3.drawio.png>]) (chapters/results.tex
 
@@ -1736,37 +1774,37 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[10]
-Chapter 6.
-<figures/stft_5_calib_scatter.jpeg, id=557, 1548.78625pt x 521.95pt>
+[11]
+Chapter 5.
+<figures/stft_5_calib_scatter.jpeg, id=573, 1548.78625pt x 521.95pt>
 File: figures/stft_5_calib_scatter.jpeg Graphic file (type jpg)
 <use figures/stft_5_calib_scatter.jpeg>
 Package pdftex.def Info: figures/stft_5_calib_scatter.jpeg  used on input line 9.
 (pdftex.def)             Requested size: 364.19667pt x 122.72993pt.
-<figures/stft_5_test_PR.jpeg, id=558, 587.19376pt x 629.35126pt>
+<figures/stft_5_test_PR.jpeg, id=574, 587.19376pt x 629.35126pt>
 File: figures/stft_5_test_PR.jpeg Graphic file (type jpg)
 <use figures/stft_5_test_PR.jpeg>
 Package pdftex.def Info: figures/stft_5_test_PR.jpeg  used on input line 15.
 (pdftex.def)             Requested size: 136.57462pt x 146.38026pt.
-<figures/stft_5_test_timeline.jpeg, id=559, 1069.9975pt x 506.89375pt>
+<figures/stft_5_test_timeline.jpeg, id=575, 1069.9975pt x 506.89375pt>
 File: figures/stft_5_test_timeline.jpeg Graphic file (type jpg)
 <use figures/stft_5_test_timeline.jpeg>
 Package pdftex.def Info: figures/stft_5_test_timeline.jpeg  used on input line 21.
 (pdftex.def)             Requested size: 273.14923pt x 129.39928pt.
-[11
+[12
 
  <./figures/stft_5_calib_scatter.jpeg> <./figures/stft_5_test_PR.jpeg>]
-<figures/stft_5_test_specs.jpeg, id=564, 1506.62875pt x 805.0075pt>
+<figures/stft_5_test_specs.jpeg, id=580, 1506.62875pt x 805.0075pt>
 File: figures/stft_5_test_specs.jpeg Graphic file (type jpg)
 <use figures/stft_5_test_specs.jpeg>
 Package pdftex.def Info: figures/stft_5_test_specs.jpeg  used on input line 27.
 (pdftex.def)             Requested size: 364.19667pt x 194.59377pt.
-<figures/stft_10_calib_scatter.jpeg, id=565, 1545.775pt x 526.96875pt>
+<figures/stft_10_calib_scatter.jpeg, id=581, 1545.775pt x 526.96875pt>
 File: figures/stft_10_calib_scatter.jpeg Graphic file (type jpg)
 <use figures/stft_10_calib_scatter.jpeg>
 Package pdftex.def Info: figures/stft_10_calib_scatter.jpeg  used on input line 35.
 (pdftex.def)             Requested size: 364.19667pt x 124.1593pt.
-<figures/stft_10_test_PR.jpeg, id=566, 623.32875pt x 624.3325pt>
+<figures/stft_10_test_PR.jpeg, id=582, 623.32875pt x 624.3325pt>
 File: figures/stft_10_test_PR.jpeg Graphic file (type jpg)
 <use figures/stft_10_test_PR.jpeg>
 Package pdftex.def Info: figures/stft_10_test_PR.jpeg  used on input line 41.
@@ -1779,18 +1817,18 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[12 <./figures/stft_5_test_timeline.jpeg> <./figures/stft_5_test_specs.jpeg> <./figures/stft_10_calib_scatter.jpeg>]
-<figures/stft_10_test_timeline.jpeg, id=572, 1060.96375pt x 503.8825pt>
+[13 <./figures/stft_5_test_timeline.jpeg> <./figures/stft_5_test_specs.jpeg> <./figures/stft_10_calib_scatter.jpeg>]
+<figures/stft_10_test_timeline.jpeg, id=587, 1060.96375pt x 503.8825pt>
 File: figures/stft_10_test_timeline.jpeg Graphic file (type jpg)
 <use figures/stft_10_test_timeline.jpeg>
 Package pdftex.def Info: figures/stft_10_test_timeline.jpeg  used on input line 47.
 (pdftex.def)             Requested size: 273.14923pt x 129.72235pt.
-<figures/stft_10_test_specs.jpeg, id=573, 1498.59875pt x 815.045pt>
+<figures/stft_10_test_specs.jpeg, id=588, 1498.59875pt x 815.045pt>
 File: figures/stft_10_test_specs.jpeg Graphic file (type jpg)
 <use figures/stft_10_test_specs.jpeg>
 Package pdftex.def Info: figures/stft_10_test_specs.jpeg  used on input line 53.
 (pdftex.def)             Requested size: 364.19667pt x 198.06479pt.
-<figures/mfcc_5_calib_scatter.jpeg, id=574, 1548.78625pt x 523.9575pt>
+<figures/mfcc_5_calib_scatter.jpeg, id=589, 1548.78625pt x 523.9575pt>
 File: figures/mfcc_5_calib_scatter.jpeg Graphic file (type jpg)
 <use figures/mfcc_5_calib_scatter.jpeg>
 Package pdftex.def Info: figures/mfcc_5_calib_scatter.jpeg  used on input line 65.
@@ -1803,18 +1841,18 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[13 <./figures/stft_10_test_PR.jpeg> <./figures/stft_10_test_timeline.jpeg> <./figures/stft_10_test_specs.jpeg>]
-<figures/mfcc_5_test_PR.jpeg, id=579, 619.31375pt x 633.36626pt>
+[14 <./figures/stft_10_test_PR.jpeg> <./figures/stft_10_test_timeline.jpeg> <./figures/stft_10_test_specs.jpeg>]
+<figures/mfcc_5_test_PR.jpeg, id=594, 619.31375pt x 633.36626pt>
 File: figures/mfcc_5_test_PR.jpeg Graphic file (type jpg)
 <use figures/mfcc_5_test_PR.jpeg>
 Package pdftex.def Info: figures/mfcc_5_test_PR.jpeg  used on input line 71.
 (pdftex.def)             Requested size: 136.57462pt x 139.66959pt.
-<figures/mfcc_5_test_timeline.jpeg, id=580, 1063.975pt x 511.9125pt>
+<figures/mfcc_5_test_timeline.jpeg, id=595, 1063.975pt x 511.9125pt>
 File: figures/mfcc_5_test_timeline.jpeg Graphic file (type jpg)
 <use figures/mfcc_5_test_timeline.jpeg>
 Package pdftex.def Info: figures/mfcc_5_test_timeline.jpeg  used on input line 77.
 (pdftex.def)             Requested size: 273.14923pt x 131.4147pt.
-<figures/mfcc_5_test_specs.jpeg, id=581, 618.31pt x 738.76pt>
+<figures/mfcc_5_test_specs.jpeg, id=596, 618.31pt x 738.76pt>
 File: figures/mfcc_5_test_specs.jpeg Graphic file (type jpg)
 <use figures/mfcc_5_test_specs.jpeg>
 Package pdftex.def Info: figures/mfcc_5_test_specs.jpeg  used on input line 83.
@@ -1827,13 +1865,13 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[14 <./figures/mfcc_5_calib_scatter.jpeg> <./figures/mfcc_5_test_PR.jpeg> <./figures/mfcc_5_test_timeline.jpeg>]
-<figures/mfcc_10_calib_scatter.jpeg, id=586, 1536.74126pt x 516.93124pt>
+[15 <./figures/mfcc_5_calib_scatter.jpeg> <./figures/mfcc_5_test_PR.jpeg> <./figures/mfcc_5_test_timeline.jpeg>]
+<figures/mfcc_10_calib_scatter.jpeg, id=601, 1536.74126pt x 516.93124pt>
 File: figures/mfcc_10_calib_scatter.jpeg Graphic file (type jpg)
 <use figures/mfcc_10_calib_scatter.jpeg>
 Package pdftex.def Info: figures/mfcc_10_calib_scatter.jpeg  used on input line 97.
 (pdftex.def)             Requested size: 364.19667pt x 122.50426pt.
-<figures/mfcc_10_test_PR.jpeg, id=587, 653.44125pt x 630.355pt>
+<figures/mfcc_10_test_PR.jpeg, id=602, 653.44125pt x 630.355pt>
 File: figures/mfcc_10_test_PR.jpeg Graphic file (type jpg)
 <use figures/mfcc_10_test_PR.jpeg>
 Package pdftex.def Info: figures/mfcc_10_test_PR.jpeg  used on input line 103.
@@ -1846,13 +1884,13 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[15 <./figures/mfcc_5_test_specs.jpeg> <./figures/mfcc_10_calib_scatter.jpeg>]
-<figures/mfcc_10_test_timeline.jpeg, id=592, 1072.005pt x 504.88625pt>
+[16 <./figures/mfcc_5_test_specs.jpeg> <./figures/mfcc_10_calib_scatter.jpeg>]
+<figures/mfcc_10_test_timeline.jpeg, id=607, 1072.005pt x 504.88625pt>
 File: figures/mfcc_10_test_timeline.jpeg Graphic file (type jpg)
 <use figures/mfcc_10_test_timeline.jpeg>
 Package pdftex.def Info: figures/mfcc_10_test_timeline.jpeg  used on input line 109.
 (pdftex.def)             Requested size: 273.14923pt x 128.64027pt.
-<figures/mfcc_10_test_specs.jpeg, id=593, 612.2875pt x 722.7pt>
+<figures/mfcc_10_test_specs.jpeg, id=608, 612.2875pt x 722.7pt>
 File: figures/mfcc_10_test_specs.jpeg Graphic file (type jpg)
 <use figures/mfcc_10_test_specs.jpeg>
 Package pdftex.def Info: figures/mfcc_10_test_specs.jpeg  used on input line 115.
@@ -1865,7 +1903,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[16 <./figures/mfcc_10_test_PR.jpeg> <./figures/mfcc_10_test_timeline.jpeg> <./figures/mfcc_10_test_specs.jpeg>]
+[17 <./figures/mfcc_10_test_PR.jpeg> <./figures/mfcc_10_test_timeline.jpeg> <./figures/mfcc_10_test_specs.jpeg>]
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
 (fancyhdr)                Make it at least 27.11653pt, for example:
@@ -1873,9 +1911,9 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[17]
-Chapter 7.
-) [18
+[18]
+Chapter 6.
+) [19
 
 ] (thesis.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 65--68
@@ -1887,7 +1925,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--68
 \T1/lmr/m/n/12 (+20) Potential _ Low _ Frequency _ Vocalizations _ of _ Southern _ African _ Bryde _ s _
  []
 
-) (appendices/appendices.tex (appendices/an_appendix.tex [19
+) (appendices/appendices.tex (appendices/an_appendix.tex [20
 
 ]
 Appendix A.
@@ -1896,7 +1934,7 @@ Appendix A.
 Package caption Warning: Unused \captionsetup[algorithm] on input line 376.
 See the caption package documentation for explanation.
 
-[20
+[21
 
 ] (thesis.aux)
  ***********
@@ -1908,20 +1946,20 @@ L3 programming layer <2025-12-24>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: D07C3435AD674E50946F5C189185E6C2;8008.
+(rerunfilecheck)             Checksum: E02AC42CDE910079C624764BD2D3A42D;7796.
  ) 
 Here is how much of TeX's memory you used:
- 51603 strings out of 467871
- 1047016 string characters out of 5419828
- 1647310 words of memory out of 5000000
- 79298 multiletter control sequences out of 15000+600000
- 726683 words of font info for 199 fonts, out of 8000000 for 9000
+ 51655 strings out of 467871
+ 1047964 string characters out of 5419828
+ 1646310 words of memory out of 5000000
+ 79316 multiletter control sequences out of 15000+600000
+ 733880 words of font info for 215 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,12n,112p,2591b,747s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (33 pages, 2004274 bytes).
+ <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (35 pages, 2076996 bytes).
 PDF statistics:
- 707 PDF objects out of 1000 (max. 8388607)
- 120 named destinations out of 1000 (max. 500000)
- 52279 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 753 PDF objects out of 1000 (max. 8388607)
+ 123 named destinations out of 1000 (max. 500000)
+ 56369 words of extra memory for PDF output out of 61914 (max. 10000000)
 

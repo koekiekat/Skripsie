@@ -6,58 +6,56 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{Table of contents}{v}{chapter*.4}%
 \contentsline {chapter}{List of figures}{vii}{chapter*.5}%
-\contentsline {chapter}{List of tables}{vii}{chapter*.6}%
-\contentsline {chapter}{Nomenclature}{ix}{chapter*.8}%
-\contentsline {section}{Acronyms and abbreviations}{x}{section*.9}%
-\contentsline {section}{Definitions}{xi}{section*.10}%
+\contentsline {chapter}{List of tables}{viii}{chapter*.6}%
+\contentsline {chapter}{Nomenclature}{x}{chapter*.8}%
+\contentsline {section}{Acronyms and abbreviations}{xi}{section*.9}%
+\contentsline {section}{Definitions}{xii}{section*.10}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Problem Statement}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Objectives}{1}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Scope}{1}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Layout of report}{1}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Literature}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Related Work}{3}{section.2.1}%
-\contentsline {chapter}{\numberline {3}Background}{4}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Background}{4}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Dynamic Time Warping}{5}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Feature Extraction Methods}{5}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Short Time Fourier Transform}{5}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Mel-Frequency Cepstral Coefficients}{5}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Linear Predictive Coding}{5}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Dataset}{6}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Background}{6}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Labeling}{6}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Data Splitting}{6}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Template Selection}{7}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Hyperparameter Tuning Template Selection}{7}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Evaluation Data Selection}{8}{subsection.4.3.3}%
-\contentsline {chapter}{\numberline {5}System Design}{9}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Overview}{9}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Feature Extraction Methods}{9}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}STFT}{9}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}MFCC}{9}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}LPC}{10}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}DTW methodology}{10}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Hyperparameter Tuning}{10}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Training Procedure}{10}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Evaluation Metrics}{10}{section.5.6}%
-\contentsline {chapter}{\numberline {6}Results}{11}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Experiment 1: STFT Features}{11}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}5 Templates}{11}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}10 Templates}{12}{subsection.6.1.2}%
-\contentsline {section}{\numberline {6.2}Experiment 2: MFCC Features}{14}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}5 Templates}{14}{subsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.1.1}No derivatives}{14}{subsubsection.6.2.1.1}%
-\contentsline {subsubsection}{\numberline {6.2.1.2}First derivative}{15}{subsubsection.6.2.1.2}%
-\contentsline {subsubsection}{\numberline {6.2.1.3}First and second derivatives}{15}{subsubsection.6.2.1.3}%
-\contentsline {subsection}{\numberline {6.2.2}10 Templates}{15}{subsection.6.2.2}%
-\contentsline {subsubsection}{\numberline {6.2.2.1}No derivatives}{15}{subsubsection.6.2.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2.2}First derivative}{17}{subsubsection.6.2.2.2}%
-\contentsline {subsubsection}{\numberline {6.2.2.3}First and second derivatives}{17}{subsubsection.6.2.2.3}%
-\contentsline {section}{\numberline {6.3}Experiment 3: LPC Features}{17}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}5 Templates}{17}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}10 Templates}{17}{subsection.6.3.2}%
-\contentsline {chapter}{\numberline {7}Conclusion}{18}{chapter.7}%
-\contentsline {chapter}{References}{19}{chapter*.29}%
-\contentsline {chapter}{\numberline {A}Appendix title goes here}{20}{appendix.A}%
+\contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problem Statement}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Objectives}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Scope}{2}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Layout of report}{2}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Literature}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Dynamic Time Warping}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Feature Extraction Methods}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Short Time Fourier Transform}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Mel-Frequency Cepstral Coefficients}{6}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Linear Predictive Coding}{6}{subsection.2.2.3}%
+\contentsline {chapter}{\numberline {3}Dataset}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Background}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Labeling}{7}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Data Splitting}{7}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Template Selection}{8}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Hyperparameter Tuning Template Selection}{8}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Evaluation Data Selection}{9}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}System Design}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Overview}{10}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Feature Extraction Methods}{10}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}STFT}{10}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}MFCC}{10}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}LPC}{11}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}DTW methodology}{11}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{11}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Training Procedure}{11}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Evaluation Metrics}{11}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Results}{12}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{12}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}5 Templates}{12}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}10 Templates}{13}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{15}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}5 Templates}{15}{subsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.1.1}No derivatives}{15}{subsubsection.5.2.1.1}%
+\contentsline {subsubsection}{\numberline {5.2.1.2}First derivative}{16}{subsubsection.5.2.1.2}%
+\contentsline {subsubsection}{\numberline {5.2.1.3}First and second derivatives}{16}{subsubsection.5.2.1.3}%
+\contentsline {subsection}{\numberline {5.2.2}10 Templates}{16}{subsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.1}No derivatives}{16}{subsubsection.5.2.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2.2}First derivative}{18}{subsubsection.5.2.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.3}First and second derivatives}{18}{subsubsection.5.2.2.3}%
+\contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{18}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}5 Templates}{18}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}10 Templates}{18}{subsection.5.3.2}%
+\contentsline {chapter}{\numberline {6}Conclusion}{19}{chapter.6}%
+\contentsline {chapter}{References}{20}{chapter*.31}%
+\contentsline {chapter}{\numberline {A}Appendix title goes here}{21}{appendix.A}%
 \contentsfinish 

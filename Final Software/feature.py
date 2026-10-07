@@ -49,18 +49,18 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming", f_min=0
                                 noverlap=int(nperseg * overlap), window=window)
         return np.abs(Zxx)[_keep(nperseg, fs)]                  # (n_freq_kept, n_frames)
 
-    def batch_fn(windows, fs):
-        nperseg = int(fs * frame_dur)
-        _, _, Zxx = signal.stft(_prep(windows, fs), fs=fs, nperseg=nperseg,
-                                noverlap=int(nperseg * overlap), window=window, axis=-1)
-        return np.abs(Zxx)[:, _keep(nperseg, fs), :]            # (n_windows, n_freq_kept, n_frames)
+    # def batch_fn(windows, fs):
+    #     nperseg = int(fs * frame_dur)
+    #     _, _, Zxx = signal.stft(_prep(windows, fs), fs=fs, nperseg=nperseg,
+    #                             noverlap=int(nperseg * overlap), window=window, axis=-1)
+    #     return np.abs(Zxx)[:, _keep(nperseg, fs), :]            # (n_windows, n_freq_kept, n_frames)
 
     return FeatureExtractor("stft", fn, min_duration=frame_dur, metric="cosine",
                             params=dict(frame_dur=frame_dur, overlap=overlap,
                                         window=window, f_min=f_min),
-                            batch_fn=batch_fn)
+                            batch_fn=None)#batch_fn)
 
-def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
+def make_mfcc_extractor(n_mfcc=14, n_mels=26, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
 
     def normalize_rows(feat, eps=1e-9):
         mean = feat.mean(axis=-1, keepdims=True)
@@ -81,7 +81,7 @@ def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, dro
                                            n_fft=n_fft, 
                                            hop_length=hop,
                                            window="hamming", 
-                                           n_mels=n_mels, fmin = 30, fmax = 500
+                                           n_mels=n_mels, fmin = 0.0, fmax = 500
                                            )
         m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), 
                                  n_mfcc=n_mfcc + int(drop_c0)
@@ -95,28 +95,28 @@ def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, dro
         else:
             return m
 
-    def batch_windows(audio, fs):
-            n_fft = int(fs * frame_dur)
-            hop = int(n_fft * (1 - overlap))
-            S = librosa.feature.melspectrogram(y=audio.astype(np.float32), 
-                                               sr=fs, 
-                                               n_fft=n_fft, 
-                                               hop_length=hop,
-                                               window="hamming", 
-                                               n_mels=n_mels
-                                               )
-            m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), 
-                                     n_mfcc=n_mfcc + int(drop_c0)
-                                    )
+    # def batch_windows(audio, fs):
+    #         n_fft = int(fs * frame_dur)
+    #         hop = int(n_fft * (1 - overlap))
+    #         S = librosa.feature.melspectrogram(y=audio.astype(np.float32), 
+    #                                            sr=fs, 
+    #                                            n_fft=n_fft, 
+    #                                            hop_length=hop,
+    #                                            window="hamming", 
+    #                                            n_mels=n_mels
+    #                                            )
+    #         m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), 
+    #                                  n_mfcc=n_mfcc + int(drop_c0)
+    #                                 )
                    
-            m = m[..., 1:, :] if drop_c0 else m      
+    #         m = m[..., 2:, :] if drop_c0 else m      
 
-            delta = safe_delta(m, order=1)
-            m_d_1 = np.concatenate([m, delta], axis=-2)
-            if derv_1:
-               return m_d_1
-            else:
-                return m
+    #         delta = safe_delta(m, order=1)
+    #         m_d_1 = np.concatenate([m, delta], axis=-2)
+    #         if derv_1:
+    #            return m_d_1
+    #         else:
+    #             return m
 
     if derv_1:
         call = "mfcc_d_1"
@@ -127,7 +127,7 @@ def make_mfcc_extractor(n_mfcc=13, n_mels=13, frame_dur=0.128, overlap=0.75, dro
                             fn, 
                             min_duration=frame_dur, 
                             metric=metric,
-                            batch_fn=batch_windows,
+                            batch_fn=None,#batch_windows,
                             params=dict(n_mfcc=n_mfcc, 
                                         n_mels=n_mels, 
                                         frame_dur=frame_dur,
