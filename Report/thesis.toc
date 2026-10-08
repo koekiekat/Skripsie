@@ -16,8 +16,8 @@
 \contentsline {section}{\numberline {1.5}Layout of report}{2}{section.1.5}%
 \contentsline {chapter}{\numberline {2}Literature}{4}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Dynamic Time Warping}{4}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Feature Extraction Methods}{7}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Short Time Fourier Transform}{7}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.2}Feature Extraction Methods}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Short Time Fourier Transform}{6}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Mel-Frequency Cepstral Coefficients}{7}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}Linear Predictive Coding}{7}{subsection.2.2.3}%
 \contentsline {chapter}{\numberline {3}Dataset}{8}{chapter.3}%

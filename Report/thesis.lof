@@ -4,7 +4,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces An example of the optimal warping path between two vector features, X with length N = 4 and Y with length M = 6}}{4}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces An example for the three possible options for min as well as an example of the optimal warp path found for signals X and Y assuming X=[0, 2, 1, 0] and Y=[0, 0, 0.5, 2, 1, 0]}}{6}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces An example for the three possible options for min as well as an example of the optimal warp path found for signals X and Y assuming X=[0, 2, 1, 0] and Y=[0, 0, 0.5, 2, 1, 0]}}{5}{figure.caption.12}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Zoomed out image of System Design}}{11}{figure.caption.13}%

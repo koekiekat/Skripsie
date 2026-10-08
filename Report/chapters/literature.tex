@@ -54,7 +54,7 @@ is shown if X and Y are chosen to be scalar signals, however the same logic is u
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/background/cost_matrix.png}
+    \includegraphics[width=0.6\linewidth]{figures/background/cost_matrix.png}
     \caption{An example for the three possible options for min as well as an example of the optimal warp path found for signals X and Y assuming X=[0, 2, 1, 0] 
     and Y=[0, 0, 0.5, 2, 1, 0]}\label{fig:cost_matrix}
 \end{figure}
@@ -91,6 +91,35 @@ of the matrix is checked to find the lowest cost. The position of that cost show
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods-background}
 
 \mysubsection{Short Time Fourier Transform}{Short Time Fourier Transform}\label{sec:short-time-fourier-transform}
+The STFT is used to analyse the change in frequency of a signal over time. The STFT of a segment of audio is calculated 
+by multiplying the signal in the time domain, $x(t)$ with a window $w(t-\tau)$ which is sweeped across said signal. 
+The Fourier Transform of each window is calculated and used to determine the frequency information for that window. Thus, the STFT provides the change in frequency
+for a segment of audio throughout time.\cite{Det_Tech}\cite{stft_kamper}
+The mathematical formulation of STFT is:
+  \begin{equation}
+    X(\tau, \omega) = \int_{-\infty}^{\infty} x(t)\, w(t - \tau)\, e^{-j\omega t}\, dt,
+  \end{equation}
+
+where $\tau$ is the step by which the window shifts in time and $\omega$ is the frequency being analysed.
+
+The frequency resolution of the STFT is given as:
+\begin{equation}
+    resolution = \frac{f_s}{L} 
+\end{equation}
+
+where $f_s$ is the sampling frequency of the signal and L is the length of the window overwhich the FT is taken. 
+
+This means that the STFT has a trade-off between time and frequency resolution. 
+
+If L is kept short, time resolution is high since smaller segments of time are being used for one FT analysis. However, frequency resolution is then decreased 
+since too little time passes for the FT to distinguish between frequencies spaced closer together.
+
+If L is kept long, time resolution drops. This means that fast changes in frequency will be missed. However, frequency resolution increases 
+and it becomes easier to distinguish between differrent frequency bands.
+
+Window overlap is another consideration when using STFT. Increased overlap means that $\tau$ is smaller. This creates a smoother representation of the changes 
+in frequency occuring over time since information at the edges of the window is no longer lost. The trade-off with overlap is the increase in computational complexity 
+that will occur due to smaller and thus more windows of a signal being analysed.\cite{dtw_basic}\cite{stft_kamper}
 
 \mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mel-frequency-cepstral-coefficients}
 
