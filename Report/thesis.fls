@@ -603,11 +603,6 @@ INPUT .\stb-thesis-frntp.pdf
 INPUT .\stb-thesis-frntp.pdf
 INPUT C:\Users\HP\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-ec.enc
-INPUT .\frontmatter\dedication.tex
-INPUT .\frontmatter\dedication.tex
-INPUT .\frontmatter\dedication.tex
-INPUT .\frontmatter\dedication.tex
-INPUT frontmatter\dedication.tex
 INPUT .\frontmatter\acknowledgements.tex
 INPUT .\frontmatter\acknowledgements.tex
 INPUT .\frontmatter\acknowledgements.tex
@@ -691,6 +686,9 @@ INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr6.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
+INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx12.tfm
+INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx8.tfm
+INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx6.tfm
 INPUT .\figures\background\cost_matrix.png
 INPUT .\figures\background\cost_matrix.png
 INPUT .\figures\background\cost_matrix.png
@@ -699,6 +697,8 @@ INPUT .\figures\background\cost_matrix.png
 INPUT .\figures\background\cost_matrix.png
 INPUT .\figures\background\cost_matrix.png
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathex.enc
+INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx9.tfm
+INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx5.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmcsc10.tfm
 INPUT .\chapters\dataset.tex
 INPUT .\chapters\dataset.tex
@@ -853,6 +853,8 @@ INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx10.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx10.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx12.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx12.pfb
+INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx8.pfb
+INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx8.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmcsc10.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmcsc10.pfb
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmex10.pfb

@@ -1,15 +1,13 @@
 \acswitchoff 
 \babel@toc {afrikaans}{}\relax 
 \contentsline {chapter}{Abstract}{iii}{chapter*.3}%
-\babel@toc {afrikaans}{}\relax 
-\contentsline {chapter}{Uittreksel}{iv}{chapter*.4}%
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Table of contents}{v}{chapter*.4}%
-\contentsline {chapter}{List of figures}{vii}{chapter*.5}%
-\contentsline {chapter}{List of tables}{viii}{chapter*.6}%
-\contentsline {chapter}{Nomenclature}{x}{chapter*.8}%
-\contentsline {section}{Acronyms and abbreviations}{xi}{section*.9}%
-\contentsline {section}{Definitions}{xii}{section*.10}%
+\contentsline {chapter}{Table of contents}{iv}{chapter*.3}%
+\contentsline {chapter}{List of figures}{vi}{chapter*.4}%
+\contentsline {chapter}{List of tables}{vii}{chapter*.5}%
+\contentsline {chapter}{Nomenclature}{ix}{chapter*.7}%
+\contentsline {section}{Acronyms and abbreviations}{x}{section*.8}%
+\contentsline {section}{Definitions}{xi}{section*.9}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problem Statement}{1}{section.1.2}%
@@ -56,6 +54,6 @@
 \contentsline {subsection}{\numberline {5.3.1}5 Templates}{18}{subsection.5.3.1}%
 \contentsline {subsection}{\numberline {5.3.2}10 Templates}{18}{subsection.5.3.2}%
 \contentsline {chapter}{\numberline {6}Conclusion}{19}{chapter.6}%
-\contentsline {chapter}{References}{20}{chapter*.31}%
+\contentsline {chapter}{References}{20}{chapter*.30}%
 \contentsline {chapter}{\numberline {A}Appendix title goes here}{21}{appendix.A}%
 \contentsfinish 

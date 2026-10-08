@@ -18,18 +18,32 @@ is initialised such that $C_{i, 0} = \infty$ for i = 1 to M, $C_{0, j} = \infty$
 
 The formula used to fill each cell of the cost matrix is:
 
-\[
-C_{i, j} = \text{dist}(x_i, y_j) + \min \qquad \text{with} \quad \min = \begin{cases}
+\begin{equation}
+C_{i, j} = \text{dist}(x_i, y_j) + \text{Q} \qquad \text{with} \quad \text{Q} = \min\begin{cases}
     C_{i-1, j-1} & \text{(match)} \\
     C_{i-1, j}   & \text{(insertion)} \\
     C_{i, j-1}   & \text{(deletion)}
 \end{cases}
-\]
+\end{equation}
 
 $dist(x_i, y_j)$ represents the difference between $X_i$ and $Y_j$ as a distance. For vector signals this distance is calculated between each frame i 
-of signal X and each fram j of signal Y. This can be done using various different techniques including cosine and euclidean distances.
+of signal X and each fram j of signal Y. This can be done using various different techniques including cosine, euclidean or dot product similarity.
+For this project only the cosine similarity and euclidean distance metrics were used.
 
-min is the minimum value of three possible options namely match, insertion or deletion. Match is the value in the matrix cell diagonally down and left 
+Euclidean distance is sensitive to the magnitude and direction of the vectors for which it is calculated. In basic terms it is the absolute difference between 
+two vectors.
+
+\begin{equation}
+    d(\mathbf{x_i}, \mathbf{y_j}) = \sqrt{(\mathbf{x_i}_1 - \mathbf{y_j}_1)^2 + (\mathbf{x_i}_2 - \mathbf{y_j}_2)^2 + \dots + (\mathbf{x_i}_n - \mathbf{y_j}_n)^2}
+\end{equation}
+
+Cosine similarity is only sensitive to the direction of the vectors for which it is calculated. In basic terms it is the angle between the two vectors.
+
+\begin{equation}
+    \cos(\mathbf{x_i}, \mathbf{y_j}) = \frac{\mathbf{x_i} \cdot \mathbf{y_j}}{\lVert\mathbf{x_i}\rVert \, \lVert\mathbf{y_j}\rVert}
+\end{equation}
+
+Q is the minimum value of three possible options namely match, insertion or deletion. Match is the value in the matrix cell diagonally down and left 
 from the current cell for which the cost is being calculated. Insertion is the value in the matrix cell directly below the current cell and deletion is 
 the matrix cell directly to the left of the current cell.
 
