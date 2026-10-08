@@ -1,11 +1,11 @@
 \mychapter{Literature}{Literature}{}\label{chap:literature}
 
 \mysection{Dynamic Time Warping}{Dynamic Time Warping}\label{sec:dynamic-time-warping}
-DTW is an algorithm for detecting the similarity of two signals, X and Y. This measure of similarity is achieved by calculating an optimal 
+DTW is an algorithm for detecting the similarity of two signals, $X = [x_1, x_2, \dots, x_n]$ and $Y = [y_1, y_2, \dots, y_m]$. This measure of similarity is achieved by calculating an optimal 
 alignment cost between the two signals of length $N \in\mathbb{N}$  and $M \in\mathbb{N}$ respectively. In terms of feature vectors such as STFT or MFCC 
 this means that each frame making up one signal is compared to each frame making up another signal. Using an alignment cost the best alignment for each 
-frame in one to the other signal is chosen and an overall DTW cost is calculated to show how similar the overall signals are. The figure below shows that 
-such an optimal alignment path may mean that a single frame in signal X may produce the lowest cost against more than one frame in signal Y.
+frame in one to the other signal is chosen and an overall DTW cost is calculated to show how similar the overall signals are. Figure~\ref{fig:vector_dtw} shows that 
+such an optimal alignment path may mean that a single frame in signal X may produce the lowest cost against more than one frame in signal Y.\cite{dtw_basic}\cite{dtw_kamper}
 
 \begin{figure}[H]
     \centering
@@ -28,16 +28,16 @@ C_{i, j} = \text{dist}(x_i, y_j) + \text{Q} \qquad \text{with} \quad \text{Q} = 
 
 $dist(x_i, y_j)$ represents the difference between $X_i$ and $Y_j$ as a distance. For vector signals this distance is calculated between each frame i 
 of signal X and each fram j of signal Y. This can be done using various different techniques including cosine, euclidean or dot product similarity.
-For this project only the cosine similarity and euclidean distance metrics were used.
+For this project only the cosine similarity and euclidean distance metrics were used.\cite{dtw_kamper}
 
 Euclidean distance is sensitive to the magnitude and direction of the vectors for which it is calculated. In basic terms it is the absolute difference between 
-two vectors.
+two vectors.\cite{vector_sim}
 
 \begin{equation}
     d(\mathbf{x_i}, \mathbf{y_j}) = \sqrt{(\mathbf{x_i}_1 - \mathbf{y_j}_1)^2 + (\mathbf{x_i}_2 - \mathbf{y_j}_2)^2 + \dots + (\mathbf{x_i}_n - \mathbf{y_j}_n)^2}
 \end{equation}
 
-Cosine similarity is only sensitive to the direction of the vectors for which it is calculated. In basic terms it is the angle between the two vectors.
+Cosine similarity is only sensitive to the direction of the vectors for which it is calculated. In basic terms it is the angle between the two vectors.\cite{vector_sim}
 
 \begin{equation}
     \cos(\mathbf{x_i}, \mathbf{y_j}) = \frac{\mathbf{x_i} \cdot \mathbf{y_j}}{\lVert\mathbf{x_i}\rVert \, \lVert\mathbf{y_j}\rVert}
@@ -49,8 +49,8 @@ the matrix cell directly to the left of the current cell.
 
 The cost which is then calculated for the current cell $C_{i, j}$ is a summation of the distance between the feature frames i and j in signals X and Y respectively 
 as well as the lowest accumlated cost up until that point. This means that the final cell reached within the cost matrix, $C_{N+1, M+1}$ will contain the 
-lowest overall cost for the similarity of signals X and Y. The lower the final cost, the higher the similarity between the two signals. The example shown in the 
-figure is shown if X and Y are chosen to be scalar signals, however the same logic is used for when X and Y are vectors.
+lowest overall cost for the similarity of signals X and Y. The lower the final cost, the higher the similarity between the two signals. The example shown in Figure~\ref{fig:cost_matrix} 
+is shown if X and Y are chosen to be scalar signals, however the same logic is used for when X and Y are vectors.\cite{dtw_kamper}
 
 \begin{figure}[H]
     \centering
@@ -60,21 +60,33 @@ figure is shown if X and Y are chosen to be scalar signals, however the same log
 \end{figure}
 
 The general case of DTW finds global alignment between the two signals. This alignment is found using the warping path.
+The warping path is the path of the best alignment between signals X and Y within the cost matrix, as shown in Figure~\ref{fig:cost_matrix}.
+This path, W, is a sequence of matrix co-ordinates, (i, j), with a total length k.\cite{dtw_boundaries}
 
-A $(N,M)$-warping path of length $L \in \mathbb{N}$ is
+The boundary condition for global alignment ensures the final path starts and ends with the start and endframes of each respective signal. 
 \begin{equation}
-  P = (p_1, \ldots, p_L)
+    i_1 = 1, i_k = N \quad \text{and} \quad j_1 = 1, j_k = M
 \end{equation}
 
-with $p_\ell = (n_\ell, m_\ell) \in [1:N] \times [1:M]$ for $\ell \in [1:L]$ satisfying the following conditions:
-\begin{itemize}
-  \item Boundary condition: $p_1 = (1,1)$ and $p_L = (N,M)$
-  \item Monotonicity condition: $n_1 \leq n_2 \leq \ldots \leq n_L$ and
-        $m_1 \leq m_2 \leq \ldots \leq m_L$
-  \item Step-size condition:
-        $p_{\ell+1} - p_\ell \in \Sigma := \{(1,0), (0,1), (1,1)\}$
-        for $\ell \in [1:L]$  % strictly this should be [1:L-1]
-\end{itemize}
+The monotonicity condition ensures that each new point in the warp path is a step forward in time from the previous step.
+\begin{equation}
+    i_{t-1} \le i_t \quad \text{and} \quad j_{t-1} \le j_t
+\end{equation}
+
+The continuity condition ensures the step size of the warping path is only one unit in time.
+\begin{equation}
+    i_t - i_{t-1} \le 1 \quad \text{and} \quad j_t - j_{t-1} \le 1
+\end{equation}
+
+Subsequence DTW is a version of the DTW algorithm that alters the boundary condition such that global alignment is no longer necessary, 
+instead the entirety of signal X is now matched with a subsequence of signal Y.
+The new boundary condition allows the warping path to start and end at anypoint within the first and final row of the matrix respectively.
+\begin{equation}
+    i_1 = 1,\; i_k = N \quad \text{and} \quad 1 \le j_1 \le j_k \le M
+\end{equation}
+
+In global alignment the final cell in the cost matrix (N+1, M+1) is considered the overall optimal cost for those two signals. With subsequence DTW the entire final row 
+of the matrix is checked to find the lowest cost. The position of that cost shows where the end point of the alignment detected via subsequence DTW is.\cite{dtw_subsequence}
 
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods-background}
 
