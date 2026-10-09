@@ -5,26 +5,28 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces An example of the optimal warping path between two vector features, X with length N = 4 and Y with length M = 6}}{4}{figure.caption.11}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces An example for the three possible options for min as well as an example of the optimal warp path found for signals X and Y assuming X=[0, 2, 1, 0] and Y=[0, 0, 0.5, 2, 1, 0]}}{5}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of a subsequence DTW alignment vetween two signal $X = [x_1, x_2, x_3, x_4]$ and $Y = [y_1. y_2, y_3, y_4, y_5, y_6, y_7, y_8, y_9, y_10]$}}{6}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}}{8}{figure.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Zoomed out image of System Design}}{11}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Zoomed out image of System Design}}{13}{figure.caption.15}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{13}{figure.caption.14}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Precision vs Recall curve}}{13}{figure.caption.15}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{14}{figure.caption.16}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{14}{figure.caption.17}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{14}{figure.caption.18}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Precision vs Recall curve}}{15}{figure.caption.19}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{15}{figure.caption.20}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{15}{figure.caption.21}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{16}{figure.caption.22}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Precision vs Recall curve}}{16}{figure.caption.23}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{16}{figure.caption.24}%
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{17}{figure.caption.25}%
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{17}{figure.caption.26}%
-\contentsline {figure}{\numberline {5.14}{\ignorespaces Precision vs Recall curve}}{18}{figure.caption.27}%
-\contentsline {figure}{\numberline {5.15}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{18}{figure.caption.28}%
-\contentsline {figure}{\numberline {5.16}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{18}{figure.caption.29}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{15}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Precision vs Recall curve}}{15}{figure.caption.17}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{16}{figure.caption.18}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{16}{figure.caption.19}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{16}{figure.caption.20}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Precision vs Recall curve}}{17}{figure.caption.21}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{17}{figure.caption.22}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{17}{figure.caption.23}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{18}{figure.caption.24}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Precision vs Recall curve}}{18}{figure.caption.25}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{18}{figure.caption.26}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{19}{figure.caption.27}%
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{19}{figure.caption.28}%
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Precision vs Recall curve}}{20}{figure.caption.29}%
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{20}{figure.caption.30}%
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{20}{figure.caption.31}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

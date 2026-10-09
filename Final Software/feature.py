@@ -62,7 +62,7 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming", f_min=0
 
 def make_mfcc_extractor(n_mfcc=14, n_mels=26, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
 
-    def normalize_rows(feat, eps=1e-9):
+    def cmvn_normalize(feat, eps=1e-9):
         mean = feat.mean(axis=-1, keepdims=True)
         std = feat.std(axis=-1, keepdims=True)
         return (feat - mean) / (std + eps)
@@ -81,13 +81,13 @@ def make_mfcc_extractor(n_mfcc=14, n_mels=26, frame_dur=0.128, overlap=0.75, dro
                                            n_fft=n_fft, 
                                            hop_length=hop,
                                            window="hamming", 
-                                           n_mels=n_mels, fmin = 0.0, fmax = 500
+                                           n_mels=n_mels, fmin = 0.0, fmax = 500.0
                                            )
         m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), 
                                  n_mfcc=n_mfcc + int(drop_c0)
                                  )
         m = m[1:] if drop_c0 else m 
-
+        #m = cmvn_normalize(m)
         delta = safe_delta(m, order=1)
         m_d_1 = np.concatenate([m, delta], axis=0)
         if derv_1:

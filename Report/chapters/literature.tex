@@ -78,6 +78,12 @@ The continuity condition ensures the step size of the warping path is only one u
     i_t - i_{t-1} \le 1 \quad \text{and} \quad j_t - j_{t-1} \le 1
 \end{equation}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/literature/sub_dtw.png}
+    \caption{Example of a subsequence DTW alignment vetween two signal $X = [x_1, x_2, x_3, x_4]$ and $Y = [y_1. y_2, y_3, y_4, y_5, y_6, y_7, y_8, y_9, y_10]$}\label{fig:sub_dtw}
+\end{figure}
+
 Subsequence DTW is a version of the DTW algorithm that alters the boundary condition such that global alignment is no longer necessary, 
 instead the entirety of signal X is now matched with a subsequence of signal Y.
 The new boundary condition allows the warping path to start and end at anypoint within the first and final row of the matrix respectively.
@@ -122,5 +128,44 @@ in frequency occuring over time since information at the edges of the window is 
 that will occur due to smaller and thus more windows of a signal being analysed.\cite{dtw_basic}\cite{stft_kamper}
 
 \mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mel-frequency-cepstral-coefficients}
+
+MFCC is a common choice for feature extraction when working on aucoustic data. This is because it is set up to percieve frequencies as they are percieved by the human ear. That means 
+the lower frequencies are given a higher resolution than the high frequencies.\cite{mel_kamper}
+Features are initially extracted using the FFT. After this they are passed through a Mel-scale Filter bank. The formula for the mel-frequency calculation is:
+
+\begin{equation}
+    Mel(f) = 1127 \ln\left(1 + \frac{f}{700}\right)
+\end{equation}
+
+ with $Mel(f)$ as the frequency value on the mel scale and f as the actual frequency in Hz.\cite{Det_Tech}
+
+ This bank is made up 20 to 40 triangular filters which are placed 
+,smallest width to largest width according to the mel scale, along the frequency spectrum. The standard amount of triangular filters chosen is 26. This results in 26 coefficients for the entire range of 
+frequencies being analysed.\cite{mel_med}\cite{mel_kamper}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/literature/mel.png}
+    \caption{The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}\label{fig:mel}
+\end{figure}
+
+The log of these coefficients is then taken and finally the Discrete cosine transform (DCT) is used to decorrelate the filter bank coefficients.
+The final number of cepstral coefficients returned by the DCT is typically 12 or 13 since the most important information is kept there. The formula use to perform the DCT is:
+
+\begin{equation}
+    MFCC_i = \sum_{k=1}^{K} X_k \cos\left(\frac{i(k - 0.5)\pi}{K}\right), \quad i = 1, 2, \dots, K
+\end{equation}
+
+with i as the index of the current coefficient, K as the total number of triangular filters used, k as the specific filter bank at that point in time and $X_k$ as the energy after log 
+was applied to the mel coefficients.\cite{Det_Tech}
+
+The first and second derivatives, often referred to as deltas, of the cepstral coefficients are often used in feature extraction. They show the change in frequency between cepstral coefficients. This can 
+be vital information when analysing how frequency changes across time since the MFCC process tends to lose this information. The formula for the derivatives is:
+
+\begin{equation}
+    x^{(d)}_t = \frac{\sum_{m=-M}^{M} m \cdot x^{(d-1)}_{t+m}}{\sum_{m=-M}^{M} m^2}
+\end{equation}
+
+with t as the specific point in time, d as the order of derivative and m as the frame offset.\cite{deltas}\cite{mel_delta}\cite{melderv_calcs}
 
 \mysubsection{Linear Predictive Coding}{Linear Predictive Coding}\label{sec:linear-predictive-coding}

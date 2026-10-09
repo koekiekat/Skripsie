@@ -145,3 +145,4 @@ def dtw_curve(temp_feat, comp_feat, metric):
     C = np.ascontiguousarray(dist.cdist(T, S, metric))
     D = librosa.sequence.dtw(C=C, subseq=True, backtrack=False)
     return D[-1, :] / T.shape[0]
+    
