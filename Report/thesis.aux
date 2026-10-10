@@ -92,6 +92,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Short Time Fourier Transform}{7}{subsection.2.2.1}\protected@file@percent }
 \newlabel{sec:short-time-fourier-transform}{{2.2.1}{7}{Short Time Fourier Transform}{subsection.2.2.1}{}}
 \newlabel{sec:short-time-fourier-transform@cref}{{[subsection][1][2,2]2.2.1}{[1][6][]7}{}{}{}}
+\newlabel{eq:freq_resolution}{{2.9}{7}{Short Time Fourier Transform}{equation.2.9}{}}
+\newlabel{eq:freq_resolution@cref}{{[equation][9][2]2.9}{[1][7][]7}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Mel-Frequency Cepstral Coefficients}{7}{subsection.2.2.2}\protected@file@percent }
 \newlabel{sec:mel-frequency-cepstral-coefficients}{{2.2.2}{7}{Mel-Frequency Cepstral Coefficients}{subsection.2.2.2}{}}
 \newlabel{sec:mel-frequency-cepstral-coefficients@cref}{{[subsection][2][2,2]2.2.2}{[1][7][]7}{}{}{}}
@@ -133,6 +135,10 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Evaluation Data Selection}{12}{subsection.3.3.3}\protected@file@percent }
 \newlabel{sec:eval_dat_sel}{{3.3.3}{12}{Evaluation Data Selection}{subsection.3.3.3}{}}
 \newlabel{sec:eval_dat_sel@cref}{{[subsection][3][3,3]3.3.3}{[1][11][]12}{}{}{}}
+\citation{nyq}
+\citation{bryde_whales_SA}
+\citation{stft_kamper}
+\citation{hamm}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}System Design}{13}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -147,130 +153,130 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Feature Extraction Methods}{13}{section.4.2}\protected@file@percent }
 \newlabel{sec:feature-extraction-methods}{{4.2}{13}{Feature Extraction Methods}{section.4.2}{}}
 \newlabel{sec:feature-extraction-methods@cref}{{[section][2][4]4.2}{[1][13][]13}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}STFT}{13}{subsection.4.2.1}\protected@file@percent }
-\newlabel{sec:stft}{{4.2.1}{13}{STFT}{subsection.4.2.1}{}}
-\newlabel{sec:stft@cref}{{[subsection][1][4,2]4.2.1}{[1][13][]13}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}MFCC}{13}{subsection.4.2.2}\protected@file@percent }
-\newlabel{sec:mfcc}{{4.2.2}{13}{MFCC}{subsection.4.2.2}{}}
-\newlabel{sec:mfcc@cref}{{[subsection][2][4,2]4.2.2}{[1][13][]13}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}STFT}{14}{subsection.4.2.1}\protected@file@percent }
+\newlabel{sec:stft}{{4.2.1}{14}{STFT}{subsection.4.2.1}{}}
+\newlabel{sec:stft@cref}{{[subsection][1][4,2]4.2.1}{[1][13][]14}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}MFCC}{14}{subsection.4.2.2}\protected@file@percent }
+\newlabel{sec:mfcc}{{4.2.2}{14}{MFCC}{subsection.4.2.2}{}}
+\newlabel{sec:mfcc@cref}{{[subsection][2][4,2]4.2.2}{[1][14][]14}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}LPC}{14}{subsection.4.2.3}\protected@file@percent }
 \newlabel{sec:lpc}{{4.2.3}{14}{LPC}{subsection.4.2.3}{}}
-\newlabel{sec:lpc@cref}{{[subsection][3][4,2]4.2.3}{[1][13][]14}{}{}{}}
+\newlabel{sec:lpc@cref}{{[subsection][3][4,2]4.2.3}{[1][14][]14}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}DTW methodology}{14}{section.4.3}\protected@file@percent }
 \newlabel{sec:dtw_method}{{4.3}{14}{DTW methodology}{section.4.3}{}}
-\newlabel{sec:dtw_method@cref}{{[section][3][4]4.3}{[1][13][]14}{}{}{}}
+\newlabel{sec:dtw_method@cref}{{[section][3][4]4.3}{[1][14][]14}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{14}{section.4.4}\protected@file@percent }
 \newlabel{sec:hyperparameter-tuning}{{4.4}{14}{Hyperparameter Tuning}{section.4.4}{}}
 \newlabel{sec:hyperparameter-tuning@cref}{{[section][4][4]4.4}{[1][14][]14}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Training Procedure}{14}{section.4.5}\protected@file@percent }
-\newlabel{sec:training-procedure}{{4.5}{14}{Training Procedure}{section.4.5}{}}
-\newlabel{sec:training-procedure@cref}{{[section][5][4]4.5}{[1][14][]14}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Evaluation Metrics}{14}{section.4.6}\protected@file@percent }
-\newlabel{sec:evaluation-metrics}{{4.6}{14}{Evaluation Metrics}{section.4.6}{}}
-\newlabel{sec:evaluation-metrics@cref}{{[section][6][4]4.6}{[1][14][]14}{}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{15}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Training Procedure}{15}{section.4.5}\protected@file@percent }
+\newlabel{sec:training-procedure}{{4.5}{15}{Training Procedure}{section.4.5}{}}
+\newlabel{sec:training-procedure@cref}{{[section][5][4]4.5}{[1][15][]15}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Evaluation Metrics}{15}{section.4.6}\protected@file@percent }
+\newlabel{sec:evaluation-metrics}{{4.6}{15}{Evaluation Metrics}{section.4.6}{}}
+\newlabel{sec:evaluation-metrics@cref}{{[section][6][4]4.6}{[1][15][]15}{}{}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{16}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:results}{{5}{15}{Results}{chapter.5}{}}
-\newlabel{chap:results@cref}{{[chapter][5][]5}{[1][15][]15}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{15}{section.5.1}\protected@file@percent }
-\newlabel{sec:exp-1-stft}{{5.1}{15}{Experiment 1: STFT Features}{section.5.1}{}}
-\newlabel{sec:exp-1-stft@cref}{{[section][1][5]5.1}{[1][15][]15}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}5 Templates}{15}{subsection.5.1.1}\protected@file@percent }
-\newlabel{sec:stft-5}{{5.1.1}{15}{5 Templates}{subsection.5.1.1}{}}
-\newlabel{sec:stft-5@cref}{{[subsection][1][5,1]5.1.1}{[1][15][]15}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{15}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:stft_5_scatter}{{5.1}{15}{Scatter plot showing threshold placement in terms of background images and call templates}{figure.caption.16}{}}
-\newlabel{fig:stft_5_scatter@cref}{{[figure][1][5]5.1}{[1][15][]15}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Precision vs Recall curve}}{15}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:stft_5_PR}{{5.2}{15}{Precision vs Recall curve}{figure.caption.17}{}}
-\newlabel{fig:stft_5_PR@cref}{{[figure][2][5]5.2}{[1][15][]15}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{16}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:stft_5_tl}{{5.3}{16}{Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}{figure.caption.18}{}}
-\newlabel{fig:stft_5_tl@cref}{{[figure][3][5]5.3}{[1][15][]16}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{16}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:stft_5_specs}{{5.4}{16}{Spectrograms of False Positive calls. Many of which could actually be real calls}{figure.caption.19}{}}
-\newlabel{fig:stft_5_specs@cref}{{[figure][4][5]5.4}{[1][16][]16}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}10 Templates}{16}{subsection.5.1.2}\protected@file@percent }
-\newlabel{sec:stft-10}{{5.1.2}{16}{10 Templates}{subsection.5.1.2}{}}
-\newlabel{sec:stft-10@cref}{{[subsection][2][5,1]5.1.2}{[1][16][]16}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{16}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:stft_10_scatter}{{5.5}{16}{Scatter plot showing threshold placement in terms of background images and call templates}{figure.caption.20}{}}
-\newlabel{fig:stft_10_scatter@cref}{{[figure][5][5]5.5}{[1][16][]16}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Precision vs Recall curve}}{17}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:stft_10_PR}{{5.6}{17}{Precision vs Recall curve}{figure.caption.21}{}}
-\newlabel{fig:stft_10_PR@cref}{{[figure][6][5]5.6}{[1][16][]17}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{17}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:stft_10_tl}{{5.7}{17}{Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}{figure.caption.22}{}}
-\newlabel{fig:stft_10_tl@cref}{{[figure][7][5]5.7}{[1][17][]17}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{17}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:stft_10_specs}{{5.8}{17}{Spectrograms of False Positive calls. Many of which could actually be real calls}{figure.caption.23}{}}
-\newlabel{fig:stft_10_specs@cref}{{[figure][8][5]5.8}{[1][17][]17}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{18}{section.5.2}\protected@file@percent }
-\newlabel{sec:exp-2-mfcc}{{5.2}{18}{Experiment 2: MFCC Features}{section.5.2}{}}
-\newlabel{sec:exp-2-mfcc@cref}{{[section][2][5]5.2}{[1][17][]18}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}5 Templates}{18}{subsection.5.2.1}\protected@file@percent }
-\newlabel{sec:mfcc-5}{{5.2.1}{18}{5 Templates}{subsection.5.2.1}{}}
-\newlabel{sec:mfcc-5@cref}{{[subsection][1][5,2]5.2.1}{[1][17][]18}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1.1}No derivatives}{18}{subsubsection.5.2.1.1}\protected@file@percent }
-\newlabel{sec:5-derv-0}{{5.2.1.1}{18}{No derivatives}{subsubsection.5.2.1.1}{}}
-\newlabel{sec:5-derv-0@cref}{{[subsubsection][1][5,2,1]5.2.1.1}{[1][17][]18}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{18}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:mfcc_5_scatter}{{5.9}{18}{Scatter plot showing threshold placement in terms of background images and call templates}{figure.caption.24}{}}
-\newlabel{fig:mfcc_5_scatter@cref}{{[figure][9][5]5.9}{[1][17][]18}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces Precision vs Recall curve}}{18}{figure.caption.25}\protected@file@percent }
-\newlabel{fig:mfcc_5_PR}{{5.10}{18}{Precision vs Recall curve}{figure.caption.25}{}}
-\newlabel{fig:mfcc_5_PR@cref}{{[figure][10][5]5.10}{[1][18][]18}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.11}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{18}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:mfcc_5_tl}{{5.11}{18}{Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}{figure.caption.26}{}}
-\newlabel{fig:mfcc_5_tl@cref}{{[figure][11][5]5.11}{[1][18][]18}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.12}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{19}{figure.caption.27}\protected@file@percent }
-\newlabel{fig:mfcc_5_specs}{{5.12}{19}{Spectrograms of False Positive calls. Many of which could actually be real calls}{figure.caption.27}{}}
-\newlabel{fig:mfcc_5_specs@cref}{{[figure][12][5]5.12}{[1][18][]19}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1.2}First derivative}{19}{subsubsection.5.2.1.2}\protected@file@percent }
-\newlabel{sec:5-derv-1}{{5.2.1.2}{19}{First derivative}{subsubsection.5.2.1.2}{}}
-\newlabel{sec:5-derv-1@cref}{{[subsubsection][2][5,2,1]5.2.1.2}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1.3}First and second derivatives}{19}{subsubsection.5.2.1.3}\protected@file@percent }
-\newlabel{sec:5-derv-2}{{5.2.1.3}{19}{First and second derivatives}{subsubsection.5.2.1.3}{}}
-\newlabel{sec:5-derv-2@cref}{{[subsubsection][3][5,2,1]5.2.1.3}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}10 Templates}{19}{subsection.5.2.2}\protected@file@percent }
-\newlabel{sec:mfcc-10}{{5.2.2}{19}{10 Templates}{subsection.5.2.2}{}}
-\newlabel{sec:mfcc-10@cref}{{[subsection][2][5,2]5.2.2}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2.1}No derivatives}{19}{subsubsection.5.2.2.1}\protected@file@percent }
-\newlabel{sec:10-derv-0}{{5.2.2.1}{19}{No derivatives}{subsubsection.5.2.2.1}{}}
-\newlabel{sec:10-derv-0@cref}{{[subsubsection][1][5,2,2]5.2.2.1}{[1][19][]19}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.13}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{19}{figure.caption.28}\protected@file@percent }
-\newlabel{fig:mfcc_10_scatter}{{5.13}{19}{Scatter plot showing threshold placement in terms of background images and call templates}{figure.caption.28}{}}
-\newlabel{fig:mfcc_10_scatter@cref}{{[figure][13][5]5.13}{[1][19][]19}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.14}{\ignorespaces Precision vs Recall curve}}{20}{figure.caption.29}\protected@file@percent }
-\newlabel{fig:mfcc_10_PR}{{5.14}{20}{Precision vs Recall curve}{figure.caption.29}{}}
-\newlabel{fig:mfcc_10_PR@cref}{{[figure][14][5]5.14}{[1][19][]20}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.15}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{20}{figure.caption.30}\protected@file@percent }
-\newlabel{fig:mfcc_10_tl}{{5.15}{20}{Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}{figure.caption.30}{}}
-\newlabel{fig:mfcc_10_tl@cref}{{[figure][15][5]5.15}{[1][20][]20}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.16}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{20}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:mfcc_10_specs}{{5.16}{20}{Spectrograms of False Positive calls. Many of which could actually be real calls}{figure.caption.31}{}}
-\newlabel{fig:mfcc_10_specs@cref}{{[figure][16][5]5.16}{[1][20][]20}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2.2}First derivative}{21}{subsubsection.5.2.2.2}\protected@file@percent }
-\newlabel{sec:10-derv-1}{{5.2.2.2}{21}{First derivative}{subsubsection.5.2.2.2}{}}
-\newlabel{sec:10-derv-1@cref}{{[subsubsection][2][5,2,2]5.2.2.2}{[1][20][]21}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2.3}First and second derivatives}{21}{subsubsection.5.2.2.3}\protected@file@percent }
-\newlabel{sec:10-derv-2}{{5.2.2.3}{21}{First and second derivatives}{subsubsection.5.2.2.3}{}}
-\newlabel{sec:10-derv-2@cref}{{[subsubsection][3][5,2,2]5.2.2.3}{[1][20][]21}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{21}{section.5.3}\protected@file@percent }
-\newlabel{sec:exp-3-lpc}{{5.3}{21}{Experiment 3: LPC Features}{section.5.3}{}}
-\newlabel{sec:exp-3-lpc@cref}{{[section][3][5]5.3}{[1][20][]21}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}5 Templates}{21}{subsection.5.3.1}\protected@file@percent }
-\newlabel{sec:lpc-5}{{5.3.1}{21}{5 Templates}{subsection.5.3.1}{}}
-\newlabel{sec:lpc-5@cref}{{[subsection][1][5,3]5.3.1}{[1][20][]21}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}10 Templates}{21}{subsection.5.3.2}\protected@file@percent }
-\newlabel{sec:lpc-10}{{5.3.2}{21}{10 Templates}{subsection.5.3.2}{}}
-\newlabel{sec:lpc-10@cref}{{[subsection][2][5,3]5.3.2}{[1][20][]21}{}{}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion}{22}{chapter.6}\protected@file@percent }
+\newlabel{chap:results}{{5}{16}{Results}{chapter.5}{}}
+\newlabel{chap:results@cref}{{[chapter][5][]5}{[1][16][]16}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{16}{section.5.1}\protected@file@percent }
+\newlabel{sec:exp-1-stft}{{5.1}{16}{Experiment 1: STFT Features}{section.5.1}{}}
+\newlabel{sec:exp-1-stft@cref}{{[section][1][5]5.1}{[1][16][]16}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}5 Templates}{16}{subsection.5.1.1}\protected@file@percent }
+\newlabel{sec:stft-5}{{5.1.1}{16}{5 Templates}{subsection.5.1.1}{}}
+\newlabel{sec:stft-5@cref}{{[subsection][1][5,1]5.1.1}{[1][16][]16}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{16}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:stft_5_scatter}{{5.1}{16}{Scatter plot showing threshold placement in terms of background images and call templates}{figure.caption.16}{}}
+\newlabel{fig:stft_5_scatter@cref}{{[figure][1][5]5.1}{[1][16][]16}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Precision vs Recall curve}}{16}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:stft_5_PR}{{5.2}{16}{Precision vs Recall curve}{figure.caption.17}{}}
+\newlabel{fig:stft_5_PR@cref}{{[figure][2][5]5.2}{[1][16][]16}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{17}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:stft_5_tl}{{5.3}{17}{Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}{figure.caption.18}{}}
+\newlabel{fig:stft_5_tl@cref}{{[figure][3][5]5.3}{[1][16][]17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{17}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:stft_5_specs}{{5.4}{17}{Spectrograms of False Positive calls. Many of which could actually be real calls}{figure.caption.19}{}}
+\newlabel{fig:stft_5_specs@cref}{{[figure][4][5]5.4}{[1][17][]17}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}10 Templates}{17}{subsection.5.1.2}\protected@file@percent }
+\newlabel{sec:stft-10}{{5.1.2}{17}{10 Templates}{subsection.5.1.2}{}}
+\newlabel{sec:stft-10@cref}{{[subsection][2][5,1]5.1.2}{[1][17][]17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{17}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:stft_10_scatter}{{5.5}{17}{Scatter plot showing threshold placement in terms of background images and call templates}{figure.caption.20}{}}
+\newlabel{fig:stft_10_scatter@cref}{{[figure][5][5]5.5}{[1][17][]17}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Precision vs Recall curve}}{18}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:stft_10_PR}{{5.6}{18}{Precision vs Recall curve}{figure.caption.21}{}}
+\newlabel{fig:stft_10_PR@cref}{{[figure][6][5]5.6}{[1][17][]18}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{18}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:stft_10_tl}{{5.7}{18}{Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}{figure.caption.22}{}}
+\newlabel{fig:stft_10_tl@cref}{{[figure][7][5]5.7}{[1][18][]18}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{18}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:stft_10_specs}{{5.8}{18}{Spectrograms of False Positive calls. Many of which could actually be real calls}{figure.caption.23}{}}
+\newlabel{fig:stft_10_specs@cref}{{[figure][8][5]5.8}{[1][18][]18}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{19}{section.5.2}\protected@file@percent }
+\newlabel{sec:exp-2-mfcc}{{5.2}{19}{Experiment 2: MFCC Features}{section.5.2}{}}
+\newlabel{sec:exp-2-mfcc@cref}{{[section][2][5]5.2}{[1][18][]19}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}5 Templates}{19}{subsection.5.2.1}\protected@file@percent }
+\newlabel{sec:mfcc-5}{{5.2.1}{19}{5 Templates}{subsection.5.2.1}{}}
+\newlabel{sec:mfcc-5@cref}{{[subsection][1][5,2]5.2.1}{[1][18][]19}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1.1}No derivatives}{19}{subsubsection.5.2.1.1}\protected@file@percent }
+\newlabel{sec:5-derv-0}{{5.2.1.1}{19}{No derivatives}{subsubsection.5.2.1.1}{}}
+\newlabel{sec:5-derv-0@cref}{{[subsubsection][1][5,2,1]5.2.1.1}{[1][18][]19}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{19}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:mfcc_5_scatter}{{5.9}{19}{Scatter plot showing threshold placement in terms of background images and call templates}{figure.caption.24}{}}
+\newlabel{fig:mfcc_5_scatter@cref}{{[figure][9][5]5.9}{[1][18][]19}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces Precision vs Recall curve}}{19}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:mfcc_5_PR}{{5.10}{19}{Precision vs Recall curve}{figure.caption.25}{}}
+\newlabel{fig:mfcc_5_PR@cref}{{[figure][10][5]5.10}{[1][19][]19}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.11}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{19}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:mfcc_5_tl}{{5.11}{19}{Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}{figure.caption.26}{}}
+\newlabel{fig:mfcc_5_tl@cref}{{[figure][11][5]5.11}{[1][19][]19}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.12}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{20}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:mfcc_5_specs}{{5.12}{20}{Spectrograms of False Positive calls. Many of which could actually be real calls}{figure.caption.27}{}}
+\newlabel{fig:mfcc_5_specs@cref}{{[figure][12][5]5.12}{[1][19][]20}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1.2}First derivative}{20}{subsubsection.5.2.1.2}\protected@file@percent }
+\newlabel{sec:5-derv-1}{{5.2.1.2}{20}{First derivative}{subsubsection.5.2.1.2}{}}
+\newlabel{sec:5-derv-1@cref}{{[subsubsection][2][5,2,1]5.2.1.2}{[1][20][]20}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1.3}First and second derivatives}{20}{subsubsection.5.2.1.3}\protected@file@percent }
+\newlabel{sec:5-derv-2}{{5.2.1.3}{20}{First and second derivatives}{subsubsection.5.2.1.3}{}}
+\newlabel{sec:5-derv-2@cref}{{[subsubsection][3][5,2,1]5.2.1.3}{[1][20][]20}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}10 Templates}{20}{subsection.5.2.2}\protected@file@percent }
+\newlabel{sec:mfcc-10}{{5.2.2}{20}{10 Templates}{subsection.5.2.2}{}}
+\newlabel{sec:mfcc-10@cref}{{[subsection][2][5,2]5.2.2}{[1][20][]20}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2.1}No derivatives}{20}{subsubsection.5.2.2.1}\protected@file@percent }
+\newlabel{sec:10-derv-0}{{5.2.2.1}{20}{No derivatives}{subsubsection.5.2.2.1}{}}
+\newlabel{sec:10-derv-0@cref}{{[subsubsection][1][5,2,2]5.2.2.1}{[1][20][]20}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.13}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{20}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:mfcc_10_scatter}{{5.13}{20}{Scatter plot showing threshold placement in terms of background images and call templates}{figure.caption.28}{}}
+\newlabel{fig:mfcc_10_scatter@cref}{{[figure][13][5]5.13}{[1][20][]20}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.14}{\ignorespaces Precision vs Recall curve}}{21}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:mfcc_10_PR}{{5.14}{21}{Precision vs Recall curve}{figure.caption.29}{}}
+\newlabel{fig:mfcc_10_PR@cref}{{[figure][14][5]5.14}{[1][20][]21}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.15}{\ignorespaces Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}}{21}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:mfcc_10_tl}{{5.15}{21}{Timeline of audio file 22 showing where the most False Positives occur in relation to the actual calls}{figure.caption.30}{}}
+\newlabel{fig:mfcc_10_tl@cref}{{[figure][15][5]5.15}{[1][21][]21}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.16}{\ignorespaces Spectrograms of False Positive calls. Many of which could actually be real calls}}{21}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:mfcc_10_specs}{{5.16}{21}{Spectrograms of False Positive calls. Many of which could actually be real calls}{figure.caption.31}{}}
+\newlabel{fig:mfcc_10_specs@cref}{{[figure][16][5]5.16}{[1][21][]21}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2.2}First derivative}{22}{subsubsection.5.2.2.2}\protected@file@percent }
+\newlabel{sec:10-derv-1}{{5.2.2.2}{22}{First derivative}{subsubsection.5.2.2.2}{}}
+\newlabel{sec:10-derv-1@cref}{{[subsubsection][2][5,2,2]5.2.2.2}{[1][21][]22}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2.3}First and second derivatives}{22}{subsubsection.5.2.2.3}\protected@file@percent }
+\newlabel{sec:10-derv-2}{{5.2.2.3}{22}{First and second derivatives}{subsubsection.5.2.2.3}{}}
+\newlabel{sec:10-derv-2@cref}{{[subsubsection][3][5,2,2]5.2.2.3}{[1][21][]22}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{22}{section.5.3}\protected@file@percent }
+\newlabel{sec:exp-3-lpc}{{5.3}{22}{Experiment 3: LPC Features}{section.5.3}{}}
+\newlabel{sec:exp-3-lpc@cref}{{[section][3][5]5.3}{[1][21][]22}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}5 Templates}{22}{subsection.5.3.1}\protected@file@percent }
+\newlabel{sec:lpc-5}{{5.3.1}{22}{5 Templates}{subsection.5.3.1}{}}
+\newlabel{sec:lpc-5@cref}{{[subsection][1][5,3]5.3.1}{[1][21][]22}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}10 Templates}{22}{subsection.5.3.2}\protected@file@percent }
+\newlabel{sec:lpc-10}{{5.3.2}{22}{10 Templates}{subsection.5.3.2}{}}
+\newlabel{sec:lpc-10@cref}{{[subsection][2][5,3]5.3.2}{[1][21][]22}{}{}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion}{23}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:conclusion}{{6}{22}{Conclusion}{chapter.6}{}}
-\newlabel{chap:conclusion@cref}{{[chapter][6][]6}{[1][22][]22}{}{}{}}
+\newlabel{chap:conclusion}{{6}{23}{Conclusion}{chapter.6}{}}
+\newlabel{chap:conclusion@cref}{{[chapter][6][]6}{[1][23][]23}{}{}{}}
 \bibdata{mybib}
 \bibcite{vessel_collision_since_1990s}{{1}{2006}{{van Waerebeek et~al.}}{{van Waerebeek, Baker, Félix, Gedamke, Iñiguez, Sanino, Secchi, Sutaria, van Helden, and Wang}}}
 \bibcite{bryde_whales_SA}{{2}{2024}{{Faustmann et~al.}}{{Faustmann, Shabangu, and Versfeld}}}
@@ -281,7 +287,7 @@
 \bibcite{dtw_basic}{{7}{2015{}}{{M\"uller and Zalkow}}{{}}}
 \bibcite{dtw_kamper}{{8}{2021{}}{{Kamper}}{{}}}
 \bibcite{vector_sim}{{9}{2023}{{Schwaber-Cohen}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{References}{23}{chapter*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{References}{24}{chapter*.32}\protected@file@percent }
 \bibcite{dtw_boundaries}{{10}{2020}{{Alizadeh}}{{}}}
 \bibcite{dtw_subsequence}{{11}{2015{}}{{M\"uller and Zalkow}}{{}}}
 \bibcite{Det_Tech}{{12}{2020}{{Atinde M.~Usman}}{{}}}
@@ -292,13 +298,15 @@
 \bibcite{mel_delta}{{17}{2023{}}{{DataMListic}}{{}}}
 \bibcite{melderv_calcs}{{18}{2015}{{Majeed et~al.}}{{Majeed, Husain, Samad, and Idbeaa}}}
 \bibcite{data_set}{{19}{2024}{{Faustmann}}{{}}}
+\bibcite{nyq}{{20}{2000}{{Meddins}}{{}}}
+\bibcite{hamm}{{21}{2026}{{Learning}}{{}}}
 \ACRO{total-barriers}{1}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Appendix title goes here}{25}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Appendix title goes here}{27}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appen:applabel}{{A}{25}{Appendix title goes here}{appendix.A}{}}
-\newlabel{appen:applabel@cref}{{[chapter][1][]A}{[1][25][]25}{}{}{}}
+\newlabel{appen:applabel}{{A}{27}{Appendix title goes here}{appendix.A}{}}
+\newlabel{appen:applabel@cref}{{[chapter][1][]A}{[1][27][]27}{}{}{}}
 \ttl@finishall
 \ACRO{usage}{MFT=={3}}
 \ACRO{pages}{MFT=={14@1@2}}
-\gdef \@abspage@last{37}
+\gdef \@abspage@last{39}

@@ -8,11 +8,21 @@
 
 
 \mysection{Overview}{Overview}\label{sec:overview}
+The project was coded in Python. The functionality of each section of the project was placed in relevant .py files which were imported to the relevant jupyter notebook which was used for that section.
 
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods}
+The raw audio recorded by the hydrophone was stored in .wav files with a sampling frequency of 8kHz. Before extracting feature vectors from audio segments the audio was first downsampled to 1kHz sampling rate. This helped remove unecessary frequency 
+information as the Nyquist Frequncy ($f_s/2$) for a 1kHz sampling rate is 500 Hz.\cite{nyq}
+
+Most of the Bryde's Whale vocalizations occur below 200 Hz. Thus, this sampling rate also ensures no relevant information was lost before analysis.\cite{bryde_whales_SA} 
 
 \mysubsection{STFT}{STFT}\label{sec:stft}
-Used signal.stft from scipy.
+The signal.stft function from the scipy library was used to calculate the STFT magnitudes for use as feature vectors. 
+Window length $L$, as referenced in Eq.\eqref{eq:freq_resolution}, is calculated by multiplying $f_s$, the sampling frequency of the given audio segment, with the chosen STFT frame duration. No set frame duration was selected as the optimal 
+frame duration was chosen during the calibration stage of this project.
+The window ovelrap $H$, as referenced in Eq.\eqref{eq:freq_resolution}, is calculed by multiplying $f_s$ with the chosen overlap percentage. For this project the overlap percentage was chosen as 0,75. The high overlap percentage produced a 
+smooth spectrogram when viewing the time-frequency representation of the given audio segment.
+A Hamming window was chosen to decrease any spectral leakage caused by the finite length of the windows used to extract the feature vectors.\cite{stft_kamper}\cite{hamm}
 
 \mysubsection{MFCC}{MFCC}\label{sec:mfcc}
 used librosa

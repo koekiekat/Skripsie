@@ -106,11 +106,12 @@ The mathematical formulation of STFT is:
     X(\tau, \omega) = \int_{-\infty}^{\infty} x(t)\, w(t - \tau)\, e^{-j\omega t}\, dt,
   \end{equation}
 
-where $\tau$ is the step by which the window shifts in time and $\omega$ is the frequency being analysed.
+where $\tau$ is the position of the window as it shifts through time at step-size $H$ and $\omega$ is the frequency being analysed.
 
 The frequency resolution of the STFT is given as:
 \begin{equation}
-    resolution = \frac{f_s}{L} 
+    resolution = \frac{f_s}{L}
+    \label{eq:freq_resolution} 
 \end{equation}
 
 where $f_s$ is the sampling frequency of the signal and L is the length of the window overwhich the FT is taken. 

@@ -34,38 +34,19 @@ class FeatureExtractor:
         return np.stack([self.fn(w, fs) for w in windows])   # slow fallback  
 
 def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming", f_min=0.0):
-    def _prep(audio, fs):
-        if f_min > 0:   # zero-phase high-pass so low-frequency energy is removed, not just hidden
-            sos = butter(4, f_min, btype="highpass", fs=fs, output="sos")
-            audio = sosfiltfilt(sos, audio, axis=-1)
-        return audio
-
-    def _keep(nperseg, fs):   # which STFT bins are at or above f_min
-        return np.fft.rfftfreq(nperseg, d=1 / fs) >= f_min
 
     def fn(audio, fs):
         nperseg = int(fs * frame_dur)
-        _, _, Zxx = signal.stft(_prep(audio, fs), fs=fs, nperseg=nperseg,
+        _, _, Zxx = signal.stft(audio, fs=fs, nperseg=nperseg,
                                 noverlap=int(nperseg * overlap), window=window)
-        return np.abs(Zxx)[_keep(nperseg, fs)]                  # (n_freq_kept, n_frames)
-
-    # def batch_fn(windows, fs):
-    #     nperseg = int(fs * frame_dur)
-    #     _, _, Zxx = signal.stft(_prep(windows, fs), fs=fs, nperseg=nperseg,
-    #                             noverlap=int(nperseg * overlap), window=window, axis=-1)
-    #     return np.abs(Zxx)[:, _keep(nperseg, fs), :]            # (n_windows, n_freq_kept, n_frames)
+        return np.abs(Zxx)                 # (n_freq_kept, n_frames)
 
     return FeatureExtractor("stft", fn, min_duration=frame_dur, metric="cosine",
                             params=dict(frame_dur=frame_dur, overlap=overlap,
                                         window=window, f_min=f_min),
-                            batch_fn=None)#batch_fn)
+)#batch_fn)
 
 def make_mfcc_extractor(n_mfcc=14, n_mels=26, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
-
-    def cmvn_normalize(feat, eps=1e-9):
-        mean = feat.mean(axis=-1, keepdims=True)
-        std = feat.std(axis=-1, keepdims=True)
-        return (feat - mean) / (std + eps)
 
     def safe_delta(m, order=1, max_width=9):
         n_frames = m.shape[-1]
@@ -87,36 +68,12 @@ def make_mfcc_extractor(n_mfcc=14, n_mels=26, frame_dur=0.128, overlap=0.75, dro
                                  n_mfcc=n_mfcc + int(drop_c0)
                                  )
         m = m[1:] if drop_c0 else m 
-        #m = cmvn_normalize(m)
         delta = safe_delta(m, order=1)
         m_d_1 = np.concatenate([m, delta], axis=0)
         if derv_1:
             return m_d_1
         else:
             return m
-
-    # def batch_windows(audio, fs):
-    #         n_fft = int(fs * frame_dur)
-    #         hop = int(n_fft * (1 - overlap))
-    #         S = librosa.feature.melspectrogram(y=audio.astype(np.float32), 
-    #                                            sr=fs, 
-    #                                            n_fft=n_fft, 
-    #                                            hop_length=hop,
-    #                                            window="hamming", 
-    #                                            n_mels=n_mels
-    #                                            )
-    #         m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), 
-    #                                  n_mfcc=n_mfcc + int(drop_c0)
-    #                                 )
-                   
-    #         m = m[..., 2:, :] if drop_c0 else m      
-
-    #         delta = safe_delta(m, order=1)
-    #         m_d_1 = np.concatenate([m, delta], axis=-2)
-    #         if derv_1:
-    #            return m_d_1
-    #         else:
-    #             return m
 
     if derv_1:
         call = "mfcc_d_1"
