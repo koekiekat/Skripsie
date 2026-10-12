@@ -23,17 +23,7 @@ class FeatureExtractor:
     def __call__(self, audio, fs):
         return self.fn(audio, fs)
 
-    #if a fast vectorized batch function is supplied you must use it
-    def batch(self, 
-              windows, 
-              fs
-              ):
-        """(n_windows, window_len) -> (n_windows, n_features, n_frames)"""
-        if self.batch_fn is not None:
-            return self.batch_fn(windows, fs)
-        return np.stack([self.fn(w, fs) for w in windows])   # slow fallback  
-
-def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming", f_min=0.0):
+def make_stft_extractor(frame_dur, overlap=0.75, window="hamming"):
 
     def fn(audio, fs):
         nperseg = int(fs * frame_dur)
@@ -41,12 +31,11 @@ def make_stft_extractor(frame_dur=0.128, overlap=0.75, window="hamming", f_min=0
                                 noverlap=int(nperseg * overlap), window=window)
         return np.abs(Zxx)                 # (n_freq_kept, n_frames)
 
-    return FeatureExtractor("stft", fn, min_duration=frame_dur, metric="cosine",
-                            params=dict(frame_dur=frame_dur, overlap=overlap,
-                                        window=window, f_min=f_min),
-)#batch_fn)
+    return FeatureExtractor("stft", fn, min_duration = frame_dur, metric="cosine",
+                            params=dict(frame_dur=frame_dur, overlap=overlap),
+)
 
-def make_mfcc_extractor(n_mfcc=14, n_mels=26, frame_dur=0.128, overlap=0.75, drop_c0 = True, metric = "euclidean", derv_1 = False, derv_2 = False):                       # one scalar scale
+def make_mfcc_extractor(frame_dur, n_mfcc=14, n_mels=26, overlap=0.75, drop_c0 = True, derv_1 = False, derv_2 = False):                       # one scalar scale
 
     def safe_delta(m, order=1, max_width=9):
         n_frames = m.shape[-1]
@@ -64,7 +53,7 @@ def make_mfcc_extractor(n_mfcc=14, n_mels=26, frame_dur=0.128, overlap=0.75, dro
                                            window="hamming", 
                                            n_mels=n_mels, fmin = 0.0, fmax = 500.0
                                            )
-        m = librosa.feature.mfcc(S=librosa.power_to_db(S, top_db=None), 
+        m = librosa.feature.mfcc(S=librosa.power_to_db(S), 
                                  n_mfcc=n_mfcc + int(drop_c0)
                                  )
         m = m[1:] if drop_c0 else m 
@@ -83,8 +72,7 @@ def make_mfcc_extractor(n_mfcc=14, n_mels=26, frame_dur=0.128, overlap=0.75, dro
     return FeatureExtractor(call, 
                             fn, 
                             min_duration=frame_dur, 
-                            metric=metric,
-                            batch_fn=None,#batch_windows,
+                            metric="euclidean",
                             params=dict(n_mfcc=n_mfcc, 
                                         n_mels=n_mels, 
                                         frame_dur=frame_dur,

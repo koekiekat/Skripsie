@@ -7,8 +7,8 @@ from pathlib import Path
 
 from feature import resample_audio
 from dtw import(
-    dtw_calc_new,
-    dtw_calc,
+    #dtw_calc_new,
+    #dtw_calc,
     dtw_calc_times
 )
 
@@ -45,37 +45,37 @@ def load_template_features_fixed_length(template, extractor, window_len, fs_new)
 
     return extractor(audio, fs_new)
 
-def dtw_cross_costs(feat_temps, feat_bg_calib, metric="cosine"):
-    """
-    Calculate costs of every item in feat_temps vs every item in feat_bg_calib.
+# def dtw_cross_costs(feat_temps, feat_bg_calib, metric="cosine"):
+#     """
+#     Calculate costs of every item in feat_temps vs every item in feat_bg_calib.
 
-    Returns:
-        costs
-    """
+#     Returns:
+#         costs
+#     """
 
-    #Build all feature pairs (feat_temps, feat_bg_calib)
-    pairs = list(product(range(len(feat_temps)), range(len(feat_bg_calib)))) 
+#     #Build all feature pairs (feat_temps, feat_bg_calib)
+#     pairs = list(product(range(len(feat_temps)), range(len(feat_bg_calib)))) 
 
-    #Calculate costs for each pair
-    costs = [dtw_calc(feat_temps[i], feat_bg_calib[j], metric) for i, j in pairs]
+#     #Calculate costs for each pair
+#     costs = [dtw_calc(feat_temps[i], feat_bg_calib[j], metric) for i, j in pairs]
 
-    return costs
+#     return costs
 
-def dtw_cross_costs_new(feat_temps, feat_bg_calib, metric="cosine"):
-    """
-    Calculate costs of every item in feat_temps vs every item in feat_bg_calib.
+# def dtw_cross_costs_new(feat_temps, feat_bg_calib, metric="cosine"):
+#     """
+#     Calculate costs of every item in feat_temps vs every item in feat_bg_calib.
 
-    Returns:
-        costs
-    """
+#     Returns:
+#         costs
+#     """
 
-    #Build all feature pairs (feat_temps, feat_bg_calib)
-    pairs = list(product(range(len(feat_temps)), range(len(feat_bg_calib)))) 
+#     #Build all feature pairs (feat_temps, feat_bg_calib)
+#     pairs = list(product(range(len(feat_temps)), range(len(feat_bg_calib)))) 
 
-    #Calculate costs for each pair
-    costs = [dtw_calc_new(feat_temps[i], feat_bg_calib[j], metric) for i, j in pairs]
+#     #Calculate costs for each pair
+#     costs = [dtw_calc_new(feat_temps[i], feat_bg_calib[j], metric) for i, j in pairs]
 
-    return costs
+#     return costs
 
 def compute_pr_curve_from_costs(call_costs, background_costs, n_thresholds=200):
     """

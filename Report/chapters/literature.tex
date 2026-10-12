@@ -35,12 +35,14 @@ two vectors.\cite{vector_sim}
 
 \begin{equation}
     d(\mathbf{x_i}, \mathbf{y_j}) = \sqrt{(\mathbf{x_i}_1 - \mathbf{y_j}_1)^2 + (\mathbf{x_i}_2 - \mathbf{y_j}_2)^2 + \dots + (\mathbf{x_i}_n - \mathbf{y_j}_n)^2}
+    \label{eq:euclidean} 
 \end{equation}
 
 Cosine similarity is only sensitive to the direction of the vectors for which it is calculated. In basic terms it is the angle between the two vectors.\cite{vector_sim}
 
 \begin{equation}
     \cos(\mathbf{x_i}, \mathbf{y_j}) = \frac{\mathbf{x_i} \cdot \mathbf{y_j}}{\lVert\mathbf{x_i}\rVert \, \lVert\mathbf{y_j}\rVert}
+    \label{eq:cosine} 
 \end{equation}
 
 Q is the minimum value of three possible options namely match, insertion or deletion. Match is the value in the matrix cell diagonally down and left 
@@ -96,6 +98,7 @@ of the matrix is checked to find the lowest cost. The position of that cost show
 
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods-background}
 
+
 \mysubsection{Short Time Fourier Transform}{Short Time Fourier Transform}\label{sec:short-time-fourier-transform}
 The STFT is used to analyse the change in frequency of a signal over time. The STFT of a segment of audio is calculated 
 by multiplying the signal in the time domain, $x(t)$ with a window $w(t-\tau)$ which is sweeped across said signal. 
@@ -124,12 +127,12 @@ since too little time passes for the FT to distinguish between frequencies space
 If L is kept long, time resolution drops. This means that fast changes in frequency will be missed. However, frequency resolution increases 
 and it becomes easier to distinguish between differrent frequency bands.
 
-Window overlap is another consideration when using STFT. Increased overlap means that $\tau$ is smaller. This creates a smoother representation of the changes 
+Window overlap is another consideration when using STFT. Increased overlap creates a smoother representation of the changes 
 in frequency occuring over time since information at the edges of the window is no longer lost. The trade-off with overlap is the increase in computational complexity 
 that will occur due to smaller and thus more windows of a signal being analysed.\cite{dtw_basic}\cite{stft_kamper}
 
-\mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mel-frequency-cepstral-coefficients}
 
+\mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mel-frequency-cepstral-coefficients}
 MFCC is a common choice for feature extraction when working on aucoustic data. This is because it is set up to percieve frequencies as they are percieved by the human ear. That means 
 the lower frequencies are given a higher resolution than the high frequencies.\cite{mel_kamper}
 Features are initially extracted using the FFT. After this they are passed through a Mel-scale Filter bank. The formula for the mel-frequency calculation is:
