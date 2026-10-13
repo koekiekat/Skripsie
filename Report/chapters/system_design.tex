@@ -1,12 +1,5 @@
 \mychapter{System Design}{System Design}{}\label{chap:sys-design}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/Skrip_CH3.drawio.png}
-    \caption{Zoomed out image of System Design}\label{fig:systen-design}
-\end{figure}
-
-
 \mysection{Overview}{Overview}\label{sec:overview}
 The project was coded in Python. The functionality of each section of the project was placed in relevant .py files which were imported to the relevant jupyter notebook which was used for that section.
 
@@ -60,6 +53,13 @@ for whale calls subsequence DTW allows for the detection of multiple calls withi
 
 
 \mysection{Hyperparameter Tuning}{Hyperparameter Tuning}\label{sec:hyperparameter-tuning}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/syst_design/calib_des.png}
+    \caption{This is a software flow diagram describing how the hyperparameters are chosen for the project.}\label{fig:calib_des}
+\end{figure}
+
 The frame length of any feature extraction method affects the frequency resolution. Therefore, different widths of frame length (0.048, 0.064, 0.096, 0.128, 0.192, 0.256, 0.384, 0.512) were tested to see 
 which produced the best F1 score. In the process of determining the best frame length the F1 score is calculated by also finding the best possible thresholds for which each call can be seperated as either 
 a call or background noise. While the project only focused on general detection of calls and not on classification, three different thresholds, one for each call type, were calculated and used. The reason for this 

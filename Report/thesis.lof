@@ -9,7 +9,7 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}}{8}{figure.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Zoomed out image of System Design}}{13}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces This is a software flow diagram describing how the hyperparameters are chosen for the project.}}{15}{figure.caption.15}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Scatter plot showing threshold placement in terms of background images and call templates}}{17}{figure.caption.16}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Precision vs Recall curve}}{17}{figure.caption.17}%
