@@ -321,15 +321,6 @@ def plot_detection_spectrograms(detections, wav_path,
     also plots that extractor's feature (e.g. MFCC) alongside the STFT
     for each detection.
     """
-    if framelength is None:
-        framelength = int(fs_new * 0.128)
-    if noverlap is None:
-        noverlap = int(framelength * 0.75)
-
-    if len(detections) == 0:
-        print(f"No {title_prefix} entries to plot.")
-        return
-
     if random_sample:
         rng = random.Random(seed)
         sample = rng.sample(detections, min(n_examples, len(detections)))
@@ -350,7 +341,6 @@ def plot_detection_spectrograms(detections, wav_path,
 
     hop_samples = int(fs_new * extractor.params["frame_dur"] * (1 - extractor.params["overlap"])) \
         if feat_method == "mfcc" else None
-
     ax_idx = 0
     for hour_idx, entries in by_hour.items():
         f_s, audio_array = read_audio_chunk(wav_path, hour_idx, duration_hour=1.0, fs_new=fs_new)
