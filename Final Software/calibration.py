@@ -40,6 +40,7 @@ def load_template_features_fixed_length(template, extractor, window_len, fs_new)
     target_len = int(fs_new * window_len)
     if len(audio) < target_len:
         audio = np.pad(audio, (0, target_len - len(audio)), mode="constant")
+        print("padded")
     elif len(audio) > target_len:
         audio = audio[:target_len]
 

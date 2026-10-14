@@ -74,8 +74,13 @@ def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
     print(f"calls closer than {min_sep_frames} frames are one call")
 
     for i in range(n_hours):
+        overlap_s = 10.0
+        hour_lo, hour_hi = i*3600, (i+1)*3600
+        chunk_start = max(0, hour_lo - overlap_s)
+        chunk_dur = hour_hi + overlap_s - chunk_start
+
         # load 1 hour of audio and compute features for the whole hour
-        f_s, audio_array = read_audio_chunk(audio_file, start_hour=i, duration_hour=1.0, fs_new=fs_new)
+        f_s, audio_array = read_audio_chunk(audio_file, start_hour=chunk_start/3600, duration_hour=chunk_dur/3600, fs_new=fs_new)
         feat_stream = extractor(audio_array, fs_new) # (n_freq, n_frames)
 
         template_costs = []     # per call type: (n_temps, n_frames), cost of each template at each frame
@@ -97,6 +102,10 @@ def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
         call_end_frames, _ = find_peaks(-best_scaled_cost, height=-alpha_max, distance=min_sep_frames)
 
         for end_frame in call_end_frames:
+            #if end frame is not within the given hour then it does not count
+            if not(hour_lo <= chunk_start + end_frame*hop_s < hour_hi):
+                continue
+
             type_idx = best_type[end_frame]
 
             # the single template that matched best at this frame
@@ -104,15 +113,15 @@ def detection_pipeline(audio_file, n_hours, st_feats, mt_feats, bt_feats,
             best_template = templates[type_idx][best_temp_idx]
 
             # redo the DTW on a short stretch of the stream ending at end_frame, to find where the match began
-            seg_lo = max(0, end_frame - 2 * best_template.shape[1])
+            seg_lo = max(0, end_frame - round(10/hop_s))#2 * best_template.shape[1])
             seg_feat = feat_stream[:, seg_lo:end_frame + 1]
             dist_mat = dist.cdist(best_template.T, seg_feat.T, extractor.metric)
             D, steps = librosa.sequence.dtw(C=dist_mat, subseq=True, backtrack=False, return_steps=True)
             warp_path = librosa.sequence.dtw_backtracking(steps, subseq=True, start=dist_mat.shape[1] - 1)
             start_frame = seg_lo + warp_path[-1, 1] # warp_path runs end -> start
 
-            all_starts.append(i * 3600 + start_frame * hop_s - frame_s / 2)
-            all_ends.append(i * 3600 + end_frame * hop_s + frame_s / 2)
+            all_starts.append(chunk_start + start_frame * hop_s - frame_s / 2)
+            all_ends.append(chunk_start + end_frame * hop_s + frame_s / 2)
             all_scaled_costs.append(best_scaled_cost[end_frame])
             all_labels.append(call_types[type_idx])
 

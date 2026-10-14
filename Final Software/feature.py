@@ -91,7 +91,7 @@ def feature_axes(feat, extractor, fs_new=1000):
     t = np.arange(n_frames) * hop / fs_new
     return f, t
 
-def load_segment_features(entry, extractor, fs_new=1000):
+def load_segment_features(entry, extractor, fs_new):
 
     with sf.SoundFile(entry["wav_path"]) as f:          # reads only the segment, not the whole WAV
         f_s = f.samplerate
@@ -99,13 +99,15 @@ def load_segment_features(entry, extractor, fs_new=1000):
         f.seek(start)
         segment = f.read(end - start, dtype="int16")
 
+    #resample segment to 1kHz
     audio = resample_audio(segment, f_s, fs_new)
     min_len = int(fs_new * extractor.min_duration)
     if len(audio) < min_len:
         audio = np.pad(audio, (0, min_len - len(audio)), mode="constant")
+        print(f"{len(audio)} < {min_len}")
     return extractor(audio, fs_new)
 
-def load_features_from_json(path, extractor, n=None, fs_new=1000):
+def load_features_from_json(path, extractor, n, fs_new):
 
     with open(path) as f:
         entries = json.load(f)
