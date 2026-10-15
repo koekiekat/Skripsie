@@ -352,17 +352,23 @@ def plot_detection_spectrograms(detections, wav_path,
         if feat_method == "mfcc" else None
     ax_idx = 0
     for hour_idx, entries in by_hour.items():
-        f_s, audio_array = read_audio_chunk(wav_path, hour_idx, duration_hour=1.0, fs_new=fs_new)
+        #f_s, audio_array = read_audio_chunk(wav_path, hour_idx, duration_hour=1.0, fs_new=fs_new)
 
         for start, end, label in entries:
-            local_start = start - hour_idx * hour_duration
-            local_end = end - hour_idx * hour_duration
 
-            seg_start_t = max(0, local_start - context)
-            seg_end_t = min(len(audio_array) / f_s, local_end + context)
-            seg_start_idx = int(seg_start_t * f_s)
-            seg_end_idx = int(seg_end_t * f_s)
-            segment = audio_array[seg_start_idx:seg_end_idx]
+            # local_start = start - hour_idx * hour_duration
+            # local_end = end - hour_idx * hour_duration
+
+            # seg_start_t = max(0, local_start - context)
+            # seg_end_t = min(len(audio_array) / f_s, local_end + context)
+            # seg_start_idx = int(seg_start_t * f_s)
+            # seg_end_idx = int(seg_end_t * f_s)
+            # segment = audio_array[seg_start_idx:seg_end_idx]
+
+            seg_start_t = max(0, start - context)
+            f_s, segment = read_audio_chunk(wav_path, seg_start_t / 3600,
+                                            (end + context - seg_start_t) / 3600, fs_new)
+            local_start, local_end = start, end
 
             if feat_method == "mfcc":
                 ax_stft, ax_feat = axes[ax_idx, 0], axes[ax_idx, 1]

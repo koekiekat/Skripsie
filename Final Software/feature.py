@@ -32,8 +32,7 @@ def make_stft_extractor(frame_dur, overlap=0.75, window="hamming"):
         return np.abs(Zxx)                 # (n_freq_kept, n_frames)
 
     return FeatureExtractor("stft", fn, min_duration = frame_dur, metric="cosine",
-                            params=dict(frame_dur=frame_dur, overlap=overlap),
-)
+                            params=dict(frame_dur=frame_dur, overlap=overlap),)
 
 def make_mfcc_extractor(frame_dur, n_mfcc=14, n_mels=26, overlap=0.75, drop_c0 = True, derv_1 = False, derv_2 = False):                       # one scalar scale
 
@@ -96,15 +95,22 @@ def load_segment_features(entry, extractor, fs_new):
     with sf.SoundFile(entry["wav_path"]) as f:          # reads only the segment, not the whole WAV
         f_s = f.samplerate
         start, end = int(entry["start_time"] * f_s), int(entry["end_time"] * f_s)
+
+        min_samples = int((extractor.min_duration + 0.01)*f_s)
+        if end - start < min_samples:
+            centre = (start + end)//2
+            start = max(0, min(centre - min_samples // 2, f.frames - min_samples))
+            end = start + min_samples
+        
         f.seek(start)
         segment = f.read(end - start, dtype="int16")
 
     #resample segment to 1kHz
     audio = resample_audio(segment, f_s, fs_new)
-    min_len = int(fs_new * extractor.min_duration)
-    if len(audio) < min_len:
-        audio = np.pad(audio, (0, min_len - len(audio)), mode="constant")
-        print(f"{len(audio)} < {min_len}")
+    # min_len = int(fs_new * extractor.min_duration)
+    # if len(audio) < min_len:
+    #     audio = np.pad(audio, (0, min_len - len(audio)), mode="constant")
+    #     print(f"{len(audio)} < {min_len}")
     return extractor(audio, fs_new)
 
 def load_features_from_json(path, extractor, n, fs_new):

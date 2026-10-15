@@ -27,8 +27,10 @@ def load_template_features_fixed_length(template, extractor, window_len, fs_new)
         call_center = (call_start + call_end) / 2
 
         half_len = window_len / 2
-        seg_start = max(0.0, call_center - half_len)
-        seg_end = seg_start + window_len
+        seg_start = max(0.0, min(call_center - half_len, f.frames / f_s - window_len - 0.01))  # CHANGED
+        seg_end = seg_start + window_len + 0.01  
+        # seg_start = max(0.0, call_center - half_len)
+        # seg_end = seg_start + window_len
 
         start_sample = int(seg_start * f_s)
         end_sample = int(seg_end * f_s)
@@ -38,11 +40,13 @@ def load_template_features_fixed_length(template, extractor, window_len, fs_new)
     audio = resample_audio(segment, f_s, fs_new)
 
     target_len = int(fs_new * window_len)
-    if len(audio) < target_len:
-        audio = np.pad(audio, (0, target_len - len(audio)), mode="constant")
-        print("padded")
-    elif len(audio) > target_len:
-        audio = audio[:target_len]
+    assert len(audio) >= target_len, "file shorter than window_len"   # CHANGED (was the pad branch)
+    audio = audio[:target_len] 
+    # if len(audio) < target_len:
+    #     audio = np.pad(audio, (0, target_len - len(audio)), mode="constant")
+    #     print("padded")
+    # elif len(audio) > target_len:
+    #     audio = audio[:target_len]
 
     return extractor(audio, fs_new)
 

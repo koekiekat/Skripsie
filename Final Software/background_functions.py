@@ -45,7 +45,7 @@ def short_time_calc(sig, fs, fs_new):
 def resample_audio(audio_segments, f_s, fs_new):
     up = 1
     down = int(f_s / fs_new)
-    audio_resampled = signal.resample_poly(audio_segments, up, down, padtype = "edge")
+    audio_resampled = signal.resample_poly(audio_segments, up, down)
     return audio_resampled
 
 def stft_calculation(audio_resampled, f_s, fs_new):
