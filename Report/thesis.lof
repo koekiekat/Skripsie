@@ -11,6 +11,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces This is a software flow diagram describing how the hyperparameters are chosen for the project.}}{15}{figure.caption.15}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces This is a software flow diagram describing how the testing procedure runs for this project.}}{18}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces This diagram shows how the kth lowest costs are stored for a hypothetical choice of costs per frame for three templates per threshold and two thresholds given k = 2.}}{19}{figure.caption.17}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

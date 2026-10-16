@@ -173,6 +173,13 @@ without running through the entire file.\cite{sf} The extracted audio is then re
 the resample\_poly function from the SciPy library.\cite{resample} After this, features were extracted as explained 
 in Section~\ref{sec:stft}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/syst_design/kth_cost.png}
+    \caption{This diagram shows how the kth lowest costs are stored for a hypothetical choice of costs per 
+    frame for three templates per threshold and two thresholds given k = 2.}\label{fig:kth_cost}
+\end{figure}
+
 The DTW costs for all templates were calculated per call type and the bottom row of each DTW cost matrix 
 for each template was stored in a matrix for every call type 
 $(n_\text{templates} \times n_\text{frames in the segment})$. A variable k was calculated to be the vote 
