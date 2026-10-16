@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  16 OCT 2026 18:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  16 OCT 2026 19:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1847,11 +1847,11 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [18 <./figures/syst_design/test_des.png>]
-<figures/syst_design/kth_cost.png, id=651, 672.5125pt x 512.91624pt>
+<figures/syst_design/kth_cost.png, id=651, 672.5125pt x 513.92pt>
 File: figures/syst_design/kth_cost.png Graphic file (type png)
 <use figures/syst_design/kth_cost.png>
 Package pdftex.def Info: figures/syst_design/kth_cost.png  used on input line 178.
-(pdftex.def)             Requested size: 364.19667pt x 277.76895pt.
+(pdftex.def)             Requested size: 364.19667pt x 278.31252pt.
 
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
@@ -1876,7 +1876,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[21]) (chapters/results.tex
+[21]
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
 (fancyhdr)                Make it at least 27.11653pt, for example:
@@ -1884,20 +1884,28 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[22]
+[22]) (chapters/results.tex
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[23]
 Chapter 5.
-) (chapters/conclusion.tex [23
+) (chapters/conclusion.tex [24
 
 ]
 Chapter 6.
-) [24
+) [25
 
 ] (thesis.bbl
 Underfull \hbox (badness 1189) in paragraph at lines 55--58
 []\T1/lmr/m/n/12 (+20) M. A. Mc-Don-ald, S. L. Mes-nick, and J. A. Hilde-brand, ``The ge-o-graphic
  []
 
-[25
+[26
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 78--80
@@ -1941,12 +1949,16 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[26]
+[27]
 Underfull \hbox (badness 10000) in paragraph at lines 178--182
 [][]$\T1/lmr/m/n/12 (+20) https : / / www . researchgate . net / publication / 273155496 _ The _ Precision-[]Recall _
  []
 
-) (appendices/appendices.tex (appendices/an_appendix.tex
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--191
+\T1/lmr/m/n/12 (+20) 343194514 _ A _ Survey _ on _ Performance _ Metrics _ for _ Object-[]Detection _
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
 (fancyhdr)                Make it at least 27.11653pt, for example:
@@ -1954,14 +1966,22 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[27]
+[28]) (appendices/appendices.tex (appendices/an_appendix.tex
+
+Package fancyhdr Warning: \headheight is too small (14.5pt): 
+(fancyhdr)                Make it at least 27.11653pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11653pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
+
+[29]
 Appendix A.
 ))
 
 Package caption Warning: Unused \captionsetup[algorithm] on input line 376.
 See the caption package documentation for explanation.
 
-[28
+[30
 
 ] (thesis.aux)
  ***********
@@ -1979,17 +1999,17 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 2213E4BAFB81043C090A217508145485;8163.
  ) 
 Here is how much of TeX's memory you used:
- 51764 strings out of 467871
- 1047345 string characters out of 5419828
- 1657668 words of memory out of 5000000
- 79355 multiletter control sequences out of 15000+600000
- 751533 words of font info for 241 fonts, out of 8000000 for 9000
+ 51773 strings out of 467871
+ 1047427 string characters out of 5419828
+ 1658915 words of memory out of 5000000
+ 79359 multiletter control sequences out of 15000+600000
+ 751535 words of font info for 241 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,12n,112p,2591b,729s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (39 pages, 625238 bytes).
+ <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (41 pages, 651727 bytes).
 PDF statistics:
- 913 PDF objects out of 1000 (max. 8388607)
- 159 named destinations out of 1000 (max. 500000)
+ 939 PDF objects out of 1000 (max. 8388607)
+ 164 named destinations out of 1000 (max. 500000)
  66565 words of extra memory for PDF output out of 74296 (max. 10000000)
 

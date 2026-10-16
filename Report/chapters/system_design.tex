@@ -299,3 +299,25 @@ performance of models relative to each other. The equation for F1 is defined as:
 \begin{equation}
     F1 = \frac{2PR}{P + R}
 \end{equation}\cite{pr}\cite{roc}
+
+For the testing part of the project the average precision (AP) was also calculated. AP was calculated using 
+all point interpolation. The equation for this is:
+
+\begin{equation}
+\mathrm{AP}_{\mathrm{all}} = \sum_{n} (R_{n+1} - R_n)\, P_{\mathrm{interp}}(R_{n+1})
+\end{equation}
+
+where
+
+\begin{equation}
+P_{\mathrm{interp}}(R_{n+1}) = \max_{\tilde{R}\,:\,\tilde{R} \geq R_{n+1}} P(\tilde{R})
+\end{equation}
+\cite{ap}
+
+The PR curve used to calculate the AP was calculated by sweeping the three thresholds equally up and down 
+by a variable alpha. During the main detection pipeline when the end and start times of the detected calls were found 
+on the scaled kth costs, the threshold below which a call was detected was initially set to 1,5. Before matching the detected 
+calls in the initial testing the detected calls cost array was again trimmed such that only the calls falling below the 
+actual threshold, 1, were matched against labels. The extra costs were necessary to later ensure there were enough costs 
+available for a threshold sweep for a PR curve. 100 thresholds were tested between 0,01 and 1,5. The precision and recall was 
+calculated at each of the new thresholds.
