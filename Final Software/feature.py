@@ -58,13 +58,20 @@ def make_mfcc_extractor(frame_dur, n_mfcc=14, n_mels=26, overlap=0.75, drop_c0 =
         m = m[1:] if drop_c0 else m 
         delta = safe_delta(m, order=1)
         m_d_1 = np.concatenate([m, delta], axis=0)
+        delta_2 = safe_delta(m, order=2)
+        m_d_2 = np.concatenate([m_d_1, delta_2], axis=0)
+
         if derv_1:
             return m_d_1
+        if derv_2:
+            return m_d_2
         else:
             return m
 
     if derv_1:
         call = "mfcc_d_1"
+    if derv_2:
+        call = "mfcc_d_2"
     else:
         call = "mfcc"
 

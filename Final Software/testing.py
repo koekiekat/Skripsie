@@ -330,6 +330,10 @@ def plot_detection_spectrograms(detections, wav_path,
     also plots that extractor's feature (e.g. MFCC) alongside the STFT
     for each detection.
     """
+    if feat_method == "mfcc_d_1":
+        feat_method = "mfcc"
+    if feat_method == "mfcc_d_2":
+        feat_method = "mfcc"
     if random_sample:
         rng = random.Random(seed)
         sample = rng.sample(detections, min(n_examples, len(detections)))
