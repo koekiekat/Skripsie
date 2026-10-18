@@ -125,11 +125,11 @@ the DTW algorithm.
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv1}}
             & 5  & 0.683 & 15.610 & 0.659 & 23.440 & 0.500 & 20.337 & 0.384 & 0.2 \\
-            & 10 & 0.785 & 18.815 & 0.394 & 22.548 & 0.425 & 20.569 & 0.256 & 0.5 \\
+            & 10 & 0.785 & 18.815 & 0.394 & 22.548 & 0.425 & 20.569 & 0.256 & 0.2 \\
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv2}}
             & 5  & 0.758 & 18.199 & 0.659 & 24.977 & 0.518 & 21.595 & 0.384 & 0.2 \\
-            & 10 & 0.806 & 19.642 & 0.408 & 22.356 & 0.430 & 22.836 & 0.256 & 0.3 \\
+            & 10 & 0.806 & 19.642 & 0.408 & 22.356 & 0.430 & 22.836 & 0.256 & 0.2 \\
         \bottomrule
     \end{tabular}%
     }\label{tab:mfcc_calib_results}
@@ -166,11 +166,11 @@ experiment doing the best in terms of overall F1 score.
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv1}}
             & 5  & 0.141 & 0.932 & 0.246 & 0.430 \\
-            & 10 & 0.354 & 0.860 & 0.502 & 0.553 \\
+            & 10 & 0.030 & 0.942 & 0.0.058 & 0.0.432 \\
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv2}}
             & 5  & 0.085 & 0.943 & 0.155 & 0.380 \\
-            & 10 & 0.271 & 0.913 & 0.417 & 0.619 \\
+            & 10 & 0.042 & 0.940 & 0.080 & 0.498 \\
         \bottomrule
     \end{tabular}\label{tab:mfcc_test_results}
 \end{table}
@@ -235,6 +235,54 @@ thresholds.
 
 \mysection{Experiment 3: LPC Features}{Experiment 3: LPC Features}\label{sec:exp-3-lpc}
 
+\begin{table}[H]
+    \caption{Calibration variables chosen via highest F1 for LPC for 5 templates and 10 templates}
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \centering
+    \makebox[\textwidth][c]{%
+    \begin{tabular}{ccccccccc}
+        \toprule
+        \multirow{2}{*}{Number of Temps}
+            & \multicolumn{2}{c}{Single Tones}
+            & \multicolumn{2}{c}{Multi Tones}
+            & \multicolumn{2}{c}{Burst Tonals} 
+            & \multirow{2}{*}{Frame Length}
+            & \multirow{2}{*}{Vote Fraction}\\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+            & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold \\
+        \midrule
+        5  & 0.863 & 0.344 & 0.744 & 0.526 & 0.632 & 0.449 & 0.256 & 0.2\\
+        10 & 0.882 & 0.336 & 0.605 & 0.364 & 0.686 &  0.427 & 0.256 & 0.2\\
+        \bottomrule
+    \end{tabular}\label{tab:lpc_calib_results}
+    }
+\end{table}
+
+\begin{table}[H]
+    \caption{Final test results for LPC for 5 and 10 templates}
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        Number of Temps & Precision & Recall & F1 & Average Precision \\
+        \midrule
+        5  & 0.190 & 0.930 & 0.316 & 0.697 \\
+        10 & 0.351 & 0.916 & 0.508 & 0.772 \\
+        \bottomrule
+    \end{tabular}\label{tab:lpc_test_results}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[5 templates\label{fig:lpc_5_pr}]{%
+        \includegraphics[width=0.3\linewidth]{figures/results/lpc_5_pr.png}}
+    \hspace{1cm}
+    \subfloat[10 templates\label{fig:lpc_10_pr}]{%
+        \includegraphics[width=0.3\linewidth]{figures/results/lpc_10_pr.png}}
+    \caption{The PR curves for LPC with the first and second derivatives added}\label{fig:lpc_pr}
+\end{figure}
 
 \mysection{General Observations}{General Observations}\label{sec:obs}
 

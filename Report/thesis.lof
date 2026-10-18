@@ -25,6 +25,9 @@
 \contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{28}{figure.caption.24}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{28}{subfigure.4.1}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{28}{subfigure.4.2}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC with the first and second derivatives added}}{29}{figure.caption.27}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{29}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{29}{subfigure.5.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 
