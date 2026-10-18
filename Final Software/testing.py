@@ -151,43 +151,6 @@ def get_exclusion_mask(window_times_global, window_len, exclude_intervals):
         keep &= ~overlap
     return keep
 
-# def merge_consecutive_detections(all_detected_t, all_detected_labels,
-#                                 step, window_len, max_gap_windows,
-#                                 min_windows, max_windows
-# ):
-#     call_start_t = np.asarray(all_detected_t, dtype=float) #place all start times in a list
-#     labels = np.asarray(all_detected_labels, dtype=object)
-#     breaks_btwn_calls = np.diff(call_start_t)
-#     breaks =  breaks_btwn_calls / step > 1 + max_gap_windows + 1e-6 #True if one or more gaps of 75% of window
-    
-#     is_first = np.r_[True, breaks] # True if there was a break just before that time
-#     first_window = np.arange(len(call_start_t))[is_first] #stores index of start time of merged calls
-
-#     is_last = np.r_[breaks, True] # True where a group finishes
-#     last_window = np.arange(len(call_start_t))[is_last]  #stores index of the start time of the final window of a set of merged calls
-    
-#     if max_windows is not None:
-#         new_first_window, new_last_window = [], []
-#         for first, last in zip(first_window, last_window):
-#             for chunk_start in range(first, last + 1, max_windows): #(start, stop, step)
-#                 chunk_end = min(chunk_start + max_windows - 1, last)
-#                 new_first_window.append(chunk_start)
-#                 new_last_window.append(chunk_end)
-#         first = np.array(new_first_window)
-#         last = np.array(new_last_window)
-
-#     keep = (last - first + 1) >= min_windows
-#     uniq, codes = np.unique(labels, return_inverse=True)
-#     onehot = np.zeros((len(call_start_t), len(uniq)), dtype=np.int32)
-#     onehot[np.arange(len(call_start_t)), codes] = 1
-#     dominant = uniq[np.add.reduceat(onehot, first, axis=0).argmax(axis=1)]
-
-#     start_t = call_start_t[first[keep]]
-#     end_t = call_start_t[last[keep]]+ window_len
-#     kept_labels = dominant[keep]
-
-#     return [(float(s), float(e), lab) for s, e, lab in zip(start_t, end_t, kept_labels)] 
-
 def match_detections(detections, raven_table, ):#ignore_duplicates):
     detections = sorted(detections, key=lambda x: x[0])  # sort by start time   
     
@@ -311,6 +274,91 @@ def plot_mfcc(m, fs_new, hop_samples, ax=None, normalise=False):
         plt.colorbar(img, ax=ax, label="Coefficient value")
 
     return img
+
+def plot_detection_spectrograms_lpc(detections, wav_path,
+                                fs_new,
+                                framelength,
+                                noverlap,
+                                n_examples,
+                                extractor,
+                                feat_method,
+                                context=0.5,
+                                hour_duration=3600.0,
+                                random_sample=True,
+                                seed=0,
+                                title_prefix="FP",
+):
+    if feat_method in ("mfcc_d_1", "mfcc_d_2"):
+        feat_method = "mfcc"
+    has_feat = feat_method in ("mfcc", "lpc")            # NEW: any feature drawn next to the STFT
+
+    if random_sample:
+        rng = random.Random(seed)
+        sample = rng.sample(detections, min(n_examples, len(detections)))
+    else:
+        sample = detections[:n_examples]
+
+    from collections import defaultdict
+    by_hour = defaultdict(list)
+    for start, end, label in sample:
+        hour_idx = int(start // hour_duration)
+        by_hour[hour_idx].append((start, end, label))
+
+    n_plot = len(sample)
+    n_cols = 2 if has_feat else 3
+    n_rows = n_plot if has_feat else int(np.ceil(n_plot / n_cols))
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows))
+    axes = np.atleast_2d(axes) if has_feat else np.atleast_1d(axes).flatten()
+
+    hop_samples = int(fs_new * extractor.params["frame_dur"] * (1 - extractor.params["overlap"])) \
+        if has_feat else None
+    ax_idx = 0
+    for hour_idx, entries in by_hour.items():
+        for start, end, label in entries:
+            seg_start_t = max(0, start - context)
+            f_s, segment = read_audio_chunk(wav_path, seg_start_t / 3600,
+                                            (end + context - seg_start_t) / 3600, fs_new)
+            local_start, local_end = start, end
+
+            if has_feat:
+                ax_stft, ax_feat = axes[ax_idx, 0], axes[ax_idx, 1]
+            else:
+                ax_stft = axes[ax_idx]
+
+            if len(segment) < framelength:
+                ax_stft.set_title(f"{title_prefix}: {label} @ {start:.2f}s\n(segment too short)")
+                ax_stft.axis("off")
+                if has_feat:
+                    ax_feat.axis("off")
+                ax_idx += 1
+                continue
+
+            f, t, Zxx = signal.stft(segment, fs=f_s, nperseg=framelength, noverlap=noverlap, window="hamming")
+            Zxx_db = 20 * np.log10(np.abs(Zxx) + 1e-10)
+
+            ax_stft.pcolormesh(t + seg_start_t, f, Zxx_db, shading="gouraud", cmap="viridis")
+            ax_stft.axvline(local_start, color="red", linestyle="--", linewidth=1)
+            ax_stft.axvline(local_end, color="red", linestyle="--", linewidth=1)
+            ax_stft.set_title(f"{title_prefix}: {label} @ {start:.2f}s (dur={end-start:.2f}s)", fontsize=10)
+            ax_stft.set_xlabel("Time (s, local)")
+            ax_stft.set_ylabel("Freq (Hz)")
+
+            if has_feat:
+                feat = extractor(segment.astype(np.float32), f_s)
+                plot_mfcc(feat, f_s, hop_samples, ax=ax_feat)
+                if feat_method == "lpc":                                   # NEW
+                    ax_feat.set_ylabel("LPC coefficient")
+                ax_feat.set_title(f"{extractor.name.upper()}", fontsize=10)
+
+            ax_idx += 1
+
+    flat_axes = axes.flatten()
+    used = ax_idx * n_cols
+    for j in range(used, len(flat_axes)):
+        flat_axes[j].axis("off")
+
+    plt.tight_layout()
+    plt.show()
 
 def plot_detection_spectrograms(detections, wav_path,
                                 fs_new,
