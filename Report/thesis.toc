@@ -42,10 +42,10 @@
 \contentsline {section}{\numberline {4.6}Evaluation Metrics}{22}{section.4.6}%
 \contentsline {chapter}{\numberline {5}Results}{25}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{25}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{26}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{28}{section.5.3}%
-\contentsline {section}{\numberline {5.4}General Observations}{29}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusion}{30}{chapter.6}%
-\contentsline {chapter}{References}{31}{chapter*.31}%
-\contentsline {chapter}{\numberline {A}Appendix title goes here}{35}{appendix.A}%
+\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{27}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{31}{section.5.3}%
+\contentsline {section}{\numberline {5.4}General Observations}{32}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Conclusion}{33}{chapter.6}%
+\contentsline {chapter}{References}{34}{chapter*.31}%
+\contentsline {chapter}{\numberline {A}Appendix title goes here}{38}{appendix.A}%
 \contentsfinish 
