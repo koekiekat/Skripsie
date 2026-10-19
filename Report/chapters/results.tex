@@ -371,26 +371,69 @@ call detections.
 
 \mysection{General Observations}{General Observations}\label{sec:obs}
 
-Considering the low availability of well labeled data to use for the calibration 
-stage of this project as well as human error, which was introduced in manual 
-selection of calibration and background templates, the varying performance of the 
-calibrated thresholds is justified. The lack of data and human error meant that 
+The lack of data and human error meant that 
 a maximum of 10 templates per call type could be used for calibration. It also caused 
-a bias in the choices of templates to train on as selecting suitably representative c
+a bias in the choices of templates to train on as selecting suitably representative
 templates per call type became difficult. The selection of background templates for 
 calibration meant that the class imbalance between calls and background noise 
 differed between calibration and testing. The selection of templates and not 
 a continuos audio file for calibration also meant that subsequence DTW did not necessarily 
-act within the same conditions as testing thus creating another hinderance. 
+act within the same conditions as testing thus creating another hinderance.
+
+Considering the low availability of well labeled data to use for the calibration 
+stage of this project as well as human error, which was introduced in manual 
+selection of calibration and background templates, the varying performance of the 
+calibrated thresholds is justified. This varying performance can be seen in Tables \ref{tab:stft_calib_results}, 
+\ref{tab:mfcc_calib_results} and \ref{tab:stft_calib_results}.
+ 
+
+\begin{table}[H]
+    \caption{Overall highest results for F1 and AP per model}
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \centering
+    \makebox[\textwidth][c]{%
+    \begin{tabular}{ccccc}
+        \toprule
+        \multirow{3}{*}{Feature extraction method}
+            & \multicolumn{2}{c}{F1}
+            & \multicolumn{2}{c}{AP}\\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+            & Highest value & Number of Templates & Highest value & Number of Templates\\
+        \midrule
+        STFT & 0.792 & 5 & 0.860 & 10\\
+        MFCC & 0.647 & 10 & 0.684 & 10\\
+        LPC & 0.650 & 10 & 0.789 & 5\\
+        \bottomrule
+    \end{tabular}\label{tab:highest_results}
+    }
+\end{table}
+
+By looking at Table \ref{tab:highest_results} it can be seen that the STFT model 
+outperforms the other models in terms of both F1 score and AP. This means that 
+both in terms of the models ability to select hyperparameters and in terms of 
+the efficiency of the detection when using STFT this model is by far the best.
+LPC comes second, but in terms of precision it is not much better than MFCC.
 
 When looking at printed spectrograms of False Positives detected by the model 
-it was found that for both experiments many of these False Positives were actually 
+it was found that for both experiments for the best performing model, STFT, 
+many of these False Positives were actually 
 unlabeled calls. This means that the actual precision of the model may be higher 
 than the reported amounts. This makes sense as human error was also introduced in 
 call labeling, since the known labeled calls were found by previous projects and 
 is therefore not necessarily a complete list.
 
-Considering the relitively good performance of the model as well as the unlabeled 
+\begin{figure}[H]
+    \centering
+    \subfloat[5 templates\label{fig:FP_STFT_10}]{%
+        \includegraphics[width=0.4\linewidth]{figures/results/FP_STFT_10.png}}
+    \hspace{1cm}
+    \subfloat[10 templates\label{fig:TP_STFT_10}]{%
+        \includegraphics[width=0.4\linewidth]{figures/results/TP_STFT_10.png}}
+    \caption{Examples of random samples of FP and TP for which some FP could be unlabeled calls.}\label{fig:FP_TP}
+\end{figure}
+
+Considering the good performance of the model as well as the unlabeled 
 True Positives STFT feature extraction is a good method to use for call detection with 
-the DTW algorithm.
+the DTW algorith and the algorithm is a valid choice as detection method.
 
