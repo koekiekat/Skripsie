@@ -173,5 +173,46 @@ be vital information when analysing how frequency changes across time since the 
 with t as the specific point in time, d as the order of derivative and m as the frame offset.\cite{deltas}\cite{mel_delta}\cite{melderv_calcs}
 
 \mysubsection{Linear Predictive Coding}{Linear Predictive Coding}\label{sec:linear-predictive-coding}
+Linear Predicitve Coding (LPC) is a straightforward mathematical method commonly used for feature extraction. LPC focuses on the method of 
+approximating a sample of a speech signal using a combination of n samples from the past. This means that for each sample for which there are 
+p available samples before it an approximation is made in the form of the equation:
 
+\begin{equation}
+    \tilde{s}(n) = \alpha_1s(n-1) + \alpha_2s(n-2) +\cdots+ \alpha_ps(n-p)
+\end{equation}
+
+where $\tilde{s}(n)$ is the approximated speech sample and $\alpha_1, \alpha_2, \ldots, \alpha_p$ are the coefficients for that approximation. The p coefficients used are constant over all 
+samples within the given frame.
+
+For each sample with an approximation an error is calculated between the real sample and the approximated sample.
+
+\begin{equation}
+    e_n = s(n) - \tilde{s}(n)
+\end{equation}
+
+The sum of the squares of all these errors is minimised to find the p constant coefficients. The equation for this is:
+
+\begin{equation}
+    E_n = \sum_m e_n^2(m)
+\end{equation}
+
+where m is the sample for which the error $e_n(m)$ was calculated.
+
+The feature extracted via this method is is the p LPC coefficients which were calculated to minimise the mean square error. 
+These coefficients tend to be unstable, therefore Cepstral Coefficients can be calculated from these raw LPC coefficients. 
+Cepstral Coefficients are the coefficients of the FT representation of the magnitude spectrum and are more reliable than the LPC. 
+
+LPCC can be calculated from the LPC results through recursion. The formula for that is:
+
+\begin{equation}
+\begin{aligned}
+c_0 &= \ln \sigma^2 \\
+c_m &= a_m + \sum_{k=1}^{m-1} \left(\frac{k}{m}\right) c_k a_{m-k}, \qquad 1 \le m \le p \\
+c_m &= \sum_{k=1}^{m-1} \left(\frac{k}{m}\right) c_k a_{m-k}, \qquad m > p,
+\end{aligned}
+\end{equation}
+
+where $\sigma^2$ is the LPC gain term.
+
+The final feature extracted using LPCC contains p coefficients for a single frame with p=0 containing the magnitude information.\cite{lpc}\cite{Det_Tech}
 \mysection{Similar Studies}{Similar Studies}\label{sec:similar_studies}

@@ -8,40 +8,38 @@
     \setlength{\tabcolsep}{3pt}
     \centering
     \makebox[\textwidth][c]{%
-    \begin{tabular}{ccccccccc}
+    \begin{tabular}{cccccccccc}
         \toprule
         \multirow{2}{*}{Number of Temps}
             & \multicolumn{2}{c}{Single Tones}
             & \multicolumn{2}{c}{Multi Tones}
             & \multicolumn{2}{c}{Burst Tonals} 
-            & \multirow{2}{*}{Frame Length}
-            & \multirow{2}{*}{Vote Fraction}\\
+            & \multirow{2}{*}{Avg F1}
+            & \multirow{2}{*}{Frame Length}\\
         \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
             & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold \\
         \midrule
-        5  & 0.682 & 0.2339 & 0.568 & 0.2557 & 0.796 & 0.2603 & 0.512 & 0.4\\
-        10 & 0.690 & 0.2455 & 0.663 & 0.2364 & 0.697 &  0.2303 & 0.512 & 0.3\\
+        5  & 0.682 & 0.2339 & 0.568 & 0.2557 & 0.796 & 0.2603 &  & 0.512\\
+        10 & 0.690 & 0.2455 & 0.663 & 0.2364 & 0.697 &  0.2303 & 0.512\\
         \bottomrule
     \end{tabular}\label{tab:stft_calib_results}
     }
 \end{table}
 
-The calibration variables chosen for both the 5 template experiment and 
-the 10 template experiment, as shown in Table \ref{tab:stft_calib_results}, 
-stayed relatively consistent. The frame length for both experiments was chosen 
-to be 0.512 seconds, this frame length was chosen based on the F1 scores 
-for the chosen thresholds. The average F1 scores for 5 templates and 10 templates 
-was 0.682 and 0.683 respectively. This shows that not only was the frame length 
-consistent, the threshold reliability also remianed consistent even if the 
-individual threshold scores per call type varied slightly between experiments. 
-The chosen vote fraction was not chosen to be the same with a choice of 0.4 
-and 0.3 for 5 and 10 templates respectively. This is not, however a 
-large difference considering 0.3 would never have been an option for 5 templates 
-since 5 multiplied by 0.3 is not a whole number. The overall effect of 
-increasing the number of templates for the STFT feature extraction method 
-during the calibration stage was not large. It can be considered however that 
-the 10 template experiment performed slightly better due to the slightly larger 
-average F1 score.
+\begin{table}[H]
+    \caption{Vote frac results for STFT for 5 and 10 templates}
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        Number of Temps & Precision & Recall & F1 & Vote Fraction\\
+        \midrule
+        5  &  &  &  \\
+        10 &  &  &  \\
+        \bottomrule
+    \end{tabular}\label{tab:stft_vote_results}
+\end{table}
 
 \begin{table}[H]
     \caption{Final test results for STFT for 5 and 10 templates}
@@ -58,14 +56,6 @@ average F1 score.
     \end{tabular}\label{tab:stft_test_results}
 \end{table}
 
-For both STFT experiments the final testing results performed relatively well. 
-When considering the calibrated precision and recall points as well as the F1 score, 
-as shown in Table \ref{tab:stft_test_results}, it can be seen that the 5 template experiment performed slightly better in terms 
-of calibration of thresholds. When consider the average precision one can see that 
-the overall model of the 10 template experiment performed better. The PR curves shown 
-in Figures \ref{fig:stft_5_pr} and \ref{fig:stft_10_pr} back this up with the red 
-point being the precision and recall resulting from the calibrated thrsholds. 
-
 \begin{figure}[H]
     \centering
     \subfloat[5 templates\label{fig:stft_5_pr}]{%
@@ -76,28 +66,7 @@ point being the precision and recall resulting from the calibrated thrsholds.
     \caption{The PR curves for STFT}\label{fig:stft_pr}
 \end{figure}
 
-Considering the low availability of well labeled data to use for the calibration 
-stage of this project as well as human error, which was introduced in manual 
-selection of calibration and background templates, the varying performance of the 
-calibrated thresholds is justified. The lack of data and human error meant that 
-a maximum of 10 templates per call type could be used for calibration. It also caused 
-a bias in the choices of templates to train on as selecting suitably representative c
-templates per call type became difficult. The selection of background templates for 
-calibration meant that the class imbalance between calls and background noise 
-differed between calibration and testing. The selection of templates and not 
-a continuos audio file for calibration also meant that subsequence DTW did not necessarily 
-act within the same conditions as testing thus creating another hinderance. 
 
-When looking at printed spectrograms of False Positives detected by the model 
-it was found that for both experiments many of these False Positives were actually 
-unlabeled calls. This means that the actual precision of the model may be higher 
-than the reported amounts. This makes sense as human error was also introduced in 
-call labeling, since the known labeled calls were found by previous projects and 
-is therefore not necessarily a complete list.
-
-Considering the relitively good performance of the model as well as the unlabeled 
-True Positives STFT feature extraction is a good method to use for call detection with 
-the DTW algorithm.
 
 
 \mysection{Experiment 2: MFCC Features}{Experiment 2: MFCC Features}\label{sec:exp-2-mfcc}
@@ -135,22 +104,6 @@ the DTW algorithm.
     }\label{tab:mfcc_calib_results}
 \end{table}
 
-The feature frame lengths selected for 5 and 10 templates did not stay consistent with MFCC as they had with STFT. 
-Between the three MFCC experiments, no derivative, 1 derivative added and 2 derivatives added, the frame length selected 
-for 5 and 10 templates for each of these experiments remained the same 0.384 for 5 templates and 0.256 for 10 
-templates. 
-
-The vote fraction chosen for all three experiments for 5 templates was consistently 0.2, but for 10 templates it changed from 
-0.2 to 0.3 to 0.5 for no derivatives to 1 derivitive and 2 erivitives respectively. 
-
-Considering the average F1 scores for 5 templates the MFCC with 2 derivatives added performed the best with an F1 of 0.645. 
-For 10 templates the MFCC without derivatives performed best with F1 avergae begin 0.553. However, the difference in F1 between 
-consecutive experiments differed at most by 0,1. The general trend in chosen thresholds as derivatives were added is that the 
-threshold appeared to increase. This was not a hard rule however.
-
-The genral trend is that the MFCC with 2 drivatives method gave the highest F1 scores, with the 5 template 
-experiment doing the best in terms of overall F1 score.
-
 \begin{table}[H]
     \caption{Final test results for 5 and 10 templates}
     \footnotesize
@@ -174,29 +127,6 @@ experiment doing the best in terms of overall F1 score.
         \bottomrule
     \end{tabular}\label{tab:mfcc_test_results}
 \end{table}
-
-In terms of recall the 5 Template experiment consistently out performed the 10 template experiment no matter 
-the amount of derivitives added to the feature. The highest recall for the template 5 experiment was 0.945 when no 
-derivatives were used. The highest recall for the 10 template experiment was 0.930, also when no derivitives were used. This shows 
-that no derivitives consistiently gives better recall performance, however the difference between the two best recalls in terms of 
-each other as well as in terms of the second highest for each respective experiment was not by much with the absolute lowest recall 
-found to be 0.860 which is all together not bad. 
-
-In terms of precision the 10 template model consistently out performed the 5 templated esperiment. 
-The highest precision for the 10 template experiment was 0.354 when 1 derivitive was used in the feature. The highest for 5 templates 
-was 0.141 also at 1 derivitive added. This shows that 1 derivitive added consistently imporved on precision. 
-Unlike with recall precision was overall not very high with the highest precision being 0.354 and the lowest being 0.063. This shows 
-that MFCC method overall detected many False Positives.
-
-When looking at the F1 scores it can be seen that adding the first derivitive drastically increased the performance for 
-both 5 and 10 templates, however adding the second derivitive again made the performance decrease slighlly, however not 
-as low as with no derivitives. It can be seen that the change in precision had a larger impact on overall performance of the selected 
-thresholds since recall stayed relitively consistent and high.
-
-When looking at the average precision for each model it can be seen that the 10 template model consistently performed better overall as 
-a model not considering the calibration thresholds. When looking at the PR curves in Figures \ref{fig:mfcc_pr}, \ref{fig:mfcc_d1_pr} and \ref{fig:mfcc_d2_pr} 
-it can clearly be seen that the selected threshold rarely is the best point on the PR curve. This again shows the effect of human error due to lack of 
-labeled data in the calibration stage of this project.
 
 \begin{figure}[H]
     \centering
@@ -228,9 +158,6 @@ labeled data in the calibration stage of this project.
     \caption{The PR curves for MFCC with the first and second derivatives added}\label{fig:mfcc_d2_pr}
 \end{figure}
 
-Overall MFCC did not perform as well as the STFT feature extraction method. Using 10 instead of 5 templates did make a large 
-difference in overall performance of MFCC. Using 1 derivitive added to the feature improved the performance of the calibrated 
-thresholds.
 
 
 \mysection{Experiment 3: LPC Features}{Experiment 3: LPC Features}\label{sec:exp-3-lpc}
@@ -286,5 +213,26 @@ thresholds.
 
 \mysection{General Observations}{General Observations}\label{sec:obs}
 
+Considering the low availability of well labeled data to use for the calibration 
+stage of this project as well as human error, which was introduced in manual 
+selection of calibration and background templates, the varying performance of the 
+calibrated thresholds is justified. The lack of data and human error meant that 
+a maximum of 10 templates per call type could be used for calibration. It also caused 
+a bias in the choices of templates to train on as selecting suitably representative c
+templates per call type became difficult. The selection of background templates for 
+calibration meant that the class imbalance between calls and background noise 
+differed between calibration and testing. The selection of templates and not 
+a continuos audio file for calibration also meant that subsequence DTW did not necessarily 
+act within the same conditions as testing thus creating another hinderance. 
 
+When looking at printed spectrograms of False Positives detected by the model 
+it was found that for both experiments many of these False Positives were actually 
+unlabeled calls. This means that the actual precision of the model may be higher 
+than the reported amounts. This makes sense as human error was also introduced in 
+call labeling, since the known labeled calls were found by previous projects and 
+is therefore not necessarily a complete list.
+
+Considering the relitively good performance of the model as well as the unlabeled 
+True Positives STFT feature extraction is a good method to use for call detection with 
+the DTW algorithm.
 

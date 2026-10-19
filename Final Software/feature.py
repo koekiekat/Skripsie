@@ -36,10 +36,9 @@ def make_stft_extractor(frame_dur, overlap=0.75, window="hamming"):
 
 def make_mfcc_extractor(frame_dur, n_mfcc=14, n_mels=26, overlap=0.75, drop_c0 = True, derv_1 = False, derv_2 = False):                       # one scalar scale
 
-    def safe_delta(m, order=1, max_width=9):
+    def safe_delta(m, order, max_width=9):
         n_frames = m.shape[-1]
         width = min(max_width, n_frames if n_frames % 2 == 1 else n_frames - 1)
-        width = max(width, 3)
         return librosa.feature.delta(m, order=order, width=width)
 
     def fn(audio, fs):
@@ -96,15 +95,15 @@ def lpc_to_lpcc(a, n_ceps):
     n_frames = a.shape[1]
     c = np.zeros((n_ceps + 1, n_frames))          # index 0 unused (gain term)
 
-    for n in range(1, n_ceps + 1):
-        if n <= p:
-            acc = -a[n]
+    for m in range(1, n_ceps + 1):#from 1 to 9
+        if m <= p:
+            acc = -a[m] #a_m
         else:
-            acc = np.zeros(n_frames)
-        for k in range(max(1, n - p), n):
-            acc = acc - (k / n) * c[k] * a[n - k]
-        c[n] = acc
-    return c[1:]
+            acc = np.zeros(n_frames) #0
+        for k in range(max(1, m - p), m):
+            acc = acc - (k / m) * c[k] * a[m - k]
+        c[m] = acc
+    return c[1:]#only return 1 to 9 not 0
 
 
 def make_lpc_extractor(frame_dur, order=4, n_ceps=8, overlap=0.75):

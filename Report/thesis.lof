@@ -9,25 +9,25 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}}{7}{figure.caption.13}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces This is a software flow diagram describing how the hyperparameters are chosen for the project.}}{15}{figure.caption.14}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces This is a software flow diagram describing how the testing procedure runs for this project.}}{18}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces This diagram shows how the kth lowest costs are stored for a hypothetical choice of costs per frame for three templates per threshold and two thresholds given k = 2.}}{19}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces This is a software flow diagram describing how the hyperparameters are chosen for the project.}}{16}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces This is a software flow diagram describing how the testing procedure runs for this project.}}{19}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces This diagram shows how the kth lowest costs are stored for a hypothetical choice of costs per frame for three templates per threshold and two thresholds given k = 2.}}{20}{figure.caption.16}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{25}{figure.caption.19}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{25}{subfigure.1.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{25}{subfigure.1.2}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{28}{figure.caption.22}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{28}{subfigure.2.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{28}{subfigure.2.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{28}{figure.caption.23}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{28}{subfigure.3.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{28}{subfigure.3.2}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{28}{figure.caption.24}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{28}{subfigure.4.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{28}{subfigure.4.2}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC with the first and second derivatives added}}{29}{figure.caption.27}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{29}{subfigure.5.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{29}{subfigure.5.2}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{26}{figure.caption.20}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{26}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{26}{subfigure.1.2}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{27}{figure.caption.23}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{27}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{27}{subfigure.2.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{27}{figure.caption.24}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{27}{subfigure.3.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{27}{subfigure.3.2}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{27}{figure.caption.25}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{27}{subfigure.4.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{27}{subfigure.4.2}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC with the first and second derivatives added}}{28}{figure.caption.28}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{28}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{28}{subfigure.5.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

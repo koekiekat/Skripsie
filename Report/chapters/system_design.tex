@@ -46,9 +46,29 @@ energy. The number of $n_{\text{mels}}$ was chosen as 26, which is common practi
 and 14 coefficients were calculated because 13 are typically used, with the lowest coefficient 0 
 removed.\cite{mfcc_dct_type}\cite{mfcc_c_zero}\cite{mfcc_librosa}
 
+The feature.delta function from the librosa library was used to calculate the first and second derivitives 
+for MFCC. The feature returned when using the first derivitive was a concatenation of the original MFCC feature 
+with the first derivitive of that feature vector. This gave a feature with 26 coeficients. Similarly for 
+the second derivitive the MFCC and first derivitive concatenation was concatenated with the new second derivitive. 
+This gave a 39 coefficient feature vector.\cite{lib_delta}\cite{librosa}
+
 
 \mysubsection{LPC}{LPC}\label{sec:lpc}
 
+The util.frame and lpc functions from the librosa library were used to calculate the lpcc feture. 
+Unlike the STFT and MFCC. LPC takes in a sequence of frames to calculate the coefficients. STFT and MFCC created the frames 
+within their functions and thus it was not necessary to frame the audio before using as an input. 
+Thus is why util.frame was used with a frame duration selected during calibration and a hop length of 0.25 of 
+the frame duration. A hamming window was also applied to the frames before using the lpc function. \cite{lib_lpc}\cite{lib_util_frame}
+
+The order chosen for the LPC calculation was 4. Since the higher the order the more detailed the approximation becomes, considering 
+background noise could have a large effect if the approximation becomes too detailed.\cite{lpc}
+
+The lpc was calculated along row of frames used as input. Due to the instability of the LPC extraction method 
+the LPC feature was converted to LPCC. This was done by manually typing out the recursive formula as explained in the theory.
+The number of LPCC coefficients chosen is approximately $\frac{3}{2}p$. For p = 4 it was chosen that around 
+6 LPCC coefficients should be calculated. After testing different numbers of LPCC coefficients it was found that 
+8 LPCC coefficients gave the best calibration results, therefore 8 was the chosen number of LPCC coefficients used.\cite{lpc}
 
 \mysection{DTW methodology}{DTW methodology}\label{sec:dtw_method}
 The sequence.dtw function from the librosa library was used to calculated the Dynamic Time Warping cost 
