@@ -8,19 +8,18 @@
     \setlength{\tabcolsep}{3pt}
     \centering
     \makebox[\textwidth][c]{%
-    \begin{tabular}{cccccccccc}
+    \begin{tabular}{ccccccccc}
         \toprule
         \multirow{2}{*}{Number of Temps}
             & \multicolumn{2}{c}{Single Tones}
             & \multicolumn{2}{c}{Multi Tones}
             & \multicolumn{2}{c}{Burst Tonals} 
-            & \multirow{2}{*}{Avg F1}
             & \multirow{2}{*}{Frame Length}\\
         \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
             & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold \\
         \midrule
-        5  & 0.682 & 0.2339 & 0.568 & 0.2557 & 0.796 & 0.2603 &  & 0.512\\
-        10 & 0.690 & 0.2455 & 0.663 & 0.2364 & 0.697 &  0.2303 & 0.512\\
+        5  & 0.682 & 0.234 & 0.568 & 0.256 & 0.796 & 0.260 & 0.512\\
+        10 & 0.690 & 0.245 & 0.663 & 0.236 & 0.697 &  0.230 & 0.512\\
         \bottomrule
     \end{tabular}\label{tab:stft_calib_results}
     }
@@ -35,8 +34,8 @@
         \toprule
         Number of Temps & Precision & Recall & F1 & Vote Fraction\\
         \midrule
-        5  &  &  &  \\
-        10 &  &  &  \\
+        5 & 0.964 & 0.900 & 0.931 & 0.6 \\
+        10 & 0.967 & 0.967 & 0.967 & 0.4 \\
         \bottomrule
     \end{tabular}\label{tab:stft_vote_results}
 \end{table}
@@ -50,8 +49,8 @@
         \toprule
         Number of Temps & Precision & Recall & F1 & Average Precision \\
         \midrule
-        5  & 0.646 & 0.951 & 0.7696 & 0.850 \\
-        10 & 0.593 & 0.968 & 0.7350 & 0.863 \\
+        5  & 0.715 & 0.886 & 0.792 & 0.829 \\
+        10 & 0.647 & 0.946 & 0.769 & 0.860 \\
         \bottomrule
     \end{tabular}\label{tab:stft_test_results}
 \end{table}
@@ -77,31 +76,54 @@
     \setlength{\tabcolsep}{3pt}
     \centering
     \makebox[\textwidth][c]{%
-    \begin{tabular}{cccccccccc}
+    \begin{tabular}{ccccccccc}
         \toprule
         & \multirow{2}{*}{Number of Temps}
             & \multicolumn{2}{c}{Single Tones}
             & \multicolumn{2}{c}{Multi Tones}
             & \multicolumn{2}{c}{Burst Tonals}
-            & \multirow{2}{*}{Frame Length}
-            & \multirow{2}{*}{Vote Fraction} \\
+            & \multirow{2}{*}{Frame Length} \\
         \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8}
-        & & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold & & \\
+        & & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold & \\
         \midrule
         \multirow{2}{*}{MFCC}
-            & 5  & 0.718 & 16.394 & 0.675 & 22.688 & 0.500 & 19.483 & 0.384 & 0.2 \\
-            & 10 & 0.784 & 17.507 & 0.402 & 19.553 & 0.472 & 21.288 & 0.256 & 0.2 \\
+            & 5  & 0.718 & 16.394 & 0.675 & 22.688 & 0.500 & 19.483 & 0.384 \\
+            & 10 & 0.784 & 17.507 & 0.402 & 19.553 & 0.472 & 21.288 & 0.256 \\
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv1}}
-            & 5  & 0.683 & 15.610 & 0.659 & 23.440 & 0.500 & 20.337 & 0.384 & 0.2 \\
-            & 10 & 0.785 & 18.815 & 0.394 & 22.548 & 0.425 & 20.569 & 0.256 & 0.2 \\
+            & 5  & 0.683 & 15.610 & 0.659 & 23.440 & 0.500 & 20.337 & 0.384 \\
+            & 10 & 0.785 & 18.815 & 0.394 & 22.548 & 0.425 & 20.569 & 0.256 \\
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv2}}
-            & 5  & 0.758 & 18.199 & 0.659 & 24.977 & 0.518 & 21.595 & 0.384 & 0.2 \\
-            & 10 & 0.806 & 19.642 & 0.408 & 22.356 & 0.430 & 22.836 & 0.256 & 0.2 \\
+            & 5  & 0.758 & 18.199 & 0.659 & 24.977 & 0.518 & 21.595 & 0.384 \\
+            & 10 & 0.806 & 19.642 & 0.408 & 22.356 & 0.430 & 22.836 & 0.256 \\
         \bottomrule
     \end{tabular}%
     }\label{tab:mfcc_calib_results}
+\end{table}
+
+\begin{table}[H]
+    \caption{Final vote results for 5 and 10 templates}
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \centering
+    \begin{tabular}{cccccc}
+        \toprule
+        & Number of Temps & Precision & Recall & $F_1$ & Vote Fraction \\
+        \midrule
+        \multirow{2}{*}{MFCC}
+            & 5  & 1.000 & 0.900 & 0.947 & 0.6 \\
+            & 10 & 0.935 & 0.967 & 0.951 & 0.5 \\
+        \midrule
+        \multirow{2}{*}{\makecell{MFCC\\deriv1}}
+            & 5  & 0.935 & 0.967 & 0.951 & 0.4 \\
+            & 10 & 0.964 & 0.900 & 0.0.931 & 0.6 \\
+        \midrule
+        \multirow{2}{*}{\makecell{MFCC\\deriv2}}
+            & 5  & 0.906 & 0.967 & 0.935 & 0.4 \\
+            & 10 & 1.000 & 0.900 & 0.947 & 0.6 \\
+        \bottomrule
+    \end{tabular}\label{tab:mfcc_vote_results}
 \end{table}
 
 \begin{table}[H]
@@ -114,16 +136,16 @@
         & Number of Temps & Precision & Recall & $F_1$ & Average Precision \\
         \midrule
         \multirow{2}{*}{MFCC}
-            & 5  & 0.063 & 0.945 & 0.117 & 0.396 \\
-            & 10 & 0.108 & 0.930 & 0.194 & 0.550 \\
+            & 5  & 0.582 & 0.714 & 0.641 & 0.642 \\
+            & 10 & 0.535 & 0.817 & 0.647 & 0.684 \\
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv1}}
-            & 5  & 0.141 & 0.932 & 0.246 & 0.430 \\
-            & 10 & 0.030 & 0.942 & 0.0.058 & 0.0.432 \\
+            & 5  & 0.495 & 0.799 & 0.611 & 0.632 \\
+            & 10 & 0.468 & 0.809 & 0.593 & 0.602 \\
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv2}}
-            & 5  & 0.085 & 0.943 & 0.155 & 0.380 \\
-            & 10 & 0.042 & 0.940 & 0.080 & 0.498 \\
+            & 5  & 0.354 & 0.880 & 0.505 & 0.614 \\
+            & 10 & 0.505 & 0.770 & 0.610 & 0.628 \\
         \bottomrule
     \end{tabular}\label{tab:mfcc_test_results}
 \end{table}
@@ -168,22 +190,36 @@
     \setlength{\tabcolsep}{3pt}
     \centering
     \makebox[\textwidth][c]{%
-    \begin{tabular}{ccccccccc}
+    \begin{tabular}{cccccccc}
         \toprule
         \multirow{2}{*}{Number of Temps}
             & \multicolumn{2}{c}{Single Tones}
             & \multicolumn{2}{c}{Multi Tones}
             & \multicolumn{2}{c}{Burst Tonals} 
-            & \multirow{2}{*}{Frame Length}
-            & \multirow{2}{*}{Vote Fraction}\\
+            & \multirow{2}{*}{Frame Length}\\
         \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
             & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold \\
         \midrule
-        5  & 0.863 & 0.344 & 0.744 & 0.526 & 0.632 & 0.449 & 0.256 & 0.2\\
-        10 & 0.882 & 0.336 & 0.605 & 0.364 & 0.686 &  0.427 & 0.256 & 0.2\\
+        5  & 0.863 & 0.344 & 0.744 & 0.526 & 0.632 & 0.449 & 0.256\\
+        10 & 0.882 & 0.336 & 0.605 & 0.364 & 0.686 &  0.427 & 0.256\\
         \bottomrule
     \end{tabular}\label{tab:lpc_calib_results}
     }
+\end{table}
+
+\begin{table}[H]
+    \caption{Vote frac results for LPC for 5 and 10 templates}
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        Number of Temps & Precision & Recall & F1 & Vote Fraction\\
+        \midrule
+        5 & 0.968 & 1.000 & 0.984 & 0.4 \\
+        10 & 0.968 & 1.000 & 0.984 & 0.5 \\
+        \bottomrule
+    \end{tabular}\label{tab:lpc_vote_results}
 \end{table}
 
 \begin{table}[H]
@@ -195,8 +231,8 @@
         \toprule
         Number of Temps & Precision & Recall & F1 & Average Precision \\
         \midrule
-        5  & 0.190 & 0.930 & 0.316 & 0.697 \\
-        10 & 0.351 & 0.916 & 0.508 & 0.772 \\
+        5  & 0.474 & 0.900 & 0.621 & 0.789 \\
+        10 & 0.523 & 0.860 & 0.650 & 0.757 \\
         \bottomrule
     \end{tabular}\label{tab:lpc_test_results}
 \end{table}

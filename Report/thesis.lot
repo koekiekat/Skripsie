@@ -10,9 +10,11 @@
 \contentsline {table}{\numberline {5.2}{\ignorespaces Vote frac results for STFT for 5 and 10 templates}}{25}{table.caption.18}%
 \contentsline {table}{\numberline {5.3}{\ignorespaces Final test results for STFT for 5 and 10 templates}}{25}{table.caption.19}%
 \contentsline {table}{\numberline {5.4}{\ignorespaces Calibration variables chosen via highest F1 for 5 templates and 10 templates}}{26}{table.caption.21}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Final test results for 5 and 10 templates}}{26}{table.caption.22}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Calibration variables chosen via highest F1 for LPC for 5 templates and 10 templates}}{28}{table.caption.26}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Final test results for LPC for 5 and 10 templates}}{28}{table.caption.27}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Final vote results for 5 and 10 templates}}{26}{table.caption.22}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Final test results for 5 and 10 templates}}{27}{table.caption.23}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Calibration variables chosen via highest F1 for LPC for 5 templates and 10 templates}}{28}{table.caption.27}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Vote frac results for LPC for 5 and 10 templates}}{28}{table.caption.28}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Final test results for LPC for 5 and 10 templates}}{28}{table.caption.29}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 
