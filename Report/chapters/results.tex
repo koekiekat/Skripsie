@@ -277,7 +277,6 @@ for the MFCC models.
 \end{figure}
 
 
-
 \mysection{Experiment 3: LPC Features}{Experiment 3: LPC Features}\label{sec:exp-3-lpc}
 
 \begin{table}[H]
@@ -286,22 +285,29 @@ for the MFCC models.
     \setlength{\tabcolsep}{3pt}
     \centering
     \makebox[\textwidth][c]{%
-    \begin{tabular}{cccccccc}
+    \begin{tabular}{ccccccccc}
         \toprule
         \multirow{2}{*}{Number of Temps}
             & \multicolumn{2}{c}{Single Tones}
             & \multicolumn{2}{c}{Multi Tones}
-            & \multicolumn{2}{c}{Burst Tonals} 
+            & \multicolumn{2}{c}{Burst Tonals}
+            & \multirow{2}{*}{Averag F1} 
             & \multirow{2}{*}{Frame Length}\\
         \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
             & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold \\
         \midrule
-        5  & 0.863 & 0.344 & 0.744 & 0.526 & 0.632 & 0.449 & 0.256\\
-        10 & 0.882 & 0.336 & 0.605 & 0.364 & 0.686 &  0.427 & 0.256\\
+        5  & 0.863 & 0.344 & 0.744 & 0.526 & 0.632 & 0.449 & 0.746 & 0.256\\
+        10 & 0.882 & 0.336 & 0.605 & 0.364 & 0.686 &  0.427 & 0.724 & 0.256\\
         \bottomrule
     \end{tabular}\label{tab:lpc_calib_results}
     }
 \end{table}
+
+Both the 5 and 10 template experiments for the LPC model chose 0.256 seconds as the 
+frame length. This can be seen in Table \ref{tab:lpc_calib_results}. 
+
+The 5 template model had the highest F1 score of 0.746. This score was 0.022 higher than the 
+to template score.
 
 \begin{table}[H]
     \caption{Vote frac results for LPC for 5 and 10 templates}
@@ -318,6 +324,10 @@ for the MFCC models.
     \end{tabular}\label{tab:lpc_vote_results}
 \end{table}
 
+While the 5 and 10 template experiments for LPC each chose a different vote fraction, 
+in terms of precision, recall and F1 score they performed equally well. Their F1 score was 
+0.984. This can be seen in Table \ref{tab:lpc_vote_results}.
+
 \begin{table}[H]
     \caption{Final test results for LPC for 5 and 10 templates}
     \footnotesize
@@ -333,6 +343,15 @@ for the MFCC models.
     \end{tabular}\label{tab:lpc_test_results}
 \end{table}
 
+As seen in Table \ref{tab:lpc_test_results}, the 5 template experiment performed better in 
+terms of recall with the value 
+being 0.900. The 10 template model performed best in precision and F1 score with a recall of 
+0.523 and an F1 score of 0.621.
+
+This means that the 10 template model performed better in terms of chosen thresholds. This 
+can also be seen in Figures \ref{fig:lpc_5_pr} and \ref{fig:lpc_10_pr} where the marked precision 
+and recall point is better matched to the PR curve for the 10 template model.
+
 \begin{figure}[H]
     \centering
     \subfloat[5 templates\label{fig:lpc_5_pr}]{%
@@ -342,6 +361,13 @@ for the MFCC models.
         \includegraphics[width=0.3\linewidth]{figures/results/lpc_10_pr.png}}
     \caption{The PR curves for LPC with the first and second derivatives added}\label{fig:lpc_pr}
 \end{figure}
+
+By considering Table \ref{tab:lpc_test_results} and Figure \ref{fig:lpc_5_pr} and \ref{fig:lpc_10_pr}, 
+it can be seen that in terms of average precision and PR curve shape the 5 template 
+model performed better with an AP value of 0.789. 
+
+Overall the 5 template experiment for the LPC model performed best in terms of Bryde's Whale 
+call detections.
 
 \mysection{General Observations}{General Observations}\label{sec:obs}
 
