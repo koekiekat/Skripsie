@@ -15,37 +15,43 @@
 \contentsline {section}{\numberline {1.4}Scope}{2}{section.1.4}%
 \contentsline {section}{\numberline {1.5}Layout of report}{2}{section.1.5}%
 \contentsline {chapter}{\numberline {2}Literature}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Dynamic Time Warping}{3}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Feature Extraction Methods}{6}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Short Time Fourier Transform}{6}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Mel-Frequency Cepstral Coefficients}{7}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Linear Predictive Coding}{8}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Similar Studies}{9}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Dataset}{10}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Background}{10}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Labeling}{10}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Data Splitting}{10}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Template Selection}{11}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Hyperparameter Tuning Template Selection}{11}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Evaluation Data Selection}{12}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}System Design}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Overview}{13}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Feature Extraction Methods}{13}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}STFT}{13}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}MFCC}{14}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}LPC}{14}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}DTW methodology}{15}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{16}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Testing Procedure}{19}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Detection Methodology}{19}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Matching Methodology}{22}{subsection.4.5.2}%
-\contentsline {section}{\numberline {4.6}Evaluation Metrics}{22}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Results}{25}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{25}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{27}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{31}{section.5.3}%
-\contentsline {section}{\numberline {5.4}General Observations}{32}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusion}{34}{chapter.6}%
-\contentsline {chapter}{References}{35}{chapter*.33}%
-\contentsline {chapter}{\numberline {A}Appendix title goes here}{39}{appendix.A}%
+\contentsline {section}{\numberline {2.1}Bryde's Whales}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Dynamic Time Warping}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Feature Extraction Methods}{6}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Short Time Fourier Transform}{6}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Mel-Frequency Cepstral Coefficients}{7}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Linear Predictive Coding}{8}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Similar Studies}{10}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Classification of Killer Whale Vocalizations using DTW}{10}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Detection of Template-Based Detection Algorithms for Bryde's Whales}{10}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Detection of real-time fin and blue whale calls}{11}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Hidden Markov Model for Bryde's Whale short pulse calls}{11}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}Speech Recognition using DTW}{12}{subsection.2.4.5}%
+\contentsline {chapter}{\numberline {3}Dataset}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Background}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Labeling}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Data Splitting}{13}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Template Selection}{14}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Hyperparameter Tuning Template Selection}{14}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Evaluation Data Selection}{15}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}System Design}{16}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Overview}{16}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Feature Extraction Methods}{16}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}STFT}{16}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}MFCC}{17}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}LPC}{17}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}DTW methodology}{18}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{19}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Testing Procedure}{22}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Detection Methodology}{22}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Matching Methodology}{25}{subsection.4.5.2}%
+\contentsline {section}{\numberline {4.6}Evaluation Metrics}{25}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Results}{28}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{28}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{30}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{33}{section.5.3}%
+\contentsline {section}{\numberline {5.4}General Observations}{35}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Conclusion}{37}{chapter.6}%
+\contentsline {chapter}{References}{38}{chapter*.33}%
+\contentsline {chapter}{\numberline {A}Appendix title goes here}{43}{appendix.A}%
 \contentsfinish 
