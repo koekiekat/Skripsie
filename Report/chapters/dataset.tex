@@ -3,7 +3,7 @@
 \mysection{Background}{Background}\label{sec:background}
 
 The dataset used contains three 72 hour recordings, recorded in False Bay, near Gordons Bay, between 22 April 2023 and 22 June 2023. 
-The recordings were taken at a depth of 20 to 30 meters at the coordinates, S 34.16813deg, E18.758718deg. 
+The recordings were taken at a depth of 20 to 30 meters at the coordinates, S 34.17$^\circ$, E 18.76$^\circ$. 
 
 The device used for the recordings was a single omnidirectional hydrophone, designed and built by a Stellenbosch University research 
 group from the Electrical and Electronic Engineering Department.
@@ -13,50 +13,93 @@ used by the recording device.\cite{data_set}
 
 \mysection{Labeling}{Labeling}\label{sec:labeling}
 
-Detection tables, containg start and end times of calls within the each file, were provided from a previous research project which used a 
-band-limited energy detector to flag calls. This method unfortunately did not detect all the calls within the audio files and none of the 
-calls were labelled as a specific type of call. 
+Detection tables, containing start and end times of calls within each of the three file, were provided from a previous research 
+project which used a 
+band-limited energy detector to flag calls. This method unfortunately did not detect all the calls within the audio files and none 
+of the 
+calls were labeled as a specific type of call. 
 
-Another detection table was procured. This table contained more detections for the first 72 hour file and contained call labels for all three files. 
-This meant that there were sufficient labels for the first 72 hour recording of the dataset and there were partial labels for the second and third 72 
-hour recordings within the dataset.\cite{data_set}
+Another detection table was procured which contained more detections for the first 72 hour file and contained call labels for 
+all three files. 
+This meant that while all three files contained labeled calls only one contained enough labeled calls to use the entire file 
+without expecting an excessive amount of unlabeled calls.\cite{data_set}
 
 \mysection{Data Splitting}{Data Splitting}\label{sec:data-splitting}
 
-For this project the data was plit in three sections. Each of the 72 hour audio files was chosen for a different section. Given that only 
-the first of the three 72 hour audio files was well labeled, it was decided that this would be used for training and testing. The second 
-audio file was used for hyperparameter tuning and the third was used to select templates.
+For this project the data was split in three sections, template data, hyperparameter tuning data and evaluation data. Each of the 
+72 hour audio files was chosen for a different section. Given that only 
+the first of the three 72 hour audio files was well labeled, it was decided that this would be used as the evaluation data. 
+The second audio file was used for hyperparameter tuning and the third was used to select templates. Labeled calls for the 
+down sweep call type were only found in the audio file used for evaluation. Therefore, due to lack of data, this call type was ignored.
+
+\begin{table}[H]
+    \caption{Dataset counts by date and category}
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \centering
+    \begin{tabular}{lccccc}
+        \toprule
+        \multirow{2}{*}{\textbf{Recording Start Date}} & \multicolumn{4}{c}{\textbf{Call Count}} & \multirow{2}{*}{\textbf{Total Calls}} \\
+        \cmidrule(lr){2-5}
+        & \textbf{Single-Tone} & \textbf{Multi-Tone} & \textbf{Burst-Tonal} & \textbf{Tonal Downsweep} & \\
+        \midrule
+        \makecell{22 April 2023} & 1015 & 452 & 171 & 164 & 1802\\
+        \midrule
+        \makecell{26 April 2023} & 242 & 91 & 9 & 0 & 342\\
+        \midrule
+        \makecell{29 April 2023} & 32 & 25 & 11 & 0 & 164 \\
+        \bottomrule
+    \end{tabular}\label{tab:dataset_counts}
+\end{table}
 
 \mysubsection{Template Selection}{Template Selection}\label{sec:temp_sel}
 
-The audio file which was recorded starting on the 29th was used to select templates. These chosen templates were used for the comparison which 
-determined whether an audio clip contained calls or not.
+The audio file which was recorded starting on 29 April 2023 was used to select templates. These chosen templates were 
+used as the baseline for \acs{DTW} comparisons.
 
-For the three different call type, single-tones, multi-tones and burst-tonals, the maximum number of templates per call type which could be 
-extracted such that each call type had the same amount of templates was 10. The limiting call type was burst-tonals.
+For the three considered call types, single-tones, multi-tones and burst-tonals, the maximum number of templates per call 
+type which could be 
+extracted such that each call type had the same amount of templates was 10. The limiting call type was burst-tonals. 
+In Table \ref{tab:dataset_counts} it can be seen that there were 11 available burts-tonals. However, it was decided to make 10 the maximum 
+number of templates per call type.
 
-To ensure that the 10 templates chosen were representative of varying amounts of background noise templates were chosen by looking at spectrograms 
-of detected calls throughout the audio file. The visual inspection was also necessary since some of the calls labeled as single-tones looked more like 
-multi-tones and some of the multi-tones could actually be classified as burst-tonals.
+To ensure that the 10 templates chosen were representative of varying signal-to-noise ratios \acs{SNR} templates were 
+chosen by looking at spectrograms 
+of labeled calls throughout the audio file. The visual inspection was also necessary 
+since some of the calls labeled as single-tones looked more like 
+multi-tones and some of the multi-tones could actually be classified as burst-tonals. This overlap in 
+possible classification 
+was due to the variety of human labelers and the common frequency components between call types.
 
 \mysubsection{Hyperparameter Tuning Template Selection}{Hyperparameter Tuning Template Selection}\label{sec:tune_temp_sel}
 
-The audio file which was recorded starting on the 26th was used to select calibration templates. These templates were used to determine below which threshold a 
-segment of audio could be considered a call. For the calibration templates 10 templates were chosen for each call type. This was again limited by the burst-tonals 
-maximum number of templates. In this file there were however only 9 labeled burst-tonals, but when selecting multi-tones it was found that a call originally labeled 
-as a multi-tone could in fact be seen as a burst-tonal. 
+The audio file which was recorded starting on 26 April 2023 was used to select templates used for hyperparameter 
+tuning, referred to as calibration templates. These calibration templates were used to determine below which \acs{DTW} cost threshold a 
+segment of audio could be considered a call. For the calibration templates 10 templates were chosen for each call type. This was 
+again limited by the burst-tonals 
+maximum number of templates. In this file there were only 9 labeled burst-tonals, but when selecting 
+multi-tones it was found that a call originally labeled 
+as a multi-tone could in fact be seen as a burst-tonal. The number of each call type labeled per file can be seen in 
+Table \ref{tab:dataset_counts}.
 
-Besides these 30 templates, 10 for each call type, 100 background templates were also selected. Within each audio file most of the time is made up of background 
-noise and only some parts actually contain calls. This was simulated by selecting many more background templates that call-type templates. Since there is no table 
-labeling background noise background segments of varying sizes were extracted from the file and 100 templates were manually selected. The reason for the manual process 
-links with the unreliability of the labelled data. The audio file used was only labeled by the band-limited energy detector and thus did not label all the calls 
-within the file. This means that some of the samples extracted as background audio actually contained calls that had never been labeled. Manually selecting each template 
-ensured that all the templates chosen were in fact background noise only.
+Besides these 30 calibration templates, 10 for each call type, 100 background calibration templates were also selected. 
+Within each audio file most of the time was made up of background 
+noise and only some parts actually contained calls. 
+This was simulated by selecting many more background calibration templates that call-type calibration templates. Since there 
+is no table 
+labeling background noise background calibration templates of varying sizes were extracted from the file and 100 templates 
+were manually selected. The reason for the manual selection process 
+links with the unreliability of the labeled data. The audio file used for selection of calibration templates was only labeled by 
+the band-limited energy detector and thus did not label all the calls 
+within the file. This means that some of the samples extracted as background audio actually contained calls that had never been labeled. 
+Manually selecting each template 
+ensured that all the templates chosen only contained background noise.
 
 \mysubsection{Evaluation Data Selection}{Evaluation Data Selection}\label{sec:eval_dat_sel}
 
-The entire first audio file which was recorded starting on the 22nd was used for the final evaluation of the whale call detection model. No templates were extracted, 
-instead the entire file was sweeped to search for calls.
+The audio file recorded starting on 22 April 2023 was used for the final evaluation of the whale 
+call detection model. No templates were extracted, instead the entire file was sweeped to search for calls.
 
-The 22nd file was the only file which contained tonal-downsweep calls. Due to the limited amount of these types of calls all the detected tonal-downsweeps within this file 
-was ignored while testing since thresholds could not be trained for this call type.
+As seen in Table \ref{tab:dataset_counts} this file was the only file which contained tonal-downsweep calls. Due to the limited amount of these types of 
+calls all the labeled tonal-downsweeps within this file 
+was ignored while testing.

@@ -52,6 +52,6 @@
 \contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{33}{section.5.3}%
 \contentsline {section}{\numberline {5.4}General Observations}{35}{section.5.4}%
 \contentsline {chapter}{\numberline {6}Conclusion}{37}{chapter.6}%
-\contentsline {chapter}{References}{38}{chapter*.33}%
+\contentsline {chapter}{References}{38}{chapter*.34}%
 \contentsline {chapter}{\numberline {A}Appendix title goes here}{43}{appendix.A}%
 \contentsfinish 
