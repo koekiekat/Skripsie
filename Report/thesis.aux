@@ -22,7 +22,9 @@
 \@writefile{toc}{\contentsline {chapter}{List of tables}{vi}{chapter*.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{Nomenclature}{viii}{chapter*.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{Acronyms and abbreviations}{ix}{section*.8}\protected@file@percent }
-\@gls@reference{main}{low_resource_language}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
+\@gls@reference{main}{precision}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
+\@gls@reference{main}{recall}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
+\@gls@reference{main}{f1_score}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
 \@writefile{toc}{\contentsline {section}{Definitions}{x}{section*.9}\protected@file@percent }
 \citation{vessel_collision_since_1990s}
 \citation{bryde_whales_SA}
@@ -30,6 +32,7 @@
 \citation{killer_whale_dialects}
 \citation{blue_whale_song_variation}
 \citation{DTW_has_worked}
+\citation{dtw_few_temps}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -38,13 +41,27 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}\protected@file@percent }
 \newlabel{sec:background-overview}{{1.1}{1}{Background}{section.1.1}{}}
 \newlabel{sec:background-overview@cref}{{[section][1][1]1.1}{[1][1][]1}{}{}{}}
+\ACRO{recordpage}{DTW}{12}{1}{1}
+\ACRO{recordpage}{DTW}{12}{1}{1}
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Problem Statement}{1}{section.1.2}\protected@file@percent }
 \newlabel{sec:problemstatement}{{1.2}{1}{Problem Statement}{section.1.2}{}}
 \newlabel{sec:problemstatement@cref}{{[section][2][1]1.2}{[1][1][]1}{}{}{}}
 \ACRO{recordpage}{DTW}{12}{1}{1}
+\ACRO{recordpage}{STFT}{13}{1}{2}
+\ACRO{recordpage}{MFCC}{13}{1}{2}
+\ACRO{recordpage}{LPC}{13}{1}{2}
 \@writefile{toc}{\contentsline {section}{\numberline {1.3}Objectives}{2}{section.1.3}\protected@file@percent }
 \newlabel{sec:objectives}{{1.3}{2}{Objectives}{section.1.3}{}}
 \newlabel{sec:objectives@cref}{{[section][3][1]1.3}{[1][2][]2}{}{}{}}
+\ACRO{recordpage}{DTW}{13}{1}{2}
+\ACRO{recordpage}{STFT}{13}{1}{2}
+\ACRO{recordpage}{MFCC}{13}{1}{2}
+\ACRO{recordpage}{LPC}{13}{1}{2}
+\ACRO{recordpage}{DTW}{13}{1}{2}
+\@gls@reference{main}{precision}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{2}}
+\@gls@reference{main}{recall}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{2}}
+\@gls@reference{main}{f1_score}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{2}}
+\ACRO{recordpage}{DTW}{13}{1}{2}
 \@writefile{toc}{\contentsline {section}{\numberline {1.4}Scope}{2}{section.1.4}\protected@file@percent }
 \newlabel{sec:scope}{{1.4}{2}{Scope}{section.1.4}{}}
 \newlabel{sec:scope@cref}{{[section][4][1]1.4}{[1][2][]2}{}{}{}}
@@ -350,47 +367,48 @@
 \bibcite{killer_whale_dialects}{{4}{2000}{{Deecke et~al.}}{{Deecke, Ford, and Spong}}}
 \bibcite{blue_whale_song_variation}{{5}{2003}{{McDonald et~al.}}{{McDonald, Mesnick, and Hildebrand}}}
 \bibcite{DTW_has_worked}{{6}{2006}{{Brown et~al.}}{{Brown, Hodgins-Davis, and Miller}}}
-\bibcite{bryde_geographicly}{{7}{2003}{{Oleson et~al.}}{{Oleson, Barlow, Gordon, Rankin, and Hildebrand}}}
-\bibcite{dtw_basic}{{8}{2015{}}{{M\"uller and Zalkow}}{{}}}
-\bibcite{dtw_kamper}{{9}{2021{}}{{Kamper}}{{}}}
+\bibcite{dtw_few_temps}{{7}{2025}{{Herreilers et~al.}}{{Herreilers, Jacobs, and Niesler}}}
+\bibcite{bryde_geographicly}{{8}{2003}{{Oleson et~al.}}{{Oleson, Barlow, Gordon, Rankin, and Hildebrand}}}
+\bibcite{dtw_basic}{{9}{2015{}}{{M\"uller and Zalkow}}{{}}}
 \@writefile{toc}{\contentsline {chapter}{References}{38}{chapter*.33}\protected@file@percent }
-\bibcite{vector_sim}{{10}{2023}{{Schwaber-Cohen}}{{}}}
-\bibcite{dtw_boundaries}{{11}{2020}{{Alizadeh}}{{}}}
-\bibcite{dtw_subsequence}{{12}{2015{}}{{M\"uller and Zalkow}}{{}}}
-\bibcite{Det_Tech}{{13}{2020}{{Atinde M.~Usman}}{{}}}
-\bibcite{stft_kamper}{{14}{2026}{{Kamper}}{{}}}
-\bibcite{mel_kamper}{{15}{2021{}}{{Kamper}}{{}}}
-\bibcite{mel_med}{{16}{2019}{{Singh}}{{}}}
-\bibcite{deltas}{{17}{2023{}}{{DataMListic}}{{}}}
-\bibcite{mel_delta}{{18}{2023{}}{{DataMListic}}{{}}}
-\bibcite{melderv_calcs}{{19}{2015}{{Majeed et~al.}}{{Majeed, Husain, Samad, and Idbeaa}}}
-\bibcite{lpc}{{20}{1993}{{Rabiner and Juang}}{{}}}
-\bibcite{killer-whale}{{21}{2007}{{Brown and Miller}}{{}}}
-\bibcite{temp-based-bryde}{{22}{2020}{{Ogundile and Versfeld}}{{}}}
-\bibcite{dtw-vq}{{23}{2009}{{Mouy et~al.}}{{Mouy, Bahoura, and Simard}}}
-\bibcite{hmm}{{24}{2020}{{Ogundile et~al.}}{{Ogundile, Usman, Babalola, and Versfeld}}}
-\bibcite{speech}{{25}{2019}{{Permanasari et~al.}}{{Permanasari, Harahap, and Ali}}}
-\bibcite{data_set}{{26}{2024}{{Faustmann}}{{}}}
-\bibcite{nyq}{{27}{2000}{{Meddins}}{{}}}
-\bibcite{hamm}{{28}{2026}{{Learning}}{{}}}
-\bibcite{mfcc_dct_type}{{29}{2008{}}{{community}}{{}}}
-\bibcite{mfcc_c_zero}{{30}{2013}{{Roch et~al.}}{{Roch, \v {S}irovi\'{c}, and Baumann-Pickering}}}
-\bibcite{mfcc_librosa}{{31}{2026{}}{{librosa~development team}}{{}}}
-\bibcite{lib_delta}{{32}{2023}{{librosa~development team}}{{}}}
-\bibcite{librosa}{{33}{2015}{{McFee et~al.}}{{McFee, Raffel, Liang, Ellis, McVicar, Battenberg, and Nieto}}}
-\bibcite{lib_lpc}{{34}{2025{}}{{librosa~development team}}{{}}}
-\bibcite{lib_util_frame}{{35}{2025{}}{{librosa~development team}}{{}}}
-\bibcite{scipy_dist}{{36}{2008{}}{{community}}{{}}}
-\bibcite{librosa_dtw}{{37}{2026{}}{{librosa~development team}}{{}}}
-\bibcite{fft_pow_2}{{38}{2026}{{Hees}}{{}}}
-\bibcite{sf}{{39}{2026}{{Bechtold}}{{}}}
-\bibcite{resample}{{40}{2008{}}{{community}}{{}}}
-\bibcite{find_peaks}{{41}{2008{}}{{community}}{{}}}
-\bibcite{backtracking}{{42}{2026{}}{{librosa~development team}}{{}}}
-\bibcite{searchsorted}{{43}{2026}{{Developers}}{{}}}
-\bibcite{pr}{{44}{2015}{{Saito and Rehmsmeier}}{{}}}
-\bibcite{roc}{{45}{2005}{{Fawcett}}{{}}}
-\bibcite{ap}{{46}{2020}{{Padilla et~al.}}{{Padilla, Netto, and da~Silva}}}
+\bibcite{dtw_kamper}{{10}{2021{}}{{Kamper}}{{}}}
+\bibcite{vector_sim}{{11}{2023}{{Schwaber-Cohen}}{{}}}
+\bibcite{dtw_boundaries}{{12}{2020}{{Alizadeh}}{{}}}
+\bibcite{dtw_subsequence}{{13}{2015{}}{{M\"uller and Zalkow}}{{}}}
+\bibcite{Det_Tech}{{14}{2020}{{Atinde M.~Usman}}{{}}}
+\bibcite{stft_kamper}{{15}{2026}{{Kamper}}{{}}}
+\bibcite{mel_kamper}{{16}{2021{}}{{Kamper}}{{}}}
+\bibcite{mel_med}{{17}{2019}{{Singh}}{{}}}
+\bibcite{deltas}{{18}{2023{}}{{DataMListic}}{{}}}
+\bibcite{mel_delta}{{19}{2023{}}{{DataMListic}}{{}}}
+\bibcite{melderv_calcs}{{20}{2015}{{Majeed et~al.}}{{Majeed, Husain, Samad, and Idbeaa}}}
+\bibcite{lpc}{{21}{1993}{{Rabiner and Juang}}{{}}}
+\bibcite{killer-whale}{{22}{2007}{{Brown and Miller}}{{}}}
+\bibcite{temp-based-bryde}{{23}{2020}{{Ogundile and Versfeld}}{{}}}
+\bibcite{dtw-vq}{{24}{2009}{{Mouy et~al.}}{{Mouy, Bahoura, and Simard}}}
+\bibcite{hmm}{{25}{2020}{{Ogundile et~al.}}{{Ogundile, Usman, Babalola, and Versfeld}}}
+\bibcite{speech}{{26}{2019}{{Permanasari et~al.}}{{Permanasari, Harahap, and Ali}}}
+\bibcite{data_set}{{27}{2024}{{Faustmann}}{{}}}
+\bibcite{nyq}{{28}{2000}{{Meddins}}{{}}}
+\bibcite{hamm}{{29}{2026}{{Learning}}{{}}}
+\bibcite{mfcc_dct_type}{{30}{2008{}}{{community}}{{}}}
+\bibcite{mfcc_c_zero}{{31}{2013}{{Roch et~al.}}{{Roch, \v {S}irovi\'{c}, and Baumann-Pickering}}}
+\bibcite{mfcc_librosa}{{32}{2026{}}{{librosa~development team}}{{}}}
+\bibcite{lib_delta}{{33}{2023}{{librosa~development team}}{{}}}
+\bibcite{librosa}{{34}{2015}{{McFee et~al.}}{{McFee, Raffel, Liang, Ellis, McVicar, Battenberg, and Nieto}}}
+\bibcite{lib_lpc}{{35}{2025{}}{{librosa~development team}}{{}}}
+\bibcite{lib_util_frame}{{36}{2025{}}{{librosa~development team}}{{}}}
+\bibcite{scipy_dist}{{37}{2008{}}{{community}}{{}}}
+\bibcite{librosa_dtw}{{38}{2026{}}{{librosa~development team}}{{}}}
+\bibcite{fft_pow_2}{{39}{2026}{{Hees}}{{}}}
+\bibcite{sf}{{40}{2026}{{Bechtold}}{{}}}
+\bibcite{resample}{{41}{2008{}}{{community}}{{}}}
+\bibcite{find_peaks}{{42}{2008{}}{{community}}{{}}}
+\bibcite{backtracking}{{43}{2026{}}{{librosa~development team}}{{}}}
+\bibcite{searchsorted}{{44}{2026}{{Developers}}{{}}}
+\bibcite{pr}{{45}{2015}{{Saito and Rehmsmeier}}{{}}}
+\bibcite{roc}{{46}{2005}{{Fawcett}}{{}}}
+\bibcite{ap}{{47}{2020}{{Padilla et~al.}}{{Padilla, Netto, and da~Silva}}}
 \ACRO{total-barriers}{1}
 \@writefile{toc}{\contentsline {chapter}{\numberline {A}Appendix title goes here}{43}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -398,10 +416,13 @@
 \newlabel{appen:applabel}{{A}{43}{Appendix title goes here}{appendix.A}{}}
 \newlabel{appen:applabel@cref}{{[chapter][1][]A}{[1][43][]43}{}{}{}}
 \ttl@finishall
-\ACRO{usage}{DTW=={3}}
-\ACRO{usage}{STFT=={1}}
-\ACRO{usage}{MFCC=={1}}
-\ACRO{usage}{LPC=={1}}
+\ACRO{usage}{DTW=={8}}
+\ACRO{usage}{STFT=={3}}
+\ACRO{usage}{MFCC=={3}}
+\ACRO{usage}{LPC=={3}}
 \ACRO{usage}{FT=={1}}
-\ACRO{pages}{DTW=={12@1@1|21@1@10}}
+\ACRO{pages}{STFT=={13@1@2}}
+\ACRO{pages}{MFCC=={13@1@2}}
+\ACRO{pages}{LPC=={13@1@2}}
+\ACRO{pages}{DTW=={12@1@1|13@1@2|21@1@10}}
 \gdef \@abspage@last{54}
