@@ -1,101 +1,110 @@
 \mychapter{System Design}{System Design}{}\label{chap:sys-design}
 
 \mysection{Overview}{Overview}\label{sec:overview}
-The project was coded in Python. The functionality of each section of the project was placed in relevant .py 
-files which were imported to the relevant jupyter notebook which was used for that section.
+The project was coded in Python. The functionality of each section of the project was placed in relevant python scripts.
+This was imported to the relevant jupyter notebook which was used for that section.
 
 
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods}
-The raw audio recorded by the hydrophone was stored in .wav files with a sampling frequency of 8kHz. Before 
-extracting feature vectors from audio segments the audio was first downsampled to 1kHz sampling rate. This 
-helped remove unecessary frequency information as the Nyquist Frequncy ($f_s/2$) for a 1kHz sampling rate 
-is 500 Hz.\cite{nyq}
+The raw audio recorded by the hydrophone was stored in wave files with a sampling 
+frequency of 8kHz. Before extracting feature vectors fromthe recordings the audio 
+was first downsampled to have a 1 kHz sampling rate. This helped remove unecessary frequency 
+information as the Nyquist Frequncy ($\frac{f_s}{2}$) for a 1kHz sampling rate is 500 Hz.\cite{nyq}
 
-Most of the Bryde's Whale vocalizations occur below 200 Hz. Thus, this sampling rate also ensures no relevant information was lost before analysis.\cite{bryde_whales_SA} 
-
-
-\mysubsection{STFT}{STFT}\label{sec:stft}
-The signal.stft function from the scipy library was used to calculate the STFT magnitudes for use as 
-feature vectors. Window length $L$, as referenced in Eq.\eqref{eq:freq_resolution}, is calculated by 
-multiplying $f_s$, the sampling frequency of the given audio segment, with the chosen STFT frame duration. 
-No set frame duration was selected as the optimal frame duration was chosen during the calibration stage 
-of this project.
-
-The window ovelrap $H$, as referenced in Eq.\eqref{eq:freq_resolution}, is calculed by multiplying $L$ 
-with the chosen overlap percentage. For this project the overlap percentage was chosen as 0,75. The high 
-overlap percentage produced a smooth spectrogram when viewing the time--frequency representation of the 
-given audio segment.A Hamming window was chosen to decrease any spectral leakage caused by the finite 
-length of the windows used to extract the feature vectors.\cite{stft_kamper}\cite{hamm}
+Most of the Bryde's Whale vocalizations occur below 500 Hz. Thus, this sampling rate 
+also ensures no relevant information was lost before analysis.\cite{bryde_whales_SA} 
 
 
-\mysubsection{MFCC}{MFCC}\label{sec:mfcc}
-The feature.melspectrogram and feature.mfcc functions from the librosa library were used to calculate 
-the cepstral coefficients for the MFCC feature extraction implemetnation. The window length for the 
-Fourier Transform required is calculated by multiplying $f_s$ with the chosen frame duration which is 
-optimally selected during calibration. Unlike the STFT function librosa.feature.mfcc requires the hop 
-length and not the ovrelap length. This is calculated by multiplying $L - H$. $H$ is also calculated by 
-choosing the overlap percentage to be 0,75.Just as in the STFT feature extraction implementation a 
-Hamming Window is used to decrease spectral leakage. 
+\mysubsection{Short Time Fourier Transform}{Short Time Fourier Transform}\label{sec:stft}
+The signal.stft function from the SciPy library was used to calculate the \ac{STFT} 
+feature vectors. Window length $L$, as referenced in Eq \eqref{eq:freq_resolution}, is calculated by 
+multiplying $f_s$, the \gls{f_s} of the given audio segment, with the chosen \acs{STFT} 
+frame duration. No set \gls{frame_dur} was selected as the optimal \gls{frame_dur} was 
+chosen during the hyperparameter selection stage of this project.
 
-The librosa function used for calculating MFCC automatically uses DCT type 2 and ortho normalization. 
+The window ovelrap $H$, as referenced in Eq \eqref{eq:freq_resolution}, is calculed by multiplying $L$ with the 
+chosen overlap percentage. For this project the overlap percentage was chosen as 0,75. The 
+high overlap percentage produced a smooth spectrogram when viewing the time--frequency 
+representation of the given audio segment.A \gls{ham_win} was chosen to decrease any 
+spectral leakage caused by the finite length of the windows used to extract the feature 
+vectors.\cite{stft_kamper}\cite{hamm}
+
+
+\mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mfcc}
+The feature.melspectrogram and feature.mfcc functions from the Librosa library were used to calculate 
+the cepstral coefficients for the \ac{MFCC} feature extraction implementation. The 
+window length for the \ac{FT} required is calculated by multiplying $f_s$ with the chosen frame duration which is 
+optimally selected during hyperparameter selection. Unlike the \acs{STFT} 
+function librosa.feature.mfcc requires the hop length and not the overlap length. This is 
+calculated by subtracting the window overlap, H, from the frame length, L. $H$ is calculated by 
+choosing the overlap percentage to be 0,75 and multiplying this with L. 
+A hamming window is used to decrease spectral leakage. 
+
+The Librosa function used for calculating \acs{MFCC} automatically uses \ac{DCT} type 2 and ortho normalization. 
 These settings mean that the bottom row of the output matrix, $c_0$, represents the sum of the log-spectrum 
-energy. It is common practice in speech analysis to remove coefficient 0, as it contains total energy 
-and can dominate subsequent analysis. For this project, only coefficients 1 to 14 were kept. This 
-ensured that the analysis considered only the overall shape of the log spectrum and not the additive 
-energy. The number of $n_{\text{mels}}$ was chosen as 26, which is common practice in audio processing, 
-and 14 coefficients were calculated because 13 are typically used, with the lowest coefficient 0 
-removed.\cite{mfcc_dct_type}\cite{mfcc_c_zero}\cite{mfcc_librosa}
+energy. It is common practice in speech analysis to 
+remove coefficient 0, as it contains the total energy of the signal and can dominate distance calculations in subsequent analysis. For 
+this project, only coefficients 1 to 14 were kept. This ensured that the analysis only 
+considered the overall shape of the log spectrum and not the total energy of the signal. The number of melspectrogram filters 
+was chosen as 26, which is common practice in audio processing. 14 final coefficients were calculated. 13 are typically used, therefore 
+with the lowest coefficient 0 removed 14 were calculated.\cite{mfcc_dct_type}\cite{mfcc_c_zero}\cite{mfcc_librosa}
 
 The feature.delta function from the librosa library was used to calculate the first and second derivitives 
-for MFCC. The feature returned when using the first derivitive was a concatenation of the original MFCC feature 
-with the first derivitive of that feature vector. This gave a feature with 26 coeficients. Similarly for 
-the second derivitive the MFCC and first derivitive concatenation was concatenated with the new second derivitive. 
+for \acs{MFCC}. The feature returned when using the first derivitive was a concatenation of the original \acs{MFCC} feature 
+with the first derivitive of that feature vector. This gave a feature with 26 coeficients, the original 13 coefficients 
+with 13 added from the first derivitive. Similarly for 
+the second derivitive the \acs{MFCC} and first derivitive concatenation was concatenated with the new second derivitive. 
 This gave a 39 coefficient feature vector.\cite{lib_delta}\cite{librosa}
 
 
 \mysubsection{LPC}{LPC}\label{sec:lpc}
 
-The util.frame and lpc functions from the librosa library were used to calculate the lpcc feture. 
-Unlike the STFT and MFCC. LPC takes in a sequence of frames to calculate the coefficients. STFT and MFCC created the frames 
-within their functions and thus it was not necessary to frame the audio before using as an input. 
-Thus is why util.frame was used with a frame duration selected during calibration and a hop length of 0.25 of 
-the frame duration. A hamming window was also applied to the frames before using the lpc function. \cite{lib_lpc}\cite{lib_util_frame}
+The util.frame and lpc functions from the Librosa library were used to calculate the \ac{LPC} features. The 
+\acs{STFT} and \acs{MFCC} functions created the frames 
+within their functions and thus it was not necessary to frame the audio before using it as an input. 
+The \acs{LPC} fuinction  takes in a sequence of frames to calculate the approximation coefficients. 
+The function util.frame was used with a frame duration selected during hyperparameter selection and a hop length of 0.25 of 
+the frame duration, 1 $-$ 0.75. A hamming window was also applied to the frames before using the lpc function.\cite{lib_lpc}\cite{lib_util_frame}
 
-The order chosen for the LPC calculation was 4. Since the higher the order the more detailed the approximation becomes, considering 
-background noise could have a large effect if the approximation becomes too detailed.\cite{lpc}
+The higher the \acs{LPC} order the more detailed the approximation becomes. Considering that 
+background noise could have a negative effect on the coefficient outcomes if the approximation becomes too detailed, an order of 4 was chosen.\cite{lpc}
 
-The lpc was calculated along row of frames used as input. Due to the instability of the LPC extraction method 
-the LPC feature was converted to LPCC. This was done by manually typing out the recursive formula as explained in the theory.
-The number of LPCC coefficients chosen is approximately $\frac{3}{2}p$. For p = 4 it was chosen that around 
-6 LPCC coefficients should be calculated. After testing different numbers of LPCC coefficients it was found that 
-8 LPCC coefficients gave the best calibration results, therefore 8 was the chosen number of LPCC coefficients used.\cite{lpc}
+Due to the instability of the \acs{LPC} extraction method 
+the \acs{LPC} feature was converted to \ac{LPCC}. This was done by manually typing out the recursive formula 
+Eq \ref{eq :lpcc}.
+The number of \acs{LPCC} coefficients typically chosen is approximately $\frac{3}{2}p$. For p = 4 it was chosen that around 
+6 \acs{LPCC} coefficients should be calculated. After testing different numbers of \acs{LPCC} coefficients it was found that 
+8 \acs{LPCC} coefficients gave the best F1-scores during hyperparameter selection. Therefore, 8 was the chosen number of LPCC 
+coefficients used.\cite{lpc}
 
 \mysection{DTW methodology}{DTW methodology}\label{sec:dtw_method}
-The sequence.dtw function from the librosa library was used to calculated the Dynamic Time Warping cost 
+The sequence.dtw function from the Librosa library was used to calculated the \ac{DTW} cost 
 matix between a template and an audio segment. The distance matrix needed as input for the function was 
-calculated using the spacial.distance.cdist function from the scipy library. 
+calculated using the spacial.distance.cdist function from the SciPy library. 
 
-The distance function was given the template feature and the audio segent feature extracted either by 
-STFT or MFCC as well as the metric specified for each extractor.The two metrics considered were cosine 
+The distance function was given the template feature and the audio segment feature extracted either by 
+STFT, MFCC or LPC as well as the metric specified for each extractor.The two metrics considered were cosine 
 similarity and euclidean distance. As shown in Eq.\eqref{eq:cosine} and Eq.\eqref{eq:euclidean}, cosine 
-similarity calculates the distance in angle between two points and eiclidean distance calculates the acual 
+similarity calculates the distance in angle between two points and euclidean distance calculates the acual 
 distance between the two point. For the STFT feature extraction method cosine similarity was used 
-rather than euclidean distance since cosine does not depend on magnitude an thus the distance between 
-a template and a call further away vs closer together will only be judged on the angular difference and 
-not the difference in magnitude. This ensures that louder and softer calls of the same type can be 
+rather than euclidean distance since cosine does not depend on magnitude. Therefore, the distance between 
+a template and a call further away compared to closer together would only be judged on the angular difference and 
+not the difference in magnitude. This ensured that louder and softer calls of the same type could be 
 classified by spectral shape only and not loudness. For the MFCC feature extraction implementation 
-the energy created by the call due to how close or far away it is from the recording device is 
-removed when $c_0$ was removed as explained in Section\ref{sec:mfcc}. This means that euclidean distance 
+the energy created by the call due to how close or far away it is from the recording device was 
+removed when $c_0$ was removed as explained in Section \ref{sec:mfcc}. Similarly for LPCC the 
+calculated magnitude is stored within the lower coefficient. This coefficient is always set to 1 during the 
+LPC stage, therefore was not considered as part of the 4 LPC coefficients. This meant that euclidean distance 
 could be used without concern of the effect of magnitude on the distance since only spectral shape is 
 left to be analysed. Euclidean distance is the common choice for DTW analysis, therefore since the 
-main cosine similarity benefit is not necessary for MFCC Euclidean distance was chosen.\cite{scipy_dist}
+main cosine similarity benefit is not necessary for MFCC or LPC, euclidean distance was chosen.\cite{scipy_dist}
 
-The subseq setting with in the sequence.dtw function was set to True. As explaines in 
-Section\ref{sec:dynamic-time-warping}, subsequence DTW means that the start and end points of a 
-detected match do not have to be the first and last points of both signals. When searching a 72 hour 
+The subseq setting with in the sequence.dtw function was set to True. As explained in 
+Section \ref{sec:dynamic-time-warping}, subsequence DTW means that the start and end points of a 
+detected match do not have to be the first and last points of both signals. When searching 1 hour segments of a 72 hour 
 audio file for whale calls subsequence DTW allows for the detection of multiple calls within a single 
 audio segment by searching the final row of the cost matrix for dips and choosing the lowest point of 
-each dip as an end point of a call. This is further explained in Section\ref{sec:training-procedure}.
+each dip as an end point of a call. This is further explained in Section\ref{sec:testing-procedure}.
 \cite{librosa_dtw}
 
 

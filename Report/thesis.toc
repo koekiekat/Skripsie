@@ -37,8 +37,8 @@
 \contentsline {chapter}{\numberline {4}System Design}{16}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Overview}{16}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Feature Extraction Methods}{16}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}STFT}{16}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}MFCC}{17}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.1}Short Time Fourier Transform}{16}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Mel-Frequency Cepstral Coefficients}{17}{subsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.2.3}LPC}{17}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}DTW methodology}{18}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{19}{section.4.4}%

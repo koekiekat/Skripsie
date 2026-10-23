@@ -25,6 +25,10 @@
 \@gls@reference{main}{precision}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
 \@gls@reference{main}{recall}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
 \@gls@reference{main}{f1_score}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
+\@gls@reference{main}{f_s}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
+\@gls@reference{main}{frame_dur}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
+\@gls@reference{main}{ham_win}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
+\@gls@reference{main}{spec_leak}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{ix}}
 \@writefile{toc}{\contentsline {section}{Definitions}{x}{section*.9}\protected@file@percent }
 \citation{vessel_collision_since_1990s}
 \citation{bryde_whales_SA}
@@ -134,6 +138,8 @@
 \newlabel{sec:linear-predictive-coding@cref}{{[subsection][3][2,3]2.3.3}{[1][8][]8}{}{}{}}
 \citation{lpc}
 \citation{Det_Tech}
+\newlabel{eq :lpcc}{{2.16}{9}{Linear Predictive Coding}{equation.2.16}{}}
+\newlabel{eq :lpcc@cref}{{[equation][16][2]2.16}{[1][9][]9}{}{}{}}
 \citation{killer-whale}
 \citation{temp-based-bryde}
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Similar Studies}{10}{section.2.4}\protected@file@percent }
@@ -204,9 +210,15 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Feature Extraction Methods}{16}{section.4.2}\protected@file@percent }
 \newlabel{sec:feature-extraction-methods}{{4.2}{16}{Feature Extraction Methods}{section.4.2}{}}
 \newlabel{sec:feature-extraction-methods@cref}{{[section][2][4]4.2}{[1][16][]16}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}STFT}{16}{subsection.4.2.1}\protected@file@percent }
-\newlabel{sec:stft}{{4.2.1}{16}{STFT}{subsection.4.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Short Time Fourier Transform}{16}{subsection.4.2.1}\protected@file@percent }
+\newlabel{sec:stft}{{4.2.1}{16}{Short Time Fourier Transform}{subsection.4.2.1}{}}
 \newlabel{sec:stft@cref}{{[subsection][1][4,2]4.2.1}{[1][16][]16}{}{}{}}
+\ACRO{recordpage}{STFT}{27}{1}{16}
+\@gls@reference{main}{f_s}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{16}}
+\ACRO{recordpage}{STFT}{27}{1}{16}
+\@gls@reference{main}{frame_dur}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{16}}
+\@gls@reference{main}{frame_dur}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{16}}
+\@gls@reference{main}{ham_win}{\glsnoidxdisplayloc{}{page}{glsnumberformat}{16}}
 \citation{mfcc_dct_type}
 \citation{mfcc_c_zero}
 \citation{mfcc_librosa}
@@ -214,26 +226,47 @@
 \citation{librosa}
 \citation{lib_lpc}
 \citation{lib_util_frame}
-\citation{lpc}
-\citation{lpc}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}MFCC}{17}{subsection.4.2.2}\protected@file@percent }
-\newlabel{sec:mfcc}{{4.2.2}{17}{MFCC}{subsection.4.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Mel-Frequency Cepstral Coefficients}{17}{subsection.4.2.2}\protected@file@percent }
+\newlabel{sec:mfcc}{{4.2.2}{17}{Mel-Frequency Cepstral Coefficients}{subsection.4.2.2}{}}
 \newlabel{sec:mfcc@cref}{{[subsection][2][4,2]4.2.2}{[1][17][]17}{}{}{}}
+\ACRO{recordpage}{MFCC}{28}{1}{17}
+\ACRO{recordpage}{FT}{28}{1}{17}
+\ACRO{recordpage}{STFT}{28}{1}{17}
+\ACRO{recordpage}{MFCC}{28}{1}{17}
+\ACRO{recordpage}{DCT}{28}{1}{17}
+\ACRO{recordpage}{MFCC}{28}{1}{17}
+\ACRO{recordpage}{MFCC}{28}{1}{17}
+\ACRO{recordpage}{MFCC}{28}{1}{17}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}LPC}{17}{subsection.4.2.3}\protected@file@percent }
 \newlabel{sec:lpc}{{4.2.3}{17}{LPC}{subsection.4.2.3}{}}
 \newlabel{sec:lpc@cref}{{[subsection][3][4,2]4.2.3}{[1][17][]17}{}{}{}}
+\ACRO{recordpage}{LPC}{28}{1}{17}
+\ACRO{recordpage}{STFT}{28}{1}{17}
+\ACRO{recordpage}{MFCC}{28}{1}{17}
+\ACRO{recordpage}{LPC}{28}{1}{17}
+\citation{lpc}
+\citation{lpc}
 \citation{scipy_dist}
 \citation{librosa_dtw}
+\ACRO{recordpage}{LPC}{29}{1}{18}
+\ACRO{recordpage}{LPC}{29}{1}{18}
+\ACRO{recordpage}{LPC}{29}{1}{18}
+\ACRO{recordpage}{LPCC}{29}{1}{18}
+\ACRO{recordpage}{LPCC}{29}{1}{18}
+\ACRO{recordpage}{LPCC}{29}{1}{18}
+\ACRO{recordpage}{LPCC}{29}{1}{18}
+\ACRO{recordpage}{LPCC}{29}{1}{18}
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}DTW methodology}{18}{section.4.3}\protected@file@percent }
 \newlabel{sec:dtw_method}{{4.3}{18}{DTW methodology}{section.4.3}{}}
 \newlabel{sec:dtw_method@cref}{{[section][3][4]4.3}{[1][18][]18}{}{}{}}
+\ACRO{recordpage}{DTW}{29}{1}{18}
 \citation{fft_pow_2}
 \@writefile{toc}{\contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{19}{section.4.4}\protected@file@percent }
 \newlabel{sec:hyperparameter-tuning}{{4.4}{19}{Hyperparameter Tuning}{section.4.4}{}}
-\newlabel{sec:hyperparameter-tuning@cref}{{[section][4][4]4.4}{[1][18][]19}{}{}{}}
+\newlabel{sec:hyperparameter-tuning@cref}{{[section][4][4]4.4}{[1][19][]19}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces This is a software flow diagram describing how the hyperparameters are chosen for the project.}}{19}{figure.caption.15}\protected@file@percent }
 \newlabel{fig:calib_des}{{4.1}{19}{This is a software flow diagram describing how the hyperparameters are chosen for the project}{figure.caption.15}{}}
-\newlabel{fig:calib_des@cref}{{[figure][1][4]4.1}{[1][18][]19}{}{}{}}
+\newlabel{fig:calib_des@cref}{{[figure][1][4]4.1}{[1][19][]19}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.5}Testing Procedure}{22}{section.4.5}\protected@file@percent }
 \newlabel{sec:testing-procedure}{{4.5}{22}{Testing Procedure}{section.4.5}{}}
 \newlabel{sec:testing-procedure@cref}{{[section][5][4]4.5}{[1][21][]22}{}{}{}}
@@ -422,15 +455,20 @@
 \newlabel{appen:applabel}{{A}{43}{Appendix title goes here}{appendix.A}{}}
 \newlabel{appen:applabel@cref}{{[chapter][1][]A}{[1][43][]43}{}{}{}}
 \ttl@finishall
-\ACRO{usage}{DTW=={10}}
-\ACRO{usage}{STFT=={3}}
-\ACRO{usage}{MFCC=={3}}
-\ACRO{usage}{LPC=={3}}
-\ACRO{usage}{FT=={1}}
+\ACRO{usage}{DTW=={11}}
+\ACRO{usage}{STFT=={7}}
+\ACRO{usage}{MFCC=={9}}
+\ACRO{usage}{LPC=={8}}
+\ACRO{usage}{FT=={2}}
 \ACRO{usage}{SNR=={2}}
-\ACRO{pages}{STFT=={13@1@2}}
-\ACRO{pages}{MFCC=={13@1@2}}
-\ACRO{pages}{LPC=={13@1@2}}
+\ACRO{usage}{DCT=={2}}
+\ACRO{usage}{LPCC=={6}}
 \ACRO{pages}{SNR=={25@1@14}}
-\ACRO{pages}{DTW=={12@1@1|13@1@2|21@1@10|25@1@14}}
+\ACRO{pages}{FT=={28@1@17}}
+\ACRO{pages}{DCT=={28@1@17}}
+\ACRO{pages}{STFT=={13@1@2|27@1@16|28@1@17}}
+\ACRO{pages}{MFCC=={13@1@2|28@1@17}}
+\ACRO{pages}{LPC=={13@1@2|28@1@17|29@1@18}}
+\ACRO{pages}{LPCC=={29@1@18}}
+\ACRO{pages}{DTW=={12@1@1|13@1@2|21@1@10|25@1@14|29@1@18}}
 \gdef \@abspage@last{54}
