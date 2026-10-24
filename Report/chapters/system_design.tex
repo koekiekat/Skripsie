@@ -116,69 +116,74 @@ each dip as an end point of a call. This is further explained in Section\ref{sec
     \caption{This is a software flow diagram describing how the hyperparameters are chosen for the project.}\label{fig:calib_des}
 \end{figure}
 
-Three hyperparameters were chosen to be tuned, namely feature frame length, call type thresholds and call 
-vote fraction. Figure\ref{fig:calib_des} show the software flow for the calibration part of the project 
-where these hyperparameters are tuned.
+Three hyperparameters were chosen to be tuned, namely feature frame length, call type 
+thresholds and call vote fraction. Figure \ref{fig:calib_des} shows the software flow for the hyperparameter selection section 
+of the project.
 
-As shown in Eq.\ref{eq:freq_resolution} frequency resolution$= f_s/L$. Considering the fact that Bryde's 
-Whale single-tone calls tend to have a main frequency around 42Hz and multi-tone calls have more than 
-one frequency between 42 and 100 Hz, upper bound for frequency resolution was chosen as about 10 Hz, 
-this gives a frame length of 100ms. The lower bound in Hz was chosen as around 2Hz, this is due to the 
-fact that while small frequency resolution is better for seperating frequency bins, 2Hz leaves a frame 
-length of 500ms given a window overlap of $75\%$ this leaves a hop length of 128ms. Given the average 
-call length within the calibration file is 246ms this hop length is still short enough to detect the 
-average call within such a file. Since it is computationally best to choose frame lengths wich are a 
+As shown in Eq \ref{eq:freq_resolution} frequency resolution$= \frac{f_s}{L}$. Considering the fact that Bryde's 
+Whale single-tone calls tend to have a main frequency around 42Hz and multi-tone calls 
+have more than one frequency between 42 and 100 Hz, the upper bound for frequency resolution 
+was chosen as about 10 Hz, this gives a frame length of 100ms. The lower bound in Hz 
+was chosen as around 2 Hz. While a smaller frequency resolution is 
+better for seperating frequency bins, a resolution of 2 Hz gives a frame length of 500ms. Given a window 
+overlap of $75\%$ this leaves a hop length of 128 ms. Given the average call length within 
+the hyperparameter selection audio file is 246 ms this hop length is still short enough to detect the average call. 
+Since it is computationally best to choose frame lengths which are a 
 power of 2 or multiples of powers of 2 the chosen frame lengths to be tested were (0.096, 0.128, 
 0.192, 0.384, 0.512).\cite{fft_pow_2}
 
-Since the calibration templates and background templates had to be handpicked due to data scarcity and 
-since the subsequence DTW method was used each calibration template as well as each background template 
-was padded. This padding allowed the subsequence DTW to work in conditions similar to those used in the 
-final testing pipeline despit the data restrictions. It was ensure that the padded length was longer 
-than the longest testing template being used with atleast one extra STFT frame length extra added to each 
-side, this extra length was chosen to equal the longest feature frame length testes, 0.512, this ensures 
-that there was always at least one frame length extra before and after the chosen segment. The call or 
-background template was centered in this length. This was done by moving the start and ends times 
-back and forward respectively to reach this set length.
+Since the call type calibration templates and background calibration templates had to be handpicked due to 
+data scarcity and since the subsequence DTW method was used each calibration template 
+was padded on each side. This padding allowed the subsequence 
+DTW to work in conditions similar to those used in the final testing pipeline despite the 
+data restrictions. It was ensured that the padded length was longer than the longest testing 
+template being used with atleast one extra frame length added to each side of the longest template. 
+This extra length was chosen to equal the longest feature frame length tested, 0.512. 
+The call or background calibration template was centered within this length. This was done by 
+moving the start and ends times back and forward respectively to reach this set length.
 
-For each of the tested frame lengths, three thresholds were determined, one for each call type. These 
-thresholds were determined by taking the DTW costs calculated between testing and calibration templates 
-for each call type as well as the DTW costs calculated between testing of each template and the background 
-noise templates. These costs were stored in two seperate lists, one for calibration costs and one for 
-background costs. The lowest and highest costs between the two lists was taken and 200 thresholds were 
-selected between these two numbers in a linearly spaced fashion. The F1 values were calculated at each 
-threshold for that call type as explained in Section\ref{sec:evaluation-metrics}. The final threshold 
-chosen for the specific call type was the threshold with the highest F1 score.
+For each of the tested frame lengths, three thresholds were determined, one for each 
+call type. These thresholds were determined by taking between 
+testing and calibration templates for each call type as well as the DTW costs calculated 
+between testing of each template and the background calibration templates. These costs were 
+stored in two seperate lists, one for call type calibration costs and one for background calibration costs. The 
+lowest and highest costs between the two lists was taken and 200 thresholds were selected 
+between these two numbers in a linearly spaced fashion. The F1 scores were calculated at 
+each threshold for that call type as explained in Section \ref{sec:evaluation-metrics}. The final threshold chosen for 
+the specific call type was the threshold with the highest F1 score.
 
-For each feature frame length there were therefore three thresholds chosen, one for each call type. 
-The lowest F1 score out of these three thresholds F1 scores was saved. These saved F1 scores were then 
-used such that the best feature frame length was chosen as the one where the lowest F1 score between the 
-three thresholds for that frame length was the highest of all the lowest F1 scores.
+For each feature frame length there were three thresholds chosen, one for 
+each call type. The lowest F1 score out of these three thresholds F1 scores was saved. 
+These saved F1 scores were then used such that the best feature frame length was chosen 
+as the one where the lowest F1 score between the three thresholds for that frame length 
+was the highest of all the lowest F1 scores between all frame lengths.
 
-While three thresholds were calculated, one for each call type, the project only focused on general 
-detection of calls and not on classification. This is due to the fact that many elements of each call 
-type also appear in the other call type. Even though the three call types are different enough to justify 
-three different thresholds and not one overarching threshold, calls are often misclassified. This choice 
-is also due to the labeling discontinuity since different labelers had different opinions on what 
-calssified a call as single-tine, multi-tone or burst tonal. This discontinuity means that the 
-templates I selected for each call type, these were labelled by a different labeler than the person 
-who labeled my testing data, might not match the manner in which another labeler labeled the 
-testing data and thus my calibrated thresholds could differ to their labels.
+While three thresholds were calculated, one for each call type, the project only focused 
+on general detection of calls and not on classification. This is due to the fact that many 
+frequency elements were shared between call types. Even though the three call 
+types are different enough to justify three different thresholds and not one overarching 
+threshold, calls are often misclassified. This choice is also due to the labeling discontinuity 
+since different human labelers had different opinions on what calssified a call as single-tine, multi-
+tone or burst tonal. This discontinuity meant that the templates selected for each call 
+type were possibly labeled by a different labeler than the one who labeled the evaluation 
+data. The difference in labeling methodologies could result in calibration thresholds not correctly classifying call types during evaluation.
 
-For the main testing pipeling there are 5 or 10 templates against which each audio segment was tested. 
-Since the templates were chosen to represent slight variations in call types this meant that while some 
-templates would agree that an audio segment was or was not a call, not all would agree. A vote fraction 
-was used such that if a certain percentage of the 10 templates agreed that an audio segment was a call 
-then only would it be labeled as a call. A list of voting fractions were tested on the best frame length 
-choice to determine the best vote fraction. When 5 templates were used the vote fractions tested were 0.2, 
-0.4, 0.6, 0.8 and 1.0. When 10 templates were used the vote fractions tested were 0.1, 0.2, 0.3, 0.4, 
-0.5, 0.6, 0.7, 0.8, 0.9 and 1.0. The two options is due to the fact that $20\%$ of 5 is 1 and $40\%$ is 
-2 and so on, thus testing the odd numbered percentages would be unecessary.
+For the main evaluation pipeline there are 5 or 10 templates against which each audio 
+segment was tested. Since the templates were chosen to represent slight variations in call 
+ypes this meant that while some templates would agree that an audio segment was or was 
+not a call, not all would agree. A vote fraction was used such that only if a certain percentage of 
+the 5 or 10 templates agreed that an audio segment was a call would it be labeled as 
+a call. A list of voting fractions were tested on the best frame length choice to determine 
+the best vote fraction. When 5 templates were used the vote fractions tested were 0.2, 0.4, 
+0.6, 0.8 and 1.0. When 10 templates were used the vote fractions tested were 0.1, 0.2, 0.3, 
+0.4, 0.5, 0.6, 0.7, 0.8, 0.9 and 1.0. The two options is due to the fact that $20\%$ of 5 is 1 
+and $40\%$ is 2 and so on, thus testing the odd numbered percentages would be unecessary.
 
-For each vote fraction the F1 score for overall call detection was calculated. This means that each 
-threshold was tested against all calibration templates no matter the call type as well as all background 
-signals. This choice is due to the testing pipeline testing all audio segments against all three 
-thresholds. The best vote fraction was chosen as the one with the highest overall F1 score. 
+For each vote fraction the F1 score for overall call detection was calculated. This means 
+that each threshold was tested against all calibration templates no matter the call type as 
+well as all background calibration templates. This choice is due to the testing pipeline testing all audio 
+segments against all three thresholds. The best vote fraction was chosen as the one with 
+the highest overall F1 score. 
 
 \mysection{Testing Procedure}{Testing Procedure}\label{sec:testing-procedure}
 
