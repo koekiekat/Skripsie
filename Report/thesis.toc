@@ -42,7 +42,7 @@
 \contentsline {subsection}{\numberline {4.2.3}LPC}{17}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}DTW methodology}{18}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{19}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Testing Procedure}{22}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Evaluation Procedure}{22}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Detection Methodology}{22}{subsection.4.5.1}%
 \contentsline {subsection}{\numberline {4.5.2}Matching Methodology}{25}{subsection.4.5.2}%
 \contentsline {section}{\numberline {4.6}Evaluation Metrics}{25}{section.4.6}%

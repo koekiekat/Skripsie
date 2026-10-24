@@ -185,27 +185,28 @@ well as all background calibration templates. This choice is due to the testing 
 segments against all three thresholds. The best vote fraction was chosen as the one with 
 the highest overall F1 score. 
 
-\mysection{Testing Procedure}{Testing Procedure}\label{sec:testing-procedure}
+\mysection{Evaluation Procedure}{Evaluation Procedure}\label{sec:testing-procedure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/syst_design/test_des.png}
-    \caption{This is a software flow diagram describing how the testing procedure runs for this project.}\label{fig:test_des}
+    \caption{This is a software flow diagram describing how the evaluation procedure runs for this project.}\label{fig:test_des}
 \end{figure}
 
 \mysubsection{Detection Methodology}{Detection Methodology}\label{sec:detection-methodology}
-The variables chosen during the calibration stage were used during testing. These were the feature 
-frame length, thresholds per call type and the voting fraction. The file used for testing was the only 
-file containing tonal downsweeps. Therefore, since no threshold was calculated for this call type a list 
-of exclusion indices was created for all the labled tonal downsweeps. Due to the use of subsequence DTW 
-the tonal downsweeps were only removed after detecting calls since leaving gaps in time during 
-subsequence DTW could effect the results. 
+The variables chosen during the hyperparameter selection stage were used during evaluation. These were 
+the feature frame length, thresholds per call type and the voting fraction. The file used 
+for evaluation was the only file containing tonal downsweeps. Therefore, since no threshold 
+was calculated for this call type a list of exclusion indices was created for all the labled 
+tonal downsweeps. Due to the use of subsequence DTW the tonal downsweeps were only 
+removed after detecting calls since leaving gaps in time during subsequence DTW could 
+effect the results. 
 
-The 72 hour file was processed one hour at a time. This ensured that memory usage was bounded to a 
-smaller amount at one time. The soundfile library is used to load hourly segments of the 72 hour file 
-without running through the entire file.\cite{sf} The extracted audio is then resampled from 8kHz to 1kHz using 
-the resample\_poly function from the SciPy library.\cite{resample} After this, features were extracted as explained 
-in Section~\ref{sec:stft}.
+The 72 hour file was processed one hour at a time. This ensured that memory usage 
+was bounded to a smaller amount at one time. The soundfile library was used to load hourly 
+segments of the 72 hour file without running through the entire file at once.\cite{sf} The extracted 
+audio was then resampled from 8kHz to 1kHz using the resample\_poly function from the 
+SciPy library.\cite{resample} Features were extracted as explained in Section~\ref{sec:stft}.
 
 \begin{figure}[H]
     \centering
@@ -214,82 +215,91 @@ in Section~\ref{sec:stft}.
     frame for three templates per threshold and two thresholds given k = 2.}\label{fig:kth_cost}
 \end{figure}
 
-The DTW costs for all templates were calculated per call type and the bottom row of each DTW cost matrix 
-for each template was stored in a matrix for every call type 
-$(n_\text{templates} \times n_\text{frames in the segment})$. A variable k was calculated to be the vote 
-fraction decided in calibration multiplied by the number of templates per call type. This variable was used 
-such that the kth lowest cost across all templates per frame in the call type matrix was selected and 
-stored in one kth lowest cost array. All the values in the array was divided by the threshold of the 
-given call type from which the matrix came. This ensured that a resulting matrix of scaled kth costs 
-per frame could be created such that no matter which call type the kth cost had been calculated from 
-a cost of 1 would always indicate a match with the threshold. This scaled matrix was of size 
-$(n_{\text{thresholds}} \times n_{\text{frames}})$. From the scaled matrix containing three 
-kth best costs per threshold the overall best cost per frame was selected by choosing the 
-lowest stored cost per frame out of the three options per frame. 
+The DTW costs for all templates were calculated per call type and the bottom row 
+of each DTW cost matrix for each template was stored in a matrix for every call type. This can be seen in the first image of Figure \ref{fig:kth_cost}. 
+A variable k was calculated to be the vote fraction, decided 
+during hyperparameter selection, multiplied by the number of templates per call type. This variable was used 
+such that the kth lowest cost across all templates, per frame, in the call type matrix was 
+selected and stored in one kth lowest cost array. All the values in the array was divided 
+by the threshold of the given call type. This ensured that a 
+resulting matrix of scaled kth costs per frame could be created such that no matter which 
+threshold the kth cost had been calculated from a cost of 1 would always indicate a match 
+with the threshold. This can be seen in the second image in Figure \ref{fig:kth_cost}. From the scaled 
+matrix containing the kth best costs per threshold the overall best cost per frame was 
+selected by choosing the lowest stored cost per frame. 
 
-Only the kth lowest cost was stored and analysed for call detection. Since the reason for the vote fraction 
-was that if the percentage of templates for a sepecific call type which detected a call waws equal to the 
-vote percentage then only would a call be detected, only the k lowest cost had to be considered since 
-anything lower than this cost would have a lower cost and thus if the kth cost detected a call all lower 
-calls would also detect a call and the vote fraction would be met. If, however, the kth cost did not 
-detect a call even if any of the lower cost templates detected a call the vote fraction would not be 
-met, thus a call would not be detected.
+This cost was stored and analysed for call detection as shown in the third image in Figure \ref{fig:kth_cost}. 
+A call would only be detected if the percentage of templates for a sepecific call type 
+detecting a call was equal to the vote percentage. Only 
+the k lowest cost had to be considered since any value lower than k would also have a 
+lower cost. Thus if the kth cost detected a call all lower calls would also detect a call 
+and the vote fraction would be met. If, however, the kth cost did not detect a call even if 
+any of the lower cost templates detected a call the vote fraction would not be met, thus a 
+call would not be detected.
 
-The find\_peaks function from the SciPy library was used to detect end times within the scaled kth 
-cost 1D-array. DTW works in such a way that the end point of a matching sequence is the lowest cost 
-within the last row of the cost matrix. This means that within a 1D-array of a 1 hour segment with 
-many calls there will be various dips in cost which will reach an absolute minimum cost at the end 
-point of a possible call. If the costs considered were to be multiplied by negative one these end 
-points would be found and peaks instead of dips. Thus any place wher $cost >= -1$ would indicate 
-a detected end point of a call.\cite{find_peaks}
+The find\_peaks function from the SciPy library was used to detect end times within 
+the scaled kth cost 1D-array. Subsequence DTW works in such a way that the end point of a matching 
+sequence is the lowest cost within the last row of the cost matrix. This means that within 
+a 1D-array of a 1 hour segment with many calls there will be various dips in cost which will 
+reach an absolute minimum cost at the end point of a possible call. If the costs considered 
+were to be multiplied by negative one these end points would be found at peaks instead 
+of dips. Thus any place wher $cost >= -1$ would indicate a detected end point of a call.\cite{find_peaks}
 
-For any detected end frame, e, within the scaled kth cost array the start time is calculated. From the 
-ten templates for the call type within which the template against which the audio segment calculated 
-the best cost found at end frame, e, the template with the lowest cost at end frame, e, is selected. 
-A section of the 1 hour audio segment is extracted such that it ends at the end of the chosen end frame 
-and starts ten seconds before the end frame starts. When matching a template to an audio segment using 
-DTW subsequence the detected call can be longer than the original template. Since there is no 
-indication for how long the detected call could be a max of ten seconds was chosen. This is arbitrarily 
-long for a Bryde's Whale call, but as long as the whale call starts somewhere within those ten seconds 
-the correct start time can be found. The reason for the ten seconds is so that the DTW of the entire 
-1 hour audio segment does not have to be recomputed to find the warp path used to select the start time. 
-This saves computational time. 
+For any detected end frame, within the scaled kth cost array the start time is 
+calculated. The end time was found using the kth lowest cost. This cost came from 
+one of the ten templates for one of the thresholds. Out of these ten templates 
+there is also one containing the absolute lowest cost for that end frame. The start time is calculated using 
+that template within which the lowest cost is found. A section of the 1 hour audio segment 
+is extracted such that it ends at the end of the chosen end frame and starts ten seconds 
+before the end frame starts. When matching a template to an audio segment using DTW 
+subsequence the detected call can be longer than the original template. Since there is 
+no indication for how long the detected call could be a max of ten seconds was chosen. 
+This is arbitrarily long for a Bryde's Whale call, but as long as the whale call starts 
+somewhere within those ten seconds the correct start time can be found. The reason for 
+the ten seconds is so that the DTW of the entire 1 hour audio segment does not have to be 
+recomputed to find the warp path used to select the start time. This saves computational 
+time. 
 
-The sequence.dtw function from librosa is once again used to calculate the DTW cost matrix of this 
-audio segment. This function has the capability to return the best warp path for the given audio segment, 
-however since the end point was selected on the k lowest cost template and the start time is now being 
-chosenon the absolute lowest cost template, this template might have an end point with a higher cost 
-that the selected end point. This end point may just not have been detected due to the vote fraction. 
-Therefore, the step choice matrix needed to find the warp path is returned instead of the best warp path 
-for that audio segment. The sequence.dtw\_backtracking function from the librosa library is then used 
-to find the warping path. In this function it is possible to force the warp path calculation to start f
-rom the chosen end point instead of the best for that audio segment. From that chosen end point the 
-function works backwards though the steps matrix until it finds the start point.\cite{backtracking}
+The sequence.dtw function from librosa is once again used to calculate the DTW cost 
+matrix of this audio segment. This function has the capability to return the best warp 
+path for the given audio segment, however since the end point was selected on the k lowest 
+cost template and the start time is now being chosenon the absolute lowest cost template, 
+this template might have an end point with a higher cost that the selected end point. This 
+end point may just not have been detected due to the vote fraction. Therefore, the step 
+choice matrix needed to find the warp path is returned instead of the best warp path for 
+that audio segment. The sequence.dtw\_backtracking function from the librosa library is 
+then used to find the warping path. In this function it is possible to force the warp path 
+calculation to start from the chosen end point instead of the best for that audio segment. 
+From that chosen end point the function works backwards though the steps matrix until it 
+finds the start point.\cite{backtracking}
 
-Theoretically whether one finds the start point in the kth lowest template or the best shouldn't make 
-too much of a difference, however in the end the kth template was only used to find then end points due 
-to the vote fraction. After finding those end points finding the most accurate start time is important 
-and since the best template has matched the best to that call it m akes sense to find the start time 
-using the best template instead if the kth best template.
+Theoretically whether one finds the start point in the kth lowest template or the best 
+should not make too much of a difference, however in the end the kth template was only 
+used to find the end points due to the vote fraction. After finding those end points 
+finding the most accurate start time is important and since the best template has matched 
+the best to that call it m akes sense to find the start time using the best template instead 
+if the kth best template.
 
 \mysubsection{Matching Methodology}{Matching Methodology}\label{sec:matching-methodology}
 
-For each detected call only the relevant time periods labeled calls were checked to find overlap. 
-The searchsorted function from the numpy library was used to find the labeled calls overlapping the 
-detected calls. Four 1D-arrays were used: start times for detected calls, end times for detected calls, 
-start times for labeled calls, end times for labeled calls. For each detected call serachsorted was used to 
-find at which index, within the array containing labeled call end times, the detected start time would have 
-to be inserted to keep the end times array sorted from smallest to largest. This index was chosen as lo. 
-The searchsorted function was also used to determine at which index within the start times array for the 
-labeled calls the end time from the detected call would have to be inserted to keep the start times array 
-sorted. This was chosen as hi. These low and hi variables ensured that only labeled calls which started 
-before the detected call ends and ended after the detected call start were considered. If hi was larger 
-than lo then any indices between these two times were labeled calls touching the detected call.
-The matching logic was set up in such a way that if one or more labeled calls touched the detected call 
-the call was considered to be a true positive call. So aslong as hi was larger than lo that detected call 
-was labelled as matched and the labeled call or calls were labeled as matched. If another call were to also 
-touch an already matched labeled call it would still be matched as general detection was the main goal 
-and not specific time matches.\cite{searchsorted}
+For each detected call only the labeled calls for the relevant time period were checked to find 
+overlap. The searchsorted function from the numpy library was used to find the labeled 
+calls overlapping the detected calls. Four 1D-arrays were used: start times for detected 
+calls, end times for detected calls, start times for labeled calls, end times for labeled calls. 
+For each detected call searchsorted was used to find at which index, within the array 
+containing labeled call end times, the detected start time would have to be inserted to 
+keep the end times array sorted from smallest to largest. This index was chosen as lo. The 
+searchsorted function was also used to determine at which index within the start times 
+array for the labeled calls the end time from the detected call would have to be inserted 
+to keep the start times array sorted. This was chosen as hi. These lo and hi variables 
+ensured that only labeled calls which started before the detected call ends and ended after 
+the detected call start were considered. If hi was larger than lo then any indices between 
+these two times were labeled calls touching the detected call.The matching logic was set 
+up in such a way that if one or more labeled calls touched the detected call the call was 
+considered to be a true positive call. So as long as hi was larger than lo that detected 
+call was labelled as matched and the labeled call or calls were labeled as matched. If another call were to also 
+touch an already matched labeled call it would still be matched as general 
+detection was the main goal and not specific time matches.\cite{searchsorted}
 
 \mysection{Evaluation Metrics}{Evaluation Metrics}\label{sec:evaluation-metrics}
 
