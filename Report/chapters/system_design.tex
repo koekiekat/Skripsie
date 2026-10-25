@@ -303,49 +303,55 @@ detection was the main goal and not specific time matches.\cite{searchsorted}
 
 \mysection{Evaluation Metrics}{Evaluation Metrics}\label{sec:evaluation-metrics}
 
-While ROC analysis is more common in detection models, due to the class imbalance between whale 
-calls present vs background noise PR analysis was chosen as the better method for analysis. This is 
-due to the fact that Roc curves tend to give a false impression as to how a model acts in the presence 
-of class imbalance. PR curves on the other hand take class imbalance into account and thus give a more 
-accurate reflection of how the model acts. Due to this precision, recall and F1 score was chosen as the 
-method of analysis.The one downside which was considered when interpreting results was that due to the 
-lack of data the calibration data used had a different imbalance to the testing data. This meant that 
-it was expected that the resulting chosen PR point would be less optimal than the PR curve would allow.
+While reciever-operating characteristic (ROC) analysis is more common in detection models, due to the class imbalance 
+between whale calls vs background noise, precision and recall (PR) analysis was chosen as the better 
+method for analysis. This is due to the fact that ROC curves tend to give a false impression 
+as to how a model acts in the presence of class imbalance. PR curves on the other hand 
+take class imbalance into account and thus give a more accurate reflection of how the model 
+acts. Due to this precision, recall and F1 score was chosen as the method of analysis.The 
+one downside which was considered when interpreting results was that due to the lack of 
+data the calibration data used had a different imbalance to the evaluation data. This meant 
+that it was expected that the resulting chosen PR point would be less optimal than the 
+PR curve could have allowed.
 
-Precision is a value showing how many of the detected whale calls actually touched a label. True 
-positives (TP) are defined as a detected call which overlaps at least one labeled call. False positives 
-(FP) are defined as detected calls which do not overlap with any labeled call. The equation to calculate 
-precision is defined as:
+Precision is a value showing how many of the detected whale calls actually touched 
+a label. True positives (TP) are defined as a detected call which overlaps at least one 
+labeled call. False positives (FP) are defined as detected calls which do not overlap with 
+any labeled call. The equation to calculate precision is defined as:
+
 \begin{equation}
     presision = \frac{TP}{TP + FP}
 \end{equation}
 
-Recall is a value showing how many of the labeled calls were detected by the model. In this cas true 
-positived (TP) are defined as a labeled call which has been overlapped at least once by a detected call. 
-False negatives (FN) are the labeled calls which are never overlapped by a detected call. The equations 
-for recall is defined as:
+Recall is a value showing how many of the labeled calls were detected by the model. 
+In this case a TP value is defined as a labeled call which has been overlapped at 
+least once by a detected call. False negatives (FN) are the labeled calls which are never 
+overlapped by a detected call. The equations for recall is defined as:
+
 \begin{equation}
     recall = \frac{TP}{TP + FN}
 \end{equation}
 
-It can be seen that for precision and recall TP has a slightly different definition. This is due to the 
-fact that the model at times could incorrectly detected one labelled call as two different calls and 
-sometimes two labelled calls can be detected as one call. Since the goal of this project is detection of 
-alls and not classification the analysis does not consider the detection of one labeled call as two 
-etected calls to be incorrect, thus leading to one of the detected calls being labelled as false positive. 
-Instead any detection overlapping any labeled call and vice versa is considered true positive.
+It can be seen that for precision and recall TP has a slightly different definition. This 
+is due to the fact that the model at times could incorrectly detect one labeled call as 
+two different calls and sometimes two labeled calls can be detected as one call. Since the 
+goal of this project is detection of calls and not classification the analysis does not consider 
+the detection of one labeled call as two detected calls to be incorrect, thus leading to one of 
+the detected calls being labelled as FP. Instead any detection overlapping any 
+labeled call and vice versa is considered TP.
 
-The F1 score shows the optimal point on a PR curve. This is due to the fact that as P increses and R 
-increases F1 will also increase. Therefore, For all choices in hyperparameter tuning the choice is based 
-on the highest F1 score. The F1 score is also used in the testing file to determine the overall 
-performance of models relative to each other. The equation for F1 is defined as:
+The F1 score shows the optimal point on a PR curve. This is due to the fact that as precision  
+and recall increases the F1 score will also increase. Therefore, for all choices in hyperparameter 
+tuning the decision is based on the highest F1 score. The F1 score is also used in the evaluation 
+file to determine the overall performance of models relative to each other. The equation 
+for the F1-score is defined as:
 
 \begin{equation}
     F1 = \frac{2PR}{P + R}
 \end{equation}\cite{pr}\cite{roc}
 
-For the testing part of the project the average precision (AP) was also calculated. AP was calculated using 
-all point interpolation. The equation for this is:
+For the evaluation part of the project the average precision (AP) was also calculated. AP 
+was calculated using all point interpolation. The equation for this is:
 
 \begin{equation}
 \mathrm{AP}_{\mathrm{all}} = \sum_{n} (R_{n+1} - R_n)\, P_{\mathrm{interp}}(R_{n+1})
@@ -358,10 +364,12 @@ P_{\mathrm{interp}}(R_{n+1}) = \max_{\tilde{R}\,:\,\tilde{R} \geq R_{n+1}} P(\ti
 \end{equation}
 \cite{ap}
 
-The PR curve used to calculate the AP was calculated by sweeping the three thresholds equally up and down 
-by a variable alpha. During the main detection pipeline when the end and start times of the detected calls were found 
-on the scaled kth costs, the threshold below which a call was detected was initially set to 1,5. Before matching the detected 
-calls in the initial testing the detected calls cost array was again trimmed such that only the calls falling below the 
-actual threshold, 1, were matched against labels. The extra costs were necessary to later ensure there were enough costs 
-available for a threshold sweep for a PR curve. 100 thresholds were tested between 0,01 and 1,5. The precision and recall was 
-calculated at each of the new thresholds.
+The points for the PR curve, used to calculate the AP, were calculated by sweeping the three thresholds 
+equally up and down by a variable alpha. During the main detection pipeline when the 
+end and start times of the detected calls were found on the scaled kth costs, the threshold 
+below which a call was detected was initially set to 1.5. Before matching the detected calls 
+in the initial evaluation the detected calls cost array was again trimmed such that only the 
+calls falling below the actual threshold, 1, were matched against labels. The extra costs, falling under 1.5, 
+were necessary to later ensure there were enough costs available for a threshold sweep for 
+a PR curve. 100 thresholds were tested between 0,01 and 1,5. The precision and recall 
+was calculated at each of the new thresholds.
