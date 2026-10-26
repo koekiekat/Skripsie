@@ -453,17 +453,30 @@ can be seen in Figure~\ref{fig:FP_TP}
 
 \begin{figure}[H]
     \centering
-    \subfloat[False Psotive samples\label{fig:FP_STFT_10}]{%
+    \subfloat[False Postive samples\label{fig:FP_STFT_10}]{%
         \includegraphics[width=0.4\linewidth]{figures/results/FP_STFT_10.png}}
     \hspace{1cm}
     \subfloat[True Positive samples\label{fig:TP_STFT_10}]{%
         \includegraphics[width=0.4\linewidth]{figures/results/TP_STFT_10.png}}
-    \caption{Examples of random samples of FP and TP for which some FP could be unlabeled calls.}\label{fig:FP_TP}
+    \caption{Examples of random samples of FP and TP for which some FP could be unlabeled calls for the 10 template experiment for the STFT model.}\label{fig:FP_TP}
 \end{figure}
 
 Another interesting observation across all three detection models was that most of the FP calls were found within the second half 
 of the 72 hour audio file used for the evaluation stage of this project. This implies a possible link between model performance 
-and the signal-to-noise ratio (SNR) of the section of audio considered. This observation can be seen in Figures~...
+and the signal-to-noise ratio (SNR) of the section of audio considered. This observation can be seen in Figure~\ref{fig:5_time_fp}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[5 template STFT model\label{fig:stft_5_time_fp}]{%
+        \includegraphics[width=0.4\linewidth]{figures/results/stft_5_time_fp.png}}
+    \hspace{1cm}
+    \subfloat[5 template no derivatives MFCC model\label{fig:mfcc_5_time_fp}]{%
+        \includegraphics[width=0.4\linewidth]{figures/results/mfcc_5_time_fp.png}}
+    \hspace{1cm}
+    \subfloat[5 template LPCC model\label{fig:lpcc_5_time_fp}]{%
+        \includegraphics[width=0.4\linewidth]{figures/results/lpcc_5_time_fp.png}}
+    \caption{This shows for each model where FP calls were detected in relation to labeled calls over the entire 72 hour audio file.}\label{fig:5_time_fp}
+\end{figure}
 
 Considering the good performance of the model as well as the unlabeled 
 TP calls, the STFT feature extraction is the best method to use for call detection with 

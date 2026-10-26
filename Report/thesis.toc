@@ -6,8 +6,8 @@
 \contentsline {chapter}{List of figures}{vi}{chapter*.4}%
 \contentsline {chapter}{List of tables}{vi}{chapter*.5}%
 \contentsline {chapter}{Nomenclature}{viii}{chapter*.7}%
-\contentsline {section}{Acronyms and abbreviations}{ix}{section*.8}%
-\contentsline {section}{Definitions}{x}{section*.9}%
+\contentsline {section}{Acronyms and abbreviations}{viii}{section*.8}%
+\contentsline {section}{Definitions}{ix}{section*.9}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problem Statement}{1}{section.1.2}%
@@ -51,7 +51,7 @@
 \contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{31}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Experiment 3: LPCC Features}{35}{section.5.3}%
 \contentsline {section}{\numberline {5.4}General Observations}{37}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusion}{39}{chapter.6}%
-\contentsline {chapter}{References}{40}{chapter*.35}%
-\contentsline {chapter}{\numberline {A}Appendix title goes here}{45}{appendix.A}%
+\contentsline {chapter}{\numberline {6}Conclusion}{40}{chapter.6}%
+\contentsline {chapter}{References}{41}{chapter*.36}%
+\contentsline {chapter}{\numberline {A}Appendix title goes here}{46}{appendix.A}%
 \contentsfinish 
