@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex thesis"] 1793042243.79568 "thesis.aux" "thesis.bbl" "thesis" 1793042252.47314 0
+["bibtex thesis"] 1793042386.47622 "thesis.aux" "thesis.bbl" "thesis" 1793042397.24447 0
   "./mybib.bib" 1792665409 13303 a2261db9cf6ae59b19223f8ee66c36a7 ""
   "C:/Users/HP/AppData/Local/Programs/MiKTeX/bibtex/bst/feupphdteses/IEEEtranN.bst" 1363102770 63465 52e4631827d9e4cab8ed25dc93fa95dd ""
-  "thesis.aux" 1793042250 38517 511c6089ad10b5b8c2ff505140092783 "pdflatex"
+  "thesis.aux" 1793042395 38559 49507302da801d26ce5d3f8097860d4d "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1793042244.19663 "c:/Users/HP/Desktop/Skripsie/Report/thesis.tex" "thesis.pdf" "thesis" 1793042252.4748 0
+["pdflatex"] 1793042387.0209 "c:/Users/HP/Desktop/Skripsie/Report/thesis.tex" "thesis.pdf" "thesis" 1793042397.24559 0
   "C:/Users/HP/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1785673729 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/HP/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecxc1200.pk" 1785673734 33548 161b810292a52c36929cb607e0d9f58d ""
   "C:/Users/HP/AppData/Local/MiKTeX/fonts/tfm/public/tipa/tipa12.tfm" 1791454041 1840 08a47545a0db806d8a2783defc49e536 ""
@@ -345,7 +345,7 @@
   "chapters/introduction.tex" 1792666362 4235 07053395421867c9bc7f42b7b8b40b4e ""
   "chapters/literature.tex" 1792959099 23600 c7680b2760f8c08113776b014019dcfa ""
   "chapters/results.tex" 1793041964 25998 48cd504c70053b292594801c719e0f67 ""
-  "chapters/system_design.tex" 1792955149 27296 2005d452bafc6708274b593d884f2b08 ""
+  "chapters/system_design.tex" 1793042378 27338 b51d336f110c742cc6cb2f6a613f2965 ""
   "figures/background/cost_matrix.png" 1791377277 23065 e23b34110d618d55952bd647ed3cc604 ""
   "figures/background/vector_dtw.png" 1791376752 11623 cacf9c8c888c5ffcf239e9ee0746ae8f ""
   "figures/literature/call_types.png" 1792958982 760827 01935c106af9b3ce9a7d17d7e33d83b7 ""
@@ -382,14 +382,14 @@
   "stb-thesis.afr" 1785676728 2637 d9bb3c388f47bdd818ec4d95578ad094 ""
   "stb-thesis.cls" 1785676728 25170 2cad7ddd22582eefe95b767cc4481e31 ""
   "stb-thesis.eng" 1785676728 2649 30a323160db19a3d451f1c2fea9d7c68 ""
-  "thesis.aux" 1793042250 38517 511c6089ad10b5b8c2ff505140092783 "pdflatex"
-  "thesis.bbl" 1793042244 13163 4b3a6243a93f0176d2f0877ddd82bc75 "bibtex thesis"
-  "thesis.lof" 1793042250 4401 d7ab095e6054d9930042a08a7bb1cd35 "pdflatex"
-  "thesis.lot" 1793042250 1835 7778d9029c3a0d3228643f307813c760 "pdflatex"
+  "thesis.aux" 1793042395 38559 49507302da801d26ce5d3f8097860d4d "pdflatex"
+  "thesis.bbl" 1793042386 13163 4b3a6243a93f0176d2f0877ddd82bc75 "bibtex thesis"
+  "thesis.lof" 1793042395 4401 d7ab095e6054d9930042a08a7bb1cd35 "pdflatex"
+  "thesis.lot" 1793042395 1835 7778d9029c3a0d3228643f307813c760 "pdflatex"
   "thesis.nls" 0 -1 0 ""
-  "thesis.out" 1793042250 8635 22c4232aead87d79730270b57dc67e57 "pdflatex"
+  "thesis.out" 1793042395 8746 af95685239baae88e587d25c2868fc10 "pdflatex"
   "thesis.tex" 1792241582 2069 5e3b76e66c5e65f9e7bb5d83289b08c0 ""
-  "thesis.toc" 1793042250 4405 b8e2fc75db95f6989fcaaf06b91c7e8c "pdflatex"
+  "thesis.toc" 1793042395 4426 7a8065b9532b3bda94e15cc62a9d58cd "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.lof"

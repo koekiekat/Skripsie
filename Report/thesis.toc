@@ -39,7 +39,7 @@
 \contentsline {section}{\numberline {4.2}Feature Extraction Methods}{17}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Short Time Fourier Transform}{17}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Mel-Frequency Cepstral Coefficients}{18}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}LPC}{18}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.3}Linear Predictive Coding}{18}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}DTW methodology}{19}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{20}{section.4.4}%
 \contentsline {section}{\numberline {4.5}Evaluation Procedure}{23}{section.4.5}%
