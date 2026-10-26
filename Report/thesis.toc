@@ -49,9 +49,9 @@
 \contentsline {chapter}{\numberline {5}Results}{29}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{29}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{31}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Experiment 3: LPC Features}{34}{section.5.3}%
-\contentsline {section}{\numberline {5.4}General Observations}{36}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusion}{38}{chapter.6}%
-\contentsline {chapter}{References}{39}{chapter*.35}%
-\contentsline {chapter}{\numberline {A}Appendix title goes here}{44}{appendix.A}%
+\contentsline {section}{\numberline {5.3}Experiment 3: LPCC Features}{35}{section.5.3}%
+\contentsline {section}{\numberline {5.4}General Observations}{37}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Conclusion}{39}{chapter.6}%
+\contentsline {chapter}{References}{40}{chapter*.35}%
+\contentsline {chapter}{\numberline {A}Appendix title goes here}{45}{appendix.A}%
 \contentsfinish 

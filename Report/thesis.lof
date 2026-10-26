@@ -17,21 +17,21 @@
 \contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{31}{figure.caption.22}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{31}{subfigure.1.1}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{31}{subfigure.1.2}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{33}{figure.caption.26}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{33}{subfigure.2.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{33}{subfigure.2.2}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{34}{figure.caption.26}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.2.2}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{34}{figure.caption.27}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.3.1}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.3.2}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{34}{figure.caption.28}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.4.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.4.2}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC with the first and second derivatives added}}{35}{figure.caption.32}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.5.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.5.2}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP for which some FP could be unlabeled calls.}}{37}{figure.caption.34}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Psotive samples}}}{37}{subfigure.6.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{37}{subfigure.6.2}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{35}{figure.caption.28}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.4.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.4.2}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC with the first and second derivatives added}}{36}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{36}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{36}{subfigure.5.2}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP for which some FP could be unlabeled calls.}}{38}{figure.caption.34}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Psotive samples}}}{38}{subfigure.6.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{38}{subfigure.6.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 
