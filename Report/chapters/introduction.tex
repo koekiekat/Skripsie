@@ -1,61 +1,87 @@
 \mychapter{Introduction}{Introduction}{}\label{chap:introduction}
 
 \mysection{Background}{Background}\label{sec:background-overview}
-Since the late 1990s there have been indications that whales have been struck by shipping vessels.\cite{vessel_collision_since_1990s} 
-Today this has become a larger concern, as vessel speeds and traffic has substantially increased. 
+Van Waerebeek et al.~\cite{vessel_collision_since_1990s} reported indications since the late 1990s 
+that whales have been struck by shipping vessels. 
+Today this has become a larger concern, as vessel speeds and traffic have substantially increased. 
 Bryde's whales are found to migrate in smaller regions 
-instead of the usual large-scale migrations of other whale species. Such a whale colony in Fasle Bay, 
-South Africa has also been placed in possible danger due to fishing activities in their migration region.\cite{bryde_whales_SA}
+instead of the usual large-scale migrations of other whale species. Faustmann et al.~\cite{bryde_whales_SA} 
+report that such a whale colony in False Bay, 
+South Africa has also been placed in possible danger due to fishing activities in their migration region.
 
-Detection and classification systems for whale calls can be used to monitor the migration patterns of specific whale colonies throughout 
-the year. The information gained from such analysis can help determine when vessel traffic should be diverted for the safety of a 
+Detection and classification systems for whale calls can be used to monitor the migration patterns of 
+specific whale colonies throughout 
+the year. The information gained from such analysis can help determine when vessel traffic should be 
+diverted for the safety of a 
 whale population.
-These types of systems have been implemented on different whale colonies, but the migration patterns of the False Bay colony has not 
-yet been 
-thoroughly documented.\cite{reducing_vessel_collisions} 
-Due to the variations in call types between different colonies of some whale species (killer whales\cite{killer_whale_dialects}, blue 
-whales\cite{blue_whale_song_variation}), models trained for other Bryde's whale colonies would not be completely trustworthy for the detection of 
-calls within the False Bay Bryde's Whale colony as universiality of calls cannot be assumed. Therefore, a model trained specifically for the False 
+These types of systems have been implemented on different whale colonies, as discussed by Betz et 
+al.~\cite{reducing_vessel_collisions}, but the migration patterns of the False Bay colony have not 
+yet been thoroughly documented. 
+Due to the variations in call types between different colonies of some whale species, such as killer 
+whales (Deecke et al.~\cite{killer_whale_dialects}) and blue 
+whales (McDonald et al.~\cite{blue_whale_song_variation}), models trained for other Bryde's whale 
+colonies would not be completely trustworthy for the detection of 
+calls within the False Bay Bryde's whale colony, as the universality of calls cannot be assumed. 
+Therefore, a model trained specifically for the False 
 Bay colony would be beneficial. 
 
-\Ac{DTW} has been shown to be an effective whale classification method on different whale colonies.\cite{DTW_has_worked} Given the 
-limited labeled data for the False Bay colony, \acs{DTW} is considered as it requires less input data than other detection algorithms.\cite{dtw_few_temps}
+Brown et al.~\cite{DTW_has_worked} showed that \ac{DTW} is an effective method for classifying 
+killer whale vocalizations. Given the 
+limited labeled data for the False Bay colony, \acs{DTW} is considered as Herreilers et 
+al.~\cite{dtw_few_temps} found that it requires less input data than other detection algorithms.
 
 \mysection{Problem Statement}{Problem Statement}\label{sec:problemstatement}
 
-This project will determine whether using \Ac{DTW} 
-using vector features is able to effectively detect Bryde's Whale calls within the False Bay region.
-Three feature extraction methods will be compared. These will be \Ac{STFT}, 
-\Ac{MFCC} and \Ac{LPC}.
+This project will determine whether \acs{DTW} 
+applied to frame-based feature vectors is able to effectively detect Bryde's whale calls within 
+the False Bay region, as measured by \gls{precision}, \gls{recall} and the \gls{f1_score}.
+Three feature extraction methods will be compared in terms of detection performance. These will be the \ac{STFT}, 
+\ac{MFCC} and \ac{LPCC}.
 
 \mysection{Objectives}{Objectives}\label{sec:objectives}
 
 \begin{enumerate}
     \item Implement a \acs{DTW} detection system using three different feature extraction methods 
-    (\acs{STFT}, \acs{MFCC} and \acs{LPC}). This shows whether 
-    the effectiveness 
-    of the \acs{DTW} system is independent from the feature extraction method.
-    \item Calculate the \gls{precision}, \gls{recall} and \gls{f1_score} for each model.
-    \item Compare results and determine whether \acs{DTW} is overall a good detection method and which 
-    feature extraction method is best suited.
+    (\acs{STFT}, \acs{MFCC} and \acs{LPCC}), and tune the feature frame length, call type 
+    thresholds and vote fraction for each method based on \gls{f1_score}.
+    \item Evaluate each system on the full 72 hour evaluation recording using 5 and 10 templates per call type, 
+    by calculating the \gls{precision}, \gls{recall}, \gls{f1_score} and average precision (\acs{AP}).
+    \item Compare the \gls{f1_score} and \acs{AP} results of the three feature extraction methods to determine which is best 
+    suited for detection, and whether the effectiveness of the \acs{DTW} system is independent 
+    of the feature extraction method.
+    \item Determine whether \acs{DTW} is an effective detection method based on the \gls{f1_score} and \acs{AP} results 
+    for the best feature extraction method.
 \end{enumerate}
 
 \mysection{Scope}{Scope}\label{sec:scope}
-    Elements not considered within this project include the classification of call types after detection and the detection of 
-    labeled tonal downsweep calls.
+    Elements not considered within this project include the classification of call types after 
+    detection, the detection of tonal downsweep calls, detection algorithms other than \acs{DTW}, 
+    feature extraction methods other than \acs{STFT}, \acs{MFCC} and \acs{LPCC}, the accuracy of 
+    detected start and end times, the detection of frequencies above 500 Hz.
 
-    Call type classification was not considered due to discontinuities in how calls were labelled. These discontinuities arose due to a variety of 
-    human labelers for different sections of data and the presence of similar frequency components across different call types.
+    Call type classification was not considered due to discontinuities in how calls were labeled. 
+    These discontinuities arose due to a variety of 
+    human labelers for different sections of data and the presence of similar frequency components 
+    across different call types.
 
-    Sections of audio containing labeled tonal downsweep calls were ignored due to a lack of data across multiple sections of recordings for this call type.
+    Tonal downsweep calls were excluded from the evaluation because labeled examples of this call 
+    type were only found in one of the three recordings.
+
+    Detections were evaluated on whether they overlap a labeled call, so the accuracy of the detected 
+    start and end times was not evaluated. Frequencies above 500 Hz were not considered, since the 
+    audio was downsampled to 1 kHz.
 
 \mysection{Layout of report}{Layout of report}\label{sec:layout}
 
 \begin{itemize}
-    \item Chapter 2 provides any background information needed to understand how to solve the given problem as well as any helpful literature of previous 
-    solutions to the problem.
-    \item Chapter 3 provides background information on the dataset used for this project as well as explaining the splitting of data for the project.
-    \item Chapter 4 gives a detailed design of the entire project.
-    \item Chapter 5 provides evidence of results obtained after the system had been designed as well as descriptions of what the results show.
-    \item Chapter 6 contains all concluding thoughts on the results as well as improvements and recommendations for the project.
+    \item \Cref{chap:literature} provides the background information needed to understand the problem, as well 
+    as literature on previous solutions to the problem.
+    \item \Cref{chap:dataset} provides background information on the dataset used for this project and explains 
+    how the data was split.
+    \item \Cref{chap:sys-design} gives a detailed design of the entire project, including the feature extraction 
+    methods, the \acs{DTW} implementation, hyperparameter tuning, the evaluation procedure and the evaluation metrics.
+    \item \Cref{chap:results} presents the results obtained from the designed system, as well as a description 
+    of what the results show.
+    \item \Cref{chap:conclusion} contains the concluding thoughts on the results, including whether the objectives were met, 
+    as well as improvements and recommendations for the project.
 \end{itemize}

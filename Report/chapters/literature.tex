@@ -2,10 +2,10 @@
 
 \mysection{Bryde's Whales}{Bryde's Whales}\label{sec:bryde-explained}
 
-Bryde's Whales predominently live in tropical or subtropical environments across the 
+Bryde's whales predominantly live in tropical or subtropical environments across the 
 world. The different call types, rates, frequencies and harmonics of these whales vary 
-depending on geographical location of the colony. Generally Bryde's Whales have calls 
-containing frequencies from as low as 42 Hz to as high as 1kHz. 
+depending on the geographical location of the colony. Generally Bryde's whales have calls 
+containing frequencies from as low as 42 Hz to as high as 1 kHz\cite{bryde_geographicly}.
 
 In the dataset used for this project there were four main call types present. These are 
 referred to as single-tones, multi-tones, burst-tonals and tonal downsweeps. 
@@ -16,19 +16,19 @@ referred to as single-tones, multi-tones, burst-tonals and tonal downsweeps.
     \caption{Examples of how each call type looks: single-tone, multi-tone, burst-tonal and tonal downsweep.}\label{fig:call_types}
 \end{figure}
 
-The single-tone calls were charecterized by a singular frequency at around 42 Hz. 
+The single-tone calls were characterised by a singular frequency at around 42 Hz. 
 Multi-tones also contained the 42 Hz frequency, but there were one or two other frequencies 
-above this with a maximum frequency component at about 200 Hz. Burst-tonals also has 
+above this with a maximum frequency component at about 200 Hz. Burst-tonals also have 
 the multiple frequency characteristic of the multi-tones, however the lower frequencies, 
 42~-~200 Hz, were held for longer than the higher frequencies, 200~-~500 Hz. The tonal 
-downsweep was the only call type not characterized by the 42 Hz frequency. It was a 
+downsweep was the only call type not characterised by the 42 Hz frequency. It was a 
 sweeping of frequencies through time starting at around 200 Hz and ending at around 100 
-Hz. 
+Hz\cite{bryde_whales_SA}.
 
 In accordance with the original detected calls the average call length of each call type was 
 around 0.3 seconds with a maximum duration of about 2.5 seconds. In other studies of 
-Bryde's Whales calls in different geographical areas a maximum duration of arount 7.0 
-seconds was identified.\cite{bryde_whales_SA}\cite{bryde_geographicly}
+Bryde's whale calls in different geographical areas identified a maximum duration of around 7.0 
+seconds\cite{bryde_whales_SA}.
 
 Decisions made in the project pertaining to frequencies and durations falling within 
 the detection limits were made based on the above information.
@@ -37,13 +37,14 @@ the detection limits were made based on the above information.
 Dynamic time warping (DTW) is an algorithm for detecting the similarity of two signals, $X = [x_1, x_2, \dots, x_n]$ and 
 $Y = [y_1, y_2, \dots, y_m]$. This measure of similarity is achieved by calculating an optimal 
 alignment cost between the two signals of length $N \in\mathbb{N}$  and $M \in\mathbb{N}$ respectively. In terms 
-of feature vectors such as the short time fourier transform (STFT), mel-scake frequency cepstral coefficients (MFCC) or linear predictive coding coefficients (LPCC) 
+of feature vectors such as the short time fourier transform (STFT), mel-frequency cepstral coefficients (MFCC) or linear predictive coding coefficients (LPCC) 
 this means that each frame making up one 
 signal is compared to each frame making up another signal. Using an alignment cost the 
-best alignment for each frame in one to the other signal is chosen and an overall DTW 
-cost is calculated to show how similar the overall signals are. Figure~\ref{fig:vector_dtw} shows that such 
+best alignment for each frame in one signal to the other signal is chosen and an overall DTW 
+cost is calculated to show how similar the overall signals are. Figure~\ref{fig:vector_dtw} shows, as 
+explained by M\"uller and Zalkow~\cite{dtw_basic} and Kamper~\cite{dtw_kamper}, that such 
 an optimal alignment path may mean that a single frame in signal X may produce the 
-lowest cost against more than one frame in signal Y and vice versa.\cite{dtw_basic}\cite{dtw_kamper}
+lowest cost against more than one frame in signal Y and vice versa.
 
 \begin{figure}[H]
     \centering
@@ -53,7 +54,7 @@ lowest cost against more than one frame in signal Y and vice versa.\cite{dtw_bas
 
 The overall cost needed to determine how similar the two signals are is calculated via a 
 cost matrix. Cost matrix, $C_{N+1, M+1}$ for signals X and Y, is initialised such that $C_{i, 0} = \infty$ 
-for i = 1 to M, $C_{0, j} = \infty$ for j = 1 to M and $C_{0, 0} = 0$. 
+for i = 1 to N, $C_{0, j} = \infty$ for j = 1 to M and $C_{0, 0} = 0$. 
 
 The formula used to fill each cell of the cost matrix is:
 
@@ -67,12 +68,12 @@ C_{i, j} = \text{dist}(x_i, y_j) + \text{Q} \qquad \text{with} \quad \text{Q} = 
 
 where $dist(x_i, y_j)$ represents the difference between $X_i$ and $Y_j$ as a distance. For vector signals 
 this distance is calculated between each frame i of signal X and each frame j of signal Y. 
-This can be done using various different techniques including cosine, euclidean or dot 
-product similarity. For this project only the cosine similarity and euclidean distance 
-metrics were used.\cite{dtw_kamper}
+According to Kamper~\cite{dtw_kamper}, this can be done using various different techniques including cosine, euclidean or dot 
+product similarity. For this project only the cosine distance and euclidean distance 
+metrics were used.
 
 Euclidean distance is sensitive to the magnitude and direction of the vectors for which 
-it is calculated. In basic terms it is the absolute difference between two vectors.\cite{vector_sim}
+it is calculated. In basic terms, as described by Schwaber-Cohen~\cite{vector_sim}, it is the absolute difference between two vectors.
 
 \begin{equation}
     d(\mathbf{x_i}, \mathbf{y_j}) = \sqrt{(\mathbf{x_i}_1 - \mathbf{y_j}_1)^2 + (\mathbf{x_i}_2 - \mathbf{y_j}_2)^2 + \dots + (\mathbf{x_i}_n - \mathbf{y_j}_n)^2}
@@ -80,12 +81,23 @@ it is calculated. In basic terms it is the absolute difference between two vecto
 \end{equation}
 
 Cosine similarity is only sensitive to the direction of the vectors for which it is calculated. 
-In basic terms it is the angle between the two vectors.\cite{vector_sim}
+In basic terms, as described by Schwaber-Cohen~\cite{vector_sim}, it is the angle between the two vectors.
 
 \begin{equation}
     \cos(\mathbf{x_i}, \mathbf{y_j}) = \frac{\mathbf{x_i} \cdot \mathbf{y_j}}{\lVert\mathbf{x_i}\rVert \, \lVert\mathbf{y_j}\rVert}
     \label{eq:cosine} 
 \end{equation}
+
+Since DTW minimises the cost between frames, the cosine similarity cannot be used directly as the distance, 
+because a higher similarity must give a lower cost. Instead the cosine distance is used, which is defined in 
+the SciPy documentation~\cite{scipy_dist} as:
+
+\begin{equation}
+    d_{\cos}(\mathbf{x_i}, \mathbf{y_j}) = 1 - \cos(\mathbf{x_i}, \mathbf{y_j})
+    \label{eq:cosine_distance} 
+\end{equation}
+
+A cosine distance of 0 therefore means that the two vectors point in the same direction.
 
 Q is the minimum value of three possible options namely match, insertion or deletion. 
 Match is the value in the matrix cell diagonally down and left from the current cell for 
@@ -94,11 +106,11 @@ the current cell and deletion is the matrix cell directly to the left of the cur
 
 The cost which is then calculated for the current cell, $C_{i, j}$, is a summation of the distance 
 between the feature frames i and j in signals X and Y respectively as well as the lowest 
-accumlated cost up until that point. This means that the final cell reached within the 
+accumulated cost up until that point. This means that the final cell reached within the 
 cost matrix, $C_{N+1, M+1}$, will contain the lowest overall cost for the similarity of signals X 
 and Y. The lower the final cost, the higher the similarity between the two signals. The 
-example shown in Figure~\ref{fig:cost_matrix} is shown if X and Y are chosen to be scalar signals, however 
-the same logic is used for when X and Y are vectors.\cite{dtw_kamper}
+example shown in Figure~\ref{fig:cost_matrix} assumes that X and Y are scalar signals, however, as 
+explained by Kamper~\cite{dtw_kamper}, the same logic is used when X and Y are vectors.
 
 \begin{figure}[H]
     \centering
@@ -108,9 +120,9 @@ the same logic is used for when X and Y are vectors.\cite{dtw_kamper}
 \end{figure}
 
 The general case of DTW finds global alignment between the two signals. This 
-alignment is found using the warping path.The warping path is the path of the best 
-alignment between signals X and Y within the cost matrix, as shown in Figure~\ref{fig:cost_matrix}. This 
-path, W, is a sequence of matrix co-ordinates, (i, j), with a total length k.\cite{dtw_boundaries}
+alignment is found using the warping path as described by Alizadeh~\cite{dtw_boundaries}. The warping path is the path of the best 
+alignment between signals X and Y within the cost matrix, as shown in Figure~\ref{fig:cost_matrix}. 
+This path, W, is a sequence of matrix co-ordinates, (i, j), with a total length k.
 
 The boundary condition for global alignment ensures the final path starts and ends 
 with the start and end frames of each respective signal. 
@@ -136,7 +148,7 @@ time.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{figures/literature/sub_dtw.png}
-    \caption{Example of a subsequence DTW alignment vetween two signal $X = [x_1, x_2, x_3, x_4]$ and $Y = [y_1. y_2, y_3, y_4, y_5, y_6, y_7, y_8, y_9, y_10]$}\label{fig:sub_dtw}
+    \caption{Example of a subsequence DTW alignment between two signals $X = [x_1, x_2, x_3, x_4]$ and $Y = [y_1, y_2, y_3, y_4, y_5, y_6, y_7, y_8, y_9, y_{10}]$}\label{fig:sub_dtw}
 \end{figure}
 
 Subsequence DTW is a version of the DTW algorithm that alters the boundary 
@@ -146,24 +158,25 @@ warping path to start and end at any point within the first and final row of the
 respectively.
 
 \begin{equation}
-    i_1 = 1,\; i_k = N \quad \text{and} \quad 1 \le j_1 \le j_k \le M
+    i_1 = 1,\ i_k = N \quad \text{and} \quad 1 \le j_1 \le j_k \le M
 \end{equation}
 
-In global alignment the final cell in the cost matrix, (N+1, M+1), is considered the 
-overall optimal cost for those two signals. With subsequence DTW the entire final row of 
+In global alignment the final cell in the cost matrix, $C_{N+1, M+1}$, is considered the 
+overall optimal cost for those two signals. As described by M\"uller and Zalkow~\cite{dtw_subsequence}, 
+with subsequence DTW the entire final row of 
 the matrix is checked to find the lowest cost. The position of that cost shows where the 
-end point of the alignment detected via subsequence DTW is.\cite{dtw_subsequence}
+end point of the alignment detected via subsequence DTW is.
 
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods-background}
 
 
 \mysubsection{Short Time Fourier Transform}{Short Time Fourier Transform}\label{sec:short-time-fourier-transform}
-The short time fourier transform (STFT) is used to analyse the change in frequency of a signal over time. The STFT of 
+According to Usman et al.~\cite{Det_Tech}, M\"uller and Zalkow~\cite{dtw_basic} and Kamper~\cite{stft_kamper}, the short time Fourier transform (STFT) is used to analyse the change in frequency of a signal over time. The STFT of 
 a segment of audio is calculated by multiplying the signal in the time domain, $x(t)$ with 
-a window $w(t-\tau)$ which is sweeped across said signal. The fourier transform (FT) of each 
+a window $w(t-\tau)$ which is swept across said signal. The Fourier transform (FT) of each 
 window is calculated and used to determine the frequency information for that window. 
 Thus, the STFT provides the change in frequency for a segment of audio throughout 
-time.\cite{Det_Tech}\cite{stft_kamper}
+time.
 
 The mathematical formulation of STFT is:
 
@@ -190,33 +203,34 @@ passes for the FT to distinguish between frequencies spaced closer together.
 
 If L is kept long, time resolution drops. This means that fast changes in frequency will 
 be missed. However, frequency resolution increases and it becomes easier to distinguish 
-between differrent frequency bands.
+between different frequency bands.
 
 Window overlap is another consideration when using STFT. Increased overlap creates 
-a smoother representation of the changes in frequency occuring over time since information 
+a smoother representation of the changes in frequency occurring over time since information 
 at the edges of the window is no longer lost. The trade-off with overlap is the increase 
 in computational complexity that will occur due to smaller and thus more windows of a 
-signal being analysed.\cite{dtw_basic}\cite{stft_kamper}
+signal being analysed.
 
 
 \mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mel-frequency-cepstral-coefficients}
-Mel-frequency cepstral coefficients (MFCC) is a common choice for feature extraction when working on aucoustic data. This is 
-because it is set up to percieve frequencies as they are percieved by the human ear. That 
-means the lower frequencies are given a higher resolution than the high frequencies.\cite{mel_kamper}
-Features are initially extracted using the fast fourier transform (FFT). After this they are passed through a 
-mel-scale filter bank. The formula for the mel-frequency calculation is:
+Mel-frequency cepstral coefficients (MFCC) is a common choice for feature extraction when working on acoustic data. This is 
+because, as explained by Kamper~\cite{mel_kamper}, it is set up to perceive frequencies as they are perceived by the human ear. That 
+means the lower frequencies are given a higher resolution than the high frequencies.
+Features are initially extracted using the fast Fourier transform (FFT). After this they are passed through a 
+mel-scale filter bank. The formula for the mel-frequency calculation given by Usman et al.~\cite{Det_Tech} is:
 
 \begin{equation}
     Mel(f) = 1127 \ln\left(1 + \frac{f}{700}\right)
 \end{equation}
 
  with $Mel(f)$ as the frequency value on the mel scale and f as the actual frequency in 
- Hz.\cite{Det_Tech}
+ Hz.
 
-This bank is made up 20 to 40 triangular filters which are placed, smallest width to 
-largest width according to the mel scale, along the frequency spectrum. The standard 
+This bank is made up of 20 to 40 triangular filters which are placed, smallest width to 
+largest width according to the mel scale, along the frequency spectrum. According to 
+Singh~\cite{mel_med} and Kamper~\cite{mel_kamper}, the standard 
 amount of triangular filters chosen is 26. This results in 26 coefficients for the entire range 
-of frequencies being analysed.\cite{mel_med}\cite{mel_kamper}
+of frequencies being analysed.
 
 \begin{figure}[H]
     \centering
@@ -229,7 +243,7 @@ The log of these coefficients is then taken and finally the discrete cosine tran
 other are removed such that the coefficients become independent. 
 The final number of cepstral 
 coefficients returned by the DCT is typically 12 or 13 since the most important information 
-is kept there. The formula use to perform the DCT is:
+is kept there. The formula used by Usman et al.~\cite{Det_Tech} to perform the DCT is:
 
 \begin{equation}
     MFCC_i = \sum_{k=1}^{K} X_k \cos\left(\frac{i(k - 0.5)\pi}{K}\right), \quad i = 1, 2, \dots, K
@@ -237,12 +251,12 @@ is kept there. The formula use to perform the DCT is:
 
 with i as the index of the current coefficient, K as the total number of triangular filters 
 used, k as the specific filter bank at that point in time and $X_k$ as the energy after log was 
-applied to the mel coefficients.\cite{Det_Tech}
+applied to the mel coefficients.
 
-The first and second derivatives, often referred to as deltas, of the cepstral coefficients 
-are often used in feature extraction. They show the change in frequency between cepstral 
-coefficients. This can be vital information when analysing how frequency changes across 
-time since the MFCC process tends to lose this information. The formula for the derivatives 
+As explained by DataMListic~\cite{deltas}\cite{mel_delta} the first and second derivatives, often referred to as deltas, of the cepstral coefficients 
+are often used in feature extraction. They show the change of each cepstral coefficient across frames. This can be vital information when analysing how frequency changes across 
+time since the MFCC process tends to lose this information. The formula for the derivatives, 
+as given by Majeed et al.~\cite{melderv_calcs}, 
 is:
 
 \begin{equation}
@@ -250,12 +264,12 @@ is:
 \end{equation}
 
 with t as the specific point in time, d as the order of derivative and m as the frame 
-offset.\cite{deltas}\cite{mel_delta}\cite{melderv_calcs}
+offset.
 
-\mysubsection{Linear Predictive Coding}{Linear Predictive Coding}\label{sec:linear-predictive-coding}
-Linear predicitve coding (LPC) is a straightforward mathematical method commonly 
+\mysubsection{Linear Predictive Coding Coefficients}{Linear Predictive Coding Coefficients}\label{sec:linear-predictive-coding}
+As explained by Rabiner and Juang~\cite{lpc} and Usman et al.~\cite{Det_Tech}, linear predictive coding (LPC) is a straightforward mathematical method commonly 
 used for feature extraction. LPC focuses on the method of approximating a sample of a 
-speech signal using a combination of $n$ samples from the past. This means that for each 
+speech signal using a combination of $p$ samples from the past. This means that for each 
 sample for which there are $p$ available samples before it an approximation is made in the 
 form of the equation:
 
@@ -287,7 +301,7 @@ The feature extracted via this method is made up of the $p$ LPC coefficients whi
 to minimise the mean square error. These coefficients tend to be unstable, therefore cepstral 
 coefficients can be calculated from these raw LPC coefficients giving linear predictive coding coefficients (LPCC). 
 LPCC gives 
-the coefficients of the fourier transform (FT) representation of the magnitude spectrum and are more reliable 
+the coefficients of the fourier transform (FT) representation of the magnitude spectrum and is more reliable 
 than the LPC representation. 
 
 LPCC can be calculated from the LPC results through recursion. The formula for that 
@@ -298,46 +312,44 @@ is:
 c_0 &= \ln \sigma^2 \\
 c_m &= a_m + \sum_{k=1}^{m-1} \left(\frac{k}{m}\right) c_k a_{m-k}, \qquad 1 \le m \le p \\
 c_m &= \sum_{k=1}^{m-1} \left(\frac{k}{m}\right) c_k a_{m-k}, \qquad m > p,
-\label{eq :lpcc}
+\label{eq:lpcc}
 \end{aligned}
 \end{equation}
 
 where $\sigma^2$ is the LPC gain term.
 
-The final feature extracted using LPCC contains $p$ coefficients for a single frame with 
-$p = 0$ containing the magnitude information.\cite{lpc}\cite{Det_Tech}
+The final feature extracted using LPCC contains $p$ coefficients for a single frame, with the zeroth coefficient, $c_0$, containing the magnitude information.
 
 \mysection{Similar Studies}{Similar Studies}\label{sec:similar_studies}
 
-\mysubsection{Classification of Killer Whale Vocalizations using DTW}{Classification of Killer Whale Vocalizations using DTW}\label{sec:killer-dtw}
+\mysubsection{Classification of Killer Whale Vocalisations using DTW}{Classification of Killer Whale Vocalisations using DTW}\label{sec:killer-dtw}
 An article, ``Automatic classification of killer whale vocalizations using dynamic time 
-warping'', written by Judith, C. and Patrrick J.O. Miller evaluated four different variations 
+warping'', written by Judith C. Brown and Patrick J. O. Miller~\cite{killer-whale} evaluated four different variations 
 of the \ac{DTW} algorithm to classify biphonic killer whale 
-vocalizations using fundamental frequency contours. 
+vocalisations using fundamental frequency contours. 
 
-Due to the biphonic nature of these calls the low-frequency component and high-
-frequency component for each call was extracted for seperate analysis. Four different 
-variations of the DTW algorithm with various different constraints were used to evluate 
+Due to the biphonic nature of these calls the low-frequency component and high-frequency component for each call was extracted for separate analysis. Four different 
+variations of the DTW algorithm with various different constraints were used to evaluate 
 against each other. 
 
 The final result of the paper was that the method referred to as ``Sakoe-Chiba'' on 
-the LPC performed the best with a 90\% agreement with the labeles selected by human 
+the LPC performed the best with a 90\% agreement with the labels selected by human 
 classifiers. 
 
-This study did show that the use of DTW in bioacustic analysis is 
-a good option. However, it did not consider the ability of DTW to detect call 
-in a continuos segment of bioacustic data as all calls which were classified had already 
-been selected and segmented to the pitch contours of the vocalization. This study also did 
-not consider the impact of low frequency analysis using DTW as killer whale vocalizations 
-do not tend to fall below 500 Hz.\cite{killer-whale}
+This study did show that the use of DTW in bioacoustic analysis is 
+a good option. However, it did not consider the ability of DTW to detect calls 
+in a continuous segment of bioacoustic data as all calls which were classified had already 
+been selected and segmented to the pitch contours of the vocalisation. This study also did 
+not consider the impact of low frequency analysis using DTW as killer whale vocalisations 
+do not tend to fall below 500 Hz.
 
-\mysubsection{Analysis of Template-Based Detection Algorithms for Bryde's Whales}{Detection of Template-Based Detection Algorithms for Bryde's Whales}\label{sec:bryde-dtw-lpc}
+\mysubsection{Analysis of Template-Based Detection Algorithms for Bryde's Whales}{Analysis of Template-Based Detection Algorithms for Bryde's Whales}\label{sec:bryde-dtw-lpc}
 
-The article, ``Analysis of Template-Base Detection Algorithms for Inshore Bryde's Whale 
-Short Pulse Calls'' written by Olayinka O. Ogundile and Daniel J. J. Versfeld 
+The article, ``Analysis of Template-Based Detection Algorithms for Inshore Bryde's Whale 
+Short Pulse Calls'' written by Olayinka O. Ogundile and Daniel J. J. Versfeld~\cite{temp-based-bryde} 
 analysed two template based detection algorithms to detect short pulse 
-calls for Bryde's Whales in False Bay, South Africa. The two methods tested were dynamic time warping (DTW) 
-and linear predictive coding (LPC). In their analysis they used two seperate sample sets with different signal-to-noise ratio (SNR) values 
+calls for Bryde's whales in False Bay, South Africa. The two methods tested were dynamic time warping (DTW) 
+and linear predictive coding (LPC). In their analysis they used two separate sample sets with different signal-to-noise ratio (SNR) values 
 to also evaluate the performance of these techniques in the presence of noise. The input 
 features for these models were the time-domain representation of the signals. 
 
@@ -345,7 +357,7 @@ The final results of the article found that both LPC and DTW performed well in h
 and low SNR segments. LPC performed the overall best in low noise segments.
 
 This project provides insight into the use of template based detection systems for 
-Bryde's Whales. This is relevant since DTW which is handled in this article is the chosen 
+Bryde's whales. This is relevant since DTW which is handled in this article is the chosen 
 detection mechanism for this project. While LPC is also used in the article, its use is 
 vastly different to the use within this project. LPC is used as a detection algorithm 
 and tested on its ability to act as such. In this project LPC is not used as a detection 
@@ -354,17 +366,17 @@ The detection method focuses on
 the error component of the LPC equation while the feature extraction method focuses 
 on the coefficients calculated for the approximation of the real signal. Another difference 
 between this project and the article is that this project exclusively uses the time domain 
-representation of the signal as input.\cite{temp-based-bryde}
+representation of the signal as input.
 
 \mysubsection{Detection of real-time fin and blue whale calls}{Detection of real-time fin and blue whale calls}\label{sec:real-time}
 
 The article, ``Automatic recognition of fin and blue whale calls for real-time monitoring in 
-the St. Lawrence'' by Xavier Mouy, Mohammed Bahoura and Yvan Simard tested detection models on 
+the St. Lawrence'' by Xavier Mouy, Mohammed Bahoura and Yvan Simard~\cite{dtw-vq} tested detection models on 
 real-time data for fin and blue whales. The 
-detection methods used were dynmaic time warping (DTW) and vector quantization (VQ). This article focused on 
+detection methods used were dynamic time warping (DTW) and vector quantisation (VQ). This article focused on 
 low frequency whale calls. 
 
-Instananeous frequency, speed and acceleration was extracted as features. It was 
+Instantaneous frequency, speed and acceleration were extracted as features. It was 
 found that due to low frequency components from background elements such as ships the 
 detection of false positives (FP) increased.
 
@@ -372,44 +384,44 @@ In terms of this project the article shows how low frequency detections can be a
 by low frequency background noise. This article also considered real-time audio detection 
 which is much closer in similarity to detection within a large audio file such as what was 
 done in this project. This article did not use the same feature vectors as the project and 
-did not consider their effect on DTW performance.\cite{dtw-vq}
+did not consider their effect on DTW performance.
 
 \mysubsection{Hidden Markov Model for Bryde's Whale short pulse calls}{Hidden Markov Model for Bryde's Whale short pulse calls}\label{sec:hmm-bryde}
 
 The article ``A hidden Markov model with selective time domain feature extraction to detect inshore Bryde's whale short pulse calls'' 
-by O.O. Ogundile, A.M. Usman, O.P. Babalola and D.J.J. Versfeld compares a time domain feature extraction technique (MAP) used for hidden markov models (HMM) against 
+by O.O. Ogundile, A.M. Usman, O.P. Babalola and D.J.J. Versfeld~\cite{hmm} compares a time domain feature extraction technique used for hidden Markov models (HMM) against 
 mel-frequency cepstral coefficients (MFCC) and linear predictive coding (LPC), frequency domain techniques. The model is used for detection of Bryde's 
-Whale calls in False Bay, South Africa.
+whale calls in False Bay, South Africa.
 
-These three HMM models are used on 2 hours of continuos recordings to detect these 
-calls. This is similar to the continuos recording detection done in this project.
+These three HMM models are used on 2 hours of continuous recordings to detect these 
+calls. This is similar to the continuous recording detection done in this project.
 
-The MAP-HMM model performed the best with MFCC performing second best and 
+The time domain feature HMM model performed the best with MFCC performing second best and 
 LPC performing the worst. It was found that the MFCC and LPC models were sensitive 
 to background noise.
 
-While this does test detection on a continuos segment of audio, this article focuses on 
-HMM detection and not DTW. It also does test MFCC feature extraction method as well 
+While this does test detection on a continuous segment of audio, this article focuses on 
+HMM detection and not DTW. It also tests the MFCC feature extraction method as well 
 as the LPC method. Considering the fact that the LPC features were not converted to 
-linear predictive coding coefficients (LPCC) this does not fully align with this project.\cite{hmm}
+linear predictive coding coefficients (LPCC) this does not fully align with this project.
 
-\mysubsection{Speech Recognition using DTW}{Speech Recognition using DTW}\label{sec: speech-dtw}
+\mysubsection{Speech Recognition using DTW}{Speech Recognition using DTW}\label{sec:speech-dtw}
 
-Th goal of the article ``Speech recognition using Dynamic Time Warping (DTW)'' by Yurika Permanasari, Ermin H. Harahap and Erwin Prayoga Ali 
+The goal of the article ``Speech recognition using Dynamic Time Warping (DTW)'' by Yurika Permanasari, Ermin H. Harahap and Erwin Prayoga Ali~\cite{speech} 
 was to analyse the effectiveness of dynamic time warping (DTW) in 
-matching speech patterns. Variabilities were included into the study via pronounciation 
+matching speech patterns. Variabilities were included in the study via pronunciation 
 timing, volume and speaker identity. 
 
 Features were extracted from the recorded audio. Some audio was used as templates 
 and others as test data. DTW was then used to test which of the variations impacted 
-DTW distances the most. The main tests were keeping the pronounciation time 
-the same with the same volume, different pronounciation time with the same volume and 
-same pronounciation time with different volume. 
+DTW distances the most. The main tests were keeping the pronunciation time 
+the same with the same volume, different pronunciation time with the same volume and 
+same pronunciation time with different volume. 
 
 It was determined that DTW was an effective pattern recognition algorithm and that 
-pronounciation timing had a larger impact on DTW alignment than volume.
+pronunciation timing had a larger impact on DTW alignment than volume.
 
 This study also uses DTW to recognise patterns in audio, however this focuses on 
-speech recognition and the effects of the abilities of variances in that recognition. It does not 
-focus on different feature vectors or detection of low frequency whale calls in a continuos 
-recording.\cite{speech}
+speech recognition and the effects of variability on that recognition. It does not 
+focus on different feature vectors or detection of low frequency whale calls in a continuous 
+recording.

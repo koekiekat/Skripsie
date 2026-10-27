@@ -531,6 +531,7 @@ INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
+INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\tex\latex\translations\dicts\translations-basic-dictionary-english.trsl
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\tex\latex\translations\dicts\translations-basic-dictionary-english.trsl
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\tex\latex\translations\dicts\translations-basic-dictionary-english.trsl
@@ -698,14 +699,14 @@ INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr6.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx12.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx8.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx6.tfm
-INPUT .\figures\background\cost_matrix.png
-INPUT .\figures\background\cost_matrix.png
-INPUT .\figures\background\cost_matrix.png
-INPUT .\figures\background\cost_matrix.png
-INPUT .\figures\background\cost_matrix.png
-INPUT .\figures\background\cost_matrix.png
-INPUT .\figures\background\cost_matrix.png
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathex.enc
+INPUT .\figures\background\cost_matrix.png
+INPUT .\figures\background\cost_matrix.png
+INPUT .\figures\background\cost_matrix.png
+INPUT .\figures\background\cost_matrix.png
+INPUT .\figures\background\cost_matrix.png
+INPUT .\figures\background\cost_matrix.png
+INPUT .\figures\background\cost_matrix.png
 INPUT .\figures\literature\sub_dtw.png
 INPUT .\figures\literature\sub_dtw.png
 INPUT .\figures\literature\sub_dtw.png
@@ -719,7 +720,6 @@ INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmsy10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmbx10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-INPUT C:\Users\HP\AppData\Local\MiKTeX\fonts\tfm\public\tipa\tipa12.tfm
 INPUT C:\Users\HP\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmcsc10.tfm
 INPUT .\figures\literature\mel.png
 INPUT .\figures\literature\mel.png

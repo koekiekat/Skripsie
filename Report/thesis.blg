@@ -29,7 +29,7 @@ and the built_in function-call counts, 26204 in all, are:
 + -- 359
 - -- 202
 * -- 1227
-:= -- 4346
+:= -- 4345
 add.period$ -- 94
 call.type$ -- 47
 change.case$ -- 139
@@ -38,7 +38,7 @@ cite$ -- 47
 duplicate$ -- 1959
 empty$ -- 2091
 format.name$ -- 282
-if$ -- 5573
+if$ -- 5574
 int.to.chr$ -- 10
 int.to.str$ -- 48
 missing$ -- 425
