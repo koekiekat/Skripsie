@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  27 OCT 2026 13:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  27 OCT 2026 13:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1683,10 +1683,10 @@ Package pdftex.def Info: figures/literature/call_types.png  used on input line 1
 [4
 
  <./figures/literature/call_types.png>]
-<figures/background/vector_dtw.png, id=533, 492.84125pt x 122.4575pt>
+<figures/background/vector_dtw.png, id=534, 492.84125pt x 122.4575pt>
 File: figures/background/vector_dtw.png Graphic file (type png)
 <use figures/background/vector_dtw.png>
-Package pdftex.def Info: figures/background/vector_dtw.png  used on input line 51.
+Package pdftex.def Info: figures/background/vector_dtw.png  used on input line 50.
 (pdftex.def)             Requested size: 364.19667pt x 90.49753pt.
 
 
@@ -1705,18 +1705,18 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [6{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
-<figures/background/cost_matrix.png, id=563, 683.55376pt x 241.90375pt>
+<figures/background/cost_matrix.png, id=564, 683.55376pt x 241.90375pt>
 File: figures/background/cost_matrix.png Graphic file (type png)
 <use figures/background/cost_matrix.png>
-Package pdftex.def Info: figures/background/cost_matrix.png  used on input line 117.
+Package pdftex.def Info: figures/background/cost_matrix.png  used on input line 116.
 (pdftex.def)             Requested size: 273.14923pt x 96.6675pt.
-<figures/literature/sub_dtw.png, id=566, 403.5075pt x 122.4575pt>
+<figures/literature/sub_dtw.png, id=567, 403.5075pt x 122.4575pt>
 File: figures/literature/sub_dtw.png Graphic file (type png)
 <use figures/literature/sub_dtw.png>
-Package pdftex.def Info: figures/literature/sub_dtw.png  used on input line 150.
+Package pdftex.def Info: figures/literature/sub_dtw.png  used on input line 149.
 (pdftex.def)             Requested size: 273.14923pt x 82.89627pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 151.
+(Font)              <10.95> on input line 150.
 
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
@@ -1741,7 +1741,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 <figures/literature/mel.png, id=597, 349.305pt x 211.79124pt>
 File: figures/literature/mel.png Graphic file (type png)
 <use figures/literature/mel.png>
-Package pdftex.def Info: figures/literature/mel.png  used on input line 237.
+Package pdftex.def Info: figures/literature/mel.png  used on input line 236.
 (pdftex.def)             Requested size: 273.14923pt x 165.62631pt.
 
 
@@ -1751,7 +1751,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[9]
+[9 <./figures/literature/mel.png>]
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
 (fancyhdr)                Make it at least 27.11653pt, for example:
@@ -1759,7 +1759,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[10 <./figures/literature/mel.png>]
+[10]
 
 Package fancyhdr Warning: \headheight is too small (14.5pt): 
 (fancyhdr)                Make it at least 27.11653pt, for example:
@@ -2276,15 +2276,15 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 1B2119F09B51F69A9ED854F9BEA97CE8;8814.
  ) 
 Here is how much of TeX's memory you used:
- 53143 strings out of 467871
- 1091263 string characters out of 5419828
- 1670445 words of memory out of 5000000
+ 53147 strings out of 467871
+ 1091307 string characters out of 5419828
+ 1670443 words of memory out of 5000000
  80632 multiletter control sequences out of 15000+600000
- 766883 words of font info for 269 fonts, out of 8000000 for 9000
+ 767057 words of font info for 271 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,20n,112p,2591b,767s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (57 pages, 6170224 bytes).
+Output written on thesis.pdf (57 pages, 6170256 bytes).
 PDF statistics:
  1219 PDF objects out of 1440 (max. 8388607)
  226 named destinations out of 1000 (max. 500000)

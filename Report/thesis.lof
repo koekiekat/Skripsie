@@ -7,7 +7,7 @@
 \contentsline {figure}{\numberline {2.2}{\ignorespaces An example of the optimal warping path between two vector features, X with length N = 4 and Y with length M = 6}}{5}{figure.caption.11}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces An example for the three possible options for min as well as an example of the optimal warp path found for signals X and Y assuming X=[0, 2, 1, 0] and Y=[0, 0, 0.5, 2, 1, 0]}}{7}{figure.caption.12}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Example of a subsequence DTW alignment between two signals $X = [x_1, x_2, x_3, x_4]$ and $Y = [y_1, y_2, y_3, y_4, y_5, y_6, y_7, y_8, y_9, y_{10}]$}}{7}{figure.caption.13}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}}{10}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}}{9}{figure.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces This is a software flow diagram describing how the hyperparameters are chosen for the project.}}{21}{figure.caption.16}%

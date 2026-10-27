@@ -21,12 +21,12 @@
 \contentsline {subsection}{\numberline {2.3.1}Short Time Fourier Transform}{8}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Mel-Frequency Cepstral Coefficients}{9}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Linear Predictive Coding Coefficients}{10}{subsection.2.3.3}%
-\contentsline {section}{\numberline {2.4}Similar Studies}{12}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Classification of Killer Whale Vocalisations using DTW}{12}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.4}Similar Studies}{11}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Classification of Killer Whale Vocalisations using DTW}{11}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Analysis of Template-Based Detection Algorithms for Bryde's Whales}{12}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Detection of real-time fin and blue whale calls}{13}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.3}Detection of real-time fin and blue whale calls}{12}{subsection.2.4.3}%
 \contentsline {subsection}{\numberline {2.4.4}Hidden Markov Model for Bryde's Whale short pulse calls}{13}{subsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.4.5}Speech Recognition using DTW}{14}{subsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.4.5}Speech Recognition using DTW}{13}{subsection.2.4.5}%
 \contentsline {chapter}{\numberline {3}Dataset}{15}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Background}{15}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Labeling}{15}{section.3.2}%

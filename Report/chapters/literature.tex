@@ -5,7 +5,7 @@
 Bryde's whales predominantly live in tropical or subtropical environments across the 
 world. The different call types, rates, frequencies and harmonics of these whales vary 
 depending on the geographical location of the colony. Generally Bryde's whales have calls 
-containing frequencies from as low as 42 Hz to as high as 1 kHz\cite{bryde_geographicly}.
+containing frequencies from as low as 42 Hz to as high as 1 kHz~\cite{bryde_geographicly}.
 
 In the dataset used for this project there were four main call types present. These are 
 referred to as single-tones, multi-tones, burst-tonals and tonal downsweeps. 
@@ -23,12 +23,11 @@ the multiple frequency characteristic of the multi-tones, however the lower freq
 42~-~200 Hz, were held for longer than the higher frequencies, 200~-~500 Hz. The tonal 
 downsweep was the only call type not characterised by the 42 Hz frequency. It was a 
 sweeping of frequencies through time starting at around 200 Hz and ending at around 100 
-Hz\cite{bryde_whales_SA}.
+Hz~\cite{bryde_whales_SA}.
 
 In accordance with the original detected calls the average call length of each call type was 
-around 0.3 seconds with a maximum duration of about 2.5 seconds. In other studies of 
-Bryde's whale calls in different geographical areas identified a maximum duration of around 7.0 
-seconds\cite{bryde_whales_SA}.
+around 0.3 seconds with a maximum duration of about 2.5 seconds. In other studies of Bryde's whale calls in different geographical areas, a maximum duration of around 7.0 
+seconds was identified by Faustmann et al.~\cite{bryde_whales_SA} and Oleson et al.~\cite{bryde_geographicly}.
 
 Decisions made in the project pertaining to frequencies and durations falling within 
 the detection limits were made based on the above information.
@@ -37,7 +36,7 @@ the detection limits were made based on the above information.
 Dynamic time warping (DTW) is an algorithm for detecting the similarity of two signals, $X = [x_1, x_2, \dots, x_n]$ and 
 $Y = [y_1, y_2, \dots, y_m]$. This measure of similarity is achieved by calculating an optimal 
 alignment cost between the two signals of length $N \in\mathbb{N}$  and $M \in\mathbb{N}$ respectively. In terms 
-of feature vectors such as the short time fourier transform (STFT), mel-frequency cepstral coefficients (MFCC) or linear predictive coding coefficients (LPCC) 
+of feature vectors such as the short time Fourier transform (STFT), mel-frequency cepstral coefficients (MFCC) or linear predictive coding coefficients (LPCC) 
 this means that each frame making up one 
 signal is compared to each frame making up another signal. Using an alignment cost the 
 best alignment for each frame in one signal to the other signal is chosen and an overall DTW 
@@ -68,8 +67,8 @@ C_{i, j} = \text{dist}(x_i, y_j) + \text{Q} \qquad \text{with} \quad \text{Q} = 
 
 where $dist(x_i, y_j)$ represents the difference between $X_i$ and $Y_j$ as a distance. For vector signals 
 this distance is calculated between each frame i of signal X and each frame j of signal Y. 
-According to Kamper~\cite{dtw_kamper}, this can be done using various different techniques including cosine, euclidean or dot 
-product similarity. For this project only the cosine distance and euclidean distance 
+According to Kamper~\cite{dtw_kamper}, this can be done using various different techniques including cosine, Euclidean or dot 
+product similarity. For this project only the cosine distance and Euclidean distance 
 metrics were used.
 
 Euclidean distance is sensitive to the magnitude and direction of the vectors for which 
@@ -171,7 +170,7 @@ end point of the alignment detected via subsequence DTW is.
 
 
 \mysubsection{Short Time Fourier Transform}{Short Time Fourier Transform}\label{sec:short-time-fourier-transform}
-According to Usman et al.~\cite{Det_Tech}, M\"uller and Zalkow~\cite{dtw_basic} and Kamper~\cite{stft_kamper}, the short time Fourier transform (STFT) is used to analyse the change in frequency of a signal over time. The STFT of 
+According to Usman et al.~\cite{Det_Tech} and Kamper~\cite{stft_kamper}, the short time Fourier transform (STFT) is used to analyse the change in frequency of a signal over time. The STFT of 
 a segment of audio is calculated by multiplying the signal in the time domain, $x(t)$ with 
 a window $w(t-\tau)$ which is swept across said signal. The Fourier transform (FT) of each 
 window is calculated and used to determine the frequency information for that window. 
@@ -253,7 +252,7 @@ with i as the index of the current coefficient, K as the total number of triangu
 used, k as the specific filter bank at that point in time and $X_k$ as the energy after log was 
 applied to the mel coefficients.
 
-As explained by DataMListic~\cite{deltas}\cite{mel_delta} the first and second derivatives, often referred to as deltas, of the cepstral coefficients 
+As explained by DataMListic~\cite{deltas}\cite{mel_delta}, the first and second derivatives, often referred to as deltas, of the cepstral coefficients 
 are often used in feature extraction. They show the change of each cepstral coefficient across frames. This can be vital information when analysing how frequency changes across 
 time since the MFCC process tends to lose this information. The formula for the derivatives, 
 as given by Majeed et al.~\cite{melderv_calcs}, 
@@ -263,8 +262,8 @@ is:
     x^{(d)}_t = \frac{\sum_{m=-M}^{M} m \cdot x^{(d-1)}_{t+m}}{\sum_{m=-M}^{M} m^2}
 \end{equation}
 
-with t as the specific point in time, d as the order of derivative and m as the frame 
-offset.
+with t as the specific point in time, d as the order of derivative, M as the number of frames on either side of t 
+and m as the frame offset.
 
 \mysubsection{Linear Predictive Coding Coefficients}{Linear Predictive Coding Coefficients}\label{sec:linear-predictive-coding}
 As explained by Rabiner and Juang~\cite{lpc} and Usman et al.~\cite{Det_Tech}, linear predictive coding (LPC) is a straightforward mathematical method commonly 
@@ -301,7 +300,7 @@ The feature extracted via this method is made up of the $p$ LPC coefficients whi
 to minimise the mean square error. These coefficients tend to be unstable, therefore cepstral 
 coefficients can be calculated from these raw LPC coefficients giving linear predictive coding coefficients (LPCC). 
 LPCC gives 
-the coefficients of the fourier transform (FT) representation of the magnitude spectrum and is more reliable 
+the coefficients of the Fourier transform (FT) representation of the magnitude spectrum and is more reliable 
 than the LPC representation. 
 
 LPCC can be calculated from the LPC results through recursion. The formula for that 
@@ -356,7 +355,7 @@ features for these models were the time-domain representation of the signals.
 The final results of the article found that both LPC and DTW performed well in high 
 and low SNR segments. LPC performed the overall best in low noise segments.
 
-This project provides insight into the use of template based detection systems for 
+This article provides insight into the use of template based detection systems for 
 Bryde's whales. This is relevant since DTW which is handled in this article is the chosen 
 detection mechanism for this project. While LPC is also used in the article, its use is 
 vastly different to the use within this project. LPC is used as a detection algorithm 
@@ -365,7 +364,7 @@ algorithm, but instead linear predictive coding coefficients (LPCC) is used as a
 The detection method focuses on 
 the error component of the LPC equation while the feature extraction method focuses 
 on the coefficients calculated for the approximation of the real signal. Another difference 
-between this project and the article is that this project exclusively uses the time domain 
+between this project and the article is that this article exclusively uses the time domain 
 representation of the signal as input.
 
 \mysubsection{Detection of real-time fin and blue whale calls}{Detection of real-time fin and blue whale calls}\label{sec:real-time}
