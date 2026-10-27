@@ -29,7 +29,7 @@
 \contentsline {subsection}{\numberline {2.4.5}Speech Recognition using DTW}{13}{subsection.2.4.5}%
 \contentsline {chapter}{\numberline {3}Dataset}{15}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Background}{15}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Labeling}{15}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Labelling}{15}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Data Splitting}{15}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Template Selection}{16}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Hyperparameter Tuning Template Selection}{16}{subsection.3.3.2}%

@@ -19,44 +19,44 @@ Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
 Reallocating 'global_strs' (item size: 1) to 4000000 items.
 
 Done.
-You've used 47 entries,
+You've used 48 entries,
             4783 wiz_defined-function locations,
-            1133 strings with 17074 characters,
-and the built_in function-call counts, 26204 in all, are:
-= -- 2370
-> -- 749
+            1137 strings with 17257 characters,
+and the built_in function-call counts, 26808 in all, are:
+= -- 2423
+> -- 772
 < -- 32
-+ -- 359
-- -- 202
-* -- 1227
-:= -- 4345
-add.period$ -- 94
-call.type$ -- 47
-change.case$ -- 139
-chr.to.int$ -- 38
-cite$ -- 47
-duplicate$ -- 1959
-empty$ -- 2091
-format.name$ -- 282
-if$ -- 5574
++ -- 369
+- -- 208
+* -- 1259
+:= -- 4442
+add.period$ -- 96
+call.type$ -- 48
+change.case$ -- 142
+chr.to.int$ -- 39
+cite$ -- 48
+duplicate$ -- 2003
+empty$ -- 2137
+format.name$ -- 290
+if$ -- 5703
 int.to.chr$ -- 10
-int.to.str$ -- 48
-missing$ -- 425
-newline$ -- 165
-num.names$ -- 141
-pop$ -- 1386
+int.to.str$ -- 49
+missing$ -- 435
+newline$ -- 168
+num.names$ -- 144
+pop$ -- 1419
 preamble$ -- 1
-purify$ -- 47
+purify$ -- 48
 quote$ -- 2
-skip$ -- 1867
+skip$ -- 1908
 stack$ -- 0
-substring$ -- 232
-swap$ -- 1033
+substring$ -- 237
+swap$ -- 1057
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 699
+type$ -- 714
 warning$ -- 0
-while$ -- 94
+while$ -- 96
 width$ -- 0
-write$ -- 493
+write$ -- 503
