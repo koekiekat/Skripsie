@@ -60,14 +60,14 @@
 \contentsline {section}{\numberline {B.3}GA 2: Application of Scientific and Engineering Knowledge}{48}{section.B.3}%
 \contentsline {section}{\numberline {B.4}GA 3: Engineering Design}{48}{section.B.4}%
 \contentsline {section}{\numberline {B.5}GA 4: Investigations, experiments and data analysis}{48}{section.B.5}%
-\contentsline {section}{\numberline {B.6}GA 5: Use of Engineering Tools}{48}{section.B.6}%
-\contentsline {section}{\numberline {B.7}GA 6: Professional and Technical Communication}{48}{section.B.7}%
-\contentsline {section}{\numberline {B.8}GA 8: Individual Work}{48}{section.B.8}%
-\contentsline {section}{\numberline {B.9}GA 9: Independent Learning Ability}{48}{section.B.9}%
-\contentsline {section}{\numberline {B.10}Sustainable Development}{48}{section.B.10}%
-\contentsline {section}{\numberline {B.11}Critical Thinking}{48}{section.B.11}%
-\contentsline {section}{\numberline {B.12}Emerging Technologies}{48}{section.B.12}%
-\contentsline {chapter}{\numberline {C}Use of Artificial Intelligence (AI) Tools}{49}{appendix.C}%
-\contentsline {section}{\numberline {C.1}AI Work Declaration}{49}{section.C.1}%
-\contentsline {section}{\numberline {C.2}Own Work Declaration}{49}{section.C.2}%
+\contentsline {section}{\numberline {B.6}GA 5: Use of Engineering Tools}{49}{section.B.6}%
+\contentsline {section}{\numberline {B.7}GA 6: Professional and Technical Communication}{49}{section.B.7}%
+\contentsline {section}{\numberline {B.8}GA 8: Individual Work}{49}{section.B.8}%
+\contentsline {section}{\numberline {B.9}GA 9: Independent Learning Ability}{49}{section.B.9}%
+\contentsline {section}{\numberline {B.10}Sustainable Development}{49}{section.B.10}%
+\contentsline {section}{\numberline {B.11}Critical Thinking}{50}{section.B.11}%
+\contentsline {section}{\numberline {B.12}Emerging Technologies}{50}{section.B.12}%
+\contentsline {chapter}{\numberline {C}Use of Artificial Intelligence (AI) Tools}{51}{appendix.C}%
+\contentsline {section}{\numberline {C.1}AI Work Declaration}{51}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Own Work Declaration}{51}{section.C.2}%
 \contentsfinish 

@@ -2,43 +2,153 @@
 \makeatletter\@mkboth{}{Appendix}\makeatother\label{appen:grad_att}
 
 \section{Complex Engineering Problem}\label{sec:ecsa_1}
-The project required theory and specialist knowledge for many topics 
-including: dynamic time warping (DTW), subsequence DTW, short time Fourier 
-transform (STFT), mel-frequency cepstral coefficients (MFCC) and linear predictive 
-Coding coefficients (LPCC).
-These topics were theoretically and mathematically explained within this project.
-The 72 hour data was split into 1 hour segments for analysis. This was done 
-as it decreased the amount of memory used at one time. 
-Engineering technology used was in the form of libraries such as Python, 
-Librosa, SciPy and NumPy.
-Other approaches to similar problems were analysed in the form of a literature 
-review.
+A systematic, theory-based method was used to design the Bryde's whales 
+call detection system. The systematic approach can be seen in the report 
+structure. Engineering specialist knowledge can be seen in the 
+theory and mathematics behind all engineering concepts needed 
+for this project. This was researched and described in Chapter~\ref{chap:literature}. 
+After understanding the concepts a systematic approach was used for all 
+design decisions. This included backing all design choices with sources or 
+by testing as hyperparameters. This can be seen in Chapter~\ref{chap:sys-design}.
 
-Technical issues within this project included a scarcity in well labelled 
+As seen in Chapter~\ref{chap:sys-design} efficient use of resources 
+was considered, thus, the 72 hour audio 
+file which had to be processed was split into 1 hour segments for analysis 
+to ensure efficient use of device memory. 
+
+As seen in Chapter~\ref{chap:dataset} the data used for the project 
+came from previous projects, therefore resources were re-used instead of 
+capturing new data. 
+The real world uses of a whale call detection system 
+were considered. A system such as this could be used to protect a Bryde's 
+whale colony from harm caused by shipping vessels. This was explained in 
+Chapter~\ref{chap:introduction}.
+
+Engineering technology used in this project included libraries such as Python, 
+Librosa, SciPy and NumPy.
+
+In Chapter~\ref{chap:literature} articles considering different approaches 
+to a similar problem or using similar methodologies for different problems 
+were considered.
+
+As explained in Chapter~\ref{chap:dataset} technical issues within 
+this project included a scarcity in well labelled 
 data which required creative thinking and planning for the hyperparameter 
-selection stage.
-All data used was from previous projects.
-A systems approach was used in the form of template selection, hyperparameter 
-selection, detetcion pipeline and evaluation.
+selection stage. These issues required the solution of sub-problems (such 
+as the data scarcity) in order to solve the larger problem.
+
 
 \section{GA 1: Problem Solving}\label{sec:ga_1}
 
+As explained in Chapter~\ref{chap:introduction} and~\ref{chap:dataset} 
+the problem of Bryde's whale call detection in a continuos audio file with 
+a scarcity of labelled data was identified. Literature relating to the problem 
+was considered in the form of other implementations of similar solutions. 
+The theory behind solution decisions was studied and explained in detail. 
+These topics include DTW, subsequence DTW, STFT, MFCC and LPC as well as 
+precision-recall (PR) analysis. The literature and theoretical explanations 
+were explained in Chapter~\ref{chap:literature}.
+
+Chapter~\ref{chap:literature} also shows understanding of the whale 
+call structure and its effect on decision made for the detection pipeline.
+
+Chapter~\ref{chap:introduction} showed that sustainability impact 
+of the project was considered in the form of the uses 
+of such a detection system to prevent the harm of Bryde's 
+whales in False Bay.
+
+The analysis of the detection system was done using precision, recall, 
+f1-score and average precision (AP). These are all topics researched and 
+explained in Chapter~\ref{chap:sys-design}. The use of these analysis methods 
+to draw conclusions can be seen in Chapter~\ref{chap:results} and~\ref{chap:conclusion}.
+
+
 \section{GA 2: Application of Scientific and Engineering Knowledge}\label{sec:ga_2}
+
+Mathematics, natural sciences and engineering sciences are 
+applied in formal analysis and modelling of the engineering problem. 
+This can be seen in the theoretical and mathematical explanations given in 
+Chapter~\ref{chap:literature} as well as in the decisions and 
+implementation explained in Chapter~\ref{chap:sys-design}.
+
 
 \section{GA 3: Engineering Design}\label{sec:ga_3}
 
+A Bryde's whale call detection system was designed with a scarcity 
+of well labelled data. All design choices were made based on theory studied. 
+The choices for which values to test for the tuned hyperparameters was also 
+based on research. All choices were therefore made with consideration and 
+required creative thinking. 
+This can be seen in Chapter~\ref{chap:sys-design}
+
+
 \section{GA 4: Investigations, experiments and data analysis}\label{sec:ga_4}
+
+In Chapter~\ref{chap:results} and~\ref{chap:conclusion} it is explained 
+how research based analysis methods were used to draw conclusions on 
+the effectiveness on the DTW detection system for different feature extraction 
+methods. The methods used for evaluation (precision, recall, f1-score and AP) 
+were researched and explained in Chapter~\ref{chap:sys-design}.
+
 
 \section{GA 5: Use of Engineering Tools}\label{sec:ga_5}
 
+In Chapter~\ref{chap:literature} techniques used for this project were 
+explained. In Chapter~\ref{chap:sys-design} the implemenation of these 
+techniques using engineering tool such as Python and its libraries: 
+Librosa, SciPy and NumPy.
+
+
 \section{GA 6: Professional and Technical Communication}\label{sec:ga_6}
+
+All research, design, implemenation and analysis of the project is 
+explained within this academic report. This report includes explanations 
+as well as tables, figures and software flow diagrams where appropriate.
+This can be seen in all chapters of this report.
 
 \section{GA 8: Individual Work}\label{sec:ga_8}
 
+This project was undertaken as an individual assignment with Professor 
+D.J.J. Versfeld as a supervisor. Planning of project timeline as shown Appendix~\ref{appen:proj_plan} 
+was conducted as individual work. All work conducted during the project was 
+analysed and possible improvements were suggested in Chapter~\ref{chap:conclusion}. This 
+shows the ability for self-reflection.
+
 \section{GA 9: Independent Learning Ability}\label{sec:ga_9}
+
+Self-learning was conducted to help define the exact problem considered as well 
+as determine a solution. This knowledge gained can be seen in Chapter~\ref{chap:literature} 
+and~\ref{chap:sys-design}.
+
 
 \section{Sustainable Development}\label{sec:ecsa_2}
 
+As explained in Chapter~\ref{chap:dataset} the dataset was re-used 
+from a previous project, therefore time and resources 
+was not put into capturing new whale call recordings. This is in line with 
+sustainable development. 
+
+As seen in Chapter~\ref{chap:introduction} the use of such a 
+detection system in a real world application of preventing harm 
+to Bryde's whales in False Bay was considered and discussed. This could 
+help reduce the environmental impacts of human activties in 
+whale territory.
+
+
 \section{Critical Thinking}\label{sec:ecsa_3}
 
+This can be seen throughout the design process and results formulation as 
+shown in Chapter~\ref{chap:sys-design},~\ref{chap:results} 
+and~\ref{chap:conclusion}
+
+Critical thinking was also necessary to combat the data scarcity explained 
+in Chapter~\ref{chap:dataset}.
+
 \section{Emerging Technologies}\label{sec:ecsa_4}
+
+An incorporation of Artificial Intelligence(AI) with a call detection system 
+such as the one described in this project could be benificial for helping identify 
+when whales enter vessel heavy areas of their migration region. With an AI 
+prediction and alert system could be implemented along a colonies migration 
+region such that vessel traffic can be diverted before Bryde's whales enter 
+the vessel area.
