@@ -55,7 +55,7 @@
 \contentsline {chapter}{References}{41}{chapter*.36}%
 \contentsline {chapter}{\numberline {A}Project Planning Schedule}{46}{appendix.A}%
 \contentsline {chapter}{\numberline {B}Graduate Attributes}{47}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Complex Engineering Problem}{48}{section.B.1}%
+\contentsline {section}{\numberline {B.1}Complex Engineering Problem}{47}{section.B.1}%
 \contentsline {section}{\numberline {B.2}GA 1: Problem Solving}{48}{section.B.2}%
 \contentsline {section}{\numberline {B.3}GA 2: Application of Scientific and Engineering Knowledge}{48}{section.B.3}%
 \contentsline {section}{\numberline {B.4}GA 3: Engineering Design}{48}{section.B.4}%
