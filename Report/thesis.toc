@@ -3,11 +3,11 @@
 \contentsline {chapter}{Abstract}{iii}{chapter*.3}%
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{Table of contents}{iv}{chapter*.3}%
-\contentsline {chapter}{List of figures}{vi}{chapter*.4}%
-\contentsline {chapter}{List of tables}{vi}{chapter*.5}%
-\contentsline {chapter}{Nomenclature}{viii}{chapter*.7}%
-\contentsline {section}{Acronyms and abbreviations}{viii}{section*.8}%
-\contentsline {section}{Definitions}{ix}{section*.9}%
+\contentsline {chapter}{List of figures}{vii}{chapter*.4}%
+\contentsline {chapter}{List of tables}{vii}{chapter*.5}%
+\contentsline {chapter}{Nomenclature}{ix}{chapter*.7}%
+\contentsline {section}{Acronyms and abbreviations}{ix}{section*.8}%
+\contentsline {section}{Definitions}{x}{section*.9}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problem Statement}{2}{section.1.2}%
@@ -53,5 +53,21 @@
 \contentsline {section}{\numberline {5.4}General Observations}{37}{section.5.4}%
 \contentsline {chapter}{\numberline {6}Conclusion}{40}{chapter.6}%
 \contentsline {chapter}{References}{41}{chapter*.36}%
-\contentsline {chapter}{\numberline {A}Appendix title goes here}{46}{appendix.A}%
+\contentsline {chapter}{\numberline {A}Project Planning Schedule}{46}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Graduate Attributes}{47}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Complex Engineering Problem}{48}{section.B.1}%
+\contentsline {section}{\numberline {B.2}GA 1: Problem Solving}{48}{section.B.2}%
+\contentsline {section}{\numberline {B.3}GA 2: Application of Scientific and Engineering Knowledge}{48}{section.B.3}%
+\contentsline {section}{\numberline {B.4}GA 3: Engineering Design}{48}{section.B.4}%
+\contentsline {section}{\numberline {B.5}GA 4: Investigations, experiments and data analysis}{48}{section.B.5}%
+\contentsline {section}{\numberline {B.6}GA 5: Use of Engineering Tools}{48}{section.B.6}%
+\contentsline {section}{\numberline {B.7}GA 6: Professional and Technical Communication}{48}{section.B.7}%
+\contentsline {section}{\numberline {B.8}GA 8: Individual Work}{48}{section.B.8}%
+\contentsline {section}{\numberline {B.9}GA 9: Independent Learning Ability}{48}{section.B.9}%
+\contentsline {section}{\numberline {B.10}Sustainable Development}{48}{section.B.10}%
+\contentsline {section}{\numberline {B.11}Critical Thinking}{48}{section.B.11}%
+\contentsline {section}{\numberline {B.12}Emerging Technologies}{48}{section.B.12}%
+\contentsline {chapter}{\numberline {C}Use of Artificial Intelligence (AI) Tools}{49}{appendix.C}%
+\contentsline {section}{\numberline {C.1}AI Work Declaration}{49}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Own Work Declaration}{49}{section.C.2}%
 \contentsfinish 
