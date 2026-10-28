@@ -1,111 +1,93 @@
 \mychapter{System Design}{System Design}{}\label{chap:sys-design}
 
 \mysection{Overview}{Overview}\label{sec:overview}
-The project was coded in Python. The functionality of each section of the project was placed in relevant python scripts.
-This was imported to the relevant jupyter notebook which was used for that section.
+The project was coded in Python. The functionality of each section of the project was placed in relevant Python scripts. 
+These were imported into the relevant Jupyter notebook used for each section.
 
 
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods}
-The raw audio recorded by the hydrophone was stored in wave files with a sampling 
-frequency of 8kHz. Before extracting feature vectors fromthe recordings the audio 
-was first downsampled to have a 1 kHz sampling rate. This helped remove unecessary frequency 
-information as the Nyquist Frequncy ($\frac{f_s}{2}$) for a 1kHz sampling rate is 500 Hz.\cite{nyq}
+The raw audio recorded by the hydrophone was stored in WAV files with a sampling frequency of 8~kHz. Before extracting feature 
+vectors from the recordings, the audio was first downsampled to a 1~kHz sampling rate. This helped remove unnecessary frequency 
+information, as Meddins~\cite{nyq} explains that the Nyquist frequency ($\frac{f_s}{2}$) for a 1~kHz sampling rate is 500~Hz.
 
-Most of the Bryde's Whale vocalizations occur below 500 Hz. Thus, this sampling rate 
-also ensures no relevant information was lost before analysis.\cite{bryde_whales_SA} 
+Faustmann et al.~\cite{bryde_whales_SA} report that most Bryde's whale vocalisations occur below 500~Hz. Thus, this sampling rate also ensures 
+that no relevant information was lost prior to analysis. 
 
 
-\mysubsection{Short Time Fourier Transform}{Short Time Fourier Transform}\label{sec:stft}
-The signal.stft function from the SciPy library was used to calculate the \ac{STFT} 
-feature vectors. Window length $L$, as referenced in Eq \eqref{eq:freq_resolution}, is calculated by 
-multiplying $f_s$, the \gls{f_s} of the given audio segment, with the chosen \acs{STFT} 
-frame duration. No set \gls{frame_dur} was selected as the optimal \gls{frame_dur} was 
-chosen during the hyperparameter selection stage of this project.
+\mysubsection{Short-Time Fourier Transform}{Short-Time Fourier Transform}\label{sec:stft}
+The \texttt{scipy.signal.stft} function from the SciPy library was used to calculate the \ac{STFT} feature vectors. The window length $L$, as 
+referenced in Eq.~\eqref{eq:freq_resolution}, is calculated by multiplying $f_s$, the \gls{f_s} of the given audio segment, by the chosen \acs{STFT} 
+frame duration. No fixed \gls{frame_dur} was pre-selected, as the optimal \gls{frame_dur} was determined during the hyperparameter selection stage 
+of this project.
 
-The window ovelrap $H$, as referenced in Eq \eqref{eq:freq_resolution}, is calculed by multiplying $L$ with the 
-chosen overlap percentage. For this project the overlap percentage was chosen as 0,75. The 
-high overlap percentage produced a smooth spectrogram when viewing the time--frequency 
-representation of the given audio segment.A \gls{ham_win} was chosen to decrease any 
-spectral leakage caused by the finite length of the windows used to extract the feature 
-vectors.\cite{stft_kamper}\cite{hamm}
+The window overlap $H$, as referenced in Eq.~\eqref{eq:freq_resolution}, is calculated by multiplying $L$ by the chosen overlap percentage. For this 
+project, the overlap percentage was set to 0.75. This high overlap percentage produced a smooth spectrogram when viewing the time-frequency 
+representation of a given audio segment. A \gls{ham_win} was chosen to reduce spectral leakage caused by the finite length of the windows used 
+to extract the feature vectors, as described by Kamper~\cite{stft_kamper} and in the windowing functions guide~\cite{hamm}.
 
 
 \mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mfcc}
-The feature.melspectrogram and feature.mfcc functions from the Librosa library were used to calculate 
-the cepstral coefficients for the \ac{MFCC} feature extraction implementation. The 
-window length for the \ac{FT} required is calculated by multiplying $f_s$ with the chosen frame duration which is 
-optimally selected during hyperparameter selection. Unlike the \acs{STFT} 
-function librosa.feature.mfcc requires the hop length and not the overlap length. This is 
-calculated by subtracting the window overlap, H, from the frame length, L. $H$ is calculated by 
-choosing the overlap percentage to be 0,75 and multiplying this with L. 
-A hamming window is used to decrease spectral leakage. 
+The \texttt{librosa.feature.melspectrogram} and \texttt{librosa.feature.mfcc} functions from the Librosa library, as documented by the 
+Librosa development team~\cite{mfcc_librosa}, were used to calculate the cepstral coefficients for the \ac{MFCC} feature extraction implementation. 
+The window length required for the \ac{FT} is calculated by multiplying 
+$f_s$ by the chosen frame duration, which is optimally selected during hyperparameter tuning. Unlike the \acs{STFT} function, \texttt{librosa.feature.mfcc} 
+requires the hop length rather than the overlap length. The hop length is calculated by subtracting the window overlap, $H$, from the frame length, $L$. 
+Here, $H$ is calculated by setting the overlap percentage to 0.75 and multiplying it by $L$. A Hamming window is used to reduce spectral leakage. 
 
-The Librosa function used for calculating \acs{MFCC} automatically uses \ac{DCT} type 2 and ortho normalization. 
-These settings mean that the bottom row of the output matrix, $c_0$, represents the sum of the log-spectrum 
-energy. It is common practice in speech analysis to 
-remove coefficient 0, as it contains the total energy of the signal and can dominate distance calculations in subsequent analysis. For 
-this project, only coefficients 1 to 14 were kept. This ensured that the analysis only 
-considered the overall shape of the log spectrum and not the total energy of the signal. The number of melspectrogram filters 
-was chosen as 26, which is common practice in audio processing. 14 final coefficients were calculated. 13 are typically used, therefore 
-with the lowest coefficient 0 removed 14 were calculated.\cite{mfcc_dct_type}\cite{mfcc_c_zero}\cite{mfcc_librosa}
+The Librosa function used to calculate the \acs{MFCC} features automatically applies \ac{DCT} type 2 and ortho-normalisation, as described in the 
+SciPy documentation~\cite{mfcc_dct_type}. These settings mean that the 
+bottom row of the output matrix, $c_0$, represents the sum of the log-spectrum energy. Roch et al.~\cite{mfcc_c_zero} note that it is common practice 
+in speech analysis to remove coefficient 0, as it contains the total signal energy and can dominate distance calculations in subsequent analysis. For this project, only coefficients 1 to 14 were 
+retained. This ensured that the analysis considered only the overall shape of the log spectrum and not the total energy of the signal. The number of 
+mel-spectrogram filters was set to 26, which is standard practice in audio processing. A total of 14 final coefficients were extracted (since 13 are typically 
+used, retaining 14 allows 13 coefficients to remain after removing $c_0$).
 
-The feature.delta function from the librosa library was used to calculate the first and second derivitives 
-for \acs{MFCC}. The feature returned when using the first derivitive was a concatenation of the original \acs{MFCC} feature 
-with the first derivitive of that feature vector. This gave a feature with 26 coeficients, the original 13 coefficients 
-with 13 added from the first derivitive. Similarly for 
-the second derivitive the \acs{MFCC} and first derivitive concatenation was concatenated with the new second derivitive. 
-This gave a 39 coefficient feature vector.\cite{lib_delta}\cite{librosa}
+The \texttt{librosa.feature.delta} function, as documented by the Librosa development team~\cite{lib_delta} and described by McFee et al.~\cite{librosa}, 
+was used to calculate the first and second derivatives for the \acs{MFCC} features. The 
+feature vector returned when using the first derivative was a concatenation of the original \acs{MFCC} feature vector with its first derivative. This resulted 
+in a feature vector with 26 coefficients (the 13 original coefficients plus 13 derivative coefficients). Similarly, for the second derivative, the concatenation 
+of the original \acs{MFCC} and first derivative was further concatenated with the second derivative, yielding a 39-coefficient feature vector.
 
 
-\mysubsection{Linear Predictive Coding}{Linear Predictive Coding}\label{sec:lpc}
+\mysubsection{Linear Predictive Coding Coefficients}{Linear Predictive Coding Coefficients}\label{sec:lpc}
+The \texttt{librosa.util.frame} function~\cite{lib_util_frame} and the \texttt{librosa.lpc} function~\cite{lib_lpc} from the Librosa library 
+were used to calculate the \ac{LPC} features. The \acs{STFT} 
+and \acs{MFCC} functions frame the audio internally; therefore, framing prior to feature extraction was not required for those methods. However, the \acs{LPC} 
+function accepts a sequence of pre-framed audio segments to calculate the approximation coefficients. The \texttt{librosa.util.frame} function was used with 
+a frame duration selected during hyperparameter tuning and a hop length of 0.25 of the frame duration ($1 - 0.75$). A Hamming window was applied to the frames 
+before calling the \texttt{librosa.lpc} function.
 
-The util.frame and lpc functions from the Librosa library were used to calculate the \ac{LPC} features. The 
-\acs{STFT} and \acs{MFCC} functions created the frames 
-within their functions and thus it was not necessary to frame the audio before using it as an input. 
-The \acs{LPC} fuinction  takes in a sequence of frames to calculate the approximation coefficients. 
-The function util.frame was used with a frame duration selected during hyperparameter selection and a hop length of 0.25 of 
-the frame duration, 1 $-$ 0.75. A hamming window was also applied to the frames before using the lpc function.\cite{lib_lpc}\cite{lib_util_frame}
+Rabiner and Juang~\cite{lpc} explain that a higher \acs{LPC} order yields a more detailed spectral approximation. However, considering that background noise could adversely affect coefficient calculations 
+if the model becomes overly detailed, an order of $p = 4$ was selected.
 
-The higher the \acs{LPC} order the more detailed the approximation becomes. Considering that 
-background noise could have a negative effect on the coefficient outcomes if the approximation becomes too detailed, an order of 4 was chosen.\cite{lpc}
+Due to the numerical instability of raw \acs{LPC} parameters, the \acs{LPC} features were converted to \ac{LPCC}. This was implemented using the recursive formula 
+in Eq.~\eqref{eq:lpcc}. According to Rabiner and Juang~\cite{lpc}, the number of \acs{LPCC} coefficients typically selected is approximately $\frac{3}{2}p$. For $p = 4$, approximately 6 \acs{LPCC} 
+coefficients would standardly be calculated. After testing different numbers of coefficients, 8 \acs{LPCC} coefficients were found to yield the best \gls{f1_score}s 
+during hyperparameter selection. Therefore, 8 \acs{LPCC} coefficients were used.
 
-Due to the instability of the \acs{LPC} extraction method 
-the \acs{LPC} feature was converted to \ac{LPCC}. This was done by manually typing out the recursive formula 
-Eq \ref{eq :lpcc}.
-The number of \acs{LPCC} coefficients typically chosen is approximately $\frac{3}{2}p$. For p = 4 it was chosen that around 
-6 \acs{LPCC} coefficients should be calculated. After testing different numbers of \acs{LPCC} coefficients it was found that 
-8 \acs{LPCC} coefficients gave the best F1-scores during hyperparameter selection. Therefore, 8 was the chosen number of LPCC 
-coefficients used.\cite{lpc}
 
-\mysection{DTW methodology}{DTW methodology}\label{sec:dtw_method}
-The sequence.dtw function from the Librosa library was used to calculated the \ac{DTW} cost 
-matix between a template and an audio segment. The distance matrix needed as input for the function was 
-calculated using the spacial.distance.cdist function from the SciPy library. 
+\mysection{DTW Methodology}{DTW Methodology}\label{sec:dtw_method}
+The \texttt{librosa.sequence.dtw} function from the Librosa library, as documented by the Librosa development team~\cite{librosa_dtw}, was used to calculate the \ac{DTW} cost matrix between a template and an audio segment. The 
+pairwise distance matrix required as input to this function was computed using the \texttt{scipy.spatial.distance.cdist} function from the SciPy library, 
+as described in the SciPy documentation~\cite{scipy_dist}. 
 
-The distance function was given the template feature and the audio segment feature extracted either by 
-STFT, MFCC or LPC as well as the metric specified for each extractor.The two metrics considered were cosine 
-similarity and euclidean distance. As shown in Eq.\eqref{eq:cosine} and Eq.\eqref{eq:euclidean}, cosine 
-similarity calculates the distance in angle between two points and euclidean distance calculates the acual 
-distance between the two point. For the STFT feature extraction method cosine similarity was used 
-rather than euclidean distance since cosine does not depend on magnitude. Therefore, the distance between 
-a template and a call further away compared to closer together would only be judged on the angular difference and 
-not the difference in magnitude. This ensured that louder and softer calls of the same type could be 
-classified by spectral shape only and not loudness. For the MFCC feature extraction implementation 
-the energy created by the call due to how close or far away it is from the recording device was 
-removed when $c_0$ was removed as explained in Section \ref{sec:mfcc}. Similarly for LPCC the 
-calculated magnitude is stored within the lower coefficient. This coefficient is always set to 1 during the 
-LPC stage, therefore was not considered as part of the 4 LPC coefficients. This meant that euclidean distance 
-could be used without concern of the effect of magnitude on the distance since only spectral shape is 
-left to be analysed. Euclidean distance is the common choice for DTW analysis, therefore since the 
-main cosine similarity benefit is not necessary for MFCC or LPC, euclidean distance was chosen.\cite{scipy_dist}
+The distance function received the template feature and the audio segment feature extracted via \acs{STFT}, \acs{MFCC}, or \acs{LPCC}, along with the specified 
+distance metric. The two distance metrics evaluated were cosine distance and Euclidean distance. As shown in Eq.~\eqref{eq:cosine} and Eq.~\eqref{eq:euclidean}, 
+cosine similarity calculates the angular difference between two vectors, whereas Euclidean distance calculates the straight-line distance between them. For the 
+\acs{STFT} feature extraction method, cosine distance was selected rather than Euclidean distance because cosine distance is invariant to magnitude. Consequently, 
+the distance between a template and a distant (softer) call versus a nearby (louder) call depends solely on spectral shape rather than signal amplitude. This 
+ensured that calls of varying loudness could be matched based on spectral properties. 
 
-The subseq setting with in the sequence.dtw function was set to True. As explained in 
-Section \ref{sec:dynamic-time-warping}, subsequence DTW means that the start and end points of a 
-detected match do not have to be the first and last points of both signals. When searching 1 hour segments of a 72 hour 
-audio file for whale calls subsequence DTW allows for the detection of multiple calls within a single 
-audio segment by searching the final row of the cost matrix for dips and choosing the lowest point of 
-each dip as an end point of a call. This is further explained in Section\ref{sec:testing-procedure}.
-\cite{librosa_dtw}
+For the \acs{MFCC} implementation, signal energy variations due to distance from the recording device were mitigated by removing $c_0$, as described in 
+Section~\ref{sec:mfcc}. Similarly, for \acs{LPCC}, signal energy is captured by the zeroth coefficient $c_0$, which is fixed to 1 during \acs{LPC} extraction 
+and excluded from the 4 primary \acs{LPC} coefficients. As a result, Euclidean distance could be used without interference from signal amplitude, as only the 
+spectral envelope remains. Because Euclidean distance is standard for \ac{DTW} applications and cosine distance provided no extra benefit for amplitude-normalised 
+features, Euclidean distance was chosen for \acs{MFCC} and \acs{LPCC}.
+
+The \texttt{subseq} parameter in \texttt{librosa.sequence.dtw} was set to \texttt{True}. As described in Section~\ref{sec:dynamic-time-warping}, subsequence 
+\ac{DTW} relaxes boundary constraints so that the start and end points of a detected match do not need to align with the boundaries of the candidate sequence. 
+When scanning 1-hour segments of a 72-hour audio file, subsequence \ac{DTW} enables the detection of multiple calls within a single segment by identifying dips 
+along the final row of the cost matrix and selecting the local minima as call end points. This is detailed further in Section~\ref{sec:testing-procedure}.
 
 
 \mysection{Hyperparameter Tuning}{Hyperparameter Tuning}\label{sec:hyperparameter-tuning}
@@ -113,263 +95,159 @@ each dip as an end point of a call. This is further explained in Section\ref{sec
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/syst_design/calib_des.png}
-    \caption{This is a software flow diagram describing how the hyperparameters are chosen for the project.}\label{fig:calib_des}
+    \caption{Software flow diagram describing the hyperparameter selection procedure.}\label{fig:calib_des}
 \end{figure}
 
-Three hyperparameters were chosen to be tuned, namely feature frame length, call type 
-thresholds and call vote fraction. Figure \ref{fig:calib_des} shows the software flow for the hyperparameter selection section 
-of the project.
+Three hyperparameters were selected for tuning: feature frame length, call type cost thresholds, and the call vote fraction. Figure~\ref{fig:calib_des} 
+illustrates the overall execution flow for hyperparameter selection.
 
-As shown in Eq \ref{eq:freq_resolution} frequency resolution$= \frac{f_s}{L}$. Considering the fact that Bryde's 
-Whale single-tone calls tend to have a main frequency around 42Hz and multi-tone calls 
-have more than one frequency between 42 and 100 Hz, the upper bound for frequency resolution 
-was chosen as about 10 Hz, this gives a frame length of 100ms. The lower bound in Hz 
-was chosen as around 2 Hz. While a smaller frequency resolution is 
-better for seperating frequency bins, a resolution of 2 Hz gives a frame length of 500ms. Given a window 
-overlap of $75\%$ this leaves a hop length of 128 ms. Given the average call length within 
-the hyperparameter selection audio file is 246 ms this hop length is still short enough to detect the average call. 
-Since it is computationally best to choose frame lengths which are a 
-power of 2 or multiples of powers of 2 the chosen frame lengths to be tested were (0.096, 0.128, 
-0.192, 0.384, 0.512).\cite{fft_pow_2}
+As defined in Eq.~\eqref{eq:freq_resolution}, frequency resolution is given by $\text{frequency resolution} = \frac{f_s}{L}$. Because Bryde's whale single-tone 
+calls primarily feature a fundamental frequency around 42~Hz and multi-tone calls contain components between 42 and 200~Hz, an upper bound on frequency resolution 
+was set to approximately 10~Hz, corresponding to a frame duration of 100~ms. The lower frequency resolution bound was set to approximately 2~Hz. Although a finer 
+frequency resolution improves spectral bin separation, a 2~Hz resolution requires a frame duration of 500~ms. At a 75\% window overlap, this leaves a hop length 
+of 128~ms. Given that the average call duration in the calibration dataset is 246~ms, a 128~ms hop length remains sufficiently short to resolve individual calls. 
+Hees~\cite{fft_pow_2} explains that \ac{FFT} routines are most computationally efficient for lengths that are powers of two. To maintain computational 
+efficiency, candidate frame lengths were therefore selected as powers of two or multiples thereof: $(0.096, 0.128, 0.192, 
+0.384, 0.512)$~seconds.
 
-Since the call type calibration templates and background calibration templates had to be handpicked due to 
-data scarcity and since the subsequence DTW method was used each calibration template 
-was padded on each side. This padding allowed the subsequence 
-DTW to work in conditions similar to those used in the final testing pipeline despite the 
-data restrictions. It was ensured that the padded length was longer than the longest testing 
-template being used with atleast one extra frame length added to each side of the longest template. 
-This extra length was chosen to equal the longest feature frame length tested, 0.512. 
-The call or background calibration template was centered within this length. This was done by 
-moving the start and ends times back and forward respectively to reach this set length.
+Because the call-type and background calibration templates had to be manually selected due to data scarcity, each calibration template was extended on both 
+sides. This extension ensured that subsequence \ac{DTW} operated under conditions representative of the evaluation pipeline despite dataset limitations. The total 
+extendd length was configured to exceed the longest evaluation template by at least one frame length on either side. This extra margin was chosen to match the 
+maximum tested frame duration (0.512~s). Each call or background calibration template was centred within this window by adjusting its boundary timestamps accordingly.
 
-For each of the tested frame lengths, three thresholds were determined, one for each 
-call type. These thresholds were determined by taking between 
-testing and calibration templates for each call type as well as the DTW costs calculated 
-between testing of each template and the background calibration templates. These costs were 
-stored in two seperate lists, one for call type calibration costs and one for background calibration costs. The 
-lowest and highest costs between the two lists was taken and 200 thresholds were selected 
-between these two numbers in a linearly spaced fashion. The F1 scores were calculated at 
-each threshold for that call type as explained in Section \ref{sec:evaluation-metrics}. The final threshold chosen for 
-the specific call type was the threshold with the highest F1 score.
+For each tested frame length, three decision thresholds were determined (one per call type). These thresholds were determined by evaluating \ac{DTW} costs between 
+evaluation templates and call type calibration templates, as well as between evaluation templates and background calibration templates. The resulting costs were grouped 
+into call-calibration costs and background-calibration costs. Two hundred candidate thresholds were spaced linearly between the overall minimum and maximum 
+costs across both lists. F1-scores were evaluated across all candidate thresholds for each call type as described in Section~\ref{sec:evaluation-metrics}. The 
+threshold yielding the highest f1-score was selected for each respective call type.
 
-For each feature frame length there were three thresholds chosen, one for 
-each call type. The lowest F1 score out of these three thresholds F1 scores was saved. 
-These saved F1 scores were then used such that the best feature frame length was chosen 
-as the one where the lowest F1 score between the three thresholds for that frame length 
-was the highest of all the lowest F1 scores between all frame lengths.
+For a given frame length, the minimum f1-score among the three call-type thresholds was recorded. The optimal feature frame length was then selected as the one 
+whose minimum threshold f1-score was highest across all tested frame lengths.
 
-While three thresholds were calculated, one for each call type, the project only focused 
-on general detection of calls and not on classification. This is due to the fact that many 
-frequency elements were shared between call types. Even though the three call 
-types are different enough to justify three different thresholds and not one overarching 
-threshold, calls are often misclassified. This choice is also due to the labeling discontinuity 
-since different human labelers had different opinions on what calssified a call as single-tine, multi-
-tone or burst tonal. This discontinuity meant that the templates selected for each call 
-type were possibly labeled by a different labeler than the one who labeled the evaluation 
-data. The difference in labeling methodologies could result in calibration thresholds not correctly classifying call types during evaluation.
+Although three distinct thresholds were computed (one per call type), this project focuses exclusively on general call detection rather than classification. 
+This approach was adopted because significant spectral overlap exists among call types. Furthermore, label inconsistencies (arising from differing annotations 
+across human labellers) meant that templates selected for a call type might differ from the ground-truth definitions used in evaluation data. Separate thresholds 
+per call type were nevertheless maintained to account for structural acoustic variations during candidate detection.
 
-For the main evaluation pipeline there are 5 or 10 templates against which each audio 
-segment was tested. Since the templates were chosen to represent slight variations in call 
-ypes this meant that while some templates would agree that an audio segment was or was 
-not a call, not all would agree. A vote fraction was used such that only if a certain percentage of 
-the 5 or 10 templates agreed that an audio segment was a call would it be labeled as 
-a call. A list of voting fractions were tested on the best frame length choice to determine 
-the best vote fraction. When 5 templates were used the vote fractions tested were 0.2, 0.4, 
-0.6, 0.8 and 1.0. When 10 templates were used the vote fractions tested were 0.1, 0.2, 0.3, 
-0.4, 0.5, 0.6, 0.7, 0.8, 0.9 and 1.0. The two options is due to the fact that $20\%$ of 5 is 1 
-and $40\%$ is 2 and so on, thus testing the odd numbered percentages would be unecessary.
+In the evaluation pipeline, candidate audio segments are compared against sets of 5 or 10 reference templates per call type. Because templates capture minor structural 
+variations within a call type, individual templates may disagree on whether a candidate segment contains a call. A voting fraction parameter was introduced 
+such that a candidate segment is classified as a call only if a specified fraction of per call type reference templates trigger a detection. Candidate voting fractions 
+were evaluated on the optimal frame length. For 5-template configurations, tested vote fractions were $\{0.2, 0.4, 0.6, 0.8, 1.0\}$; for 10-template 
+configurations, tested fractions were $\{0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0\}$. 
 
-For each vote fraction the F1 score for overall call detection was calculated. This means 
-that each threshold was tested against all calibration templates no matter the call type as 
-well as all background calibration templates. This choice is due to the testing pipeline testing all audio 
-segments against all three thresholds. The best vote fraction was chosen as the one with 
-the highest overall F1 score. 
+For each vote fraction, the overall f1-score for general call detection was computed across all call type calibration and background calibration templates. 
+This meant that each group of 5 or 10 templates per call type and its relevant threshold was tested against all call type and background calibration templates. 
+The vote fraction producing the highest overall f1-score was selected.
+
 
 \mysection{Evaluation Procedure}{Evaluation Procedure}\label{sec:testing-procedure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/syst_design/test_des.png}
-    \caption{This is a software flow diagram describing how the evaluation procedure runs for this project.}\label{fig:test_des}
+    \caption{Software flow diagram describing the evaluation procedure.}\label{fig:test_des}
 \end{figure}
 
 \mysubsection{Detection Methodology}{Detection Methodology}\label{sec:detection-methodology}
-The variables chosen during the hyperparameter selection stage were used during evaluation. These were 
-the feature frame length, thresholds per call type and the voting fraction. The file used 
-for evaluation was the only file containing tonal downsweeps. Therefore, since no threshold 
-was calculated for this call type a list of exclusion indices was created for all the labled 
-tonal downsweeps. Due to the use of subsequence DTW the tonal downsweeps were only 
-removed after detecting calls since leaving gaps in time during subsequence DTW could 
-effect the results. 
+The parameters selected during hyperparameter tuning (frame duration, call-type thresholds, and voting fraction) were applied directly during evaluation. 
+The evaluation dataset was the only recording containing tonal downsweeps. Because no calibration threshold was computed for tonal downsweeps, an exclusion 
+index list was maintained for all annotated tonal downsweeps. To avoid introducing discontinuities in time into the subsequence \ac{DTW} cost 
+matrix, tonal downsweeps were only excluded after detection rather than omitted prior to processing.
 
-The 72 hour file was processed one hour at a time. This ensured that memory usage 
-was bounded to a smaller amount at one time. The soundfile library was used to load hourly 
-segments of the 72 hour file without running through the entire file at once.\cite{sf} The extracted 
-audio was then resampled from 8kHz to 1kHz using the resample\_poly function from the 
-SciPy library.\cite{resample} Features were extracted as explained in Section~\ref{sec:stft}.
+The 72-hour evaluation recording was processed in sequential 1-hour segments to maintain a low memory footprint. The \texttt{soundfile} Python library, 
+as documented by Bechtold~\cite{sf}, was 
+used to stream continuous hourly audio blocks without loading the entire dataset into memory. Each hourly segment was downsampled from 8~kHz to 
+1~kHz using the \texttt{scipy.signal.resample\_poly} function described in the SciPy documentation~\cite{resample}, and features were extracted as outlined in Section~\ref{sec:stft}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/syst_design/kth_cost.png}
-    \caption{This diagram shows how the kth lowest costs are stored for a hypothetical choice of costs per 
-    frame for three templates per threshold and two thresholds given k = 2.}\label{fig:kth_cost}
+    \caption{Illustration of how $k$-th lowest costs are extracted and scaled for a sample configuration with three templates per call type, two thresholds, 
+    and $k = 2$.}\label{fig:kth_cost}
 \end{figure}
 
-The DTW costs for all templates were calculated per call type and the bottom row 
-of each DTW cost matrix for each template was stored in a matrix for every call type. This can be seen in the first image of Figure \ref{fig:kth_cost}. 
-A variable k was calculated to be the vote fraction, decided 
-during hyperparameter selection, multiplied by the number of templates per call type. This variable was used 
-such that the kth lowest cost across all templates, per frame, in the call type matrix was 
-selected and stored in one kth lowest cost array. All the values in the array was divided 
-by the threshold of the given call type. This ensured that a 
-resulting matrix of scaled kth costs per frame could be created such that no matter which 
-threshold the kth cost had been calculated from a cost of 1 would always indicate a match 
-with the threshold. This can be seen in the second image in Figure \ref{fig:kth_cost}. From the scaled 
-matrix containing the kth best costs per threshold the overall best cost per frame was 
-selected by choosing the lowest stored cost per frame. 
+The \ac{DTW} cost matrix was computed for all templates across each call type, and the bottom row of each cost matrix was extracted and stored, as 
+illustrated in the top diagram of Figure~\ref{fig:kth_cost}. The integer parameter $k$ was defined as the vote fraction multiplied by the number of 
+templates per call type. For each frame, the $k$-th lowest cost across templates was extracted into a single array. Each value in this array was divided 
+by the corresponding call-type threshold. This normalisation created a matrix of scaled $k$-th costs, where a value less than or equal to 1.0 consistently 
+indicated a valid threshold match across all call types, as shown in the second diagram of Figure~\ref{fig:kth_cost}. The minimum scaled cost across call 
+types was then taken to produce a single cost curve per frame.
 
-This cost was stored and analysed for call detection as shown in the third image in Figure \ref{fig:kth_cost}. 
-A call would only be detected if the percentage of templates for a sepecific call type 
-detecting a call was equal to the vote percentage. Only 
-the k lowest cost had to be considered since any value lower than k would also have a 
-lower cost. Thus if the kth cost detected a call all lower calls would also detect a call 
-and the vote fraction would be met. If, however, the kth cost did not detect a call even if 
-any of the lower cost templates detected a call the vote fraction would not be met, thus a 
-call would not be detected.
+This unified cost array was evaluated for call detections (third diagram of Figure~\ref{fig:kth_cost}). Evaluating the $k$-th lowest cost guarantees that 
+the voting fraction requirement is satisfied: if the $k$-th cost falls below the decision threshold, at least $k$ templates have matched the candidate segment.
 
-The find\_peaks function from the SciPy library was used to detect end times within 
-the scaled kth cost 1D-array. Subsequence DTW works in such a way that the end point of a matching 
-sequence is the lowest cost within the last row of the cost matrix. This means that within 
-a 1D-array of a 1 hour segment with many calls there will be various dips in cost which will 
-reach an absolute minimum cost at the end point of a possible call. If the costs considered 
-were to be multiplied by negative one these end points would be found at peaks instead 
-of dips. Thus any place wher $cost >= -1$ would indicate a detected end point of a call.\cite{find_peaks}
+Call end times were detected using the \texttt{scipy.signal.find\_peaks} function, as described in the SciPy documentation~\cite{find_peaks}, on the inverted cost array. In subsequence \ac{DTW}, candidate matches 
+correspond to local minima along the final row of the accumulated cost matrix. Inverting the cost array ($-\text{cost}$) transforms these local cost dips into
+peaks, allowing candidate end frames with cost $\leq 1.0$ to be identified using standard peak-finding algorithms.
+For each detected end frame, the corresponding call start time was determined. While the end time was identified via the lowest $k$-th lowest cost among all call type templates, 
+the start time was 
+extracted using the template yielding the absolute lowest cost (from the call type templates of the $k$-th lowest cost call type) at that end frame. A 10-second audio window preceding the detected end frame was extracted for 
+re-alignment. Because subsequence matches can exceed the baseline template duration, a 10-second window was chosen to accommodate long calls without requiring 
+full recalculation across the entire 1-hour block.
 
-For any detected end frame, within the scaled kth cost array the start time is 
-calculated. The end time was found using the kth lowest cost. This cost came from 
-one of the ten templates for one of the thresholds. Out of these ten templates 
-there is also one containing the absolute lowest cost for that end frame. The start time is calculated using 
-that template within which the lowest cost is found. A section of the 1 hour audio segment 
-is extracted such that it ends at the end of the chosen end frame and starts ten seconds 
-before the end frame starts. When matching a template to an audio segment using DTW 
-subsequence the detected call can be longer than the original template. Since there is 
-no indication for how long the detected call could be a max of ten seconds was chosen. 
-This is arbitrarily long for a Bryde's Whale call, but as long as the whale call starts 
-somewhere within those ten seconds the correct start time can be found. The reason for 
-the ten seconds is so that the DTW of the entire 1 hour audio segment does not have to be 
-recomputed to find the warp path used to select the start time. This saves computational 
-time. 
+The \texttt{librosa.sequence.dtw} function was re-executed on this localized window to compute the step matrix. Backtracking was then performed via 
+\texttt{librosa.sequence.dtw\_backtracking}, forcing the warp path to originate at the chosen end frame and trace backward to determine the exact start 
+frame. Using the best-matching template (rather than the $k$-th template) ensures the most accurate start-time boundary estimation.
 
-The sequence.dtw function from librosa is once again used to calculate the DTW cost 
-matrix of this audio segment. This function has the capability to return the best warp 
-path for the given audio segment, however since the end point was selected on the k lowest 
-cost template and the start time is now being chosenon the absolute lowest cost template, 
-this template might have an end point with a higher cost that the selected end point. This 
-end point may just not have been detected due to the vote fraction. Therefore, the step 
-choice matrix needed to find the warp path is returned instead of the best warp path for 
-that audio segment. The sequence.dtw\_backtracking function from the librosa library is 
-then used to find the warping path. In this function it is possible to force the warp path 
-calculation to start from the chosen end point instead of the best for that audio segment. 
-From that chosen end point the function works backwards though the steps matrix until it 
-finds the start point.\cite{backtracking}
-
-Theoretically whether one finds the start point in the kth lowest template or the best 
-should not make too much of a difference, however in the end the kth template was only 
-used to find the end points due to the vote fraction. After finding those end points 
-finding the most accurate start time is important and since the best template has matched 
-the best to that call it m akes sense to find the start time using the best template instead 
-if the kth best template.
 
 \mysubsection{Matching Methodology}{Matching Methodology}\label{sec:matching-methodology}
 
-For each detected call only the labeled calls for the relevant time period were checked to find 
-overlap. The searchsorted function from the numpy library was used to find the labeled 
-calls overlapping the detected calls. Four 1D-arrays were used: start times for detected 
-calls, end times for detected calls, start times for labeled calls, end times for labeled calls. 
-For each detected call searchsorted was used to find at which index, within the array 
-containing labeled call end times, the detected start time would have to be inserted to 
-keep the end times array sorted from smallest to largest. This index was chosen as lo. The 
-searchsorted function was also used to determine at which index within the start times 
-array for the labeled calls the end time from the detected call would have to be inserted 
-to keep the start times array sorted. This was chosen as hi. These lo and hi variables 
-ensured that only labeled calls which started before the detected call ends and ended after 
-the detected call start were considered. If hi was larger than lo then any indices between 
-these two times were labeled calls touching the detected call.The matching logic was set 
-up in such a way that if one or more labeled calls touched the detected call the call was 
-considered to be a true positive call. So as long as hi was larger than lo that detected 
-call was labelled as matched and the labeled call or calls were labeled as matched. If another call were to also 
-touch an already matched labeled call it would still be matched as general 
-detection was the main goal and not specific time matches.\cite{searchsorted}
+Detected calls were evaluated against labelled calls within the corresponding time period. The \texttt{numpy.searchsorted} function, as documented 
+by the NumPy developers~\cite{searchsorted}, was used to 
+find the labelled calls overlapping the detected calls. This was achieved efficiently using four 1D arrays: detected start times, detected end times, labeled start times, and labeled end times. 
+
+For each detected call, \texttt{numpy.searchsorted} identified the index \texttt{lo} in the labeled end-time array where the detected start time would 
+fit sequentially. Similarly, it identified the index \texttt{hi} in the labeled start-time array where the detected end time would fit. A condition of 
+$\texttt{hi} > \texttt{lo}$ indicates that at least one labelled call overlaps with the detected window. If this condition was met, the detection 
+was categorized as a true positive (TP), and the corresponding labelled call was marked as matched. Subsequent detections overlapping an already-matched 
+label were still treated as TPs, as the primary objective of this system is detection rather than specific matches of start and end times.
+
 
 \mysection{Evaluation Metrics}{Evaluation Metrics}\label{sec:evaluation-metrics}
 
-While reciever-operating characteristic (ROC) analysis is more common in detection models, due to the class imbalance 
-between whale calls vs background noise, precision and recall (PR) analysis was chosen as the better 
-method for analysis. This is due to the fact that ROC curves tend to give a false impression 
-as to how a model acts in the presence of class imbalance. PR curves on the other hand 
-take class imbalance into account and thus give a more accurate reflection of how the model 
-acts. Due to this precision, recall and F1 score was chosen as the method of analysis.The 
-one downside which was considered when interpreting results was that due to the lack of 
-data the calibration data used had a different imbalance to the evaluation data. This meant 
-that it was expected that the resulting chosen PR point would be less optimal than the 
-PR curve could have allowed.
+Although receiver operating characteristic (ROC) analysis, as explained by Fawcett~\cite{roc}, is widely used in detection tasks, precision-recall (PR) analysis was chosen due to severe class 
+imbalance between whale calls and background noise. Saito and Rehmsmeier~\cite{pr} show that ROC curves can present an overly optimistic assessment in heavily imbalanced scenarios, whereas PR curves 
+more accurately reflect performance under class skew. Consequently, precision, recall, and f1-score were selected as primary evaluation metrics. However, because 
+the calibration dataset exhibited a different class imbalance ratio than the evaluation dataset, the calibrated operating point was expected to sit slightly 
+off the theoretical optimum of the evaluation PR curve.
 
-Precision is a value showing how many of the detected whale calls actually touched 
-a label. True positives (TP) are defined as a detected call which overlaps at least one 
-labeled call. False positives (FP) are defined as detected calls which do not overlap with 
-any labeled call. The equation to calculate precision is defined as:
+Precision measures the proportion of detected calls that correspond to true labelled calls. A true positive (TP) detection is defined as a detected call 
+window overlapping at least one labelled call, while a false positive (FP) is a detection with no label overlap:
 
 \begin{equation}
-    presision = \frac{TP}{TP + FP}
+    \text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}
 \end{equation}
 
-Recall is a value showing how many of the labeled calls were detected by the model. 
-In this case a TP value is defined as a labeled call which has been overlapped at 
-least once by a detected call. False negatives (FN) are the labeled calls which are never 
-overlapped by a detected call. The equations for recall is defined as:
+Recall measures the proportion of labelled calls successfully detected by the system. In this context, a TP label is defined as a labelled call overlapped 
+by at least one detection, whereas a false negative (FN) is a labelled call that receives no detection overlap:
 
 \begin{equation}
-    recall = \frac{TP}{TP + FN}
+    \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
 \end{equation}
 
-It can be seen that for precision and recall TP has a slightly different definition. This 
-is due to the fact that the model at times could incorrectly detect one labeled call as 
-two different calls and sometimes two labeled calls can be detected as one call. Since the 
-goal of this project is detection of calls and not classification the analysis does not consider 
-the detection of one labeled call as two detected calls to be incorrect, thus leading to one of 
-the detected calls being labelled as FP. Instead any detection overlapping any 
-labeled call and vice versa is considered TP.
+Note that TP definitions differ slightly between precision and recall. Because a single long labelled call may produce multiple detections (or vice versa), any overlap 
+between call detections and labelled calls is treated as a true positive, supporting the system's objective of general call detection.
 
-The F1 score shows the optimal point on a PR curve. This is due to the fact that as precision  
-and recall increases the F1 score will also increase. Therefore, for all choices in hyperparameter 
-tuning the decision is based on the highest F1 score. The F1 score is also used in the evaluation 
-file to determine the overall performance of models relative to each other. The equation 
-for the F1-score is defined as:
+The f1-score represents the optimal mean of precision and recall:
 
 \begin{equation}
-    F1 = \frac{2PR}{P + R}
-\end{equation}\cite{pr}\cite{roc}
+    \text{F1} = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
 
-For the evaluation part of the project the average precision (AP) was also calculated. AP 
-was calculated using all point interpolation. The equation for this is:
+Hyperparameter selections and model comparisons were evaluated primarily using the maximum f1-score. Additionally, Average precision (AP) was calculated across 
+the continuous PR curve using all-point interpolation, as defined by Padilla et al.~\cite{ap}:
 
 \begin{equation}
-\mathrm{AP}_{\mathrm{all}} = \sum_{n} (R_{n+1} - R_n)\, P_{\mathrm{interp}}(R_{n+1})
+    \text{AP}_{\text{all}} = \sum_{n} (R_{n+1} - R_n) P_{\text{interp}}(R_{n+1})
 \end{equation}
 
 where
 
 \begin{equation}
-P_{\mathrm{interp}}(R_{n+1}) = \max_{\tilde{R}\,:\,\tilde{R} \geq R_{n+1}} P(\tilde{R})
+    P_{\text{interp}}(R_{n+1}) = \max_{\tilde{R} \ge R_{n+1}} P(\tilde{R})
 \end{equation}
-\cite{ap}
 
-The points for the PR curve, used to calculate the AP, were calculated by sweeping the three thresholds 
-equally up and down by a variable alpha. During the main detection pipeline when the 
-end and start times of the detected calls were found on the scaled kth costs, the threshold 
-below which a call was detected was initially set to 1.5. Before matching the detected calls 
-in the initial evaluation the detected calls cost array was again trimmed such that only the 
-calls falling below the actual threshold, 1, were matched against labels. The extra costs, falling under 1.5, 
-were necessary to later ensure there were enough costs available for a threshold sweep for 
-a PR curve. 100 thresholds were tested between 0,01 and 1,5. The precision and recall 
-was calculated at each of the new thresholds.
+To construct the continuous PR curve for AP calculations, the decision thresholds were swept across a range using a scaling factor $\alpha$. During initial 
+processing, candidate end points were retained if their scaled cost was below 1.5. A strict cut-off at 1.0 was applied for single-point baseline matching, 
+while retaining detections up to 1.5 ensured sufficient candidate points to generate a full PR curve over 100 linearly spaced threshold steps between 0.01 
+and 1.5.

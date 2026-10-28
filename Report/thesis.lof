@@ -10,32 +10,32 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}}{9}{figure.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces This is a software flow diagram describing how the hyperparameters are chosen for the project.}}{21}{figure.caption.16}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces This is a software flow diagram describing how the evaluation procedure runs for this project.}}{24}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces This diagram shows how the kth lowest costs are stored for a hypothetical choice of costs per frame for three templates per threshold and two thresholds given k = 2.}}{25}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Software flow diagram describing the hyperparameter selection procedure.}}{21}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Software flow diagram describing the evaluation procedure.}}{24}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Illustration of how $k$-th lowest costs are extracted and scaled for a sample configuration with three templates per call type, two thresholds, and $k = 2$.}}{25}{figure.caption.18}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{32}{figure.caption.22}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{32}{subfigure.1.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{32}{subfigure.1.2}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{35}{figure.caption.26}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.2.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.2.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{35}{figure.caption.27}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.3.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.3.2}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{36}{figure.caption.28}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{36}{subfigure.4.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{36}{subfigure.4.2}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC with the first and second derivatives added}}{37}{figure.caption.32}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{37}{subfigure.5.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{37}{subfigure.5.2}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP for which some FP could be unlabeled calls for the 10 template experiment for the STFT model.}}{39}{figure.caption.34}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Postive samples}}}{39}{subfigure.6.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{39}{subfigure.6.2}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces This shows for each model where FP calls were detected in relation to labeled calls over the entire 72 hour audio file.}}{39}{figure.caption.35}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 template STFT model}}}{39}{subfigure.7.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {5 template no derivatives MFCC model}}}{39}{subfigure.7.2}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {5 template LPCC model}}}{39}{subfigure.7.3}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{31}{figure.caption.22}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{31}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{31}{subfigure.1.2}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{34}{figure.caption.26}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.2.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{34}{figure.caption.27}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.3.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.3.2}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{35}{figure.caption.28}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.4.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.4.2}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC with the first and second derivatives added}}{36}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{36}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{36}{subfigure.5.2}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP for which some FP could be unlabeled calls for the 10 template experiment for the STFT model.}}{38}{figure.caption.34}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Postive samples}}}{38}{subfigure.6.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{38}{subfigure.6.2}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces This shows for each model where FP calls were detected in relation to labeled calls over the entire 72 hour audio file.}}{38}{figure.caption.35}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 template STFT model}}}{38}{subfigure.7.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {5 template no derivatives MFCC model}}}{38}{subfigure.7.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {5 template LPCC model}}}{38}{subfigure.7.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

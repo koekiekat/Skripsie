@@ -37,21 +37,21 @@
 \contentsline {chapter}{\numberline {4}System Design}{18}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Overview}{18}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Feature Extraction Methods}{18}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Short Time Fourier Transform}{18}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.1}Short-Time Fourier Transform}{18}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Mel-Frequency Cepstral Coefficients}{19}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Linear Predictive Coding}{19}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}DTW methodology}{20}{section.4.3}%
+\contentsline {subsection}{\numberline {4.2.3}Linear Predictive Coding Coefficients}{19}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}DTW Methodology}{20}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{21}{section.4.4}%
 \contentsline {section}{\numberline {4.5}Evaluation Procedure}{24}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Detection Methodology}{24}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Matching Methodology}{27}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.2}Matching Methodology}{26}{subsection.4.5.2}%
 \contentsline {section}{\numberline {4.6}Evaluation Metrics}{27}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Results}{30}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{30}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{32}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Experiment 3: LPCC Features}{36}{section.5.3}%
-\contentsline {section}{\numberline {5.4}General Observations}{38}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusion}{41}{chapter.6}%
-\contentsline {chapter}{References}{42}{chapter*.36}%
-\contentsline {chapter}{\numberline {A}Appendix title goes here}{47}{appendix.A}%
+\contentsline {chapter}{\numberline {5}Results}{29}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{29}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{31}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Experiment 3: LPCC Features}{35}{section.5.3}%
+\contentsline {section}{\numberline {5.4}General Observations}{37}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Conclusion}{40}{chapter.6}%
+\contentsline {chapter}{References}{41}{chapter*.36}%
+\contentsline {chapter}{\numberline {A}Appendix title goes here}{46}{appendix.A}%
 \contentsfinish 
