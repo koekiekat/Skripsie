@@ -26,11 +26,11 @@
 \contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{35}{figure.caption.28}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.4.1}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.4.2}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC with the first and second derivatives added}}{36}{figure.caption.32}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC}}{36}{figure.caption.32}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{36}{subfigure.5.1}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{36}{subfigure.5.2}%
 \contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP for which some FP could be unlabeled calls for the 10 template experiment for the STFT model.}}{38}{figure.caption.34}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Postive samples}}}{38}{subfigure.6.1}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Positive samples}}}{38}{subfigure.6.1}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{38}{subfigure.6.2}%
 \contentsline {figure}{\numberline {5.7}{\ignorespaces This shows for each model where FP calls were detected in relation to labeled calls over the entire 72 hour audio file.}}{38}{figure.caption.35}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 template STFT model}}}{38}{subfigure.7.1}%

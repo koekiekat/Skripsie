@@ -1,14 +1,14 @@
 \mychapter{Results}{Results}{}\label{chap:results}
 
-After the final detection and seperate analysis of the three different models an overall analysis 
+After the final detection and separate analysis of the three different models an overall analysis 
 must be done to determine which of the feature extraction methods was the best as well 
 as whether dynamic time warping (DTW) works overall as a detection algorithm for 
 Bryde's Whales in False Bay.
 
 \mysection{Experiment 1: STFT Features}{Experiment 1: STFT Features}\label{sec:exp-1-stft}
-For the short time fourier transform (STFT) model used for call detection two experiments were conducted. The first 
-considered the results given the use of 5 templates used as the analysis database for both hyperparameter selection and evaluation. 
-The second considered the use of 10 templates, the original 5 with 5 new templates added to increase the database diversity.
+For the short time Fourier transform (STFT) model used for call detection two experiments were conducted. The first 
+considered the results given the use of 5 templates per call type used as the analysis database for both hyperparameter selection and evaluation. 
+The second considered the use of 10 templates per call type, the original 5 with 5 new templates added to increase the database diversity.
 
 \begin{table}[H]
     \caption{Tabulation of thresholds as well as the respective F1-scores 
@@ -68,7 +68,7 @@ F1-score was 0.967. This shows that for the chosen thresholds at the best possib
 when compared to all 30 call type templates, 10 for each call type, performed well under the chosen vote fraction. There is an 
 expected drop in precision, recall and F1-score for detection of evaluation data. This drop is due to the vote fraction test being applied using 
 the same calibration templates used to choose the three thresholds and feature frame length. The reuse of calibration templates 
-is due to data scarcity and thus gives an overly optomistic performance result of the model which should only be considered in choosing the vote 
+is due to data scarcity and thus gives an overly optimistic performance result of the model which should only be considered in choosing the vote 
 fraction and not in determining the actual model performance.
 
 \begin{table}[H]
@@ -88,7 +88,7 @@ fraction and not in determining the actual model performance.
 
 In terms of precision, as seen in Table~\ref{tab:stft_test_results}, the 5 template experiment performed the best with 
 a difference in precision between the 
-two experiments as 0.068 and the highest being 0.715. However, in terms of recall the 10 template experiment 
+two experiments of 0.068 and the highest being 0.715. However, in terms of recall the 10 template experiment 
 performed the best with a 0.06 difference and the highest being 0.946. 
 
 Since the precision difference between the two experiments was the largest the 5 template experiment 
@@ -111,15 +111,15 @@ STFT experiments performed well in terms of hyperparameter selection.
     \caption{The PR curves for STFT}\label{fig:stft_pr}
 \end{figure}
 
-By again looking at Table~\ref{tab:stft_calib_results} and Figures~\ref{fig:stft_5_pr} and~\ref{fig:stft_10_pr}, 
-It can be seen that in terms of average precision (AP) and therefore the overal precision recall (PR) curve of the model the 10 template 
+By again looking at Table~\ref{tab:stft_test_results} and Figures~\ref{fig:stft_5_pr} and~\ref{fig:stft_10_pr}, 
+it can be seen that in terms of average precision (AP) and therefore the overall precision recall (PR) curve of the model the 10 template 
 experiment outperformed the 5 template experiment with the highest AP equal to 0.860.
 
 \mysection{Experiment 2: MFCC Features}{Experiment 2: MFCC Features}\label{sec:exp-2-mfcc}
 For the mel-frequency cepstral coefficient (MFCC) model three main experiments were considered. The first experiment used the MFCC output 
 with no added derivatives for the feature. The second experiment used the original 13 feature coefficients from experiment 1 and added 13 more 
-coefficients in the form of the derivitives of the original 13. The third and final experiment consider the 26 coefficients used in the second 
-experiment and added another 13 in the form of the second derivitives of the original 13 MFCC output coefficients.
+coefficients in the form of the derivatives of the original 13. The third and final experiment considered the 26 coefficients used in the second 
+experiment and added another 13 in the form of the second derivatives of the original 13 MFCC output coefficients.
 
 For each experiment two sub-experiments were performed. The first was performed using 5 templates and the second using 10 templates.
 
@@ -135,7 +135,7 @@ For each experiment two sub-experiments were performed. The first was performed 
             & \multicolumn{2}{c}{Single Tones}
             & \multicolumn{2}{c}{Multi Tones}
             & \multicolumn{2}{c}{Burst Tonals}
-            & \multirow{2}{*}{Avergage F1}
+            & \multirow{2}{*}{Average F1}
             & \multirow{2}{*}{Frame Length} \\
         \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8}
         & & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold & \\
@@ -164,15 +164,15 @@ For all three experiments the 5 template sub-experiment achieved a higher
 average F1-score over all three thresholds. In terms of average F1 score over 
 all three thresholds the MFCC experiment without derivatives performed the best. 
 The highest average F1-score was for the 5 template sub-experiment with a score of 0.631. The 
-second highest average F1-score was for the experiment where the first derivitives were added with a score of 0.614.
+second highest average F1-score was for the experiment where the first derivatives were added with a score of 0.614.
 
 In terms of the 10 template sub-experiments the experiment only using the first 13 MFCC output coefficients 
-peroformed the best in terms of average F1-score with a score of 0.553. The second best F1-score across the three 
+performed the best in terms of average F1-score with a score of 0.553. The second best F1-score across the three 
 10 template sub-experiments was for the third experiment using all 39 coefficients. This score was 0.548.
 
 For all three experiments and their respective sub-experiments the single-tone call type performed the best in terms of 
 F1-score for its chosen threshold. The highest F1-score was 0.806 for the 10 template sub-experiment of the 
-third experiment containing all 39 coefficients
+third experiment containing all 39 coefficients.
 
 \begin{table}[H]
     \caption{Final vote results for 5 and 10 templates}
@@ -189,7 +189,7 @@ third experiment containing all 39 coefficients
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv1}}
             & 5  & 0.935 & 0.967 & 0.951 & 0.4 \\
-            & 10 & 0.964 & 0.900 & 0.0.931 & 0.6 \\
+            & 10 & 0.964 & 0.900 & 0.931 & 0.6 \\
         \midrule
         \multirow{2}{*}{\makecell{MFCC\\deriv2}}
             & 5  & 0.906 & 0.967 & 0.935 & 0.4 \\
@@ -200,18 +200,18 @@ third experiment containing all 39 coefficients
 
 In terms of the F1-score for the choice of vote fraction, as seen in Table~\ref{tab:mfcc_vote_results}, 
 the highest score of 0.951 was shared by the 
-10 template sub-experiment for the MFCC experiment without derivatives and the 5 template sub-experimant for MFCC experiment with the first derivitives added. 
+10 template sub-experiment for the MFCC experiment without derivatives and the 5 template sub-experiment for MFCC experiment with the first derivatives added. 
 
 The second highest F1-score of 0.947 was shared by the 5 template sub-experiment for the MFCC experiment 
-without derivitives and the 10 template sub-experiment of the MFCC experiment with two derivatives.
+without derivatives and the 10 template sub-experiment of the MFCC experiment with two derivatives.
 
 Considering that the MFCC experiment with no derivatives held both the first and second highest F1-scores 
 this model was seen to have performed best in terms of overall call detection at the chosen hyperparameter settings for the calibration data. 
 This performance can only be considered in terms of the hyperparameter choices and not in terms of the overall 
 performance of the model due to the use of the same calibration templates for all hyperparameter selection choices.
 
-The vote fractions chosen for the MFCC experiments with the first and second derivitives stayed constant in terms of number of templates. The 5 template 
-sub-experiments chose a vote fraction of 0.4 and the 10 template sub-experiments chose 0.6. The MFCC experiment without derivitives had different vote fractions 
+The vote fractions chosen for the MFCC experiments with the first and second derivatives stayed constant in terms of number of templates. The 5 template 
+sub-experiments chose a vote fraction of 0.4 and the 10 template sub-experiments chose 0.6. The MFCC experiment without derivatives had different vote fractions 
 with the 5 template sub-experiment choosing 0.6 and the 10 template sub-experiment choosing 0.5.
 
 \begin{table}[H]
@@ -251,19 +251,19 @@ were 0.495, 0.809 and 0.611.
 For the MFCC experiment with the second derivatives added the 5 template sub-experiment performed best for recall. The 
 10 template sub-experiment performed best for precision and F1 score. 
 The highest values for precision, recall and F1 score respectively 
-were 0.505, 0.880 and 0.628.
+were 0.505, 0.880 and 0.610.
 
 Overall in terms of F1-score the 10 template sub-experiment for the MFCC experiment with no derivatives 
 performed the best. By looking at the values in Table~\ref{tab:mfcc_test_results} it can be seen 
-that the highest overall hyperparametr selection performance is characterized by averaging out
-the precision and recall and not by getting the higest value in either category.
+that the highest overall hyperparameter selection performance is characterized by averaging out
+the precision and recall and not by getting the highest value in either category.
 
 In terms of average precision (AP) and precision and recall (PR) curve the MFCC experiment with no derivatives outperformed all other MFCC 
 experiments with a maximum AP of 0.684 for the 10 template sub-experiment. This can be seen by looking at 
 both Table~\ref{tab:mfcc_test_results} and Figures~\ref{fig:mfcc_pr},~\ref{fig:mfcc_d1_pr} 
 and~\ref{fig:mfcc_d2_pr}.
 
-The 10 template sub-experiment for the MFCC experiment with no derivitives is the overall best performer 
+The 10 template sub-experiment for the MFCC experiment with no derivatives is the overall best performer 
 for the MFCC models.
 
 \begin{figure}[H]
@@ -314,7 +314,7 @@ and the second considered the use of 10 templates for the call type database for
             & \multicolumn{2}{c}{Single Tones}
             & \multicolumn{2}{c}{Multi Tones}
             & \multicolumn{2}{c}{Burst Tonals}
-            & \multirow{2}{*}{Averag F1} 
+            & \multirow{2}{*}{Average F1} 
             & \multirow{2}{*}{Frame Length}\\
         \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
             & $F_1$ & Threshold & $F_1$ & Threshold & $F_1$ & Threshold \\
@@ -330,7 +330,7 @@ Both the 5 and 10 template experiments for the LPC model chose 0.256 seconds as 
 frame length. This can be seen in Table~\ref{tab:lpc_calib_results}. 
 
 The 5 template model had the highest average F1-score of 0.746. This score was 0.022 higher than the 
-to 10 template experiment F1-score. There was no consistency in terms of F1-scores across the three call type 
+10 template experiment F1-score. There was no consistency in terms of F1-scores across the three call type 
 thresholds for either the 5 or 10 template experiment.
 
 \begin{table}[H]
@@ -349,7 +349,7 @@ thresholds for either the 5 or 10 template experiment.
 \end{table}
 
 While the 5 and 10 template experiments for LPC each chose a different vote fraction, 
-in terms of precision, recall and F1 score they performed equally well. The chose vote fraction for each was 0.4 and 0.5 for the 5 and 
+in terms of precision, recall and F1 score they performed equally well. The chosen vote fraction for each was 0.4 and 0.5 for the 5 and 
 10 template experiments respectively. The F1-score for both experiments was 
 0.984. This can be seen in Table~\ref{tab:lpc_vote_results}. 
 
@@ -372,7 +372,7 @@ This F1-score carries no weight in terms of the actual performance of the model 
 
 As seen in Table~\ref{tab:lpc_test_results}, the 5 template experiment performed better in 
 terms of recall. The 10 template experiment performed best in precision and F1 score. The highest precision, recall and F1-score 
-were 0.523, 0.900 and 0.621 respectively.
+were 0.523, 0.900 and 0.650 respectively.
 
 This means that the 10 template experiment performed better in terms of chosen thresholds. This 
 can also be seen in Figures~\ref{fig:lpc_5_pr} and~\ref{fig:lpc_10_pr} where the marked precision 
@@ -385,7 +385,7 @@ and recall point is better matched to the precision recall (PR) curve for the 10
     \hspace{1cm}
     \subfloat[10 templates\label{fig:lpc_10_pr}]{%
         \includegraphics[width=0.3\linewidth]{figures/results/lpc_10_pr.png}}
-    \caption{The PR curves for LPC with the first and second derivatives added}\label{fig:lpc_pr}
+    \caption{The PR curves for LPC}\label{fig:lpc_pr}
 \end{figure}
 
 By considering Table~\ref{tab:lpc_test_results} and Figure~\ref{fig:lpc_5_pr} and~\ref{fig:lpc_10_pr}, 
@@ -403,14 +403,14 @@ a bias in the choices of templates to train on as selecting suitably representat
 templates per call type became difficult. The selection of background calibration templates 
 meant that the class imbalance between calls and background noise 
 differed between hyperparameter selection and evaluation. The selection of templates and not 
-a continuos audio file for hyperparameter selection also meant that subsequence dynamic time warping (DTW) did not necessarily 
+a continuous audio file for hyperparameter selection also meant that subsequence dynamic time warping (DTW) did not necessarily 
 act within the same conditions as evaluation thus creating another difference between the two datasets.
 
 Considering the low availability of well labeled data to use for the hyperparameter selection 
 stage of this project as well as human error, which was introduced in manual 
 selection of calibration templates, the varying performance of the 
 calibrated thresholds is justified. This varying performance can be seen in Tables~\ref{tab:stft_calib_results},
-~\ref{tab:mfcc_calib_results} and~\ref{tab:stft_calib_results}.
+~\ref{tab:mfcc_calib_results} and~\ref{tab:lpc_calib_results}.
  
 
 \begin{table}[H]
@@ -435,7 +435,7 @@ calibrated thresholds is justified. This varying performance can be seen in Tabl
     }
 \end{table}
 
-By looking at Table~\ref{tab:highest_results} it can be seen that the short time fourier transform (STFT) model 
+By looking at Table~\ref{tab:highest_results} it can be seen that the short time Fourier transform (STFT) model 
 outperforms the other models in terms of both F1-score and average precision (AP). This meant that 
 both in terms of the models ability to select hyperparameters and in terms of 
 the efficiency of the detection pipeline the STFT model outperformed the other two models.
@@ -448,12 +448,12 @@ many of these FP calls were actually
 unlabeled calls. This means that the actual precision of the model may be higher 
 than the reported amounts. This may be due to the human error introduced in 
 call labeling, since the known labeled calls were found by previous projects and 
-was therefore not necessarily a complete list. Examples of FP calls compared to similar true positive (TP) calls 
+were therefore not necessarily a complete list. Examples of FP calls compared to similar true positive (TP) calls 
 can be seen in Figure~\ref{fig:FP_TP}
 
 \begin{figure}[H]
     \centering
-    \subfloat[False Postive samples\label{fig:FP_STFT_10}]{%
+    \subfloat[False Positive samples\label{fig:FP_STFT_10}]{%
         \includegraphics[width=0.4\linewidth]{figures/results/FP_STFT_10.png}}
     \hspace{1cm}
     \subfloat[True Positive samples\label{fig:TP_STFT_10}]{%
@@ -480,5 +480,4 @@ and the signal-to-noise ratio (SNR) of the section of audio considered. This obs
 
 Considering the good performance of the model as well as the unlabeled 
 TP calls, the STFT feature extraction is the best method to use for call detection with 
-the DTW algorith and the algorithm is a valid choice as detection method for Bryde's Whales within the False Bay region.
-
+the DTW algorithm and the algorithm is a valid choice as detection method for Bryde's Whales within the False Bay region.
