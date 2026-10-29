@@ -13,17 +13,19 @@ referred to as single-tones, multi-tones, burst-tonals and tonal downsweeps.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/literature/call_types.png}
-    \caption{Examples of how each call type looks: single-tone, multi-tone, burst-tonal and tonal downsweep.}\label{fig:call_types}
+    \caption{Examples of how each call type looks: single-tone, multi-tone, burst-tonal and tonal downsweep. The spectrograms for 
+    each call type were printed based on labeled calls from the dataset~\cite{gunther_calls}.} \label{fig:call_types}
 \end{figure}
 
-The single-tone calls were characterised by a singular frequency at around 42 Hz. 
+As explained by Faustmann et al.~\cite{bryde_whales_SA} The single-tone calls were characterised by a 
+singular frequency at around 42 Hz. 
 Multi-tones also contained the 42 Hz frequency, but there were one or two other frequencies 
 above this with a maximum frequency component at about 200 Hz. Burst-tonals also have 
 the multiple frequency characteristic of the multi-tones, however the lower frequencies, 
 42~-~200 Hz, were held for longer than the higher frequencies, 200~-~500 Hz. The tonal 
 downsweep was the only call type not characterised by the 42 Hz frequency. It was a 
 sweeping of frequencies through time starting at around 200 Hz and ending at around 100 
-Hz~\cite{bryde_whales_SA}.
+Hz.
 
 In accordance with the original detected calls the average call length of each call type was 
 around 0.3 seconds with a maximum duration of about 2.5 seconds. In other studies of Bryde's whale calls in different geographical areas, a maximum duration of around 7.0 
@@ -206,9 +208,7 @@ between different frequency bands.
 
 Window overlap is another consideration when using STFT. Increased overlap creates 
 a smoother representation of the changes in frequency occurring over time since information 
-at the edges of the window is no longer lost. The trade-off with overlap is the increase 
-in computational complexity that will occur due to smaller and thus more windows of a 
-signal being analysed.
+at the edges of the window is no longer lost.
 
 
 \mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mel-frequency-cepstral-coefficients}
@@ -317,15 +317,13 @@ c_m &= \sum_{k=1}^{m-1} \left(\frac{k}{m}\right) c_k a_{m-k}, \qquad m > p,
 
 where $\sigma^2$ is the LPC gain term.
 
-The final feature extracted using LPCC contains $p$ coefficients for a single frame, with the zeroth coefficient, $c_0$, containing the magnitude information.
+The final feature vector extracted using LPCC contains $p$ coefficients for a single frame, with the zeroth coefficient, $c_0$, containing the magnitude information.
 
 \mysection{Similar Studies}{Similar Studies}\label{sec:similar_studies}
 
 \mysubsection{Classification of Killer Whale Vocalisations using DTW}{Classification of Killer Whale Vocalisations using DTW}\label{sec:killer-dtw}
-An article, ``Automatic classification of killer whale vocalizations using dynamic time 
-warping'', written by Judith C. Brown and Patrick J. O. Miller~\cite{killer-whale} evaluated four different variations 
-of the \ac{DTW} algorithm to classify biphonic killer whale 
-vocalisations using fundamental frequency contours. 
+Brown and Miller evaluated four different variations of the \ac{DTW} algorithm to classify biphonic killer whale 
+vocalisations using fundamental frequency contours (see~\cite{killer-whale}). 
 
 Due to the biphonic nature of these calls the low-frequency component and high-frequency component for each call was extracted for separate analysis. Four different 
 variations of the DTW algorithm with various different constraints were used to evaluate 
@@ -344,10 +342,8 @@ do not tend to fall below 500 Hz.
 
 \mysubsection{Analysis of Template-Based Detection Algorithms for Bryde's Whales}{Analysis of Template-Based Detection Algorithms for Bryde's Whales}\label{sec:bryde-dtw-lpc}
 
-The article, ``Analysis of Template-Based Detection Algorithms for Inshore Bryde's Whale 
-Short Pulse Calls'' written by Olayinka O. Ogundile and Daniel J. J. Versfeld~\cite{temp-based-bryde} 
-analysed two template based detection algorithms to detect short pulse 
-calls for Bryde's whales in False Bay, South Africa. The two methods tested were dynamic time warping (DTW) 
+Ogundile and Versfeld analysed two template based detection algorithms to detect short pulse 
+calls for Bryde's whales in False Bay, South Africa (see~\cite{temp-based-bryde}). The two methods tested were dynamic time warping (DTW) 
 and linear predictive coding (LPC). In their analysis they used two separate sample sets with different signal-to-noise ratio (SNR) values 
 to also evaluate the performance of these techniques in the presence of noise. The input 
 features for these models were the time-domain representation of the signals. 
@@ -363,17 +359,13 @@ and tested on its ability to act as such. In this project LPC is not used as a d
 algorithm, but instead linear predictive coding coefficients (LPCC) is used as a feature extraction method. 
 The detection method focuses on 
 the error component of the LPC equation while the feature extraction method focuses 
-on the coefficients calculated for the approximation of the real signal. Another difference 
-between this project and the article is that this article exclusively uses the time domain 
-representation of the signal as input.
+on the coefficients calculated for the approximation of the real signal.
 
 \mysubsection{Detection of real-time fin and blue whale calls}{Detection of real-time fin and blue whale calls}\label{sec:real-time}
 
-The article, ``Automatic recognition of fin and blue whale calls for real-time monitoring in 
-the St. Lawrence'' by Xavier Mouy, Mohammed Bahoura and Yvan Simard~\cite{dtw-vq} tested detection models on 
+Mouy et al.~\cite{dtw-vq} tested detection models on 
 real-time data for fin and blue whales. The 
-detection methods used were dynamic time warping (DTW) and vector quantisation (VQ). This article focused on 
-low frequency whale calls. 
+detection methods used were dynamic time warping (DTW) and vector quantisation (VQ).
 
 Instantaneous frequency, speed and acceleration were extracted as features. It was 
 found that due to low frequency components from background elements such as ships the 
@@ -387,8 +379,7 @@ did not consider their effect on DTW performance.
 
 \mysubsection{Hidden Markov Model for Bryde's Whale short pulse calls}{Hidden Markov Model for Bryde's Whale short pulse calls}\label{sec:hmm-bryde}
 
-The article ``A hidden Markov model with selective time domain feature extraction to detect inshore Bryde's whale short pulse calls'' 
-by O.O. Ogundile, A.M. Usman, O.P. Babalola and D.J.J. Versfeld~\cite{hmm} compares a time domain feature extraction technique used for hidden Markov models (HMM) against 
+Ogundile et al.~\cite{hmm} compared a time domain feature extraction technique used for hidden Markov models (HMM) against 
 mel-frequency cepstral coefficients (MFCC) and linear predictive coding (LPC), frequency domain techniques. The model is used for detection of Bryde's 
 whale calls in False Bay, South Africa.
 
@@ -400,14 +391,13 @@ LPC performing the worst. It was found that the MFCC and LPC models were sensiti
 to background noise.
 
 While this does test detection on a continuous segment of audio, this article focuses on 
-HMM detection and not DTW. It also tests the MFCC feature extraction method as well 
-as the LPC method. Considering the fact that the LPC features were not converted to 
+HMM detection and not DTW. Similar to this project it compares the MFCC feature extraction method with the LPC method. 
+However, considering the fact that the LPC features were not converted to 
 linear predictive coding coefficients (LPCC) this does not fully align with this project.
 
 \mysubsection{Speech Recognition using DTW}{Speech Recognition using DTW}\label{sec:speech-dtw}
 
-The goal of the article ``Speech recognition using Dynamic Time Warping (DTW)'' by Yurika Permanasari, Ermin H. Harahap and Erwin Prayoga Ali~\cite{speech} 
-was to analyse the effectiveness of dynamic time warping (DTW) in 
+Permanasari et al.~\cite{speech} analysed the effectiveness of dynamic time warping (DTW) in 
 matching speech patterns. Variabilities were included in the study via pronunciation 
 timing, volume and speaker identity. 
 

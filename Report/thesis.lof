@@ -3,39 +3,41 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Examples of how each call type looks: single-tone, multi-tone, burst-tonal and tonal downsweep.}}{4}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Examples of how each call type looks: single-tone, multi-tone, burst-tonal and tonal downsweep. The spectrograms for each call type were printed based on labeled calls from the dataset~\cite {gunther_calls}.}}{4}{figure.caption.10}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces An example of the optimal warping path between two vector features, X with length N = 4 and Y with length M = 6}}{5}{figure.caption.11}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces An example for the three possible options for min as well as an example of the optimal warp path found for signals X and Y assuming X=[0, 2, 1, 0] and Y=[0, 0, 0.5, 2, 1, 0]}}{7}{figure.caption.12}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Example of a subsequence DTW alignment between two signals $X = [x_1, x_2, x_3, x_4]$ and $Y = [y_1, y_2, y_3, y_4, y_5, y_6, y_7, y_8, y_9, y_{10}]$}}{7}{figure.caption.13}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}}{9}{figure.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Software flow diagram describing the hyperparameter selection procedure.}}{21}{figure.caption.16}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Software flow diagram describing the evaluation procedure.}}{24}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Illustration of how $k$-th lowest costs are extracted and scaled for a sample configuration with three templates per call type, two thresholds, and $k = 2$.}}{25}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Software flow diagram describing the hyperparameter selection procedure.}}{20}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Software flow diagram describing the evaluation procedure.}}{23}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Illustration of per call type matrices containing the bottom row of the cost matrix for each template in the given call type for k = 1. The green, purple and pink blocks are the $k_{th}$ lowest cost per frame for each matrix. These correspond to Figure~\ref {fig:kth_cost_2} The blue block is the detected end frame as it appears in the template analysed to find the start frame. This corresponds to Figure~\ref {fig:kth_cost_3}.}}{24}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Illustration of the $k_{th}$ best costs matrix. The coloured blocks correspond to those in Figure\ref {fig:kth_cost_1}}}{25}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Illustration of the cost arrays used to find the start and end frames without normalisation. The coloured blocks corresponds to those in Figure~\ref {fig:kth_cost_1} and~\ref {fig:kth_cost_2}.}}{25}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{31}{figure.caption.22}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{31}{subfigure.1.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{31}{subfigure.1.2}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{34}{figure.caption.26}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.2.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.2.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{34}{figure.caption.27}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.3.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.3.2}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{35}{figure.caption.28}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.4.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.4.2}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC}}{36}{figure.caption.32}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{36}{subfigure.5.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{36}{subfigure.5.2}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP for which some FP could be unlabeled calls for the 10 template experiment for the STFT model.}}{38}{figure.caption.34}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Positive samples}}}{38}{subfigure.6.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{38}{subfigure.6.2}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces This shows for each model where FP calls were detected in relation to labeled calls over the entire 72 hour audio file.}}{38}{figure.caption.35}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 template STFT model}}}{38}{subfigure.7.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {5 template no derivatives MFCC model}}}{38}{subfigure.7.2}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {5 template LPCC model}}}{38}{subfigure.7.3}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{30}{figure.caption.24}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{30}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{30}{subfigure.1.2}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{33}{figure.caption.28}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{33}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{33}{subfigure.2.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{33}{figure.caption.29}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{33}{subfigure.3.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{33}{subfigure.3.2}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{34}{figure.caption.30}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.4.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.4.2}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPC}}{35}{figure.caption.34}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.5.2}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP for which some FP could be unlabeled calls for the 10 template experiment for the STFT model.}}{37}{figure.caption.36}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Positive samples}}}{37}{subfigure.6.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{37}{subfigure.6.2}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces This shows for each model where FP calls were detected in relation to labeled calls over the entire 72 hour audio file.}}{37}{figure.caption.37}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 template STFT model}}}{37}{subfigure.7.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {5 template no derivatives MFCC model}}}{37}{subfigure.7.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {5 template LPCC model}}}{37}{subfigure.7.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

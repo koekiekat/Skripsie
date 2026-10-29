@@ -121,6 +121,11 @@ into call-calibration costs and background-calibration costs. Two hundred candid
 costs across both lists. F1-scores were evaluated across all candidate thresholds for each call type as described in Section~\ref{sec:evaluation-metrics}. The 
 threshold yielding the highest f1-score was selected for each respective call type.
 
+Both call type calibration templates and background calibration templates were used to determine the thresholds since true positive (TP), false positive (FP) 
+and true negative (TN) calls were all needed 
+in the calculation of precision and recall and thus in the calculation for the f1-score used to select the optimal thresholds. 
+This can be seen in Eq.\ref{eq:precision},~\ref{eq:recall} and~\ref{eq:f1}.
+
 For a given frame length, the minimum f1-score among the three call-type thresholds was recorded. The optimal feature frame length was then selected as the one 
 whose minimum threshold f1-score was highest across all tested frame lengths.
 
@@ -159,34 +164,63 @@ as documented by Bechtold~\cite{sf}, was
 used to stream continuous hourly audio blocks without loading the entire dataset into memory. Each hourly segment was downsampled from 8~kHz to 
 1~kHz using the \texttt{scipy.signal.resample\_poly} function described in the SciPy documentation~\cite{resample}, and features were extracted as outlined in Section~\ref{sec:stft}.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/syst_design/kth_cost.png}
-    \caption{Illustration of how $k$-th lowest costs are extracted and scaled for a sample configuration with three templates per call type, two thresholds, 
-    and $k = 2$.}\label{fig:kth_cost}
-\end{figure}
+All templates (5 or 10 per call type) were tested against the entire 1 hour audio segment. End frames of detected calls were identified if the 
+percentage of templates for a specific call type detecting a call was equal to the vote fraction chosen during hyperparameter selection. This is 
+explained below with the help of Figure~\ref{fig:kth_cost_1},~\ref{fig:kth_cost_2} and ~\ref{fig:kth_cost_3}.
 
 The \ac{DTW} cost matrix was computed for all templates across each call type, and the bottom row of each cost matrix was extracted and stored, as 
-illustrated in the top diagram of Figure~\ref{fig:kth_cost}. The integer parameter $k$ was defined as the vote fraction multiplied by the number of 
-templates per call type. For each frame, the $k$-th lowest cost across templates was extracted into a single array. Each value in this array was divided 
-by the corresponding call-type threshold. This normalisation created a matrix of scaled $k$-th costs, where a value less than or equal to 1.0 consistently 
-indicated a valid threshold match across all call types, as shown in the second diagram of Figure~\ref{fig:kth_cost}. The minimum scaled cost across call 
-types was then taken to produce a single cost curve per frame.
+illustrated in Figure~\ref{fig:kth_cost_1}.
 
-This unified cost array was evaluated for call detections (third diagram of Figure~\ref{fig:kth_cost}). Evaluating the $k$-th lowest cost guarantees that 
-the voting fraction requirement is satisfied: if the $k$-th cost falls below the decision threshold, at least $k$ templates have matched the candidate segment.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/syst_design/kth_cost_1.png}
+    \caption{Illustration of per call type matrices containing the bottom row of the cost matrix for each template in the given call type for k = 1. The 
+    green, purple and pink blocks are the $k_{th}$ lowest cost per frame for each matrix. These correspond to Figure~\ref{fig:kth_cost_2} The blue block is the detected end frame as it appears in the 
+    template analysed to find the start frame. This corresponds to Figure~\ref{fig:kth_cost_3}.}\label{fig:kth_cost_1}
+\end{figure}
+
+The integer parameter $k$ was defined as the vote fraction multiplied by the number of 
+templates per call type. For each frame in the 1 hour audio segment, the $k_{th}$ lowest cost across templates per call type was extracted into a single array per call type. 
+The three $k_{th}$ lowest costs arrays (one for each call type) were stacked to form a three row $k_{th}$ best costs matrix as shown in Figure~\ref{fig:kth_cost_2}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figures/syst_design/kth_cost_2.png}
+    \caption{Illustration of the $k_{th}$ best costs matrix. The coloured blocks correspond to those in Figure\ref{fig:kth_cost_1}}\label{fig:kth_cost_2}
+\end{figure}
+
+All the costs in the rows of the matrix were divided by the call type threshold for each row. This normalisation created a matrix of scaled $k_{th}$ costs, where a value less than or equal to 1.0 consistently 
+indicated a valid threshold match across all call types.
+
+The minimum scaled cost across all three call types was taken per frame and placed in a cost per frame array.
+This array was evaluated for call detections (top array in Figure~\ref{fig:kth_cost_3}). 
+
+Evaluating the $k_{th}$ lowest cost guarantees that the voting fraction requirement is satisfied: 
+if the $k_{th}$ cost falls below the decision threshold, at least $k$ templates have matched the candidate segment.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{figures/syst_design/kth_cost_3.png}
+    \caption{Illustration of the cost arrays used to find the start and end frames without normalisation. The coloured blocks corresponds to those in 
+    Figure~\ref{fig:kth_cost_1} and~\ref{fig:kth_cost_2}.}\label{fig:kth_cost_3}
+\end{figure}
 
 Call end times were detected using the \texttt{scipy.signal.find\_peaks} function, as described in the SciPy documentation~\cite{find_peaks}, on the inverted cost array. In subsequence \ac{DTW}, candidate matches 
 correspond to local minima along the final row of the accumulated cost matrix. Inverting the cost array ($-\text{cost}$) transforms these local cost dips into
 peaks, allowing candidate end frames with cost $\leq 1.0$ to be identified using standard peak-finding algorithms.
-For each detected end frame, the corresponding call start time was determined. While the end time was identified via the lowest $k$-th lowest cost among all call type templates, 
+
+For each detected end frame, the corresponding call start time was determined. While the end time was identified via the lowest $k_{th}$ lowest cost among all call type templates, 
 the start time was 
-extracted using the template yielding the absolute lowest cost (from the call type templates of the $k$-th lowest cost call type) at that end frame. A 10-second audio window preceding the detected end frame was extracted for 
+extracted using the template yielding the absolute lowest cost (from the call type templates of the $k_{th}$ lowest cost call type) at that end frame. 
+Bottom array in Figure~\ref{fig:kth_cost_3} shows the array selected to find the start time based on a detected end frame. The costs in the selected 
+start time array were also normalised by dividing by the threshold for the given call type.
+
+A 10-second audio window preceding the detected end frame was extracted for 
 re-alignment. Because subsequence matches can exceed the baseline template duration, a 10-second window was chosen to accommodate long calls without requiring 
 full recalculation across the entire 1-hour block.
 
-The \texttt{librosa.sequence.dtw} function was re-executed on this localized window to compute the step matrix. Backtracking was then performed via 
-\texttt{librosa.sequence.dtw\_backtracking}, forcing the warp path to originate at the chosen end frame and trace backward to determine the exact start 
+The \texttt{librosa.sequence.dtw} function was re-executed on this localized window to compute the step matrix. 
+Backtracking was then performed via \texttt{librosa.sequence.dtw\_backtracking}, forcing the warp path to originate at the chosen end frame and trace backward to determine the exact start 
 frame. Using the best-matching template (rather than the $k$-th template) ensures the most accurate start-time boundary estimation.
 
 
@@ -216,6 +250,7 @@ window overlapping at least one labelled call, while a false positive (FP) is a 
 
 \begin{equation}
     \text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}
+    \label{eq:precision}
 \end{equation}
 
 Recall measures the proportion of labelled calls successfully detected by the system. In this context, a TP label is defined as a labelled call overlapped 
@@ -223,6 +258,7 @@ by at least one detection, whereas a false negative (FN) is a labelled call that
 
 \begin{equation}
     \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
+    \label{eq:recall}
 \end{equation}
 
 Note that TP definitions differ slightly between precision and recall. Because a single long labelled call may produce multiple detections (or vice versa), any overlap 
@@ -232,6 +268,7 @@ The f1-score represents the optimal mean of precision and recall:
 
 \begin{equation}
     \text{F1} = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+    \label{eq:f1}
 \end{equation}
 
 Hyperparameter selections and model comparisons were evaluated primarily using the maximum f1-score. Additionally, Average precision (AP) was calculated across 
