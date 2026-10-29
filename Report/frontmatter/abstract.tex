@@ -3,3 +3,21 @@
 \makeatletter\@mkboth{}{\scshape Abstract}\makeatother
 
 \selectlanguage{english}
+
+This project investigated the use of dynamic time warping (DTW) as a detection system for Bryde's whale calls in False Bay. Three 
+feature extraction methods were considered and compared: the short-time Fourier transform (STFT), mel-frequency cepstral coefficients 
+(MFCCs), with and 
+without first and second derivatives, and linear predictive coding coefficients (LPCCs). Each feature extraction method was tested using 
+both 5 templates per call type and 10 templates per call type. 
+
+During hyperparameter tuning, the per-call-type thresholds, feature frame length and vote fraction for each model were selected. 
+Selection decisions were made based on the highest f1-scores for each tested setting.
+After tuning, call detection was performed on a full 72-hour audio file. The performance of each model was analysed using precision, recall, 
+f1-score and average precision (AP).
+
+The STFT model outperformed the other two models with a maximum f1-score of 0.792 and a maximum AP of 0.860. 
+Precision was consistently lower than recall across all models, indicating that the models were more lenient during evaluation than intended in hyperparameter 
+tuning.
+
+Despite limitations caused by data scarcity and labelling inconsistencies, the DTW detection system was able to efficiently detect calls. This was 
+especially true for the STFT feature extraction method.

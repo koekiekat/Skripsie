@@ -4,22 +4,22 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Dataset counts by date and category}}{15}{table.caption.15}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Dataset counts by date and category}}{16}{table.caption.15}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Tabulation of thresholds as well as the respective F1-scores used to choose the best frame length. The average F1-score over all three thresholds per STFT experiment was also given for easier analysis.}}{28}{table.caption.21}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Vote frac results for STFT for 5 and 10 templates}}{29}{table.caption.22}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Final test results for STFT for 5 and 10 templates}}{29}{table.caption.23}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Calibration variables chosen via highest F1 for 5 templates and 10 templates}}{31}{table.caption.25}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Final vote results for 5 and 10 templates}}{31}{table.caption.26}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Final test results for 5 and 10 templates}}{32}{table.caption.27}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Calibration variables chosen via highest F1 for LPC for 5 templates and 10 templates}}{34}{table.caption.31}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Vote frac results for LPC for 5 and 10 templates}}{34}{table.caption.32}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Final test results for LPC for 5 and 10 templates}}{35}{table.caption.33}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces Overall highest results for F1 and AP per model}}{36}{table.caption.35}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Calibration results for the STFT model: F1-scores and thresholds per call type, average F1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}}{29}{table.caption.21}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Vote fraction selection results for the STFT model: precision, recall and F1-score at the chosen vote fraction for 5 and 10 templates per call type.}}{30}{table.caption.22}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Final evaluation results for the STFT model: precision, recall, F1-score and average precision (AP) for 5 and 10 templates per call type.}}{30}{table.caption.23}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Calibration results for the MFCC model: F1-scores and thresholds per call type, average F1-score and selected frame length (in seconds) for each feature set (no derivatives, first derivatives and first and second derivatives) with 5 and 10 templates per call type.}}{32}{table.caption.25}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Vote fraction selection results for the MFCC model: precision, recall and F1-score at the chosen vote fraction for each feature set with 5 and 10 templates per call type.}}{33}{table.caption.26}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Final evaluation results for the MFCC model: precision, recall, F1-score and average precision (AP) for each feature set with 5 and 10 templates per call type.}}{34}{table.caption.27}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Calibration results for the LPCC model: F1-scores and thresholds per call type, average F1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}}{36}{table.caption.31}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Vote fraction selection results for the LPCC model: precision, recall and F1-score at the chosen vote fraction for 5 and 10 templates per call type.}}{36}{table.caption.32}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Final evaluation results for the LPCC model: precision, recall, F1-score and average precision (AP) for 5 and 10 templates per call type.}}{37}{table.caption.33}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Summary of the highest F1-score and AP achieved by each feature extraction method, with the corresponding number of templates per call type.}}{38}{table.caption.35}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Project Schedule}}{45}{table.caption.39}%
+\contentsline {table}{\numberline {A.1}{\ignorespaces Project Schedule}}{48}{table.caption.39}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

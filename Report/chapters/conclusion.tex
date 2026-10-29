@@ -1,4 +1,62 @@
 \graphicspath{{conclusion/fig/}}
 
-\mychapter{Conclusion}{Conclusion}{}
-\label{chap:conclusion}
+\mychapter{Conclusion}{Conclusion}{}\label{chap:conclusion}
+
+\mysection{Summary}{Summary}\label{sec:sum}
+
+The use of dynamic time warping (DTW) as a Bryde's whale call detection system was investigated in this project. Three feature 
+extraction methods were tested: short-time Fourier transform (STFT), mel-frequency cepstral coefficients (MFCC) 
+and linear predictive coding coefficients (LPCC).
+
+\mysection{Objectives}{Objectives}\label{sec:obj}
+The first objective of this project was to implement a \acs{DTW}-based detection system using three feature extraction methods: 
+the short-time Fourier transform (STFT), mel-frequency cepstral coefficients (MFCCs) and linear predictive coding coefficients (LPCC). 
+This was designed and implemented as explained in Chapter~\ref{chap:sys-design}.
+
+The second objective was to tune the feature frame length, call type thresholds and vote fraction for each method based on \gls{f1_score}. 
+The results for this can be seen in Tables~\ref{tab:stft_calib_results},~\ref{tab:stft_vote_results},~\ref{tab:mfcc_calib_results},~\ref{tab:mfcc_vote_results},~\ref{tab:lpc_calib_results} 
+and~\ref{tab:lpc_vote_results}. 
+
+The third objective was to evaluate the detection performance of each configuration using \gls{precision}, \gls{recall}, \gls{f1_score} 
+and average precision (\acs{AP}). This can be seen in Tables~\ref{tab:stft_test_results},~\ref{tab:mfcc_test_results} and~\ref{tab:lpc_test_results}.
+
+\mysection{Limitations}{Limitations}\label{sec:lim}
+
+Limitations in this project included the scarcity of well-labelled data and the human error involved in the 
+labelling, due to a range of human labellers being used for different sections. This meant that it was necessary 
+to select call type and background calibration templates, which caused more human error within the template 
+selection stage. The necessity of calibration template selection led to an imbalance between calls and background 
+noise in hyperparameter tuning and evaluation. The labelling based on previous projects also led to many false positives (FPs) 
+actually being calls that were never labelled.
+
+\mysection{Conclusion}{Conclusion}\label{sec:con}
+
+The STFT model performed the best out of the three considered models. The maximum f1-score across all 
+STFT experiments was 0.792 and the maximum AP was 0.860. The LPCC model performed second best with best scores of 
+0.650 and 0.789 for f1-score and AP respectively. The MFCC model performed the worst with a highest f1-score and AP value of 
+0.647 and 0.684 respectively. 
+
+For the MFCC experiments the addition of derivatives did not improve the model. For all three models an 
+increase in template diversification (5 vs 10 templates per call type) had little effect on hyperparameter selection. 
+It was found that the single-tone thresholds chosen for all experiments were generally better than the other 
+thresholds, with a possible link to the simplicity of their frequency structure in comparison to the other 
+two call types. Multi-tone call thresholds always had the lowest f1-scores, probably due to human error caused 
+by different definitions decided by each labeller.
+
+Precision was consistently lower than recall, showing that all models were more lenient in the evaluation 
+stage than intended during the hyperparameter selection stage. Inspection of FP calls for the STFT model 
+found that many of the FP calls were actually unlabelled calls. This shows that the limitations may have caused 
+a skewed precision result in the evaluation analysis. The presence of FP calls closer to already labelled calls and in the second 
+half of the 72-hour file pointed to possible connections between SNR and call density and FP detections. 
+
+Overall the STFT model was the most suitable method by a sizeable margin in both f1-score and AP values for detection of 
+Bryde's whale calls in the False Bay region.
+
+\mysection{Future Work}{Future Work}\label{sec:fut_work}
+
+More consistent labelling and more in-depth labelling of all audio files in future would be beneficial. A model 
+could be tuned on full audio files instead of selected templates, and many of the limitations would be removed. 
+The consideration of different methods to remove background noise would also be beneficial.
+
+Once the limitations of the current detection model have been addressed, the next step would be to 
+extend the system to classify the call type of each detection in continuous audio files.
