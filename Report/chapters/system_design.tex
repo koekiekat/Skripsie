@@ -6,7 +6,7 @@ These were imported into the relevant Jupyter notebook used for each section.
 
 
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods}
-The raw audio recorded by the hydrophone was stored in WAV files with a sampling frequency of 8~kHz. Before extracting feature 
+The raw audio recorded by the hydrophone was stored in \acs{WAV} files with a sampling frequency of 8~kHz. Before extracting feature 
 vectors from the recordings, the audio was first downsampled to a 1~kHz sampling rate. This helped remove unnecessary frequency 
 information, as Meddins~\cite{nyq} explains that the Nyquist frequency ($\frac{f_s}{2}$) for a 1~kHz sampling rate is 500~Hz.
 
@@ -121,8 +121,8 @@ into call-calibration costs and background-calibration costs. Two hundred candid
 costs across both lists. f1-scores were evaluated across all candidate thresholds for each call type as described in Section~\ref{sec:evaluation-metrics}. The 
 threshold yielding the highest f1-score was selected for each respective call type.
 
-Both call type calibration templates and background calibration templates were used to determine the thresholds since true positive (TP), false positive (FP) 
-and true negative (TN) calls were all needed 
+Both call type calibration templates and background calibration templates were used to determine the thresholds since true positive (\acs{TP}), false positive (\acs{FP}) 
+and true negative (\acs{TN}) calls were all needed 
 in the calculation of precision and recall and thus in the calculation for the f1-score used to select the optimal thresholds. 
 This can be seen in Eq.\ref{eq:precision},~\ref{eq:recall} and~\ref{eq:f1}.
 
@@ -233,35 +233,35 @@ find the labelled calls overlapping the detected calls. This was achieved effici
 For each detected call, \texttt{numpy.searchsorted} identified the index \texttt{lo} in the labelled end-time array where the detected start time would 
 fit sequentially. Similarly, it identified the index \texttt{hi} in the labelled start-time array where the detected end time would fit. A condition of 
 $\texttt{hi} > \texttt{lo}$ indicates that at least one labelled call overlaps with the detected window. If this condition was met, the detection 
-was categorised as a true positive (TP), and the corresponding labelled call was marked as matched. Subsequent detections overlapping an already-matched 
-label were still treated as TPs, as the primary objective of this system is detection rather than specific matches of start and end times.
+was categorised as a true positive (\acs{TP}), and the corresponding labelled call was marked as matched. Subsequent detections overlapping an already-matched 
+label were still treated as \acsp{TP}, as the primary objective of this system is detection rather than specific matches of start and end times.
 
 
 \mysection{Evaluation Metrics}{Evaluation Metrics}\label{sec:evaluation-metrics}
 
-Although receiver operating characteristic (ROC) analysis, as explained by Fawcett~\cite{roc}, is widely used in detection tasks, precision-recall (PR) analysis was chosen due to severe class 
-imbalance between whale calls and background noise. Saito and Rehmsmeier~\cite{pr} show that ROC curves can present an overly optimistic assessment in heavily imbalanced scenarios, whereas PR curves 
+Although receiver operating characteristic (\acs{ROC}) analysis, as explained by Fawcett~\cite{roc}, is widely used in detection tasks, precision-recall (\acs{PR}) analysis was chosen due to severe class 
+imbalance between whale calls and background noise. Saito and Rehmsmeier~\cite{pr} show that \acs{ROC} curves can present an overly optimistic assessment in heavily imbalanced scenarios, whereas \acs{PR} curves 
 more accurately reflect performance under class skew. Consequently, precision, recall, and f1-score were selected as primary evaluation metrics. However, because 
 the calibration dataset exhibited a different class imbalance ratio than the evaluation dataset, the calibrated operating point was expected to sit slightly 
-off the theoretical optimum of the evaluation PR curve.
+off the theoretical optimum of the evaluation \acs{PR} curve.
 
-Precision measures the proportion of detected calls that correspond to true labelled calls. A true positive (TP) detection is defined as a detected call 
-window overlapping at least one labelled call, while a false positive (FP) is a detection with no label overlap:
+Precision measures the proportion of detected calls that correspond to true labelled calls. A true positive (\acs{TP}) detection is defined as a detected call 
+window overlapping at least one labelled call, while a false positive (\acs{FP}) is a detection with no label overlap:
 
 \begin{equation}
     \text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}
     \label{eq:precision}
 \end{equation}
 
-Recall measures the proportion of labelled calls successfully detected by the system. In this context, a TP label is defined as a labelled call overlapped 
-by at least one detection, whereas a false negative (FN) is a labelled call that receives no detection overlap:
+Recall measures the proportion of labelled calls successfully detected by the system. In this context, a \acs{TP} label is defined as a labelled call overlapped 
+by at least one detection, whereas a false negative (\acs{FN}) is a labelled call that receives no detection overlap:
 
 \begin{equation}
     \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
     \label{eq:recall}
 \end{equation}
 
-Note that TP definitions differ slightly between precision and recall. Because a single long labelled call may produce multiple detections (or vice versa), any overlap 
+Note that \acs{TP} definitions differ slightly between precision and recall. Because a single long labelled call may produce multiple detections (or vice versa), any overlap 
 between call detections and labelled calls is treated as a true positive, supporting the system's objective of general call detection.
 
 The f1-score represents the optimal mean of precision and recall:
@@ -271,8 +271,8 @@ The f1-score represents the optimal mean of precision and recall:
     \label{eq:f1}
 \end{equation}
 
-Hyperparameter selections and model comparisons were evaluated primarily using the maximum f1-score. Additionally, Average precision (AP) was calculated across 
-the continuous PR curve using all-point interpolation, as defined by Padilla et al.~\cite{ap}:
+Hyperparameter selections and model comparisons were evaluated primarily using the maximum f1-score. Additionally, Average precision (\acs{AP}) was calculated across 
+the continuous \acs{PR} curve using all-point interpolation, as defined by Padilla et al.~\cite{ap}:
 
 \begin{equation}
     \text{AP}_{\text{all}} = \sum_{n} (R_{n+1} - R_n) P_{\text{interp}}(R_{n+1})
@@ -284,13 +284,13 @@ where
     P_{\text{interp}}(R_{n+1}) = \max_{\tilde{R} \ge R_{n+1}} P(\tilde{R})
 \end{equation}
 
-To construct the continuous PR curve for AP calculations, the decision thresholds were swept across a range using a scaling factor $\alpha$. During initial 
+To construct the continuous \acs{PR} curve for \acs{AP} calculations, the decision thresholds were swept across a range using a scaling factor $\alpha$. During initial 
 processing, candidate end points were retained if their scaled cost was below 1.5. A strict cut-off at 1.0 was applied for single-point baseline matching, 
-while retaining detections up to 1.5 ensured sufficient candidate points to generate a full PR curve over 100 linearly spaced threshold steps between 0.01 
+while retaining detections up to 1.5 ensured sufficient candidate points to generate a full \acs{PR} curve over 100 linearly spaced threshold steps between 0.01 
 and 1.5.
 
 \mysection{Chapter Summary}{Chapter Summary}
 
 In this chapter the design of all sub-systems built and combined to form the Bryde's whale call detection system was explained (Feature extraction 
-and DTW implementations, Hyperparameter selection implementation and evaluation procedure). 
+and \acs{DTW} implementations, Hyperparameter selection implementation and evaluation procedure). 
 In the next chapter the results for all experiments conducted on the system will be discussed.

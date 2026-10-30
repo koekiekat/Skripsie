@@ -32,7 +32,7 @@ al.~\cite{dtw_few_temps} found that it requires less input data than other detec
 
 \mysection{Problem Statement}{Problem Statement}\label{sec:problemstatement}
 
-This project will investigate whether dynamic time warping (DTW) applied to two-dimensional time-frequency representations 
+This project will investigate whether dynamic time warping (\acs{DTW}) applied to two-dimensional time-frequency representations 
 can effectively detect Bryde's whale calls in False Bay, as measured by \gls{precision}, \gls{recall} and the \gls{f1_score}.
 Three feature extraction methods will be compared in terms of detection performance. These will be the \ac{STFT}, 
 \ac{MFCC} and \ac{LPCC}.
@@ -41,8 +41,8 @@ Three feature extraction methods will be compared in terms of detection performa
 
 \begin{enumerate}
     \item Implement a \acs{DTW}-based detection system using three feature extraction methods: 
-    the short-time Fourier transform (STFT), mel-frequency cepstral coefficients (MFCCs) and 
-    linear predictive coding coefficients (LPCC). 
+    the short-time Fourier transform (\acs{STFT}), mel-frequency cepstral coefficients (\acsp{MFCC}) and 
+    linear predictive coding coefficients (\acs{LPCC}). 
     \item Tune the feature frame length, call type 
     thresholds and vote fraction for each method based on \gls{f1_score}.
     \item Evaluate the detection performance of each configuration using \gls{precision}, \gls{recall}, \gls{f1_score} 

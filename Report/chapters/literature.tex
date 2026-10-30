@@ -35,13 +35,13 @@ Decisions made in the project pertaining to frequencies and durations falling wi
 the detection limits were made based on the above information.
 
 \mysection{Dynamic Time Warping}{Dynamic Time Warping}\label{sec:dynamic-time-warping}
-Dynamic time warping (DTW) is an algorithm for detecting the similarity of two signals, $X = [x_1, x_2, \dots, x_n]$ and 
+Dynamic time warping (\acs{DTW}) is an algorithm for detecting the similarity of two signals, $X = [x_1, x_2, \dots, x_n]$ and 
 $Y = [y_1, y_2, \dots, y_m]$. This measure of similarity is achieved by calculating an optimal 
 alignment cost between the two signals of length $N \in\mathbb{N}$  and $M \in\mathbb{N}$ respectively. In terms 
-of feature vectors such as the short-time Fourier transform (STFT), mel-frequency cepstral coefficients (MFCC) or linear predictive coding coefficients (LPCC) 
+of feature vectors such as the short-time Fourier transform (\acs{STFT}), mel-frequency cepstral coefficients (\acs{MFCC}) or linear predictive coding coefficients (\acs{LPCC}) 
 this means that each frame making up one 
 signal is compared to each frame making up another signal. Using an alignment cost the 
-best alignment for each frame in one signal to the other signal is chosen and an overall DTW 
+best alignment for each frame in one signal to the other signal is chosen and an overall \acs{DTW} 
 cost is calculated to show how similar the overall signals are. Figure~\ref{fig:vector_dtw} shows, as 
 explained by M\"uller and Zalkow~\cite{dtw_basic} and Kamper~\cite{dtw_kamper}, that such 
 an optimal alignment path may mean that a single frame in signal X may produce the 
@@ -89,7 +89,7 @@ In basic terms, as described by Schwaber-Cohen~\cite{vector_sim}, it is the angl
     \label{eq:cosine} 
 \end{equation}
 
-Since DTW minimises the cost between frames, the cosine similarity cannot be used directly as the distance, 
+Since \acs{DTW} minimises the cost between frames, the cosine similarity cannot be used directly as the distance, 
 because a higher similarity must give a lower cost. Instead the cosine distance is used, which is defined in 
 the SciPy documentation~\cite{scipy_dist} as:
 
@@ -120,7 +120,7 @@ explained by Kamper~\cite{dtw_kamper}, the same logic is used when X and Y are v
     and Y=[0, 0, 0.5, 2, 1, 0]}\label{fig:cost_matrix}
 \end{figure}
 
-The general case of DTW finds global alignment between the two signals. This 
+The general case of \acs{DTW} finds global alignment between the two signals. This 
 alignment is found using the warping path as described by Alizadeh~\cite{dtw_boundaries}. The warping path is the path of the best 
 alignment between signals X and Y within the cost matrix, as shown in Figure~\ref{fig:cost_matrix}. 
 This path, W, is a sequence of matrix coordinates, (i, j), with a total length k.
@@ -152,7 +152,7 @@ time.
     \caption{Example of a subsequence DTW alignment between two signals $X = [x_1, x_2, x_3, x_4]$ and $Y = [y_1, y_2, y_3, y_4, y_5, y_6, y_7, y_8, y_9, y_{10}]$}\label{fig:sub_dtw}
 \end{figure}
 
-Subsequence DTW is a version of the DTW algorithm that alters the boundary 
+Subsequence \acs{DTW} is a version of the \acs{DTW} algorithm that alters the boundary 
 condition such that global alignment is no longer necessary. Instead the entirety of signal 
 X is now matched with a subsequence of signal Y. The new boundary condition allows the 
 warping path to start and end at any point within the first and final row of the matrix 
@@ -164,22 +164,22 @@ respectively.
 
 In global alignment the final cell in the cost matrix, $C_{N+1, M+1}$, is considered the 
 overall optimal cost for those two signals. As described by M\"uller and Zalkow~\cite{dtw_subsequence}, 
-with subsequence DTW the entire final row of 
+with subsequence \acs{DTW} the entire final row of 
 the matrix is checked to find the lowest cost. The position of that cost shows where the 
-end point of the alignment detected via subsequence DTW is.
+end point of the alignment detected via subsequence \acs{DTW} is.
 
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods-background}
 
 
 \mysubsection{short-time Fourier Transform}{short-time Fourier Transform}\label{sec:short-time-fourier-transform}
-According to Usman et al.~\cite{Det_Tech} and Kamper~\cite{stft_kamper}, the short-time Fourier transform (STFT) is used to analyse the change in frequency of a signal over time. The STFT of 
+According to Usman et al.~\cite{Det_Tech} and Kamper~\cite{stft_kamper}, the short-time Fourier transform (\acs{STFT}) is used to analyse the change in frequency of a signal over time. The \acs{STFT} of 
 a segment of audio is calculated by multiplying the signal in the time domain, $x(t)$ with 
-a window $w(t-\tau)$ which is swept across said signal. The Fourier transform (FT) of each 
+a window $w(t-\tau)$ which is swept across said signal. The Fourier transform (\acs{FT}) of each 
 window is calculated and used to determine the frequency information for that window. 
-Thus, the STFT provides the change in frequency for a segment of audio throughout 
+Thus, the \acs{STFT} provides the change in frequency for a segment of audio throughout 
 time.
 
-The mathematical formulation of STFT is:
+The mathematical formulation of \acs{STFT} is:
 
   \begin{equation}
     X(\tau, \omega) = \int_{-\infty}^{\infty} x(t)\, w(t - \tau)\, e^{-j\omega t}\, dt,
@@ -188,34 +188,34 @@ The mathematical formulation of STFT is:
 where $\tau$ is the position of the window as it shifts through time at step-size $H$ and $\omega$ is 
 the frequency being analysed.
 
-The frequency resolution of the STFT is given as:
+The frequency resolution of the \acs{STFT} is given as:
 \begin{equation}
     resolution = \frac{f_s}{L}
     \label{eq:freq_resolution} 
 \end{equation}
 
-where $f_s$ is the sampling frequency of the signal and L is the length of the window over which the FT is taken. 
+where $f_s$ is the sampling frequency of the signal and L is the length of the window over which the \acs{FT} is taken. 
 
-This means that the STFT has a trade-off between time and frequency resolution. 
+This means that the \acs{STFT} has a trade-off between time and frequency resolution. 
 
 If L is kept short, time resolution is high since smaller segments of time are being used 
-for one FT analysis. However, frequency resolution is then decreased since too little time 
-passes for the FT to distinguish between frequencies spaced closer together.
+for one \acs{FT} analysis. However, frequency resolution is then decreased since too little time 
+passes for the \acs{FT} to distinguish between frequencies spaced closer together.
 
 If L is kept long, time resolution drops. This means that fast changes in frequency will 
 be missed. However, frequency resolution increases and it becomes easier to distinguish 
 between different frequency bands.
 
-Window overlap is another consideration when using STFT. Increased overlap creates 
+Window overlap is another consideration when using \acs{STFT}. Increased overlap creates 
 a smoother representation of the changes in frequency occurring over time since information 
 at the edges of the window is no longer lost.
 
 
 \mysubsection{Mel-Frequency Cepstral Coefficients}{Mel-Frequency Cepstral Coefficients}\label{sec:mel-frequency-cepstral-coefficients}
-Mel-frequency cepstral coefficients (MFCC) is a common choice for feature extraction when working on acoustic data. This is 
+Mel-frequency cepstral coefficients (\acs{MFCC}) is a common choice for feature extraction when working on acoustic data. This is 
 because, as explained by Kamper~\cite{mel_kamper}, it is set up to perceive frequencies as they are perceived by the human ear. That 
 means the lower frequencies are given a higher resolution than the high frequencies.
-Features are initially extracted using the fast Fourier transform (FFT). After this they are passed through a 
+Features are initially extracted using the fast Fourier transform (\acs{FFT}). After this they are passed through a 
 mel-scale filter bank. The formula for the mel-frequency calculation given by Usman et al.~\cite{Det_Tech} is:
 
 \begin{equation}
@@ -238,11 +238,11 @@ of frequencies being analysed.
 \end{figure}
 
 The log of these coefficients is then taken and finally the discrete cosine transform 
-(DCT) is used to decorrelate the filter bank coefficients. That means any patterns linking different coefficients to each 
+(\acs{DCT}) is used to decorrelate the filter bank coefficients. That means any patterns linking different coefficients to each 
 other are removed such that the coefficients become independent. 
 The final number of cepstral 
-coefficients returned by the DCT is typically 12 or 13 since the most important information 
-is kept there. The formula used by Usman et al.~\cite{Det_Tech} to perform the DCT is:
+coefficients returned by the \acs{DCT} is typically 12 or 13 since the most important information 
+is kept there. The formula used by Usman et al.~\cite{Det_Tech} to perform the \acs{DCT} is:
 
 \begin{equation}
     MFCC_i = \sum_{k=1}^{K} X_k \cos\left(\frac{i(k - 0.5)\pi}{K}\right), \quad i = 1, 2, \dots, K
@@ -254,7 +254,7 @@ applied to the mel coefficients.
 
 As explained by DataMListic~\cite{deltas}\cite{mel_delta}, the first and second derivatives, often referred to as deltas, of the cepstral coefficients 
 are often used in feature extraction. They show the change of each cepstral coefficient across frames. This can be vital information when analysing how frequency changes across 
-time since the MFCC process tends to lose this information. The formula for the derivatives, 
+time since the \acs{MFCC} process tends to lose this information. The formula for the derivatives, 
 as given by Majeed et al.~\cite{melderv_calcs}, 
 is:
 
@@ -266,8 +266,8 @@ with t as the specific point in time, d as the order of derivative, M as the num
 and m as the frame offset.
 
 \mysubsection{Linear Predictive Coding Coefficients}{Linear Predictive Coding Coefficients}\label{sec:linear-predictive-coding}
-As explained by Rabiner and Juang~\cite{lpc} and Usman et al.~\cite{Det_Tech}, linear predictive coding (LPC) is a straightforward mathematical method commonly 
-used for feature extraction. LPC focuses on the method of approximating a sample of a 
+As explained by Rabiner and Juang~\cite{lpc} and Usman et al.~\cite{Det_Tech}, linear predictive coding (\acs{LPC}) is a straightforward mathematical method commonly 
+used for feature extraction. \acs{LPC} focuses on the method of approximating a sample of a 
 speech signal using a combination of $p$ samples from the past. This means that for each 
 sample for which there are $p$ available samples before it an approximation is made in the 
 form of the equation:
@@ -296,14 +296,14 @@ The equation for this is:
 
 where $m$ is the sample for which the error $e_n(m)$ was calculated.
 
-The feature extracted via this method is made up of the $p$ LPC coefficients which were calculated 
+The feature extracted via this method is made up of the $p$ \acs{LPC} coefficients which were calculated 
 to minimise the mean square error. These coefficients tend to be unstable, therefore cepstral 
-coefficients can be calculated from these raw LPC coefficients giving linear predictive coding coefficients (LPCC). 
-LPCC gives 
-the coefficients of the Fourier transform (FT) representation of the magnitude spectrum and is more reliable 
-than the LPC representation. 
+coefficients can be calculated from these raw \acs{LPC} coefficients giving linear predictive coding coefficients (\acs{LPCC}). 
+\acs{LPCC} gives 
+the coefficients of the Fourier transform (\acs{FT}) representation of the magnitude spectrum and is more reliable 
+than the \acs{LPC} representation. 
 
-LPCC can be calculated from the LPC results through recursion. The formula for that 
+\acs{LPCC} can be calculated from the \acs{LPC} results through recursion. The formula for that 
 is:
 
 \begin{equation}
@@ -315,9 +315,9 @@ c_m &= \sum_{k=1}^{m-1} \left(\frac{k}{m}\right) c_k a_{m-k}, \qquad m > p,
 \end{aligned}
 \end{equation}
 
-where $\sigma^2$ is the LPC gain term.
+where $\sigma^2$ is the \acs{LPC} gain term.
 
-The final feature vector extracted using LPCC contains $p$ coefficients for a single frame, with the zeroth coefficient, $c_0$, containing the magnitude information.
+The final feature vector extracted using \acs{LPCC} contains $p$ coefficients for a single frame, with the zeroth coefficient, $c_0$, containing the magnitude information.
 
 \mysection{Similar Studies}{Similar Studies}\label{sec:similar_studies}
 
@@ -326,97 +326,97 @@ Brown and Miller evaluated four different variations of the \ac{DTW} algorithm t
 vocalisations using fundamental frequency contours (see~\cite{killer-whale}). 
 
 Due to the biphonic nature of these calls the low-frequency component and high-frequency component for each call was extracted for separate analysis. Four different 
-variations of the DTW algorithm with various different constraints were used to evaluate 
+variations of the \acs{DTW} algorithm with various different constraints were used to evaluate 
 against each other. 
 
 The final result of the paper was that the method referred to as ``Sakoe-Chiba'' on 
-the LPC performed the best with a 90\% agreement with the labels selected by human 
+the \acs{LPC} performed the best with a 90\% agreement with the labels selected by human 
 classifiers. 
 
-This study did show that the use of DTW in bioacoustic analysis is 
-a good option. However, it did not consider the ability of DTW to detect calls 
+This study did show that the use of \acs{DTW} in bioacoustic analysis is 
+a good option. However, it did not consider the ability of \acs{DTW} to detect calls 
 in a continuous segment of bioacoustic data as all calls which were classified had already 
 been selected and segmented to the pitch contours of the vocalisation. This study also did 
-not consider the impact of low frequency analysis using DTW as killer whale vocalisations 
+not consider the impact of low frequency analysis using \acs{DTW} as killer whale vocalisations 
 do not tend to fall below 500 Hz.
 
 \mysubsection{Analysis of Template-Based Detection Algorithms for Bryde's Whales}{Analysis of Template-Based Detection Algorithms for Bryde's Whales}\label{sec:bryde-dtw-lpc}
 
 Ogundile and Versfeld analysed two template-based detection algorithms to detect short pulse 
-calls for Bryde's whales in False Bay, South Africa (see~\cite{temp-based-bryde}). The two methods tested were dynamic time warping (DTW) 
-and linear predictive coding (LPC). In their analysis they used two separate sample sets with different signal-to-noise ratio (SNR) values 
+calls for Bryde's whales in False Bay, South Africa (see~\cite{temp-based-bryde}). The two methods tested were dynamic time warping (\acs{DTW}) 
+and linear predictive coding (\acs{LPC}). In their analysis they used two separate sample sets with different signal-to-noise ratio (\acs{SNR}) values 
 to also evaluate the performance of these techniques in the presence of noise. The input 
 features for these models were the time-domain representation of the signals. 
 
-The final results of the article found that both LPC and DTW performed well in high 
-and low SNR segments. LPC performed the overall best in low noise segments.
+The final results of the article found that both \acs{LPC} and \acs{DTW} performed well in high 
+and low \acs{SNR} segments. \acs{LPC} performed the overall best in low noise segments.
 
 This article provides insight into the use of template-based detection systems for 
-Bryde's whales. This is relevant since DTW which is handled in this article is the chosen 
-detection mechanism for this project. While LPC is also used in the article, its use is 
-vastly different to the use within this project. LPC is used as a detection algorithm 
-and tested on its ability to act as such. In this project LPC is not used as a detection 
-algorithm, but instead linear predictive coding coefficients (LPCC) is used as a feature extraction method. 
+Bryde's whales. This is relevant since \acs{DTW} which is handled in this article is the chosen 
+detection mechanism for this project. While \acs{LPC} is also used in the article, its use is 
+vastly different to the use within this project. \acs{LPC} is used as a detection algorithm 
+and tested on its ability to act as such. In this project \acs{LPC} is not used as a detection 
+algorithm, but instead linear predictive coding coefficients (\acs{LPCC}) is used as a feature extraction method. 
 The detection method focuses on 
-the error component of the LPC equation while the feature extraction method focuses 
+the error component of the \acs{LPC} equation while the feature extraction method focuses 
 on the coefficients calculated for the approximation of the real signal.
 
 \mysubsection{Detection of real-time fin and blue whale calls}{Detection of real-time fin and blue whale calls}\label{sec:real-time}
 
 Mouy et al.~\cite{dtw-vq} tested detection models on 
 real-time data for fin and blue whales. The 
-detection methods used were dynamic time warping (DTW) and vector quantisation (VQ).
+detection methods used were dynamic time warping (\acs{DTW}) and vector quantisation (\acs{VQ}).
 
 Instantaneous frequency, speed and acceleration were extracted as features. It was 
 found that due to low frequency components from background elements such as ships the 
-detection of false positives (FP) increased.
+detection of false positives (\acs{FP}) increased.
 
 In terms of this project the article shows how low frequency detections can be affected 
 by low frequency background noise. This article also considered real-time audio detection 
 which is much closer in similarity to detection within a large audio file such as what was 
 done in this project. This article did not use the same feature vectors as the project and 
-did not consider their effect on DTW performance.
+did not consider their effect on \acs{DTW} performance.
 
 \mysubsection{Hidden Markov Model for Bryde's Whale short pulse calls}{Hidden Markov Model for Bryde's Whale short pulse calls}\label{sec:hmm-bryde}
 
-Ogundile et al.~\cite{hmm} compared a time domain feature extraction technique used for hidden Markov models (HMM) against 
-mel-frequency cepstral coefficients (MFCC) and linear predictive coding (LPC), frequency domain techniques. The model is used for detection of Bryde's 
+Ogundile et al.~\cite{hmm} compared a time domain feature extraction technique used for hidden Markov models (\acs{HMM}) against 
+mel-frequency cepstral coefficients (\acs{MFCC}) and linear predictive coding (\acs{LPC}), frequency domain techniques. The model is used for detection of Bryde's 
 whale calls in False Bay, South Africa.
 
-These three HMM models are used on 2 hours of continuous recordings to detect these 
+These three \acs{HMM} models are used on 2 hours of continuous recordings to detect these 
 calls. This is similar to the continuous recording detection done in this project.
 
-The time domain feature HMM model performed the best with MFCC performing second best and 
-LPC performing the worst. It was found that the MFCC and LPC models were sensitive 
+The time domain feature \acs{HMM} model performed the best with \acs{MFCC} performing second best and 
+\acs{LPC} performing the worst. It was found that the \acs{MFCC} and \acs{LPC} models were sensitive 
 to background noise.
 
 While this does test detection on a continuous segment of audio, this article focuses on 
-HMM detection and not DTW. Similar to this project it compares the MFCC feature extraction method with the LPC method. 
-However, considering the fact that the LPC features were not converted to 
-linear predictive coding coefficients (LPCC) this does not fully align with this project.
+\acs{HMM} detection and not \acs{DTW}. Similar to this project it compares the \acs{MFCC} feature extraction method with the \acs{LPC} method. 
+However, considering the fact that the \acs{LPC} features were not converted to 
+linear predictive coding coefficients (\acs{LPCC}) this does not fully align with this project.
 
 \mysubsection{Speech Recognition using DTW}{Speech Recognition using DTW}\label{sec:speech-dtw}
 
-Permanasari et al.~\cite{speech} analysed the effectiveness of dynamic time warping (DTW) in 
+Permanasari et al.~\cite{speech} analysed the effectiveness of dynamic time warping (\acs{DTW}) in 
 matching speech patterns. Variabilities were included in the study via pronunciation 
 timing, volume and speaker identity. 
 
 Features were extracted from the recorded audio. Some audio was used as templates 
-and others as test data. DTW was then used to test which of the variations impacted 
-DTW distances the most. The main tests were keeping the pronunciation time 
+and others as test data. \acs{DTW} was then used to test which of the variations impacted 
+\acs{DTW} distances the most. The main tests were keeping the pronunciation time 
 the same with the same volume, different pronunciation time with the same volume and 
 same pronunciation time with different volume. 
 
-It was determined that DTW was an effective pattern recognition algorithm and that 
-pronunciation timing had a larger impact on DTW alignment than volume.
+It was determined that \acs{DTW} was an effective pattern recognition algorithm and that 
+pronunciation timing had a larger impact on \acs{DTW} alignment than volume.
 
-This study also uses DTW to recognise patterns in audio, however this focuses on 
+This study also uses \acs{DTW} to recognise patterns in audio, however this focuses on 
 speech recognition and the effects of variability on that recognition. It does not 
 focus on different feature vectors or detection of low frequency whale calls in a continuous 
 recording.
 
 \mysection{Chapter Summary}{Chapter Summary}
 
-In this chapter, Bryde's whale traits were discussed, the mathematics and theoretical explanations for DTW, STFT, MFCC and LPCC were given 
+In this chapter, Bryde's whale traits were discussed, the mathematics and theoretical explanations for \acs{DTW}, \acs{STFT}, \acs{MFCC} and \acs{LPCC} were given 
 and various literature pieces were discussed with similar methodologies or goals. In the next chapter details of the dataset used for the 
 project will be explained.

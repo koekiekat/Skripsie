@@ -1,11 +1,11 @@
 \mychapter{Results}{Results}{}\label{chap:results}
 
-After conducting experiments for the three different models (STFT, MFCC and LPCC), analysis 
-must be done to determine which of the feature extraction methods worked best for dynamic time warping (DTW). 
-This analysis will be done by comparing f1-scores and average precision (AP).
+After conducting experiments for the three different models (\acs{STFT}, \acs{MFCC} and \acs{LPCC}), analysis 
+must be done to determine which of the feature extraction methods worked best for dynamic time warping (\acs{DTW}). 
+This analysis will be done by comparing f1-scores and average precision (\acs{AP}).
 
-\mysection{Experiment 1: STFT Features}{Experiment 1: STFT Features}\label{sec:exp-1-stft}
-For the short-time Fourier transform (STFT) model used for call detection, two experiments were conducted. The first 
+\mysection{Experiment 1: \acs{STFT} Features}{Experiment 1: STFT Features}\label{sec:exp-1-stft}
+For the short-time Fourier transform (\acs{STFT}) model used for call detection, two experiments were conducted. The first 
 considered the results given the use of 5 templates per call type as the analysis database for both hyperparameter selection and evaluation. 
 The second considered the use of 10 templates per call type, the original 5 with 5 new templates added to increase the database diversity.
 
@@ -60,7 +60,7 @@ both single-tones and burst-tonals because of human error incorporated by differ
     \end{tabular}\label{tab:stft_vote_results}
 \end{table}
 
-The precision, recall and f1-scores for the two STFT experiments during vote fraction selection can be seen in Table~\ref{tab:stft_vote_results}.
+The precision, recall and f1-scores for the two \acs{STFT} experiments during vote fraction selection can be seen in Table~\ref{tab:stft_vote_results}.
 The vote fraction for the 5-template experiment was 0.6 and for the 10-template 
 experiment it was 0.4. This means that 3 of 5 templates and 4 of 10 templates had to be selected for each experiment.
 
@@ -98,7 +98,7 @@ An increase in template diversity appeared to negatively affect the leniency of 
 By looking at Figures~\ref{fig:stft_5_pr} and~\ref{fig:stft_10_pr}, it can be seen that both experiments 
 performed well in terms of the selection of the hyperparameters, as both marked precision and recall points are 
 in the optimal position of their respective curve. Therefore, despite the leniency of the model, both 
-STFT experiments performed well in terms of hyperparameter selection.
+\acs{STFT} experiments performed well in terms of hyperparameter selection.
  
 
 \begin{figure}[H]
@@ -112,15 +112,15 @@ STFT experiments performed well in terms of hyperparameter selection.
 \end{figure}
 
 By again looking at Table~\ref{tab:stft_test_results} and Figures~\ref{fig:stft_5_pr} and~\ref{fig:stft_10_pr}, 
-it can be seen that in terms of average precision (AP), and therefore the overall precision-recall (PR) curve of the model, the 10-template 
-experiment outperformed the 5-template experiment with the highest AP equal to 0.860 compared to 0.829. Considering both AP 
+it can be seen that in terms of average precision (\acs{AP}), and therefore the overall precision-recall (\acs{PR}) curve of the model, the 10-template 
+experiment outperformed the 5-template experiment with the highest \acs{AP} equal to 0.860 compared to 0.829. Considering both \acs{AP} 
 values are above 0.8, both experiments performed relatively well for the call detection system.
 
 \mysection{Experiment 2: MFCC Features}{Experiment 2: MFCC Features}\label{sec:exp-2-mfcc}
-For the mel-frequency cepstral coefficient (MFCC) model, three main experiments were considered. The first experiment used the MFCC output 
+For the mel-frequency cepstral coefficient (\acs{MFCC}) model, three main experiments were considered. The first experiment used the \acs{MFCC} output 
 with no added derivatives for the feature. The second experiment used the original 13 feature coefficients from experiment 1 and added 13 more 
 coefficients in the form of the derivatives of the original 13. The third and final experiment considered the 26 coefficients used in the second 
-experiment and added another 13 in the form of the second derivatives of the original 13 MFCC output coefficients.
+experiment and added another 13 in the form of the second derivatives of the original 13 \acs{MFCC} output coefficients.
 
 For each experiment, two sub-experiments were performed. The first was performed using 5 templates and the second using 10 templates.
 
@@ -159,21 +159,21 @@ For each experiment, two sub-experiments were performed. The first was performed
     }\label{tab:mfcc_calib_results}
 \end{table}
 
-As seen in Table~\ref{tab:mfcc_calib_results}, all three experiments for the MFCC model chose the same frame length for 
+As seen in Table~\ref{tab:mfcc_calib_results}, all three experiments for the \acs{MFCC} model chose the same frame length for 
 the 5- and 10-template sub-experiments. These values were 0.384 and 0.256 seconds for the 5- and 10-template 
 sub-experiments respectively. This suggests a possible link between the number of templates per call type and the chosen frame length, 
 as the frame length changed with the number of templates but not with the number of coefficients used.
 
 For all three experiments the 5-template sub-experiment achieved a higher 
 average f1-score over all three thresholds. In terms of average f1-score over 
-all three thresholds, the MFCC experiment without derivatives performed the best. 
+all three thresholds, the \acs{MFCC} experiment without derivatives performed the best. 
 The highest average f1-score was for the 5-template sub-experiment with a score of 0.631. The 
 second highest average f1-score was for the experiment where the first derivatives were added, with a score of 0.614. 
 
 The lowest f1-score was for the 10-template 
 sub-experiment for the experiment where the first derivatives were added, with a score of 0.535.
 
-In terms of the 10-template sub-experiments, the experiment using only the first 13 MFCC output coefficients 
+In terms of the 10-template sub-experiments, the experiment using only the first 13 \acs{MFCC} output coefficients 
 performed the best in terms of average f1-score with a score of 0.553. The second best f1-score across the three 
 10-template sub-experiments was for the third experiment using all 39 coefficients. This score was 0.548.
 
@@ -212,18 +212,18 @@ the single-tone call type and the other two call types was rather large, further
 
 In terms of the f1-score for the choice of vote fraction, as seen in Table~\ref{tab:mfcc_vote_results}, 
 the highest score of 0.951 was shared by the 
-10-template sub-experiment for the MFCC experiment without derivatives and the 5-template sub-experiment for the MFCC experiment with the first derivatives added. 
+10-template sub-experiment for the \acs{MFCC} experiment without derivatives and the 5-template sub-experiment for the \acs{MFCC} experiment with the first derivatives added. 
 
-The second highest f1-score of 0.947 was shared by the 5-template sub-experiment for the MFCC experiment 
-without derivatives and the 10-template sub-experiment of the MFCC experiment with two derivatives.
+The second highest f1-score of 0.947 was shared by the 5-template sub-experiment for the \acs{MFCC} experiment 
+without derivatives and the 10-template sub-experiment of the \acs{MFCC} experiment with two derivatives.
 
-Considering that the MFCC experiment with no derivatives held both the first and second highest f1-scores, 
+Considering that the \acs{MFCC} experiment with no derivatives held both the first and second highest f1-scores, 
 this model was seen to have performed best in terms of overall call detection at the chosen hyperparameter settings for the calibration data. 
 This performance can only be considered in terms of the hyperparameter choices and not in terms of the overall 
 performance of the model, due to the use of the same calibration templates for all hyperparameter selection choices.
 
-The vote fractions chosen for the MFCC experiments with the first and second derivatives stayed constant in terms of number of templates. The 5-template 
-sub-experiments chose a vote fraction of 0.4 (2 out of 5 detections) and the 10-template sub-experiments chose 0.6 (6 out of 10 detections). The MFCC experiment without derivatives had different vote fractions, 
+The vote fractions chosen for the \acs{MFCC} experiments with the first and second derivatives stayed constant in terms of number of templates. The 5-template 
+sub-experiments chose a vote fraction of 0.4 (2 out of 5 detections) and the 10-template sub-experiments chose 0.6 (6 out of 10 detections). The \acs{MFCC} experiment without derivatives had different vote fractions, 
 with the 5-template sub-experiment choosing 0.6 (3 out of 5 detections) and the 10-template sub-experiment choosing 0.5 (5 out of 10 detections).
 
 \begin{table}[H]
@@ -251,22 +251,22 @@ with the 5-template sub-experiment choosing 0.6 (3 out of 5 detections) and the 
     \end{tabular}\label{tab:mfcc_test_results}
 \end{table}
 
-For the MFCC experiment with no derivatives, the 5-template sub-experiment performed the best 
+For the \acs{MFCC} experiment with no derivatives, the 5-template sub-experiment performed the best 
 for precision. The 10-template sub-experiment performed best in terms of 
 recall and f1-score. The highest values for precision, recall and f1-score respectively 
 were 0.582, 0.817 and 0.647.
 
-For the MFCC experiment with the first derivatives added, the 5-template sub-experiment performed best in precision 
+For the \acs{MFCC} experiment with the first derivatives added, the 5-template sub-experiment performed best in precision 
 and f1-score, while the 10-template sub-experiment performed best for recall. 
 The highest values for precision, recall and f1-score respectively 
 were 0.495, 0.809 and 0.611.
 
-For the MFCC experiment with the second derivatives added, the 5-template sub-experiment performed best for recall. The 
+For the \acs{MFCC} experiment with the second derivatives added, the 5-template sub-experiment performed best for recall. The 
 10-template sub-experiment performed best for precision and f1-score. 
 The highest values for precision, recall and f1-score respectively 
 were 0.505, 0.880 and 0.610.
 
-Overall, in terms of f1-score, the 10-template sub-experiment for the MFCC experiment with no derivatives 
+Overall, in terms of f1-score, the 10-template sub-experiment for the \acs{MFCC} experiment with no derivatives 
 performed the best. By looking at the values in Table~\ref{tab:mfcc_test_results}, it can be seen 
 that the highest overall hyperparameter selection performance is characterised by balancing 
 precision and recall and not by getting the highest value in either category.
@@ -274,11 +274,11 @@ precision and recall and not by getting the highest value in either category.
 The precision for all experiments was consistently much lower than recall. This shows that the model was more lenient than what it was 
 tuned for.
 
-In terms of average precision (AP) and the precision-recall (PR) curve, the MFCC experiment with no derivatives outperformed all other MFCC 
-experiments with a maximum AP of 0.684 for the 10-template sub-experiment. This can be seen by looking at 
+In terms of average precision (\acs{AP}) and the precision-recall (\acs{PR}) curve, the \acs{MFCC} experiment with no derivatives outperformed all other \acs{MFCC} 
+experiments with a maximum \acs{AP} of 0.684 for the 10-template sub-experiment. This can be seen by looking at 
 both Table~\ref{tab:mfcc_test_results} and Figures~\ref{fig:mfcc_pr},~\ref{fig:mfcc_d1_pr} 
-and~\ref{fig:mfcc_d2_pr}. Considering the AP was below 0.7, this was not considered a good performance. In terms of the hyperparameters selected for the model, 
-all experiments did relatively well, as the PR points were in the best position given the model capabilities.
+and~\ref{fig:mfcc_d2_pr}. Considering the \acs{AP} was below 0.7, this was not considered a good performance. In terms of the hyperparameters selected for the model, 
+all experiments did relatively well, as the \acs{PR} points were in the best position given the model capabilities.
 
 \begin{figure}[H]
     \centering
@@ -313,7 +313,7 @@ all experiments did relatively well, as the PR points were in the best position 
 
 \mysection{Experiment 3: LPCC Features}{Experiment 3: LPCC Features}\label{sec:exp-3-lpc}
 
-For the linear predictive coding coefficients (LPCC) model, two experiments were conducted. The first considered the use of 5 templates 
+For the linear predictive coding coefficients (\acs{LPCC}) model, two experiments were conducted. The first considered the use of 5 templates 
 and the second considered the use of 10 templates for the per-call type database for hyperparameter selection and evaluation.
 
 \begin{table}[H]
@@ -341,7 +341,7 @@ and the second considered the use of 10 templates for the per-call type database
     }
 \end{table}
 
-Both the 5- and 10-template experiments for the LPCC model chose 0.256 seconds as the 
+Both the 5- and 10-template experiments for the \acs{LPCC} model chose 0.256 seconds as the 
 frame length. This can be seen in Table~\ref{tab:lpc_calib_results}. This shows that template diversification did not have a large effect 
 on the selected frame length.
 
@@ -367,7 +367,7 @@ due to the simplicity of the single-tone structure.
     \end{tabular}\label{tab:lpc_vote_results}
 \end{table}
 
-While the 5- and 10-template experiments for LPCC each chose a different vote fraction, 
+While the 5- and 10-template experiments for \acs{LPCC} each chose a different vote fraction, 
 in terms of precision, recall and f1-score they performed equally well. The chosen vote fraction for each was 0.4 and 0.5 for the 5- and 
 10-template experiments respectively. This means 2 of 5 templates and 5 of 10 templates had to agree for a detection to occur. 
 
@@ -398,7 +398,7 @@ were 0.523, 0.900 and 0.650 respectively.
 
 This means that the 10-template experiment performed better in terms of chosen thresholds. This 
 can also be seen in Figures~\ref{fig:lpc_5_pr} and~\ref{fig:lpc_10_pr}, where the marked precision 
-and recall point is better matched to the precision-recall (PR) curve for the 10-template experiment.
+and recall point is better matched to the precision-recall (\acs{PR}) curve for the 10-template experiment.
 
 The precision for both experiments is much lower than the recall. This shows the model is lenient in call detection.
 
@@ -413,12 +413,12 @@ The precision for both experiments is much lower than the recall. This shows the
 \end{figure}
 
 By considering Table~\ref{tab:lpc_test_results} and Figures~\ref{fig:lpc_5_pr} and~\ref{fig:lpc_10_pr}, 
-it can be seen that in terms of average precision (AP) and PR curve shape, the 5-template 
-experiment performed better with an AP value of 0.789. 
+it can be seen that in terms of average precision (\acs{AP}) and \acs{PR} curve shape, the 5-template 
+experiment performed better with an \acs{AP} value of 0.789. 
 
-Even though the 10-template experiment gave a better PR point due to chosen thresholds, the 5-template experiment for 
-the LPCC model performed best overall in terms of Bryde's whale call detections due to the PR curve shape and AP value. 
-However, considering both AP values were above 0.7, the model is seen to perform relatively well.
+Even though the 10-template experiment gave a better \acs{PR} point due to chosen thresholds, the 5-template experiment for 
+the \acs{LPCC} model performed best overall in terms of Bryde's whale call detections due to the \acs{PR} curve shape and \acs{AP} value. 
+However, considering both \acs{AP} values were above 0.7, the model is seen to perform relatively well.
 
 \mysection{General Observations}{General Observations}\label{sec:obs}
 
@@ -428,7 +428,7 @@ a bias in the choice of templates to train on, as selecting suitably representat
 templates per call type became difficult. The selection of background calibration templates 
 meant that the class imbalance between calls and background noise 
 differed between hyperparameter selection and evaluation. The selection of templates, and not 
-a continuous audio file, for hyperparameter selection also meant that subsequence DTW did not necessarily 
+a continuous audio file, for hyperparameter selection also meant that subsequence \acs{DTW} did not necessarily 
 act under the same conditions as in evaluation, thus creating another difference between the two datasets.
 
 The varying performance of the calibrated thresholds is consistent with the low availability of well-labelled data to use 
@@ -460,20 +460,20 @@ selection of calibration templates. This varying performance can be seen in Tabl
     }
 \end{table}
 
-By looking at Table~\ref{tab:highest_results}, it can be seen that the STFT model 
-outperforms the other models in terms of both f1-score and AP. This means that, 
+By looking at Table~\ref{tab:highest_results}, it can be seen that the \acs{STFT} model 
+outperforms the other models in terms of both f1-score and \acs{AP}. This means that, 
 both in terms of the model's ability to select hyperparameters and in terms of 
-the efficiency of the detection pipeline, the STFT model outperformed the other two models.
-The LPCC model comes second, but in terms of precision it 
-is not much better than the MFCC model. 
+the efficiency of the detection pipeline, the \acs{STFT} model outperformed the other two models.
+The \acs{LPCC} model comes second, but in terms of precision it 
+is not much better than the \acs{MFCC} model. 
 
-When looking at printed spectrograms of false positives (FP) detected by the 10-template STFT model, 
+When looking at printed spectrograms of false positives (\acs{FP}) detected by the 10-template \acs{STFT} model, 
 it was found that for both experiments for the best performing model, 
-many of these FP calls were actually 
+many of these \acs{FP} calls were actually 
 unlabelled calls. This means that the actual precision of the model may be higher 
 than the reported amounts. This may be due to the human error introduced in 
 call labelling, since the known labelled calls were found by previous projects and 
-were therefore not necessarily a complete list. Examples of FP calls compared to similar true positive (TP) calls 
+were therefore not necessarily a complete list. Examples of \acs{FP} calls compared to similar true positive (\acs{TP}) calls 
 can be seen in Figure~\ref{fig:FP_TP}.
 
 \begin{figure}[H]
@@ -486,9 +486,9 @@ can be seen in Figure~\ref{fig:FP_TP}.
     \caption{Examples of random samples of FP and TP for which some FP could be unlabelled calls for the 10-template experiment for the STFT model.}\label{fig:FP_TP}
 \end{figure}
 
-Another observation across all three detection models was that most of the FP calls were found within the second half 
+Another observation across all three detection models was that most of the \acs{FP} calls were found within the second half 
 of the 72-hour audio file used for the evaluation stage of this project. This implies a possible link between model performance 
-and the signal-to-noise ratio (SNR) of the section of audio considered. The increase in FPs also seems to correlate 
+and the signal-to-noise ratio (\acs{SNR}) of the section of audio considered. The increase in \acsp{FP} also seems to correlate 
 with the increase in labelled calls. These observations can be seen in Figure~\ref{fig:5_time_fp}.
 
 \begin{figure}[H]
@@ -505,10 +505,10 @@ with the increase in labelled calls. These observations can be seen in Figure~\r
 \end{figure}
 
 Considering the good performance of the model as well as the unlabelled 
-TP calls, the STFT feature extraction is the best method to use for call detection with 
-the DTW algorithm, and the algorithm is a valid choice of detection method for Bryde's whales within the False Bay region.
+\acs{TP} calls, the \acs{STFT} feature extraction is the best method to use for call detection with 
+the \acs{DTW} algorithm, and the algorithm is a valid choice of detection method for Bryde's whales within the False Bay region.
 
 \mysection{Chapter Summary}{Chapter Summary}
 
-In this chapter the results for all conducted experiments were discussed (STFT experiments, MFCC experiments and LPCC experiments). 
+In this chapter the results for all conducted experiments were discussed (\acs{STFT} experiments, \acs{MFCC} experiments and \acs{LPCC} experiments). 
 In the next chapter, conclusions will be drawn based on observations made from the results.

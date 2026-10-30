@@ -1,55 +1,111 @@
-\newglossaryentry{precision}
+\newglossaryentry{class_imb}
 {
-	name=precision,
-	text=precision,
-	description={i},
+	name=class imbalance,
+	text=class imbalance,
+	description={A situation in which one class occurs far more often than another. In this project, segments of background noise greatly outnumber whale calls},
 }
 
-\newglossaryentry{recall}
+\newglossaryentry{downsampling}
 {
-	name=recall,
-	text=recall,
-	description={i},
+	name=downsampling,
+	text=downsampling,
+	description={Reducing the sampling frequency of a signal by first removing the frequencies that the lower rate cannot represent and then discarding samples. Here, the audio was downsampled from 8~kHz to 1~kHz},
 }
 
 \newglossaryentry{f1_score}
 {
 	name=f1-score,
 	text=f1-score,
-	description={i},
+	description={A single measure of detection performance, calculated as the harmonic mean of precision and recall},
 }
 
 \newglossaryentry{f_s}
 {
 	name=sampling frequency,
-	text=sampling,
-	description={i},
+	text=sampling frequency,
+	description={The number of samples of a signal taken per second, measured in hertz. Also referred to as the sampling rate},
 }
 
 \newglossaryentry{frame_dur}
 {
 	name=frame duration,
 	text=frame duration,
-	description={i},
+	description={The length, in seconds, of the window of audio from which one feature vector is calculated. Also referred to as the frame length},
 }
 
 \newglossaryentry{ham_win}
 {
-	name=hamming window,
-	text=hamming window,
-	description={i},
+	name=Hamming window,
+	text=Hamming window,
+	description={A window function that tapers the edges of each frame of audio before the Fourier transform is calculated, which reduces spectral leakage},
+}
+
+\newglossaryentry{hop_len}
+{
+	name=hop length,
+	text=hop length,
+	description={The distance, in samples or seconds, between the starts of consecutive frames. It equals the frame length minus the window overlap},
+}
+
+\newglossaryentry{hydrophone}
+{
+	name=hydrophone,
+	text=hydrophone,
+	description={An underwater microphone used to record sound in water},
+}
+
+\newglossaryentry{hyperparameter}
+{
+	name=hyperparameter,
+	text=hyperparameter,
+	description={A setting of the detection system that is chosen before detection is performed, such as the frame length, call type thresholds or vote fraction, rather than calculated from the audio itself},
+}
+
+\newglossaryentry{nyquist}
+{
+	name=Nyquist frequency,
+	text=Nyquist frequency,
+	description={The highest frequency that can be represented without aliasing at a given sampling frequency, equal to half the sampling frequency},
+}
+
+\newglossaryentry{precision}
+{
+	name=precision,
+	text=precision,
+	description={The proportion of detections that correspond to labelled calls, calculated as the number of true positives divided by the sum of the true positives and false positives},
+}
+
+\newglossaryentry{recall}
+{
+	name=recall,
+	text=recall,
+	description={The proportion of labelled calls that are detected, calculated as the number of true positives divided by the sum of the true positives and false negatives},
 }
 
 \newglossaryentry{spec_leak}
 {
 	name=spectral leakage,
 	text=spectral leakage,
-	description={i},
+	description={The spreading of energy from one frequency into neighbouring frequencies, which occurs because the Fourier transform is calculated over a segment of finite length},
 }
 
-\newglossaryentry{}
+\newglossaryentry{spectrogram}
 {
-	name=,
-	text=,
-	description={i},
+	name=spectrogram,
+	text=spectrogram,
+	description={A visual representation of how the frequency content of a signal changes over time, with time on the horizontal axis, frequency on the vertical axis and magnitude shown by colour},
+}
+
+\newglossaryentry{template}
+{
+	name=template,
+	text=template,
+	description={A short labelled example of a call, or of background noise, that is compared with segments of audio using dynamic time warping},
+}
+
+\newglossaryentry{vote_frac}
+{
+	name=vote fraction,
+	text=vote fraction,
+	description={The fraction of the templates for a call type that must register a detection at a point in the audio before that point is classified as a call},
 }

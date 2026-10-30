@@ -50,7 +50,7 @@
 \contentsline {section}{\numberline {4.6}Evaluation Metrics}{27}{section.4.6}%
 \contentsline {section}{\numberline {4.7}Chapter Summary}{28}{section.4.7}%
 \contentsline {chapter}{\numberline {5}Results}{29}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{29}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Experiment 1: \acs {STFT} Features}{29}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{31}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Experiment 3: LPCC Features}{36}{section.5.3}%
 \contentsline {section}{\numberline {5.4}General Observations}{38}{section.5.4}%
@@ -76,7 +76,7 @@
 \contentsline {section}{\numberline {B.10}Sustainable Development}{51}{section.B.10}%
 \contentsline {section}{\numberline {B.11}Critical Thinking}{52}{section.B.11}%
 \contentsline {section}{\numberline {B.12}Emerging Technologies}{52}{section.B.12}%
-\contentsline {chapter}{\numberline {C}Use of Artificial Intelligence (AI) Tools}{53}{appendix.C}%
+\contentsline {chapter}{\numberline {C}Use of Artificial Intelligence (\acs {AI}) Tools}{53}{appendix.C}%
 \contentsline {section}{\numberline {C.1}AI Work Declaration}{53}{section.C.1}%
 \contentsline {section}{\numberline {C.2}Own Work Declaration}{53}{section.C.2}%
 \contentsfinish 
