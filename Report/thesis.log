@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  30 OCT 2026 11:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.7.20)  30 OCT 2026 12:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1588,15 +1588,39 @@ Package microtype Info: Character `029' is missing
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/24.88'.
 (microtype)             Ignoring protrusion settings for this character.
-) (frontmatter/declaration.tex) [1
+) (frontmatter/declaration.tex
+<../SU_PlagiarismDeclaration.pdf, id=334, 597.45204pt x 845.1575pt>
+File: ../SU_PlagiarismDeclaration.pdf Graphic file (type pdf)
+<use ../SU_PlagiarismDeclaration.pdf>
+Package pdftex.def Info: ../SU_PlagiarismDeclaration.pdf  used on input line 1.
+(pdftex.def)             Requested size: 597.45058pt x 845.15544pt.
+<../SU_PlagiarismDeclaration.pdf, id=336, page=1, 597.45204pt x 845.1575pt>
+File: ../SU_PlagiarismDeclaration.pdf Graphic file (type pdf)
+<use ../SU_PlagiarismDeclaration.pdf, page 1>
+Package pdftex.def Info: ../SU_PlagiarismDeclaration.pdf , page1 used on input line 1.
+(pdftex.def)             Requested size: 597.45058pt x 845.15544pt.
+File: ../SU_PlagiarismDeclaration.pdf Graphic file (type pdf)
+<use ../SU_PlagiarismDeclaration.pdf, page 1>
+Package pdftex.def Info: ../SU_PlagiarismDeclaration.pdf , page1 used on input line 1.
+(pdftex.def)             Requested size: 597.47792pt x 845.19412pt.
+ [1
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 41.
- (C:\Users\HP\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) (frontmatter/abstract.tex [2
+File: ../SU_PlagiarismDeclaration.pdf Graphic file (type pdf)
+<use ../SU_PlagiarismDeclaration.pdf, page 1>
+Package pdftex.def Info: ../SU_PlagiarismDeclaration.pdf , page1 used on input line 1.
+(pdftex.def)             Requested size: 597.47792pt x 845.19412pt.
+File: ../SU_PlagiarismDeclaration.pdf Graphic file (type pdf)
+<use ../SU_PlagiarismDeclaration.pdf, page 1>
+Package pdftex.def Info: ../SU_PlagiarismDeclaration.pdf , page1 used on input line 1.
+(pdftex.def)             Requested size: 597.47792pt x 845.19412pt.
+File: ../SU_PlagiarismDeclaration.pdf Graphic file (type pdf)
+<use ../SU_PlagiarismDeclaration.pdf, page 1>
+Package pdftex.def Info: ../SU_PlagiarismDeclaration.pdf , page1 used on input line 1.
+(pdftex.def)             Requested size: 597.47792pt x 845.19412pt.
+ [2
 
-{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]) [3
+ <../SU_PlagiarismDeclaration.pdf>]) (frontmatter/abstract.tex) [3
 
 ] (thesis.toc [4
 
@@ -1713,7 +1737,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 
 [3]
 Chapter 2.
-<figures/literature/call_types.png, id=714, 991.5444pt x 642.4803pt>
+<figures/literature/call_types.png, id=745, 991.5444pt x 642.4803pt>
 File: figures/literature/call_types.png Graphic file (type png)
 <use figures/literature/call_types.png>
 Package pdftex.def Info: figures/literature/call_types.png  used on input line 15.
@@ -1721,7 +1745,7 @@ Package pdftex.def Info: figures/literature/call_types.png  used on input line 1
 [4
 
  <./figures/literature/call_types.png>]
-<figures/background/vector_dtw.png, id=732, 492.84125pt x 122.4575pt>
+<figures/background/vector_dtw.png, id=763, 492.84125pt x 122.4575pt>
 File: figures/background/vector_dtw.png Graphic file (type png)
 <use figures/background/vector_dtw.png>
 Package pdftex.def Info: figures/background/vector_dtw.png  used on input line 52.
@@ -1743,12 +1767,12 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [6{C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
-<figures/background/cost_matrix.png, id=762, 683.55376pt x 241.90375pt>
+<figures/background/cost_matrix.png, id=793, 683.55376pt x 241.90375pt>
 File: figures/background/cost_matrix.png Graphic file (type png)
 <use figures/background/cost_matrix.png>
 Package pdftex.def Info: figures/background/cost_matrix.png  used on input line 118.
 (pdftex.def)             Requested size: 273.14923pt x 96.6675pt.
-<figures/literature/sub_dtw.png, id=765, 403.5075pt x 122.4575pt>
+<figures/literature/sub_dtw.png, id=796, 403.5075pt x 122.4575pt>
 File: figures/literature/sub_dtw.png Graphic file (type png)
 <use figures/literature/sub_dtw.png>
 Package pdftex.def Info: figures/literature/sub_dtw.png  used on input line 151.
@@ -1776,7 +1800,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [8]
-<figures/literature/mel.png, id=795, 349.305pt x 211.79124pt>
+<figures/literature/mel.png, id=826, 349.305pt x 211.79124pt>
 File: figures/literature/mel.png Graphic file (type png)
 <use figures/literature/mel.png>
 Package pdftex.def Info: figures/literature/mel.png  used on input line 236.
@@ -1885,7 +1909,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [20]
-<figures/syst_design/calib_des.png, id=918, 824.07875pt x 774.895pt>
+<figures/syst_design/calib_des.png, id=949, 824.07875pt x 774.895pt>
 File: figures/syst_design/calib_des.png Graphic file (type png)
 <use figures/syst_design/calib_des.png>
 Package pdftex.def Info: figures/syst_design/calib_des.png  used on input line 97.
@@ -1907,7 +1931,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [22]
-<figures/syst_design/test_des.png, id=939, 729.72626pt x 985.6825pt>
+<figures/syst_design/test_des.png, id=970, 729.72626pt x 985.6825pt>
 File: figures/syst_design/test_des.png Graphic file (type png)
 <use figures/syst_design/test_des.png>
 Package pdftex.def Info: figures/syst_design/test_des.png  used on input line 152.
@@ -1929,12 +1953,12 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [24 <./figures/syst_design/test_des.png>]
-<figures/syst_design/kth_cost_1.png, id=957, 715.17188pt x 248.42813pt>
+<figures/syst_design/kth_cost_1.png, id=988, 715.17188pt x 248.42813pt>
 File: figures/syst_design/kth_cost_1.png Graphic file (type png)
 <use figures/syst_design/kth_cost_1.png>
 Package pdftex.def Info: figures/syst_design/kth_cost_1.png  used on input line 176.
 (pdftex.def)             Requested size: 364.19667pt x 126.51093pt.
-<figures/syst_design/kth_cost_2.png, id=963, 337.26pt x 123.46124pt>
+<figures/syst_design/kth_cost_2.png, id=994, 337.26pt x 123.46124pt>
 File: figures/syst_design/kth_cost_2.png Graphic file (type png)
 <use figures/syst_design/kth_cost_2.png>
 Package pdftex.def Info: figures/syst_design/kth_cost_2.png  used on input line 188.
@@ -1948,7 +1972,7 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [25 <./figures/syst_design/kth_cost_1.png>]
-<figures/syst_design/kth_cost_3.png, id=974, 240.14719pt x 104.64093pt>
+<figures/syst_design/kth_cost_3.png, id=1005, 240.14719pt x 104.64093pt>
 File: figures/syst_design/kth_cost_3.png Graphic file (type png)
 <use figures/syst_design/kth_cost_3.png>
 Package pdftex.def Info: figures/syst_design/kth_cost_3.png  used on input line 203.
@@ -1999,12 +2023,12 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [30]
-<figures/results/stft_5_pr.png, id=1023, 387.3672pt x 393.8715pt>
+<figures/results/stft_5_pr.png, id=1054, 387.3672pt x 393.8715pt>
 File: figures/results/stft_5_pr.png Graphic file (type png)
 <use figures/results/stft_5_pr.png>
 Package pdftex.def Info: figures/results/stft_5_pr.png  used on input line 107.
 (pdftex.def)             Requested size: 136.57462pt x 138.86676pt.
-<figures/results/stft_10_pr.png, id=1024, 387.3672pt x 393.8715pt>
+<figures/results/stft_10_pr.png, id=1055, 387.3672pt x 393.8715pt>
 File: figures/results/stft_10_pr.png Graphic file (type png)
 <use figures/results/stft_10_pr.png>
 Package pdftex.def Info: figures/results/stft_10_pr.png  used on input line 110.
@@ -2034,12 +2058,12 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [33]
-<figures/results/mfcc_5_pr.png, id=1051, 387.3672pt x 393.8715pt>
+<figures/results/mfcc_5_pr.png, id=1082, 387.3672pt x 393.8715pt>
 File: figures/results/mfcc_5_pr.png Graphic file (type png)
 <use figures/results/mfcc_5_pr.png>
 Package pdftex.def Info: figures/results/mfcc_5_pr.png  used on input line 286.
 (pdftex.def)             Requested size: 136.57462pt x 138.86676pt.
-<figures/results/mfcc_10_pr.png, id=1052, 387.3672pt x 393.8715pt>
+<figures/results/mfcc_10_pr.png, id=1083, 387.3672pt x 393.8715pt>
 File: figures/results/mfcc_10_pr.png Graphic file (type png)
 <use figures/results/mfcc_10_pr.png>
 Package pdftex.def Info: figures/results/mfcc_10_pr.png  used on input line 289.
@@ -2053,22 +2077,22 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [34]
-<figures/results/mfcc_d1_5_pr.png, id=1057, 387.3672pt x 393.8715pt>
+<figures/results/mfcc_d1_5_pr.png, id=1088, 387.3672pt x 393.8715pt>
 File: figures/results/mfcc_d1_5_pr.png Graphic file (type png)
 <use figures/results/mfcc_d1_5_pr.png>
 Package pdftex.def Info: figures/results/mfcc_d1_5_pr.png  used on input line 296.
 (pdftex.def)             Requested size: 136.57462pt x 138.86676pt.
-<figures/results/mfcc_d1_10_pr.png, id=1058, 387.3672pt x 393.8715pt>
+<figures/results/mfcc_d1_10_pr.png, id=1089, 387.3672pt x 393.8715pt>
 File: figures/results/mfcc_d1_10_pr.png Graphic file (type png)
 <use figures/results/mfcc_d1_10_pr.png>
 Package pdftex.def Info: figures/results/mfcc_d1_10_pr.png  used on input line 299.
 (pdftex.def)             Requested size: 136.57462pt x 138.86676pt.
-<figures/results/mfcc_d2_5_pr.png, id=1059, 387.3672pt x 393.8715pt>
+<figures/results/mfcc_d2_5_pr.png, id=1090, 387.3672pt x 393.8715pt>
 File: figures/results/mfcc_d2_5_pr.png Graphic file (type png)
 <use figures/results/mfcc_d2_5_pr.png>
 Package pdftex.def Info: figures/results/mfcc_d2_5_pr.png  used on input line 306.
 (pdftex.def)             Requested size: 136.57462pt x 138.86676pt.
-<figures/results/mfcc_d2_10_pr.png, id=1060, 387.3672pt x 393.8715pt>
+<figures/results/mfcc_d2_10_pr.png, id=1091, 387.3672pt x 393.8715pt>
 File: figures/results/mfcc_d2_10_pr.png Graphic file (type png)
 <use figures/results/mfcc_d2_10_pr.png>
 Package pdftex.def Info: figures/results/mfcc_d2_10_pr.png  used on input line 309.
@@ -2090,12 +2114,12 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [36]
-<figures/results/lpc_5_pr.png, id=1087, 387.3672pt x 393.8715pt>
+<figures/results/lpc_5_pr.png, id=1118, 387.3672pt x 393.8715pt>
 File: figures/results/lpc_5_pr.png Graphic file (type png)
 <use figures/results/lpc_5_pr.png>
 Package pdftex.def Info: figures/results/lpc_5_pr.png  used on input line 408.
 (pdftex.def)             Requested size: 136.57462pt x 138.86676pt.
-<figures/results/lpc_10_pr.png, id=1088, 387.3672pt x 393.8715pt>
+<figures/results/lpc_10_pr.png, id=1119, 387.3672pt x 393.8715pt>
 File: figures/results/lpc_10_pr.png Graphic file (type png)
 <use figures/results/lpc_10_pr.png>
 Package pdftex.def Info: figures/results/lpc_10_pr.png  used on input line 411.
@@ -2109,12 +2133,12 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [37 <./figures/results/lpc_5_pr.png> <./figures/results/lpc_10_pr.png>]
-<figures/results/FP_STFT_10.png, id=1105, 1075.3776pt x 1158.4881pt>
+<figures/results/FP_STFT_10.png, id=1136, 1075.3776pt x 1158.4881pt>
 File: figures/results/FP_STFT_10.png Graphic file (type png)
 <use figures/results/FP_STFT_10.png>
 Package pdftex.def Info: figures/results/FP_STFT_10.png  used on input line 482.
 (pdftex.def)             Requested size: 182.09486pt x 196.16258pt.
-<figures/results/TP_STFT_10.png, id=1106, 1076.1003pt x 1148.3703pt>
+<figures/results/TP_STFT_10.png, id=1137, 1076.1003pt x 1148.3703pt>
 File: figures/results/TP_STFT_10.png Graphic file (type png)
 <use figures/results/TP_STFT_10.png>
 Package pdftex.def Info: figures/results/TP_STFT_10.png  used on input line 485.
@@ -2128,12 +2152,12 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [38]
-<figures/results/stft_5_time_fp.png, id=1112, 711.8595pt x 268.1217pt>
+<figures/results/stft_5_time_fp.png, id=1143, 711.8595pt x 268.1217pt>
 File: figures/results/stft_5_time_fp.png Graphic file (type png)
 <use figures/results/stft_5_time_fp.png>
 Package pdftex.def Info: figures/results/stft_5_time_fp.png  used on input line 497.
 (pdftex.def)             Requested size: 182.09486pt x 68.58492pt.
-<figures/results/mfcc_5_time_fp.png, id=1113, 711.8595pt x 268.1217pt>
+<figures/results/mfcc_5_time_fp.png, id=1144, 711.8595pt x 268.1217pt>
 File: figures/results/mfcc_5_time_fp.png Graphic file (type png)
 <use figures/results/mfcc_5_time_fp.png>
 Package pdftex.def Info: figures/results/mfcc_5_time_fp.png  used on input line 500.
@@ -2143,7 +2167,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 500--500
 []\T1/lmr/bx/n/10 (+20) (b) |\T1/lmr/m/n/10 (+20) 5-template no-derivatives
  []
 
-<figures/results/lpcc_5_time_fp.png, id=1114, 711.8595pt x 268.1217pt>
+<figures/results/lpcc_5_time_fp.png, id=1145, 711.8595pt x 268.1217pt>
 File: figures/results/lpcc_5_time_fp.png Graphic file (type png)
 <use figures/results/lpcc_5_time_fp.png>
 Package pdftex.def Info: figures/results/lpcc_5_time_fp.png  used on input line 503.
@@ -2175,31 +2199,26 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
-[42] (thesis.bbl
-Underfull \hbox (badness 1189) in paragraph at lines 60--63
-[]\T1/lmr/m/n/12 (+20) M. A. Mc-Don-ald, S. L. Mes-nick, and J. A. Hilde-brand, ``The ge-o-graphic
- []
-
-[43
+[42] (thesis.bbl [43
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 98--100
-[]\T1/lmr/m/n/12 (+20) E. Al-izadeh, ``An il-lus-tra-tive ex-pla-na-tion to dy-namic
+Underfull \hbox (badness 10000) in paragraph at lines 103--106
+[]\T1/lmr/m/n/12 (+20) E. Al-izadeh, ``An il-lus-tra-tive ex-pla-na-tion to dy-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--100
-\T1/lmr/m/n/12 (+20) time warp-ing,'' 2020, [][]$https : / / towardsdatascience . com /
+Underfull \hbox (badness 10000) in paragraph at lines 103--106
+\T1/lmr/m/n/12 (+20) namic time warp-ing,'' [][]$https : / / towardsdatascience . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--114
-\T1/lmr/m/n/12 (+20) watch ? v = tQeDi2qEW-[]s & list = PLmZlBIcArwhMrUZ _ njMmlO _ T8gAWHihNS &
+Underfull \hbox (badness 3861) in paragraph at lines 108--112
+[]\T1/lmr/m/n/12 (+20) M. Müller and F. Za-lkow, ``Fun-da-men-tals of mu-sic pro-cess-ing: Sub-se-
  []
 
 
-Underfull \hbox (badness 4660) in paragraph at lines 120--122
-[]\T1/lmr/m/n/12 (+20) T. Singh, ``Mfcc's made easy,'' 2019, [][]$https : / / medium . com / @tanveer9812 /
+Underfull \hbox (badness 10000) in paragraph at lines 130--132
+[]\T1/lmr/m/n/12 (+20) T. Singh, ``Mfcc's made easy,'' [][]$https : / / medium . com / @tanveer9812 /
  []
 
 
@@ -2210,83 +2229,93 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [44]
-Underfull \hbox (badness 10000) in paragraph at lines 142--145
+Underfull \hbox (badness 5726) in paragraph at lines 152--156
+\T1/lmr/m/n/12 (+20) vo-cal-iza-tions us-ing dy-namic time warp-ing,'' [][]$https : / / pubs . aip . org / asa / jasa /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--156
 \T1/lmr/m/n/12 (+20) article-[]abstract / 122 / 2 / 1201 / 699104 / Automatic-[]classi^^\cation-[]of-[]killer-[]whale ?
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--145
+Underfull \hbox (badness 10000) in paragraph at lines 152--156
 \T1/lmr/m/n/12 (+20) redirectedFrom = fulltext & casa _ token = OzamuY0etVkAAAAA :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--145
+Underfull \hbox (badness 10000) in paragraph at lines 152--156
 \T1/lmr/m/n/12 (+20) VNGCuA1SmTnQEYgVRN2KuKcJvbDF79bLT2VkmggZSIUc2qnhYfNt _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--155
+Underfull \hbox (badness 10000) in paragraph at lines 163--167
 []\T1/lmr/m/n/12 (+20) X. Mouy, M. Ba-houra, and Y. Simard, ``Au-to-matic recog-ni-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--155
-\T1/lmr/m/n/12 (+20) tion of fin and blue whale calls for real-time mon-i-tor-ing in the
+Underfull \hbox (badness 10000) in paragraph at lines 163--167
+\T1/lmr/m/n/12 (+20) tion of fin and blue whale calls for real-time mon-i-tor-ing in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--155
-\T1/lmr/m/n/12 (+20) st. lawrence,'' 2009, [][]$https : / / pubs . aip . org / asa / jasa / article-[]abstract /
+Underfull \hbox (badness 10000) in paragraph at lines 163--167
+\T1/lmr/m/n/12 (+20) the st. lawrence,'' [][]$https : / / pubs . aip . org / asa / jasa / article-[]abstract /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--155
+Underfull \hbox (badness 10000) in paragraph at lines 163--167
 \T1/lmr/m/n/12 (+20) 126 / 6 / 2918 / 627068 / Automatic-[]recognition-[]of-[]^^\n-[]and-[]blue-[]whale-[]calls ?
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--155
+Underfull \hbox (badness 10000) in paragraph at lines 163--167
 \T1/lmr/m/n/12 (+20) redirectedFrom = fulltext & casa _ token = _uPiaa9QXCsAAAAA :
  []
 
 
-Overfull \hbox (84.14348pt too wide) in paragraph at lines 152--155
-\T1/lmr/m/n/12 (-20) Ge3i-[]ujMkyY8PsWGIQ4iGgW0FRxsPD0VtXtwuCMONoJvGUJFQAuBTQu8Iq7TWFSif-[]LMp-[]EosQ$[][]. 
+Overfull \hbox (84.78972pt too wide) in paragraph at lines 163--167
+\T1/lmr/m/n/12 (-20) Ge3i-[]ujMkyY8PsWGIQ4iGgW0FRxsPD0VtXtwuCMONoJvGUJFQAuBTQu8Iq7TWFSif-[]LMp-[]EosQ$[][],
  []
 
 
-Underfull \hbox (badness 5288) in paragraph at lines 157--161
+Underfull \hbox (badness 5288) in paragraph at lines 169--174
 []\T1/lmr/m/n/12 (+20) O. O. Ogundile, A. Us-man, O. Ba-balola, and D. Vers-feld, ``A hid-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--161
-\T1/lmr/m/n/12 (+20) den markov model with se-lec-tive time do-main fea-ture ex-trac-tion to
+Underfull \hbox (badness 10000) in paragraph at lines 169--174
+\T1/lmr/m/n/12 (+20) den markov model with se-lec-tive time do-main fea-ture ex-trac-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--161
-\T1/lmr/m/n/12 (+20) de-tect in-shore bryde's whale short pulse calls,'' 2020, [][]$https : / / www .
+Underfull \hbox (badness 10000) in paragraph at lines 169--174
+\T1/lmr/m/n/12 (+20) to de-tect in-shore bryde's whale short pulse calls,'' [][]$https : / / www .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--161
+Underfull \hbox (badness 10000) in paragraph at lines 169--174
 \T1/lmr/m/n/12 (+20) sciencedirect . com / science / article / pii / S1574954120300376 ? casa _ token =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--161
+Underfull \hbox (badness 10000) in paragraph at lines 169--174
 \T1/lmr/m/n/12 (+20) 6Nq5H72ZrPQAAAAA : X0axwemDJS8TgltJ62x5518DbviKiMtXRjb7HX _
  []
 
 
-Underfull \hbox (badness 3758) in paragraph at lines 168--171
-\T1/lmr/m/n/12 (+20) africa,'' 2024, [][]$https : / / scholardata . sun . ac . za / articles / dataset / An _ Analysis _ of _
+Underfull \hbox (badness 10000) in paragraph at lines 182--186
+[][]$\T1/lmr/m/n/12 (+20) https : / / scholardata . sun . ac . za / articles / dataset / An _ Analysis _ of _ Potential _ Low _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--171
-\T1/lmr/m/n/12 (+20) Potential _ Low _ Frequency _ Vocalizations _ of _ Southern _ African _ Bryde _ s _
+Underfull \hbox (badness 10000) in paragraph at lines 182--186
+\T1/lmr/m/n/12 (+20) Frequency _ Vocalizations _ of _ Southern _ African _ Bryde _ s _ Whales _ /25108016 ?
+ []
+
+
+Underfull \hbox (badness 1389) in paragraph at lines 188--191
+[]\T1/lmr/m/n/12 (+20) B. Med-dins, ``The nyquist fre-quency,'' [][]$https : / / www . sciencedirect . com / topics /
  []
 
 
@@ -2297,8 +2326,38 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [45]
-Underfull \hbox (badness 10000) in paragraph at lines 177--179
+Underfull \hbox (badness 10000) in paragraph at lines 193--196
+[]\T1/lmr/m/n/12 (+20) A. M. Learn-ing, ``Win-dow-ing func-tions ex-plained,'' [][]$https : / / apxml . com /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--196
 \T1/lmr/m/n/12 (+20) courses / introduction-[]to-[]speech-[]recognition / chapter-[]2-[]processing-[]audio-[]signals /
+ []
+
+
+Underfull \hbox (badness 1184) in paragraph at lines 226--228
+[]\T1/lmr/m/n/12 (+20) librosa de-vel-op-ment team, ``li-brosa.util.frame,'' [][]$https : / / librosa . org / doc / 0 . 11 . 0 /
+ []
+
+
+Underfull \hbox (badness 5288) in paragraph at lines 234--237
+[]\T1/lmr/m/n/12 (+20) ------, ``li-brosa.sequence.dtw,'' [][]$https : / / librosa . org / doc / 0 . 11 . 0 / generated / librosa .
+ []
+
+
+Underfull \hbox (badness 1117) in paragraph at lines 248--251
+[]\T1/lmr/m/n/12 (+20) T. S. com-mu-nity, ``re-sam-ple_poly,'' [][]$http : / / docs . scipy . org / doc / scipy / reference /
+ []
+
+
+Underfull \hbox (badness 1460) in paragraph at lines 253--256
+[]\T1/lmr/m/n/12 (+20) ------, ``find_peaks,'' [][]$https : / / docs . scipy . org / doc / scipy / reference / generated / scipy .
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 258--261
+[]\T1/lmr/m/n/12 (+20) N. De-vel-op-ers, ``numpy.searchsorted,'' [][]$https : / / numpy . org / doc / stable / reference /
  []
 
 
@@ -2309,13 +2368,8 @@ Package fancyhdr Warning: \headheight is too small (14.5pt):
 (fancyhdr)                \addtolength{\topmargin}{-12.61653pt}.
 
 [46]
-Underfull \hbox (badness 10000) in paragraph at lines 242--246
+Underfull \hbox (badness 10000) in paragraph at lines 268--273
 [][]$\T1/lmr/m/n/12 (+20) https : / / www . researchgate . net / publication / 273155496 _ The _ Precision-[]Recall _
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 248--251
-\T1/lmr/m/n/12 (+20) 343194514 _ A _ Survey _ on _ Performance _ Metrics _ for _ Object-[]Detection _
  []
 
 ) (appendices/appendices.tex (appendices/appendix_a.tex
@@ -2381,20 +2435,20 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: ED596968258C2DF2F6E45816882E9BF8;13329.
+(rerunfilecheck)             Checksum: 6B6BBDDAC311C24A517BBF298AAA252A;13329.
  ) 
 Here is how much of TeX's memory you used:
- 54889 strings out of 467871
- 1150085 string characters out of 5419828
- 1797921 words of memory out of 5000000
- 82309 multiletter control sequences out of 15000+600000
- 776711 words of font info for 295 fonts, out of 8000000 for 9000
+ 54853 strings out of 467871
+ 1149476 string characters out of 5419828
+ 1797740 words of memory out of 5000000
+ 82285 multiletter control sequences out of 15000+600000
+ 776059 words of font info for 291 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,20n,112p,2591b,921s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\HP\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmro12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/HP/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (67 pages, 6292709 bytes).
+Output written on thesis.pdf (67 pages, 6385637 bytes).
 PDF statistics:
- 1532 PDF objects out of 1728 (max. 8388607)
- 263 named destinations out of 1000 (max. 500000)
- 78591 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 1553 PDF objects out of 1728 (max. 8388607)
+ 262 named destinations out of 1000 (max. 500000)
+ 76558 words of extra memory for PDF output out of 89155 (max. 10000000)
 

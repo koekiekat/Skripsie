@@ -24,8 +24,8 @@
 
 \bibitem[Tonitz et~al.(2026)Tonitz, Geldenhuys, and Niesler]{gunther_calls}
 G.~Tonitz, C.~M. Geldenhuys, and T.~R. Niesler, ``A perch out of water:
-  Few-shot detection of bryde's whale vocalisations in false bay,'' 2026,
-  \url{https://arxiv.org/abs/2610.29572}.
+  Few-shot detection of bryde's whale vocalisations in false bay,''
+  \url{https://arxiv.org/abs/2610.29572}, 2026.
 
 \bibitem[van Waerebeek et~al.(2006)van Waerebeek, Baker, Félix, Gedamke,
   Iñiguez, Sanino, Secchi, Sutaria, van Helden, and
@@ -33,106 +33,116 @@ G.~Tonitz, C.~M. Geldenhuys, and T.~R. Niesler, ``A perch out of water:
 K.~van Waerebeek, A.~N. Baker, F.~Félix, J.~Gedamke, M.~Iñiguez, G.~P.
   Sanino, E.~Secchi, D.~Sutaria, A.~van Helden, and Y.~Wang, ``Vessel
   collisions with small cetaceans worldwide and with large whales in the
-  southern hemisphere; building a standardized database,'' 2006,
-  \url{https://www.vliz.be/imisdocs/publications/243193.pdf}.
+  southern hemisphere; building a standardized database,''
+  \url{https://www.vliz.be/imisdocs/publications/243193.pdf}, 2006.
 
 \bibitem[Faustmann et~al.(2024)Faustmann, Shabangu, and
   Versfeld]{bryde_whales_SA}
 A.~Faustmann, F.~W. Shabangu, and J.~D. J.~J. Versfeld, ``Potential
-  vocalizations of bryde's whales in false bay, south africa,'' 2024,
-  \url{https://repository.up.ac.za/server/api/core/bitstreams/57ba6a31-7aca-4acb-b9b6-60884695c964/content}.
+  vocalizations of bryde's whales in false bay, south africa,''
+  \url{https://repository.up.ac.za/server/api/core/bitstreams/57ba6a31-7aca-4acb-b9b6-60884695c964/content},
+  2024.
 
 \bibitem[Betz et~al.(2011)Betz, Bohnsack, Callahan, Campbell, Green, and
   Labrum]{reducing_vessel_collisions}
 S.~Betz, K.~Bohnsack, A.~R. Callahan, L.~E. Campbell, S.~E. Green, and K.~M.
   Labrum, ``Reducing the risk of vessel strikes to endangered whales in the
-  santa barbara channel,'' 2011,
-  \url{https://nmssanctuaries.blob.core.windows.net/sanctuaries-prod/media/archive/protect/shipstrike/pdfs/bren.pdf}.
+  santa barbara channel,''
+  \url{https://nmssanctuaries.blob.core.windows.net/sanctuaries-prod/media/archive/protect/shipstrike/pdfs/bren.pdf},
+  2011.
 
 \bibitem[Deecke et~al.(2000)Deecke, Ford, and Spong]{killer_whale_dialects}
 V.~B. Deecke, J.~K.~B. Ford, and P.~Spong, ``Call diversity in the north
   pacific killer whale populations: implications for dialect evolution and
-  population history,'' \emph{Animal Behaviour}, 2000,
-  \url{https://www.sciencedirect.com/science/article/abs/pii/S0003347211005537}.
+  population history,'' \emph{Animal Behaviour}, 2000.
 
 \bibitem[McDonald et~al.(2003)McDonald, Mesnick, and
   Hildebrand]{blue_whale_song_variation}
 M.~A. McDonald, S.~L. Mesnick, and J.~A. Hildebrand, ``The geographic variation
-  of blue whale song,'' 2003,
-  \url{https://www.cetus.ucsd.edu/docs/reports/McDonaldIWC-2003.pdf}.
+  of blue whale song,''
+  \url{https://www.cetus.ucsd.edu/docs/reports/McDonaldIWC-2003.pdf}, 2003.
 
 \bibitem[Brown et~al.(2006)Brown, Hodgins-Davis, and Miller]{DTW_has_worked}
 J.~C. Brown, A.~Hodgins-Davis, and P.~J.~O. Miller, ``Classification of
-  vocalizations of killer whales using dynamic time warping,'' 2006,
-  \url{https://pubs.aip.org/asa/jasa/article/119/3/EL34/850621}.
+  vocalizations of killer whales using dynamic time warping,''
+  \url{https://pubs.aip.org/asa/jasa/article/119/3/EL34/850621}, 2006.
 
 \bibitem[Herreilers et~al.(2025)Herreilers, Jacobs, and Niesler]{dtw_few_temps}
 J.~Herreilers, C.~Jacobs, and T.~Niesler, ``Low-resource keyword spotting using
-  contrastively trained transformer acoustic word embeddings,'' 2025,
-  \url{https://arxiv.org/pdf/2506.17690}.
+  contrastively trained transformer acoustic word embeddings,''
+  \url{https://arxiv.org/pdf/2506.17690}, 2025.
 
 \bibitem[Oleson et~al.(2003)Oleson, Barlow, Gordon, Rankin, and
   Hildebrand]{bryde_geographicly}
 E.~M. Oleson, J.~Barlow, J.~Gordon, S.~Rankin, and J.~A. Hildebrand, ``Low
-  frequency calls of bryde's whales,'' 2003,
-  \url{https://digitalcommons.unl.edu/cgi/viewcontent.cgi?referer=&httpsredir=1&article=1297&context=usdeptcommercepub}.
+  frequency calls of bryde's whales,''
+  \url{https://digitalcommons.unl.edu/cgi/viewcontent.cgi?referer=&httpsredir=1&article=1297&context=usdeptcommercepub},
+  2003.
 
 \bibitem[M\"uller and Zalkow(2015{\natexlab{a}})]{dtw_basic}
 M.~M\"uller and F.~Zalkow, ``Fundamentals of music processing: Dynamic time
-  warping (dtw),'' 2015,
-  \url{https://www.audiolabs-erlangen.de/resources/MIR/FMP/C3/C3S2_DTWbasic.html}.
+  warping (dtw),''
+  \url{https://www.audiolabs-erlangen.de/resources/MIR/FMP/C3/C3S2_DTWbasic.html},
+  2015.
 
 \bibitem[Kamper(2021{\natexlab{a}})]{dtw_kamper}
-H.~Kamper, ``Dynamic time warping (dtw),'' 2021,
-  \url{https://www.youtube.com/playlist?list=PLmZlBIcArwhMJoGk5zpiRlkaHUqy5dLzL}.
+H.~Kamper, ``Dynamic time warping (dtw),''
+  \url{https://www.youtube.com/playlist?list=PLmZlBIcArwhMJoGk5zpiRlkaHUqy5dLzL},
+  2021.
 
 \bibitem[Schwaber-Cohen(2023)]{vector_sim}
-R.~Schwaber-Cohen, ``Vector similarity explained,'' 2023,
-  \url{https://www.pinecone.io/learn/vector-similarity/}.
+R.~Schwaber-Cohen, ``Vector similarity explained,''
+  \url{https://www.pinecone.io/learn/vector-similarity/}, 2023.
 
 \bibitem[community(2008{\natexlab{a}})]{scipy_dist}
-T.~S. community, ``scipy.spatian.distnace,'' 2008,
-  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.cdist.html}.
+T.~S. community, ``scipy.spatial.distance.cdist,''
+  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.cdist.html},
+  2008.
 
 \bibitem[Alizadeh(2020)]{dtw_boundaries}
-E.~Alizadeh, ``An illustrative explanation to dynamic time warping,'' 2020,
-  \url{https://towardsdatascience.com/an-illustrative-introduction-to-dynamic-time-warping-36aa98513b98/}.
+E.~Alizadeh, ``An illustrative explanation to dynamic time warping,''
+  \url{https://towardsdatascience.com/an-illustrative-introduction-to-dynamic-time-warping-36aa98513b98/},
+  2020.
 
 \bibitem[M\"uller and Zalkow(2015{\natexlab{b}})]{dtw_subsequence}
 M.~M\"uller and F.~Zalkow, ``Fundamentals of music processing: Subsequence
-  dtw,'' 2015,
-  \url{https://www.audiolabs-erlangen.de/resources/MIR/FMP/C7/C7S2_SubsequenceDTW.html}.
+  dtw,''
+  \url{https://www.audiolabs-erlangen.de/resources/MIR/FMP/C7/C7S2_SubsequenceDTW.html},
+  2015.
 
-\bibitem[Atinde M.~Usman(2020)]{Det_Tech}
-D.~J. J.~V. Atinde M.~Usman, Olayinka O.~Ocundile, ``Review of automatic
-  detection and classification techniques for cetacean vocalization,'' 2020,
-  \url{https://scholar.sun.ac.za/server/api/core/bitstreams/6e4a861d-74eb-4d2d-b81b-353743cc06b8/content}.
+\bibitem[Usman et~al.(2020)Usman, Ogundile, and Versfeld]{Det_Tech}
+A.~M. Usman, O.~O. Ogundile, and D.~J.~J. Versfeld, ``Review of automatic
+  detection and classification techniques for cetacean vocalization,''
+  \url{https://scholar.sun.ac.za/server/api/core/bitstreams/6e4a861d-74eb-4d2d-b81b-353743cc06b8/content},
+  2020.
 
 \bibitem[Kamper(2026)]{stft_kamper}
-H.~Kamper, ``Short-time fourier transforms (stft),'' 2026,
-  \url{https://www.youtube.com/watch?v=tQeDi2qEW-s&list=PLmZlBIcArwhMrUZ_njMmlO_T8gAWHihNS&index=26}.
+H.~Kamper, ``Short-time fourier transforms (stft),''
+  \url{https://www.youtube.com/watch?v=tQeDi2qEW-s&list=PLmZlBIcArwhMrUZ_njMmlO_T8gAWHihNS&index=26},
+  2026.
 
 \bibitem[Kamper(2021{\natexlab{b}})]{mel_kamper}
-------, ``Introduction to speech features,'' 2021,
-  \url{https://www.youtube.com/playlist?list=PLmZlBIcArwhN8nFJ8VL1jLM2Qe7YCcmAb}.
+------, ``Introduction to speech features,''
+  \url{https://www.youtube.com/playlist?list=PLmZlBIcArwhN8nFJ8VL1jLM2Qe7YCcmAb},
+  2021.
 
 \bibitem[Singh(2019)]{mel_med}
-T.~Singh, ``Mfcc's made easy,'' 2019,
-  \url{https://medium.com/@tanveer9812/mfccs-made-easy-7ef383006040}.
+T.~Singh, ``Mfcc's made easy,''
+  \url{https://medium.com/@tanveer9812/mfccs-made-easy-7ef383006040}, 2019.
 
 \bibitem[DataMListic(2023{\natexlab{a}})]{deltas}
-DataMListic, ``Spectral features - deltas and delta-deltas explained,'' 2023,
-  \url{https://www.youtube.com/watch?v=zxEnuPolylY}.
+DataMListic, ``Spectral features - deltas and delta-deltas explained,''
+  \url{https://www.youtube.com/watch?v=zxEnuPolylY}, 2023.
 
 \bibitem[DataMListic(2023{\natexlab{b}})]{mel_delta}
-------, ``Mel frequency cepstral coefficients (mfcc) explained,'' 2023,
-  \url{https://www.youtube.com/watch?v=SJo7vPgRlBQ}.
+------, ``Mel frequency cepstral coefficients (mfcc) explained,''
+  \url{https://www.youtube.com/watch?v=SJo7vPgRlBQ}, 2023.
 
 \bibitem[Majeed et~al.(2015)Majeed, Husain, Samad, and Idbeaa]{melderv_calcs}
 S.~A. Majeed, H.~Husain, S.~A. Samad, and T.~F. Idbeaa, ``Mel frequency
   cepstral coefficients (mfcc) feature extraction enhancement in the
-  application of speech recognition: A comparison study,'' 2015,
-  \url{https://www.jatit.org/volumes/Vol79No1/5Vol79No1.pdf}.
+  application of speech recognition: A comparison study,''
+  \url{https://www.jatit.org/volumes/Vol79No1/5Vol79No1.pdf}, 2015.
 
 \bibitem[Rabiner and Juang(1993)]{lpc}
 L.~Rabiner and B.-H.~J. Juang, \emph{Fundamentals of Speech Recognition}.\hskip
@@ -140,113 +150,131 @@ L.~Rabiner and B.-H.~J. Juang, \emph{Fundamentals of Speech Recognition}.\hskip
 
 \bibitem[Brown and Miller(2007)]{killer-whale}
 J.~C. Brown and P.~J.~O. Miller, ``Automatic classification of killer whale
-  vocalizations using dynamic time warping,'' 2007,
-  \url{https://pubs.aip.org/asa/jasa/article-abstract/122/2/1201/699104/Automatic-classification-of-killer-whale?redirectedFrom=fulltext&casa_token=OzamuY0etVkAAAAA:VNGCuA1SmTnQEYgVRN2KuKcJvbDF79bLT2VkmggZSIUc2qnhYfNt_Yo7BleyPL4ffIKE3CTopQ}.
+  vocalizations using dynamic time warping,''
+  \url{https://pubs.aip.org/asa/jasa/article-abstract/122/2/1201/699104/Automatic-classification-of-killer-whale?redirectedFrom=fulltext&casa_token=OzamuY0etVkAAAAA:VNGCuA1SmTnQEYgVRN2KuKcJvbDF79bLT2VkmggZSIUc2qnhYfNt_Yo7BleyPL4ffIKE3CTopQ},
+  2007.
 
 \bibitem[Ogundile and Versfeld(2020)]{temp-based-bryde}
 O.~O. Ogundile and D.~J.~J. Versfeld, ``Analysis of template-based detection
-  algorithms for inshore bryde’s whale short pulse calls,'' 2020,
-  \url{https://ieeexplore.ieee.org/document/8957435}.
+  algorithms for inshore bryde’s whale short pulse calls,''
+  \url{https://ieeexplore.ieee.org/document/8957435}, 2020.
 
 \bibitem[Mouy et~al.(2009)Mouy, Bahoura, and Simard]{dtw-vq}
 X.~Mouy, M.~Bahoura, and Y.~Simard, ``Automatic recognition of fin and blue
-  whale calls for real-time monitoring in the st. lawrence,'' 2009,
-  \url{https://pubs.aip.org/asa/jasa/article-abstract/126/6/2918/627068/Automatic-recognition-of-fin-and-blue-whale-calls?redirectedFrom=fulltext&casa_token=_uPiaa9QXCsAAAAA:Ge3i-ujMkyY8PsWGIQ4iGgW0FRxsPD0VtXtwuCMONoJvGUJFQAuBTQu8Iq7TWFSif-LMp-EosQ}.
+  whale calls for real-time monitoring in the st. lawrence,''
+  \url{https://pubs.aip.org/asa/jasa/article-abstract/126/6/2918/627068/Automatic-recognition-of-fin-and-blue-whale-calls?redirectedFrom=fulltext&casa_token=_uPiaa9QXCsAAAAA:Ge3i-ujMkyY8PsWGIQ4iGgW0FRxsPD0VtXtwuCMONoJvGUJFQAuBTQu8Iq7TWFSif-LMp-EosQ},
+  2009.
 
 \bibitem[Ogundile et~al.(2020)Ogundile, Usman, Babalola, and Versfeld]{hmm}
 O.~O. Ogundile, A.~Usman, O.~Babalola, and D.~Versfeld, ``A hidden markov model
   with selective time domain feature extraction to detect inshore bryde's whale
-  short pulse calls,'' 2020,
-  \url{https://www.sciencedirect.com/science/article/pii/S1574954120300376?casa_token=6Nq5H72ZrPQAAAAA:X0axwemDJS8TgltJ62x5518DbviKiMtXRjb7HX_TJkOnpH1IpbmheAeQcZnjfbrx6TNF-oP_Z7o}.
+  short pulse calls,''
+  \url{https://www.sciencedirect.com/science/article/pii/S1574954120300376?casa_token=6Nq5H72ZrPQAAAAA:X0axwemDJS8TgltJ62x5518DbviKiMtXRjb7HX_TJkOnpH1IpbmheAeQcZnjfbrx6TNF-oP_Z7o},
+  2020.
 
 \bibitem[Permanasari et~al.(2019)Permanasari, Harahap, and Ali]{speech}
 Y.~Permanasari, E.~H. Harahap, and E.~P. Ali, ``Speech recognition using
-  dynamic time warping (dtw),'' 2019,
-  \url{https://iopscience.iop.org/article/10.1088/1742-6596/1366/1/012091/meta}.
+  dynamic time warping (dtw),''
+  \url{https://iopscience.iop.org/article/10.1088/1742-6596/1366/1/012091/meta},
+  2019.
 
 \bibitem[Faustmann(2024)]{data_set}
 A.~Faustmann, ``Potential vocalizations of bryde's whales in false bay, south
-  africa,'' 2024,
-  \url{https://scholardata.sun.ac.za/articles/dataset/An_Analysis_of_Potential_Low_Frequency_Vocalizations_of_Southern_African_Bryde_s_Whales_/25108016?file=44351747}.
+  africa,''
+  \url{https://scholardata.sun.ac.za/articles/dataset/An_Analysis_of_Potential_Low_Frequency_Vocalizations_of_Southern_African_Bryde_s_Whales_/25108016?file=44351747},
+  2024.
 
 \bibitem[Meddins(2000)]{nyq}
-B.~Meddins, ``The nyquist frequency,'' 2000,
-  \url{https://www.sciencedirect.com/topics/computer-science/nyquist-frequency}.
+B.~Meddins, ``The nyquist frequency,''
+  \url{https://www.sciencedirect.com/topics/computer-science/nyquist-frequency},
+  2000.
 
 \bibitem[Learning(2026)]{hamm}
-A.~M. Learning, ``Windowing functions explained,'' 2026,
-  \url{https://apxml.com/courses/introduction-to-speech-recognition/chapter-2-processing-audio-signals/windowing-functions-explained}.
+A.~M. Learning, ``Windowing functions explained,''
+  \url{https://apxml.com/courses/introduction-to-speech-recognition/chapter-2-processing-audio-signals/windowing-functions-explained},
+  2026.
 
 \bibitem[librosa~development team(2026{\natexlab{a}})]{mfcc_librosa}
-librosa~development team, ``librosa.feature.mfcc,'' 2026,
-  \url{https://librosa.org/doc/main/api/generated/librosa.feature.mfcc.html}.
+librosa~development team, ``librosa.feature.mfcc,''
+  \url{https://librosa.org/doc/main/api/generated/librosa.feature.mfcc.html},
+  2026.
 
 \bibitem[community(2008{\natexlab{b}})]{mfcc_dct_type}
-T.~S. community, ``dct,'' 2008,
-  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.fft.dct.html}.
+T.~S. community, ``dct,''
+  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.fft.dct.html},
+  2008.
 
 \bibitem[Roch et~al.(2013)Roch, \v{S}irovi\'{c}, and
   Baumann-Pickering]{mfcc_c_zero}
 M.~A. Roch, A.~\v{S}irovi\'{c}, and S.~Baumann-Pickering, ``Detection,
   classification, and localization of cetaceans by groups at the scripps
-  institution of oceanography and san diego state university,'' 2013,
-  \url{https://www.cetus.ucsd.edu/docs/publications/RochDCL2013.pdf}.
+  institution of oceanography and san diego state university,''
+  \url{https://www.cetus.ucsd.edu/docs/publications/RochDCL2013.pdf}, 2013.
 
 \bibitem[librosa~development team(2023)]{lib_delta}
-librosa~development team, ``librosa.feature.delta,'' 2023,
-  \url{https://librosa.org/doc/dev/api/generated/librosa.feature.delta.html}.
+librosa~development team, ``librosa.feature.delta,''
+  \url{https://librosa.org/doc/dev/api/generated/librosa.feature.delta.html},
+  2023.
 
 \bibitem[McFee et~al.(2015)McFee, Raffel, Liang, Ellis, McVicar, Battenberg,
   and Nieto]{librosa}
 B.~McFee, C.~Raffel, D.~Liang, D.~P. Ellis, M.~McVicar, E.~Battenberg, and
-  O.~Nieto, ``librosa: Audio and music signal analysis in python,'' 2015,
-  \url{https://proceedings.scipy.org/articles/Majora-7b98e3ed-003.pdf}.
+  O.~Nieto, ``librosa: Audio and music signal analysis in python,''
+  \url{https://proceedings.scipy.org/articles/Majora-7b98e3ed-003.pdf}, 2015.
 
 \bibitem[librosa~development team(2025{\natexlab{a}})]{lib_util_frame}
-librosa~development team, ``librosa.util.frame,'' 2025,
-  \url{https://librosa.org/doc/0.11.0/generated/librosa.util.frame.html}.
+librosa~development team, ``librosa.util.frame,''
+  \url{https://librosa.org/doc/0.11.0/generated/librosa.util.frame.html}, 2025.
 
 \bibitem[librosa~development team(2025{\natexlab{b}})]{lib_lpc}
-------, ``librosa.lpc,'' 2025,
-  \url{https://librosa.org/doc/0.11.0/generated/librosa.lpc.html}.
+------, ``librosa.lpc,''
+  \url{https://librosa.org/doc/0.11.0/generated/librosa.lpc.html}, 2025.
 
 \bibitem[librosa~development team(2026{\natexlab{b}})]{librosa_dtw}
-------, ``librosa.sequence.dtw,'' 2026,
-  \url{https://librosa.org/doc/0.11.0/generated/librosa.sequence.dtw.html}.
+------, ``librosa.sequence.dtw,''
+  \url{https://librosa.org/doc/0.11.0/generated/librosa.sequence.dtw.html},
+  2026.
 
 \bibitem[Hees(2026)]{fft_pow_2}
-P.~Hees, ``The fast fourier transform, how and why it works,'' 2026,
-  \url{https://research.ibm.com/blog/the-fast-fourier-transform-how-and-why-it-works}.
+P.~Hees, ``The fast fourier transform, how and why it works,''
+  \url{https://research.ibm.com/blog/the-fast-fourier-transform-how-and-why-it-works},
+  2026.
 
 \bibitem[Bechtold(2026)]{sf}
-B.~Bechtold, ``soundfile 0.14.0,'' 2026,
-  \url{https://pypi.org/project/soundfile/}.
+B.~Bechtold, ``soundfile 0.14.0,'' \url{https://pypi.org/project/soundfile/},
+  2026.
 
 \bibitem[community(2008{\natexlab{c}})]{resample}
-T.~S. community, ``resample\_poly,'' 2008,
-  \url{http://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.resample_poly.html}.
+T.~S. community, ``resample\_poly,''
+  \url{http://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.resample_poly.html},
+  2008.
 
 \bibitem[community(2008{\natexlab{d}})]{find_peaks}
-------, ``find\_peaks,'' 2008,
-  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html}.
+------, ``find\_peaks,''
+  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html},
+  2008.
 
 \bibitem[Developers(2026)]{searchsorted}
-N.~Developers, ``numpy.searchsorted,'' 2026,
-  \url{https://numpy.org/doc/stable/reference/generated/numpy.searchsorted.html}.
+N.~Developers, ``numpy.searchsorted,''
+  \url{https://numpy.org/doc/stable/reference/generated/numpy.searchsorted.html},
+  2026.
 
 \bibitem[Fawcett(2005)]{roc}
-T.~Fawcett, ``An introduction to roc analysis,'' 2005,
-  \url{https://www.sciencedirect.com/science/article/pii/S016786550500303X}.
+T.~Fawcett, ``An introduction to roc analysis,''
+  \url{https://www.sciencedirect.com/science/article/pii/S016786550500303X},
+  2005.
 
 \bibitem[Saito and Rehmsmeier(2015)]{pr}
 T.~Saito and M.~Rehmsmeier, ``The precision-recall plot is more informative
   than the roc plot when evaluating binary classifiers on imbalanced
-  datasets,'' 2015,
-  \url{https://www.researchgate.net/publication/273155496_The_Precision-Recall_Plot_Is_More_Informative_than_the_ROC_Plot_When_Evaluating_Binary_Classifiers_on_Imbalanced_Datasets}.
+  datasets,''
+  \url{https://www.researchgate.net/publication/273155496_The_Precision-Recall_Plot_Is_More_Informative_than_the_ROC_Plot_When_Evaluating_Binary_Classifiers_on_Imbalanced_Datasets},
+  2015.
 
 \bibitem[Padilla et~al.(2020)Padilla, Netto, and da~Silva]{ap}
 R.~Padilla, S.~L. Netto, and E.~A.~B. da~Silva, ``A survey on performance
-  metrics forobject-detection algorithms,'' 2020,
-  \url{https://www.researchgate.net/publication/343194514_A_Survey_on_Performance_Metrics_for_Object-Detection_Algorithms}.
+  metrics for object-detection algorithms,''
+  \url{https://www.researchgate.net/publication/343194514_A_Survey_on_Performance_Metrics_for_Object-Detection_Algorithms},
+  2020.
 
 \end{thebibliography}

@@ -1,13 +1,13 @@
 \acswitchoff 
 \babel@toc {afrikaans}{}\relax 
-\contentsline {chapter}{Abstract}{iii}{chapter*.3}%
+\contentsline {chapter}{Abstract}{iii}{chapter*.2}%
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Table of contents}{iv}{chapter*.3}%
-\contentsline {chapter}{List of figures}{vii}{chapter*.4}%
-\contentsline {chapter}{List of tables}{viii}{chapter*.5}%
-\contentsline {chapter}{Nomenclature}{x}{chapter*.7}%
-\contentsline {section}{Acronyms and abbreviations}{x}{section*.8}%
-\contentsline {section}{Definitions}{xi}{section*.9}%
+\contentsline {chapter}{Table of contents}{iv}{chapter*.2}%
+\contentsline {chapter}{List of figures}{vii}{chapter*.3}%
+\contentsline {chapter}{List of tables}{viii}{chapter*.4}%
+\contentsline {chapter}{Nomenclature}{x}{chapter*.6}%
+\contentsline {section}{Acronyms and abbreviations}{x}{section*.7}%
+\contentsline {section}{Definitions}{xi}{section*.8}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Background}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Problem Statement}{2}{section.1.2}%
@@ -61,7 +61,7 @@
 \contentsline {section}{\numberline {6.3}Limitations}{41}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Conclusion}{42}{section.6.4}%
 \contentsline {section}{\numberline {6.5}Future Work}{42}{section.6.5}%
-\contentsline {chapter}{References}{43}{chapter*.38}%
+\contentsline {chapter}{References}{43}{chapter*.37}%
 \contentsline {chapter}{\numberline {A}Project Planning Schedule}{48}{appendix.A}%
 \contentsline {chapter}{\numberline {B}Graduate Attributes}{49}{appendix.B}%
 \contentsline {section}{\numberline {B.1}Complex Engineering Problem}{49}{section.B.1}%
