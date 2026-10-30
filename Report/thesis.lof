@@ -10,34 +10,34 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces The mel-scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}}{9}{figure.caption.13}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Software flow diagram describing the hyperparameter selection procedure.}}{21}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Software flow diagram describing the evaluation procedure.}}{24}{figure.caption.16}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Illustration of per call type matrices containing the bottom row of the cost matrix for each template in the given call type for k = 1. The green, purple and pink blocks are the $k_{th}$ lowest cost per frame for each matrix. These correspond to Figure~\ref {fig:kth_cost_2} The blue block is the detected end frame as it appears in the template analysed to find the start frame. This corresponds to Figure~\ref {fig:kth_cost_3}.}}{25}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Illustration of the $k_{th}$ best costs matrix. The coloured blocks correspond to those in Figure\ref {fig:kth_cost_1}}}{26}{figure.caption.18}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Illustration of the cost arrays used to find the start and end frames without normalisation. The coloured blocks corresponds to those in Figure~\ref {fig:kth_cost_1} and~\ref {fig:kth_cost_2}.}}{26}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Software flow diagram describing the hyperparameter selection procedure.}}{20}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Software flow diagram describing the evaluation procedure.}}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Illustration of per call type matrices containing the bottom row of the cost matrix for each template in the given call type for k = 1. The green, purple and pink blocks are the $k_{th}$ lowest cost per frame for each matrix. These correspond to Figure~\ref {fig:kth_cost_2} The blue block is the detected end frame as it appears in the template analysed to find the start frame. This corresponds to Figure~\ref {fig:kth_cost_3}.}}{24}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Illustration of the $k_{th}$ best costs matrix. The coloured blocks correspond to those in Figure~\ref {fig:kth_cost_1}}}{25}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Illustration of the cost arrays used to find the start and end frames without normalisation. The coloured blocks corresponds to those in Figure~\ref {fig:kth_cost_1} and~\ref {fig:kth_cost_2}.}}{25}{figure.caption.19}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{31}{figure.caption.23}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{31}{subfigure.1.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{31}{subfigure.1.2}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{35}{figure.caption.27}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.2.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.2.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{35}{figure.caption.28}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.3.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.3.2}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{35}{figure.caption.29}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{35}{subfigure.4.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{35}{subfigure.4.2}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPCC}}{37}{figure.caption.33}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{37}{subfigure.5.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{37}{subfigure.5.2}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP for which some FP could be unlabelled calls for the 10-template experiment for the STFT model.}}{39}{figure.caption.35}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Positive samples}}}{39}{subfigure.6.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{39}{subfigure.6.2}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces This shows for each model where FP calls were detected in relation to labelled calls over the entire 72-hour audio file.}}{39}{figure.caption.36}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5-template STFT model}}}{39}{subfigure.7.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {5-template no-derivatives MFCC model}}}{39}{subfigure.7.2}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {5-template LPCC model}}}{39}{subfigure.7.3}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The PR curves for STFT}}{30}{figure.caption.23}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{30}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{30}{subfigure.1.2}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces The PR curves for MFCC}}{34}{figure.caption.27}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.2.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The PR curves for MFCC with the first derivative added}}{34}{figure.caption.28}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.3.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.3.2}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The PR curves for MFCC with the first and second derivatives added}}{34}{figure.caption.29}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{34}{subfigure.4.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{34}{subfigure.4.2}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The PR curves for LPCC}}{36}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5 templates}}}{36}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {10 templates}}}{36}{subfigure.5.2}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Examples of random samples of FP and TP calls for which some FP calls could be unlabelled calls for the 10-template experiment for the STFT model.}}{38}{figure.caption.34}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {False Positive samples}}}{38}{subfigure.6.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {True Positive samples}}}{38}{subfigure.6.2}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces This shows for each model where FP calls were detected in relation to labelled calls over the entire 72-hour audio file.}}{38}{figure.caption.35}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {5-template STFT model}}}{38}{subfigure.7.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {5-template no-derivatives MFCC model}}}{38}{subfigure.7.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {5-template LPCC model}}}{38}{subfigure.7.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

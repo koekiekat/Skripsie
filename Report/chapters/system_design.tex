@@ -108,7 +108,7 @@ frequency resolution improves spectral bin separation, a 2~Hz resolution require
 of 128~ms. Given that the average call duration in the calibration dataset is 246~ms, a 128~ms hop length remains sufficiently short to resolve individual calls. 
 Hees~\cite{fft_pow_2} explains that \ac{FFT} routines are most computationally efficient for lengths that are powers of two. To maintain computational 
 efficiency, candidate frame lengths were therefore selected as powers of two or multiples thereof: $(0.096, 0.128, 0.192, 
-0.384, 0.512)$~seconds.
+0.256, 0.384, 0.512)$~seconds.
 
 Because the call type and background calibration templates had to be manually selected due to data scarcity, each calibration template was extended on both 
 sides. This extension ensured that subsequence \ac{DTW} operated under conditions representative of the evaluation pipeline despite dataset limitations. The total 
@@ -132,7 +132,7 @@ whose minimum threshold f1-score was highest across all tested frame lengths.
 Although three distinct thresholds were computed (one per call type), this project focuses exclusively on general call detection rather than classification. 
 This approach was adopted because significant spectral overlap exists among call types. Furthermore, label inconsistencies (arising from differing annotations 
 across human labellers) meant that templates selected for a call type might differ from the ground-truth definitions used in evaluation data. Separate thresholds 
-per call type were nevertheless maintained to account for structural acoustic variations during candidate detection.
+per call type were nevertheless maintained to account for structural acoustic variations during detection.
 
 In the evaluation pipeline, candidate audio segments are compared against sets of 5 or 10 reference templates per call type. Because templates capture minor structural 
 variations within a call type, individual templates may disagree on whether a candidate segment contains a call. A vote fraction parameter was introduced 
@@ -186,7 +186,7 @@ The three $k_{th}$ lowest costs arrays (one for each call type) were stacked to 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\linewidth]{figures/syst_design/kth_cost_2.png}
-    \caption{Illustration of the $k_{th}$ best costs matrix. The coloured blocks correspond to those in Figure\ref{fig:kth_cost_1}}\label{fig:kth_cost_2}
+    \caption{Illustration of the $k_{th}$ best costs matrix. The coloured blocks correspond to those in Figure~\ref{fig:kth_cost_1}}\label{fig:kth_cost_2}
 \end{figure}
 
 All the costs in the rows of the matrix were divided by the call type threshold for each row. This normalisation created a matrix of scaled $k_{th}$ costs, where a value less than or equal to 1.0 consistently 
@@ -212,8 +212,7 @@ peaks, allowing candidate end frames with cost $\leq 1.0$ to be identified using
 For each detected end frame, the corresponding call start time was determined. While the end time was identified via the lowest $k_{th}$ lowest cost among all call type templates, 
 the start time was 
 extracted using the template yielding the absolute lowest cost (from the call type templates of the $k_{th}$ lowest cost call type) at that end frame. 
-Bottom array in Figure~\ref{fig:kth_cost_3} shows the array selected to find the start time based on a detected end frame. The costs in the selected 
-start time array were also normalised by dividing by the threshold for the given call type.
+Bottom array in Figure~\ref{fig:kth_cost_3} shows the array selected to find the start time based on a detected end frame.
 
 A 10-second audio window preceding the detected end frame was extracted for 
 re-alignment. Because subsequence matches can exceed the baseline template duration, a 10-second window was chosen to accommodate long calls without requiring 

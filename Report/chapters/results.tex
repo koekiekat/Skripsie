@@ -267,10 +267,7 @@ The highest values for precision, recall and f1-score respectively
 were 0.505, 0.880 and 0.610.
 
 Overall, in terms of f1-score, the 10-template sub-experiment for the \acs{MFCC} experiment with no derivatives 
-performed the best. By looking at the values in Table~\ref{tab:mfcc_test_results}, it can be seen 
-that the highest overall hyperparameter selection performance is characterised by balancing 
-precision and recall and not by getting the highest value in either category.
-
+performed the best.
 The precision for all experiments was consistently much lower than recall. This shows that the model was more lenient than what it was 
 tuned for.
 
@@ -436,31 +433,7 @@ for the hyperparameter selection stage of this project, as well as human error, 
 selection of calibration templates. This varying performance can be seen in Tables~\ref{tab:stft_calib_results},
 ~\ref{tab:mfcc_calib_results} and~\ref{tab:lpc_calib_results}.
  
-
-\begin{table}[H]
-    \caption{Summary of the highest f1-score and AP achieved by each feature extraction method, 
-    with the corresponding number of templates per call type.}
-    \footnotesize
-    \setlength{\tabcolsep}{3pt}
-    \centering
-    \makebox[\textwidth][c]{%
-    \begin{tabular}{ccccc}
-        \toprule
-        \multirow{3}{*}{Feature extraction method}
-            & \multicolumn{2}{c}{F1}
-            & \multicolumn{2}{c}{AP}\\
-        \cmidrule(lr){2-3} \cmidrule(lr){4-5}
-            & Highest value & Number of Templates & Highest value & Number of Templates\\
-        \midrule
-        STFT & 0.792 & 5 & 0.860 & 10\\
-        MFCC & 0.647 & 10 & 0.684 & 10\\
-        LPCC & 0.650 & 10 & 0.789 & 5\\
-        \bottomrule
-    \end{tabular}\label{tab:highest_results}
-    }
-\end{table}
-
-By looking at Table~\ref{tab:highest_results}, it can be seen that the \acs{STFT} model 
+The \acs{STFT} model 
 outperforms the other models in terms of both f1-score and \acs{AP}. This means that, 
 both in terms of the model's ability to select hyperparameters and in terms of 
 the efficiency of the detection pipeline, the \acs{STFT} model outperformed the other two models.
@@ -476,6 +449,11 @@ call labelling, since the known labelled calls were found by previous projects a
 were therefore not necessarily a complete list. Examples of \acs{FP} calls compared to similar true positive (\acs{TP}) calls 
 can be seen in Figure~\ref{fig:FP_TP}.
 
+Another observation across all three detection models was that most of the \acs{FP} calls were found within the second half 
+of the 72-hour audio file used for the evaluation stage of this project. This implies a possible link between model performance 
+and the signal-to-noise ratio (\acs{SNR}) of the section of audio considered. The increase in \acsp{FP} also seems to correlate 
+with the increase in labelled calls. These observations can be seen in Figure~\ref{fig:5_time_fp}.
+
 \begin{figure}[H]
     \centering
     \subfloat[False Positive samples\label{fig:FP_STFT_10}]{%
@@ -483,13 +461,8 @@ can be seen in Figure~\ref{fig:FP_TP}.
     \hspace{1cm}
     \subfloat[True Positive samples\label{fig:TP_STFT_10}]{%
         \includegraphics[width=0.4\linewidth]{figures/results/TP_STFT_10.png}}
-    \caption{Examples of random samples of FP and TP for which some FP could be unlabelled calls for the 10-template experiment for the STFT model.}\label{fig:FP_TP}
+    \caption{Examples of random samples of FP and TP calls for which some FP calls could be unlabelled calls for the 10-template experiment for the STFT model.}\label{fig:FP_TP}
 \end{figure}
-
-Another observation across all three detection models was that most of the \acs{FP} calls were found within the second half 
-of the 72-hour audio file used for the evaluation stage of this project. This implies a possible link between model performance 
-and the signal-to-noise ratio (\acs{SNR}) of the section of audio considered. The increase in \acsp{FP} also seems to correlate 
-with the increase in labelled calls. These observations can be seen in Figure~\ref{fig:5_time_fp}.
 
 \begin{figure}[H]
     \centering
@@ -504,11 +477,7 @@ with the increase in labelled calls. These observations can be seen in Figure~\r
     \caption{This shows for each model where FP calls were detected in relation to labelled calls over the entire 72-hour audio file.}\label{fig:5_time_fp}
 \end{figure}
 
-Considering the good performance of the model as well as the unlabelled 
-\acs{TP} calls, the \acs{STFT} feature extraction is the best method to use for call detection with 
-the \acs{DTW} algorithm, and the algorithm is a valid choice of detection method for Bryde's whales within the False Bay region.
-
 \mysection{Chapter Summary}{Chapter Summary}
 
-In this chapter the results for all conducted experiments were discussed (\acs{STFT} experiments, \acs{MFCC} experiments and \acs{LPCC} experiments). 
+In this chapter the results for all conducted experiments were discussed. 
 In the next chapter, conclusions will be drawn based on observations made from the results.

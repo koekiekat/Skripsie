@@ -28,55 +28,55 @@
 \contentsline {subsection}{\numberline {2.4.4}Hidden Markov Model for Bryde's Whale short pulse calls}{13}{subsection.2.4.4}%
 \contentsline {subsection}{\numberline {2.4.5}Speech Recognition using DTW}{13}{subsection.2.4.5}%
 \contentsline {section}{\numberline {2.5}Chapter Summary}{13}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Dataset}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Background}{15}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Labelling}{15}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Data Splitting}{16}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Template Selection}{16}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Hyperparameter Tuning Template Selection}{16}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Evaluation Data Selection}{17}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Chapter Summary}{17}{section.3.4}%
-\contentsline {chapter}{\numberline {4}System Design}{18}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Overview}{18}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Feature Extraction Methods}{18}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Short-Time Fourier Transform}{18}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Mel-Frequency Cepstral Coefficients}{19}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Linear Predictive Coding Coefficients}{19}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}DTW Methodology}{20}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{21}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Evaluation Procedure}{24}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Detection Methodology}{24}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Matching Methodology}{27}{subsection.4.5.2}%
-\contentsline {section}{\numberline {4.6}Evaluation Metrics}{27}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Chapter Summary}{28}{section.4.7}%
-\contentsline {chapter}{\numberline {5}Results}{29}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{29}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{31}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Experiment 3: LPCC Features}{36}{section.5.3}%
-\contentsline {section}{\numberline {5.4}General Observations}{38}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Chapter Summary}{40}{section.5.5}%
-\contentsline {chapter}{\numberline {6}Conclusion}{41}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Summary}{41}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Objectives}{41}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Limitations}{41}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Conclusion}{42}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Future Work}{42}{section.6.5}%
-\contentsline {chapter}{References}{43}{chapter*.37}%
-\contentsline {chapter}{\numberline {A}Project Planning Schedule}{48}{appendix.A}%
-\contentsline {chapter}{\numberline {B}Graduate Attributes}{49}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Complex Engineering Problem}{49}{section.B.1}%
-\contentsline {section}{\numberline {B.2}GA 1: Problem Solving}{50}{section.B.2}%
-\contentsline {section}{\numberline {B.3}GA 2: Application of Scientific and Engineering Knowledge}{50}{section.B.3}%
-\contentsline {section}{\numberline {B.4}GA 3: Engineering Design}{50}{section.B.4}%
-\contentsline {section}{\numberline {B.5}GA 4: Investigations, experiments and data analysis}{50}{section.B.5}%
-\contentsline {section}{\numberline {B.6}GA 5: Use of Engineering Tools}{51}{section.B.6}%
-\contentsline {section}{\numberline {B.7}GA 6: Professional and Technical Communication}{51}{section.B.7}%
-\contentsline {section}{\numberline {B.8}GA 8: Individual Work}{51}{section.B.8}%
-\contentsline {section}{\numberline {B.9}GA 9: Independent Learning Ability}{51}{section.B.9}%
-\contentsline {section}{\numberline {B.10}Sustainable Development}{51}{section.B.10}%
-\contentsline {section}{\numberline {B.11}Critical Thinking}{52}{section.B.11}%
-\contentsline {section}{\numberline {B.12}Emerging Technologies}{52}{section.B.12}%
-\contentsline {chapter}{\numberline {C}Use of Artificial Intelligence (AI) Tools}{53}{appendix.C}%
-\contentsline {section}{\numberline {C.1}AI Work Declaration}{53}{section.C.1}%
-\contentsline {section}{\numberline {C.2}Own Work Declaration}{53}{section.C.2}%
+\contentsline {chapter}{\numberline {3}Dataset}{14}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Background}{14}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Labelling}{14}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Data Splitting}{15}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Template Selection}{15}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Hyperparameter Tuning Template Selection}{15}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Evaluation Data Selection}{16}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Chapter Summary}{16}{section.3.4}%
+\contentsline {chapter}{\numberline {4}System Design}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Overview}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Feature Extraction Methods}{17}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Short-Time Fourier Transform}{17}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Mel-Frequency Cepstral Coefficients}{18}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Linear Predictive Coding Coefficients}{18}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}DTW Methodology}{19}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Hyperparameter Tuning}{20}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Evaluation Procedure}{23}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Detection Methodology}{23}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Matching Methodology}{26}{subsection.4.5.2}%
+\contentsline {section}{\numberline {4.6}Evaluation Metrics}{26}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Chapter Summary}{27}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Results}{28}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Experiment 1: STFT Features}{28}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Experiment 2: MFCC Features}{30}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Experiment 3: LPCC Features}{35}{section.5.3}%
+\contentsline {section}{\numberline {5.4}General Observations}{37}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Chapter Summary}{38}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Conclusion}{39}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Summary}{39}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Objectives}{39}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Limitations}{39}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Conclusion}{40}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Future Work}{40}{section.6.5}%
+\contentsline {chapter}{References}{41}{chapter*.36}%
+\contentsline {chapter}{\numberline {A}Project Planning Schedule}{46}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Graduate Attributes}{47}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Complex Engineering Problem}{47}{section.B.1}%
+\contentsline {section}{\numberline {B.2}GA 1: Problem Solving}{48}{section.B.2}%
+\contentsline {section}{\numberline {B.3}GA 2: Application of Scientific and Engineering Knowledge}{48}{section.B.3}%
+\contentsline {section}{\numberline {B.4}GA 3: Engineering Design}{48}{section.B.4}%
+\contentsline {section}{\numberline {B.5}GA 4: Investigations, experiments and data analysis}{48}{section.B.5}%
+\contentsline {section}{\numberline {B.6}GA 5: Use of Engineering Tools}{49}{section.B.6}%
+\contentsline {section}{\numberline {B.7}GA 6: Professional and Technical Communication}{49}{section.B.7}%
+\contentsline {section}{\numberline {B.8}GA 8: Individual Work}{49}{section.B.8}%
+\contentsline {section}{\numberline {B.9}GA 9: Independent Learning Ability}{49}{section.B.9}%
+\contentsline {section}{\numberline {B.10}Sustainable Development}{49}{section.B.10}%
+\contentsline {section}{\numberline {B.11}Critical Thinking}{50}{section.B.11}%
+\contentsline {section}{\numberline {B.12}Emerging Technologies}{50}{section.B.12}%
+\contentsline {chapter}{\numberline {C}Use of Artificial Intelligence (AI) Tools}{51}{appendix.C}%
+\contentsline {section}{\numberline {C.1}AI Work Declaration}{51}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Own Work Declaration}{51}{section.C.2}%
 \contentsfinish 
