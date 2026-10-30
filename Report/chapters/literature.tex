@@ -171,7 +171,7 @@ end point of the alignment detected via subsequence \acs{DTW} is.
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods-background}
 
 
-\mysubsection{short-time Fourier Transform}{short-time Fourier Transform}\label{sec:short-time-fourier-transform}
+\mysubsection{Short-Time Fourier Transform}{Short-Time Fourier Transform}\label{sec:short-time-fourier-transform}
 According to Usman et al.~\cite{Det_Tech} and Kamper~\cite{stft_kamper}, the short-time Fourier transform (\acs{STFT}) is used to analyse the change in frequency of a signal over time. The \acs{STFT} of 
 a segment of audio is calculated by multiplying the signal in the time domain, $x(t)$ with 
 a window $w(t-\tau)$ which is swept across said signal. The Fourier transform (\acs{FT}) of each 
@@ -222,11 +222,11 @@ mel-scale filter bank. The formula for the mel-frequency calculation given by Us
     Mel(f) = 1127 \ln\left(1 + \frac{f}{700}\right)
 \end{equation}
 
- with $Mel(f)$ as the frequency value on the mel-scale and f as the actual frequency in 
+ with $Mel(f)$ as the frequency value on the mel scale and f as the actual frequency in 
  Hz.
 
 This bank is made up of 20 to 40 triangular filters which are placed, smallest width to 
-largest width according to the mel-scale, along the frequency spectrum. According to 
+largest width according to the mel scale, along the frequency spectrum. According to 
 Singh~\cite{mel_med} and Kamper~\cite{mel_kamper}, the standard 
 amount of triangular filters chosen is 26. This results in 26 coefficients for the entire range 
 of frequencies being analysed.
@@ -234,7 +234,7 @@ of frequencies being analysed.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{figures/literature/mel.png}
-    \caption{The mel-scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel-scale.}\label{fig:mel}
+    \caption{The mel-scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}\label{fig:mel}
 \end{figure}
 
 The log of these coefficients is then taken and finally the discrete cosine transform 

@@ -118,7 +118,7 @@ maximum tested frame duration (0.512~s). Each call or background calibration tem
 For each tested frame length, three decision thresholds were determined (one per call type). These thresholds were determined by evaluating \ac{DTW} costs between 
 evaluation templates and call type calibration templates, as well as between evaluation templates and background calibration templates. The resulting costs were grouped 
 into call-calibration costs and background-calibration costs. Two hundred candidate thresholds were spaced linearly between the overall minimum and maximum 
-costs across both lists. f1-scores were evaluated across all candidate thresholds for each call type as described in Section~\ref{sec:evaluation-metrics}. The 
+costs across both lists. The f1-scores were evaluated across all candidate thresholds for each call type as described in Section~\ref{sec:evaluation-metrics}. The 
 threshold yielding the highest f1-score was selected for each respective call type.
 
 Both call type calibration templates and background calibration templates were used to determine the thresholds since true positive (\acs{TP}), false positive (\acs{FP}) 
@@ -271,7 +271,7 @@ The f1-score represents the optimal mean of precision and recall:
     \label{eq:f1}
 \end{equation}
 
-Hyperparameter selections and model comparisons were evaluated primarily using the maximum f1-score. Additionally, Average precision (\acs{AP}) was calculated across 
+Hyperparameter selections and model comparisons were evaluated primarily using the maximum f1-score. Additionally, average precision (\acs{AP}) was calculated across 
 the continuous \acs{PR} curve using all-point interpolation, as defined by Padilla et al.~\cite{ap}:
 
 \begin{equation}

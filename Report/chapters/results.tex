@@ -4,7 +4,7 @@ After conducting experiments for the three different models (\acs{STFT}, \acs{MF
 must be done to determine which of the feature extraction methods worked best for dynamic time warping (\acs{DTW}). 
 This analysis will be done by comparing f1-scores and average precision (\acs{AP}).
 
-\mysection{Experiment 1: \acs{STFT} Features}{Experiment 1: STFT Features}\label{sec:exp-1-stft}
+\mysection{Experiment 1: STFT Features}{Experiment 1: STFT Features}\label{sec:exp-1-stft}
 For the short-time Fourier transform (\acs{STFT}) model used for call detection, two experiments were conducted. The first 
 considered the results given the use of 5 templates per call type as the analysis database for both hyperparameter selection and evaluation. 
 The second considered the use of 10 templates per call type, the original 5 with 5 new templates added to increase the database diversity.
@@ -117,7 +117,7 @@ experiment outperformed the 5-template experiment with the highest \acs{AP} equa
 values are above 0.8, both experiments performed relatively well for the call detection system.
 
 \mysection{Experiment 2: MFCC Features}{Experiment 2: MFCC Features}\label{sec:exp-2-mfcc}
-For the mel-frequency cepstral coefficient (\acs{MFCC}) model, three main experiments were considered. The first experiment used the \acs{MFCC} output 
+For the mel-frequency cepstral coefficients (\acs{MFCC}) model, three main experiments were considered. The first experiment used the \acs{MFCC} output 
 with no added derivatives for the feature. The second experiment used the original 13 feature coefficients from experiment 1 and added 13 more 
 coefficients in the form of the derivatives of the original 13. The third and final experiment considered the 26 coefficients used in the second 
 experiment and added another 13 in the form of the second derivatives of the original 13 \acs{MFCC} output coefficients.
@@ -314,7 +314,7 @@ all experiments did relatively well, as the \acs{PR} points were in the best pos
 \mysection{Experiment 3: LPCC Features}{Experiment 3: LPCC Features}\label{sec:exp-3-lpc}
 
 For the linear predictive coding coefficients (\acs{LPCC}) model, two experiments were conducted. The first considered the use of 5 templates 
-and the second considered the use of 10 templates for the per-call type database for hyperparameter selection and evaluation.
+and the second considered the use of 10 templates for the per call type database for hyperparameter selection and evaluation.
 
 \begin{table}[H]
     \caption{Calibration results for the LPCC model: f1-scores and thresholds per call type, 
