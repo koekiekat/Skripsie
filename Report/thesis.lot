@@ -7,16 +7,16 @@
 \contentsline {table}{\numberline {3.1}{\ignorespaces Dataset counts by date and category}}{16}{table.caption.15}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Calibration results for the STFT model: F1-scores and thresholds per call type, average F1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}}{29}{table.caption.21}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Vote fraction selection results for the STFT model: precision, recall and F1-score at the chosen vote fraction for 5 and 10 templates per call type.}}{30}{table.caption.22}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Final evaluation results for the STFT model: precision, recall, F1-score and average precision (AP) for 5 and 10 templates per call type.}}{30}{table.caption.23}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Calibration results for the MFCC model: F1-scores and thresholds per call type, average F1-score and selected frame length (in seconds) for each feature set (no derivatives, first derivatives and first and second derivatives) with 5 and 10 templates per call type.}}{32}{table.caption.25}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Vote fraction selection results for the MFCC model: precision, recall and F1-score at the chosen vote fraction for each feature set with 5 and 10 templates per call type.}}{33}{table.caption.26}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Final evaluation results for the MFCC model: precision, recall, F1-score and average precision (AP) for each feature set with 5 and 10 templates per call type.}}{34}{table.caption.27}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Calibration results for the LPCC model: F1-scores and thresholds per call type, average F1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}}{36}{table.caption.31}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Vote fraction selection results for the LPCC model: precision, recall and F1-score at the chosen vote fraction for 5 and 10 templates per call type.}}{36}{table.caption.32}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Final evaluation results for the LPCC model: precision, recall, F1-score and average precision (AP) for 5 and 10 templates per call type.}}{37}{table.caption.33}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces Summary of the highest F1-score and AP achieved by each feature extraction method, with the corresponding number of templates per call type.}}{38}{table.caption.35}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Calibration results for the STFT model: f1-scores and thresholds per call type, average f1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}}{29}{table.caption.21}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Vote fraction selection results for the STFT model: precision, recall and f1-score at the chosen vote fraction for 5 and 10 templates per call type.}}{30}{table.caption.22}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Final evaluation results for the STFT model: precision, recall, f1-score and average precision (AP) for 5 and 10 templates per call type.}}{30}{table.caption.23}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Calibration results for the MFCC model: f1-scores and thresholds per call type, average f1-score and selected frame length (in seconds) for each feature set (no derivatives, first derivatives and first and second derivatives) with 5 and 10 templates per call type.}}{32}{table.caption.25}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Vote fraction selection results for the MFCC model: precision, recall and f1-score at the chosen vote fraction for each feature set with 5 and 10 templates per call type.}}{33}{table.caption.26}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Final evaluation results for the MFCC model: precision, recall, f1-score and average precision (AP) for each feature set with 5 and 10 templates per call type.}}{34}{table.caption.27}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Calibration results for the LPCC model: f1-scores and thresholds per call type, average f1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}}{36}{table.caption.31}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Vote fraction selection results for the LPCC model: precision, recall and f1-score at the chosen vote fraction for 5 and 10 templates per call type.}}{36}{table.caption.32}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Final evaluation results for the LPCC model: precision, recall, f1-score and average precision (AP) for 5 and 10 templates per call type.}}{37}{table.caption.33}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Summary of the highest f1-score and AP achieved by each feature extraction method, with the corresponding number of templates per call type.}}{38}{table.caption.35}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {A.1}{\ignorespaces Project Schedule}}{48}{table.caption.39}%

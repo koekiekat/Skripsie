@@ -14,7 +14,7 @@ referred to as single-tones, multi-tones, burst-tonals and tonal downsweeps.
     \centering
     \includegraphics[width=0.8\linewidth]{figures/literature/call_types.png}
     \caption{Examples of how each call type looks: single-tone, multi-tone, burst-tonal and tonal downsweep. The spectrograms for 
-    each call type were printed based on labeled calls from the dataset~\cite{gunther_calls}.} \label{fig:call_types}
+    each call type were printed based on labelled calls from the dataset~\cite{gunther_calls}.} \label{fig:call_types}
 \end{figure}
 
 As explained by Faustmann et al.~\cite{bryde_whales_SA} The single-tone calls were characterised by a 
@@ -38,7 +38,7 @@ the detection limits were made based on the above information.
 Dynamic time warping (DTW) is an algorithm for detecting the similarity of two signals, $X = [x_1, x_2, \dots, x_n]$ and 
 $Y = [y_1, y_2, \dots, y_m]$. This measure of similarity is achieved by calculating an optimal 
 alignment cost between the two signals of length $N \in\mathbb{N}$  and $M \in\mathbb{N}$ respectively. In terms 
-of feature vectors such as the short time Fourier transform (STFT), mel-frequency cepstral coefficients (MFCC) or linear predictive coding coefficients (LPCC) 
+of feature vectors such as the short-time Fourier transform (STFT), mel-frequency cepstral coefficients (MFCC) or linear predictive coding coefficients (LPCC) 
 this means that each frame making up one 
 signal is compared to each frame making up another signal. Using an alignment cost the 
 best alignment for each frame in one signal to the other signal is chosen and an overall DTW 
@@ -123,7 +123,7 @@ explained by Kamper~\cite{dtw_kamper}, the same logic is used when X and Y are v
 The general case of DTW finds global alignment between the two signals. This 
 alignment is found using the warping path as described by Alizadeh~\cite{dtw_boundaries}. The warping path is the path of the best 
 alignment between signals X and Y within the cost matrix, as shown in Figure~\ref{fig:cost_matrix}. 
-This path, W, is a sequence of matrix co-ordinates, (i, j), with a total length k.
+This path, W, is a sequence of matrix coordinates, (i, j), with a total length k.
 
 The boundary condition for global alignment ensures the final path starts and ends 
 with the start and end frames of each respective signal. 
@@ -171,8 +171,8 @@ end point of the alignment detected via subsequence DTW is.
 \mysection{Feature Extraction Methods}{Feature Extraction Methods}\label{sec:feature-extraction-methods-background}
 
 
-\mysubsection{Short Time Fourier Transform}{Short Time Fourier Transform}\label{sec:short-time-fourier-transform}
-According to Usman et al.~\cite{Det_Tech} and Kamper~\cite{stft_kamper}, the short time Fourier transform (STFT) is used to analyse the change in frequency of a signal over time. The STFT of 
+\mysubsection{short-time Fourier Transform}{short-time Fourier Transform}\label{sec:short-time-fourier-transform}
+According to Usman et al.~\cite{Det_Tech} and Kamper~\cite{stft_kamper}, the short-time Fourier transform (STFT) is used to analyse the change in frequency of a signal over time. The STFT of 
 a segment of audio is calculated by multiplying the signal in the time domain, $x(t)$ with 
 a window $w(t-\tau)$ which is swept across said signal. The Fourier transform (FT) of each 
 window is calculated and used to determine the frequency information for that window. 
@@ -222,11 +222,11 @@ mel-scale filter bank. The formula for the mel-frequency calculation given by Us
     Mel(f) = 1127 \ln\left(1 + \frac{f}{700}\right)
 \end{equation}
 
- with $Mel(f)$ as the frequency value on the mel scale and f as the actual frequency in 
+ with $Mel(f)$ as the frequency value on the mel-scale and f as the actual frequency in 
  Hz.
 
 This bank is made up of 20 to 40 triangular filters which are placed, smallest width to 
-largest width according to the mel scale, along the frequency spectrum. According to 
+largest width according to the mel-scale, along the frequency spectrum. According to 
 Singh~\cite{mel_med} and Kamper~\cite{mel_kamper}, the standard 
 amount of triangular filters chosen is 26. This results in 26 coefficients for the entire range 
 of frequencies being analysed.
@@ -234,7 +234,7 @@ of frequencies being analysed.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{figures/literature/mel.png}
-    \caption{The mel scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel scale.}\label{fig:mel}
+    \caption{The mel-scale filter bank is made up of 20 to 40 triangular filters arranged according to the mel-scale.}\label{fig:mel}
 \end{figure}
 
 The log of these coefficients is then taken and finally the discrete cosine transform 
@@ -342,7 +342,7 @@ do not tend to fall below 500 Hz.
 
 \mysubsection{Analysis of Template-Based Detection Algorithms for Bryde's Whales}{Analysis of Template-Based Detection Algorithms for Bryde's Whales}\label{sec:bryde-dtw-lpc}
 
-Ogundile and Versfeld analysed two template based detection algorithms to detect short pulse 
+Ogundile and Versfeld analysed two template-based detection algorithms to detect short pulse 
 calls for Bryde's whales in False Bay, South Africa (see~\cite{temp-based-bryde}). The two methods tested were dynamic time warping (DTW) 
 and linear predictive coding (LPC). In their analysis they used two separate sample sets with different signal-to-noise ratio (SNR) values 
 to also evaluate the performance of these techniques in the presence of noise. The input 
@@ -351,7 +351,7 @@ features for these models were the time-domain representation of the signals.
 The final results of the article found that both LPC and DTW performed well in high 
 and low SNR segments. LPC performed the overall best in low noise segments.
 
-This article provides insight into the use of template based detection systems for 
+This article provides insight into the use of template-based detection systems for 
 Bryde's whales. This is relevant since DTW which is handled in this article is the chosen 
 detection mechanism for this project. While LPC is also used in the article, its use is 
 vastly different to the use within this project. LPC is used as a detection algorithm 

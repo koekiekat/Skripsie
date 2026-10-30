@@ -110,15 +110,15 @@ Hees~\cite{fft_pow_2} explains that \ac{FFT} routines are most computationally e
 efficiency, candidate frame lengths were therefore selected as powers of two or multiples thereof: $(0.096, 0.128, 0.192, 
 0.384, 0.512)$~seconds.
 
-Because the call-type and background calibration templates had to be manually selected due to data scarcity, each calibration template was extended on both 
+Because the call type and background calibration templates had to be manually selected due to data scarcity, each calibration template was extended on both 
 sides. This extension ensured that subsequence \ac{DTW} operated under conditions representative of the evaluation pipeline despite dataset limitations. The total 
-extendd length was configured to exceed the longest evaluation template by at least one frame length on either side. This extra margin was chosen to match the 
+extended length was configured to exceed the longest evaluation template by at least one frame length on either side. This extra margin was chosen to match the 
 maximum tested frame duration (0.512~s). Each call or background calibration template was centred within this window by adjusting its boundary timestamps accordingly.
 
 For each tested frame length, three decision thresholds were determined (one per call type). These thresholds were determined by evaluating \ac{DTW} costs between 
 evaluation templates and call type calibration templates, as well as between evaluation templates and background calibration templates. The resulting costs were grouped 
 into call-calibration costs and background-calibration costs. Two hundred candidate thresholds were spaced linearly between the overall minimum and maximum 
-costs across both lists. F1-scores were evaluated across all candidate thresholds for each call type as described in Section~\ref{sec:evaluation-metrics}. The 
+costs across both lists. f1-scores were evaluated across all candidate thresholds for each call type as described in Section~\ref{sec:evaluation-metrics}. The 
 threshold yielding the highest f1-score was selected for each respective call type.
 
 Both call type calibration templates and background calibration templates were used to determine the thresholds since true positive (TP), false positive (FP) 
@@ -126,7 +126,7 @@ and true negative (TN) calls were all needed
 in the calculation of precision and recall and thus in the calculation for the f1-score used to select the optimal thresholds. 
 This can be seen in Eq.\ref{eq:precision},~\ref{eq:recall} and~\ref{eq:f1}.
 
-For a given frame length, the minimum f1-score among the three call-type thresholds was recorded. The optimal feature frame length was then selected as the one 
+For a given frame length, the minimum f1-score among the three call type thresholds was recorded. The optimal feature frame length was then selected as the one 
 whose minimum threshold f1-score was highest across all tested frame lengths.
 
 Although three distinct thresholds were computed (one per call type), this project focuses exclusively on general call detection rather than classification. 
@@ -135,8 +135,8 @@ across human labellers) meant that templates selected for a call type might diff
 per call type were nevertheless maintained to account for structural acoustic variations during candidate detection.
 
 In the evaluation pipeline, candidate audio segments are compared against sets of 5 or 10 reference templates per call type. Because templates capture minor structural 
-variations within a call type, individual templates may disagree on whether a candidate segment contains a call. A voting fraction parameter was introduced 
-such that a candidate segment is classified as a call only if a specified fraction of per call type reference templates trigger a detection. Candidate voting fractions 
+variations within a call type, individual templates may disagree on whether a candidate segment contains a call. A vote fraction parameter was introduced 
+such that a candidate segment is classified as a call only if a specified fraction of per call type reference templates trigger a detection. Candidate vote fractions 
 were evaluated on the optimal frame length. For 5-template configurations, tested vote fractions were $\{0.2, 0.4, 0.6, 0.8, 1.0\}$; for 10-template 
 configurations, tested fractions were $\{0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0\}$. 
 
@@ -154,7 +154,7 @@ The vote fraction producing the highest overall f1-score was selected.
 \end{figure}
 
 \mysubsection{Detection Methodology}{Detection Methodology}\label{sec:detection-methodology}
-The parameters selected during hyperparameter tuning (frame duration, call-type thresholds, and voting fraction) were applied directly during evaluation. 
+The parameters selected during hyperparameter tuning (frame duration, call type thresholds, and vote fraction) were applied directly during evaluation. 
 The evaluation dataset was the only recording containing tonal downsweeps. Because no calibration threshold was computed for tonal downsweeps, an exclusion 
 index list was maintained for all annotated tonal downsweeps. To avoid introducing discontinuities in time into the subsequence \ac{DTW} cost 
 matrix, tonal downsweeps were only excluded after detection rather than omitted prior to processing.
@@ -164,7 +164,7 @@ as documented by Bechtold~\cite{sf}, was
 used to stream continuous hourly audio blocks without loading the entire dataset into memory. Each hourly segment was downsampled from 8~kHz to 
 1~kHz using the \texttt{scipy.signal.resample\_poly} function described in the SciPy documentation~\cite{resample}, and features were extracted as outlined in Section~\ref{sec:stft}.
 
-All templates (5 or 10 per call type) were tested against the entire 1 hour audio segment. End frames of detected calls were identified if the 
+All templates (5 or 10 per call type) were tested against the entire 1-hour audio segment. End frames of detected calls were identified if the 
 percentage of templates for a specific call type detecting a call was equal to the vote fraction chosen during hyperparameter selection. This is 
 explained below with the help of Figure~\ref{fig:kth_cost_1},~\ref{fig:kth_cost_2} and ~\ref{fig:kth_cost_3}.
 
@@ -180,7 +180,7 @@ illustrated in Figure~\ref{fig:kth_cost_1}.
 \end{figure}
 
 The integer parameter $k$ was defined as the vote fraction multiplied by the number of 
-templates per call type. For each frame in the 1 hour audio segment, the $k_{th}$ lowest cost across templates per call type was extracted into a single array per call type. 
+templates per call type. For each frame in the 1-hour audio segment, the $k_{th}$ lowest cost across templates per call type was extracted into a single array per call type. 
 The three $k_{th}$ lowest costs arrays (one for each call type) were stacked to form a three row $k_{th}$ best costs matrix as shown in Figure~\ref{fig:kth_cost_2}.
 
 \begin{figure}[H]
@@ -195,7 +195,7 @@ indicated a valid threshold match across all call types.
 The minimum scaled cost across all three call types was taken per frame and placed in a cost per frame array.
 This array was evaluated for call detections (top array in Figure~\ref{fig:kth_cost_3}). 
 
-Evaluating the $k_{th}$ lowest cost guarantees that the voting fraction requirement is satisfied: 
+Evaluating the $k_{th}$ lowest cost guarantees that the vote fraction requirement is satisfied: 
 if the $k_{th}$ cost falls below the decision threshold, at least $k$ templates have matched the candidate segment.
 
 \begin{figure}[H]
@@ -228,12 +228,12 @@ frame. Using the best-matching template (rather than the $k$-th template) ensure
 
 Detected calls were evaluated against labelled calls within the corresponding time period. The \texttt{numpy.searchsorted} function, as documented 
 by the NumPy developers~\cite{searchsorted}, was used to 
-find the labelled calls overlapping the detected calls. This was achieved efficiently using four 1D arrays: detected start times, detected end times, labeled start times, and labeled end times. 
+find the labelled calls overlapping the detected calls. This was achieved efficiently using four 1D arrays: detected start times, detected end times, labelled start times, and labelled end times. 
 
-For each detected call, \texttt{numpy.searchsorted} identified the index \texttt{lo} in the labeled end-time array where the detected start time would 
-fit sequentially. Similarly, it identified the index \texttt{hi} in the labeled start-time array where the detected end time would fit. A condition of 
+For each detected call, \texttt{numpy.searchsorted} identified the index \texttt{lo} in the labelled end-time array where the detected start time would 
+fit sequentially. Similarly, it identified the index \texttt{hi} in the labelled start-time array where the detected end time would fit. A condition of 
 $\texttt{hi} > \texttt{lo}$ indicates that at least one labelled call overlaps with the detected window. If this condition was met, the detection 
-was categorized as a true positive (TP), and the corresponding labelled call was marked as matched. Subsequent detections overlapping an already-matched 
+was categorised as a true positive (TP), and the corresponding labelled call was marked as matched. Subsequent detections overlapping an already-matched 
 label were still treated as TPs, as the primary objective of this system is detection rather than specific matches of start and end times.
 
 
@@ -291,6 +291,6 @@ and 1.5.
 
 \mysection{Chapter Summary}{Chapter Summary}
 
-In this chapter the desighn of all sub-systems built and combined to form the Bryde's whale call detection system was explained (Feature extraction 
+In this chapter the design of all sub-systems built and combined to form the Bryde's whale call detection system was explained (Feature extraction 
 and DTW implementations, Hyperparameter selection implementation and evaluation procedure). 
 In the next chapter the results for all experiments conducted on the system will be discussed.

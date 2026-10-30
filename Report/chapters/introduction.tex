@@ -26,8 +26,8 @@ Therefore, a model trained specifically for the False
 Bay colony would be beneficial. 
 
 Brown et al.~\cite{DTW_has_worked} showed that \ac{DTW} is an effective method for classifying 
-killer whale vocalizations. Given the 
-limited labeled data for the False Bay colony, \acs{DTW} is considered as Herreilers et 
+killer whale vocalisations. Given the 
+limited labelled data for the False Bay colony, \acs{DTW} is considered as Herreilers et 
 al.~\cite{dtw_few_temps} found that it requires less input data than other detection algorithms.
 
 \mysection{Problem Statement}{Problem Statement}\label{sec:problemstatement}
@@ -55,15 +55,15 @@ Three feature extraction methods will be compared in terms of detection performa
     feature extraction methods other than \acs{STFT}, \acs{MFCC} and \acs{LPCC}, the accuracy of 
     detected start and end times, the detection of frequencies above 500 Hz.
 
-    Call type classification was not considered due to discontinuities in how calls were labeled. 
+    Call type classification was not considered due to discontinuities in how calls were labelled. 
     These discontinuities arose due to a variety of 
-    human labelers for different sections of data and the presence of similar frequency components 
+    human labellers for different sections of data and the presence of similar frequency components 
     across different call types.
 
-    Tonal downsweep calls were excluded from the evaluation because labeled examples of this call 
+    Tonal downsweep calls were excluded from the evaluation because labelled examples of this call 
     type were only found in one of the three recordings.
 
-    Detections were evaluated on whether they overlap a labeled call, so the accuracy of the detected 
+    Detections were evaluated on whether they overlap a labelled call, so the accuracy of the detected 
     start and end times was not evaluated. Frequencies above 500 Hz were not considered, since the 
     audio was downsampled to 1 kHz.
 

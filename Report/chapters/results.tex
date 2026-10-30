@@ -10,8 +10,8 @@ considered the results given the use of 5 templates per call type as the analysi
 The second considered the use of 10 templates per call type, the original 5 with 5 new templates added to increase the database diversity.
 
 \begin{table}[H]
-    \caption{Calibration results for the STFT model: F1-scores and thresholds per call type, 
-    average F1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}
+    \caption{Calibration results for the STFT model: f1-scores and thresholds per call type, 
+    average f1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
     \centering
@@ -45,7 +45,7 @@ The lowest f1-scores point to the possible effect of multi-tones often being mix
 both single-tones and burst-tonals because of human error incorporated by different labellers. 
 
 \begin{table}[H]
-    \caption{Vote fraction selection results for the STFT model: precision, recall and F1-score 
+    \caption{Vote fraction selection results for the STFT model: precision, recall and f1-score 
     at the chosen vote fraction for 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
@@ -71,7 +71,7 @@ However, they do show that diversification of templates did not affect the effec
 needed to agree on a call type for detection to occur in both experiments.
 
 \begin{table}[H]
-    \caption{Final evaluation results for the STFT model: precision, recall, F1-score and 
+    \caption{Final evaluation results for the STFT model: precision, recall, f1-score and 
     average precision (AP) for 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
@@ -125,8 +125,8 @@ experiment and added another 13 in the form of the second derivatives of the ori
 For each experiment, two sub-experiments were performed. The first was performed using 5 templates and the second using 10 templates.
 
 \begin{table}[H]
-    \caption{Calibration results for the MFCC model: F1-scores and thresholds per call type, 
-    average F1-score and selected frame length (in seconds) for each feature set (no derivatives, 
+    \caption{Calibration results for the MFCC model: f1-scores and thresholds per call type, 
+    average f1-score and selected frame length (in seconds) for each feature set (no derivatives, 
     first derivatives and first and second derivatives) with 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
@@ -186,7 +186,7 @@ a single frequency component, unlike the other two call types. It is also import
 the single-tone call type and the other two call types was rather large, further supporting this argument.
 
 \begin{table}[H]
-    \caption{Vote fraction selection results for the MFCC model: precision, recall and F1-score 
+    \caption{Vote fraction selection results for the MFCC model: precision, recall and f1-score 
     at the chosen vote fraction for each feature set with 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
@@ -227,7 +227,7 @@ sub-experiments chose a vote fraction of 0.4 (2 out of 5 detections) and the 10-
 with the 5-template sub-experiment choosing 0.6 (3 out of 5 detections) and the 10-template sub-experiment choosing 0.5 (5 out of 10 detections).
 
 \begin{table}[H]
-    \caption{Final evaluation results for the MFCC model: precision, recall, F1-score and 
+    \caption{Final evaluation results for the MFCC model: precision, recall, f1-score and 
     average precision (AP) for each feature set with 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
@@ -253,11 +253,11 @@ with the 5-template sub-experiment choosing 0.6 (3 out of 5 detections) and the 
 
 For the MFCC experiment with no derivatives, the 5-template sub-experiment performed the best 
 for precision. The 10-template sub-experiment performed best in terms of 
-recall and F1 score. The highest values for precision, recall and f1-score respectively 
+recall and f1-score. The highest values for precision, recall and f1-score respectively 
 were 0.582, 0.817 and 0.647.
 
 For the MFCC experiment with the first derivatives added, the 5-template sub-experiment performed best in precision 
-and F1 score, while the 10-template sub-experiment performed best for recall. 
+and f1-score, while the 10-template sub-experiment performed best for recall. 
 The highest values for precision, recall and f1-score respectively 
 were 0.495, 0.809 and 0.611.
 
@@ -314,11 +314,11 @@ all experiments did relatively well, as the PR points were in the best position 
 \mysection{Experiment 3: LPCC Features}{Experiment 3: LPCC Features}\label{sec:exp-3-lpc}
 
 For the linear predictive coding coefficients (LPCC) model, two experiments were conducted. The first considered the use of 5 templates 
-and the second considered the use of 10 templates for the per-call-type database for hyperparameter selection and evaluation.
+and the second considered the use of 10 templates for the per-call type database for hyperparameter selection and evaluation.
 
 \begin{table}[H]
-    \caption{Calibration results for the LPCC model: F1-scores and thresholds per call type, 
-    average F1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}
+    \caption{Calibration results for the LPCC model: f1-scores and thresholds per call type, 
+    average f1-score and selected frame length (in seconds) for 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
     \centering
@@ -352,7 +352,7 @@ The f1-scores for the single-tone call type for both experiments were much highe
 due to the simplicity of the single-tone structure.
 
 \begin{table}[H]
-    \caption{Vote fraction selection results for the LPCC model: precision, recall and F1-score 
+    \caption{Vote fraction selection results for the LPCC model: precision, recall and f1-score 
     at the chosen vote fraction for 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
@@ -368,7 +368,7 @@ due to the simplicity of the single-tone structure.
 \end{table}
 
 While the 5- and 10-template experiments for LPCC each chose a different vote fraction, 
-in terms of precision, recall and F1 score they performed equally well. The chosen vote fraction for each was 0.4 and 0.5 for the 5- and 
+in terms of precision, recall and f1-score they performed equally well. The chosen vote fraction for each was 0.4 and 0.5 for the 5- and 
 10-template experiments respectively. This means 2 of 5 templates and 5 of 10 templates had to agree for a detection to occur. 
 
 The f1-score for both experiments was 0.984. This can be seen in Table~\ref{tab:lpc_vote_results}. 
@@ -377,7 +377,7 @@ This f1-score carries no weight in terms of the actual performance of the model 
 Despite the difference in vote fractions, the increase in diversification had no effect on vote fraction selection performance.
 
 \begin{table}[H]
-    \caption{Final evaluation results for the LPCC model: precision, recall, F1-score and 
+    \caption{Final evaluation results for the LPCC model: precision, recall, f1-score and 
     average precision (AP) for 5 and 10 templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
@@ -393,7 +393,7 @@ Despite the difference in vote fractions, the increase in diversification had no
 \end{table}
 
 As seen in Table~\ref{tab:lpc_test_results}, the 5-template experiment performed better in 
-terms of recall. The 10-template experiment performed best in precision and F1 score. The highest precision, recall and F1-score 
+terms of recall. The 10-template experiment performed best in precision and f1-score. The highest precision, recall and f1-score 
 were 0.523, 0.900 and 0.650 respectively.
 
 This means that the 10-template experiment performed better in terms of chosen thresholds. This 
@@ -438,7 +438,7 @@ selection of calibration templates. This varying performance can be seen in Tabl
  
 
 \begin{table}[H]
-    \caption{Summary of the highest F1-score and AP achieved by each feature extraction method, 
+    \caption{Summary of the highest f1-score and AP achieved by each feature extraction method, 
     with the corresponding number of templates per call type.}
     \footnotesize
     \setlength{\tabcolsep}{3pt}
